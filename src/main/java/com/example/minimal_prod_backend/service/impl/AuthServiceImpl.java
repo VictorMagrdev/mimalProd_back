@@ -8,6 +8,7 @@ import com.example.minimal_prod_backend.exception.InvalidCredentialsException;
 import com.example.minimal_prod_backend.repository.UserRepository;
 import com.example.minimal_prod_backend.security.JwtUtil;
 import com.example.minimal_prod_backend.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
+    @Autowired
     public AuthServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
                            JwtUtil jwtUtil) {

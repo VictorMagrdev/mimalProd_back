@@ -7,6 +7,7 @@ import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.repository.RoleRepository;
 import com.example.minimal_prod_backend.repository.TagRepository;
 import com.example.minimal_prod_backend.service.TagService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class TagServiceImpl implements TagService {
     private final TagRepository tagRepository;
     private final RoleRepository roleRepository;
 
+    @Autowired
     public TagServiceImpl(TagRepository tagRepository, RoleRepository roleRepository) {
         this.tagRepository = tagRepository;
         this.roleRepository = roleRepository;
@@ -32,7 +34,10 @@ public class TagServiceImpl implements TagService {
     @Override
     @Transactional
     public Tag createTag(TagRequest r) {
-        Tag t = Tag.builder().name(r.getName()).description(r.getDescription()).build();
+        Tag t = Tag.builder()
+                .name(r.getName())
+                .description(r.getDescription())
+                .build();
         if (r.getOwnerRoleId() != null) {
             Role owner = roleRepository.findById(r.getOwnerRoleId())
                     .orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + r.getOwnerRoleId()));

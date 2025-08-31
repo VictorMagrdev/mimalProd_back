@@ -5,6 +5,7 @@ import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.dto.UserUpdateRequest;
 import com.example.minimal_prod_backend.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,52 +20,53 @@ public class UserController {
 
     private final UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping
-    @PreAuthorize("@customSecurity.hasPermission('USER', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'CREATE')")
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreateRequest request) {
         UserResponse createdUser = userService.createUser(request);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @PreAuthorize("@customSecurity.hasPermission('USER', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'READ')")
     public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("@customSecurity.hasPermission('USER', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'READ')")
     public UserResponse getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("@customSecurity.hasPermission('USER', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
     public UserResponse updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest request) {
         return userService.updateUser(id, request);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("@customSecurity.hasPermission('USER', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'DELETE')")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
 
     @PostMapping("/{userId}/roles")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("@customSecurity.hasPermission('USER', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
     public void assignRoleToUser(@PathVariable Long userId, @RequestBody Map<String, Long> payload) {
         userService.assignRoleToUser(userId, payload.get("roleId"));
     }
 
     @DeleteMapping("/{userId}/roles/{roleId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("@customSecurity.hasPermission('USER', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
     public void removeRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId) {
         userService.removeRoleFromUser(userId, roleId);
     }

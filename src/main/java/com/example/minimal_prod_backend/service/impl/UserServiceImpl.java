@@ -10,6 +10,7 @@ import com.example.minimal_prod_backend.exception.UsernameAlreadyExistsException
 import com.example.minimal_prod_backend.repository.RoleRepository;
 import com.example.minimal_prod_backend.repository.UserRepository;
 import com.example.minimal_prod_backend.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
@@ -50,20 +52,20 @@ public class UserServiceImpl implements UserService {
         }
 
         User savedUser = userRepository.save(user);
-        return toUserResponse(savedUser);
+        return new UserResponse(savedUser);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<UserResponse> getAllUsers() {
-        return userRepository.findAll().stream().map(this::toUserResponse).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(UserResponse::new).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
-        return toUserResponse(user);
+        return new UserResponse(user);
     }
 
     @Override
@@ -81,7 +83,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User updatedUser = userRepository.save(user);
-        return toUserResponse(updatedUser);
+        return new UserResponse(updatedUser);
     }
 
     @Override
@@ -109,14 +111,5 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findById(roleId).orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + roleId));
         user.getRoles().remove(role);
         userRepository.save(user);
-    }
-
-    private UserResponse toUserResponse(User user) {
-        UserResponse res = new UserResponse();
-        res.setId(user.getId());
-        res.setUsername(user.getUsername());
-        res.setEmail(user.getEmail());
-        res.setRoles(user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()));
-        return res;
     }
 }

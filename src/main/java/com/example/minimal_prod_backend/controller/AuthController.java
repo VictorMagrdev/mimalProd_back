@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.controller;
 import com.example.minimal_prod_backend.dto.LoginRequest;
 import com.example.minimal_prod_backend.dto.LoginResponse;
 import com.example.minimal_prod_backend.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @Autowired
     public AuthController(AuthService authService) {
         this.authService = authService;
     }

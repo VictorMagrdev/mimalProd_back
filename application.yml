@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: minimalProd:postgresql://localhost:5432/minimalProd
+    url: jdbc:postgresql://localhost:5432/minimalProd
     username: minimal_prod_user
     password: minimal_prod_pass
   jpa:
@@ -12,7 +12,7 @@ spring:
     show-sql: true
 
 jwt:
-  secret: my-very-secret-key-change-me
+  secret: ac9c8a7b2dc5c9bdc3a7fed6888d3c3f
   expiration-ms: 3600000
 
 flyway:

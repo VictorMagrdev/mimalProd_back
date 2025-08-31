@@ -8,7 +8,7 @@ public class PolicyRequest {
     @NotNull
     private Long roleId;
     @NotNull
-    private Long objectId;
+    private Long tagId;
     @NotNull
     private Long permissionId;
 }

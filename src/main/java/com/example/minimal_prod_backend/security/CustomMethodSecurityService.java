@@ -1,9 +1,9 @@
 package com.example.minimal_prod_backend.security;
 
-import com.example.minimal_prod_backend.entity.Role;
 import com.example.minimal_prod_backend.entity.User;
 import com.example.minimal_prod_backend.repository.PolicyRepository;
 import com.example.minimal_prod_backend.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -17,12 +17,13 @@ public class CustomMethodSecurityService {
     private final UserRepository userRepository;
     private final PolicyRepository policyRepository;
 
+    @Autowired
     public CustomMethodSecurityService(UserRepository userRepository, PolicyRepository policyRepository) {
         this.userRepository = userRepository;
         this.policyRepository = policyRepository;
     }
 
-    public boolean hasPermission(String object, String permission) {
+    public boolean hasPermission(String tagName, String permission) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
             return false;
@@ -35,13 +36,14 @@ public class CustomMethodSecurityService {
         }
 
         List<Long> roleIds = user.getRoles().stream()
-                .map(Role::getId)
+                .map(role -> role.getId())
                 .collect(Collectors.toList());
 
         if (roleIds.isEmpty()) {
             return false;
         }
 
-        return policyRepository.existsByRole_IdInAndObjectEntity_NameAndPermission_Name(roleIds, object, permission);
+        return policyRepository.existsByRole_IdInAndTag_NameAndPermission_Name(roleIds, tagName, permission);
     }
 }
+

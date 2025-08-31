@@ -1,74 +1,61 @@
--- Roles base
-INSERT INTO roles (nombre, descripcion) VALUES
-('ADMIN', 'Superusuario con acceso total'),
-('PLANNER', 'Planeador de producción'),
-('OPERATOR', 'Operario de planta'),
-('MANAGER', 'Jefe de planta / gerente');
+-- Limpieza de tablas para un estado consistente (opcional, bueno para desarrollo)
+-- TRUNCATE TABLE policy, user_roles, users, roles, permission, object_entity RESTART IDENTITY CASCADE;
 
--- Usuario admin con contraseña en BCrypt
-INSERT INTO users (username, email, password, estado)
-VALUES ('admin', 'admin@erp.com', '$2a$10$k9vPQ3W3EwYFzldpHD0/7OqFfD5xYZv2ZtJhXswT9qfxXjBgWxK2m', TRUE);
--- password = admin123
+-- 1. Insertar Permisos (Operaciones)
+-- Estos son los tipos de acciones que un usuario puede realizar.
+INSERT INTO permission (name, description) VALUES
+('CREATE', 'Permite crear nuevos registros'),
+('READ', 'Permite leer registros existentes'),
+('UPDATE', 'Permite actualizar registros existentes'),
+('DELETE', 'Permite eliminar registros existentes');
 
-INSERT INTO user_roles (user_id, role_id) VALUES (1, 1);
+-- 2. Insertar Entidades Objeto (Módulos)
+-- Estos son los módulos o tipos de datos sobre los que se aplican los permisos.
+INSERT INTO object_entity (name, description) VALUES
+('USER', 'Administración de Usuarios'),
+('ROLE', 'Administración de Roles'),
+('POLICY', 'Administración de Políticas de Acceso'),
+('TAG', 'Administración de Etiquetas');
 
--- Módulos del ERP
-INSERT INTO modules (nombre, descripcion) VALUES
-('Producción', 'Gestión de órdenes de producción y lotes'),
-('Inventario', 'Control de insumos y productos terminados'),
-('Compras', 'Gestión de proveedores y órdenes de compra'),
-('Ventas', 'Gestión de clientes y pedidos');
+-- 3. Insertar Roles
+-- Roles principales del sistema.
+INSERT INTO roles (name, description) VALUES
+('ROLE_ADMIN', 'Administrador del sistema con acceso a la configuración'),
+('ROLE_OPERATOR', 'Usuario estándar con permisos limitados');
 
--- Operaciones genéricas
-INSERT INTO operations (nombre, descripcion) VALUES
-('create', 'Crear registros'),
-('read', 'Consultar registros'),
-('update', 'Actualizar registros'),
-('delete', 'Eliminar registros'),
-('approve', 'Aprobar procesos o documentos');
+-- 4. Insertar Usuario Administrador
+-- Contraseña es 'admin123'
+INSERT INTO users (username, email, password) VALUES
+('admin', 'admin@example.com', '$2a$10$k9vPQ3W3EwYFzldpHD0/7OqFfD5xYZv2ZtJhXswT9qfxXjBgWxK2m');
 
--- Ejemplos de permisos
--- Producción: crear, consultar y aprobar
-INSERT INTO permissions (module_id, operation_id) VALUES
-(1, 1), -- Producción + create
-(1, 2), -- Producción + read
-(1, 5); -- Producción + approve
+-- 5. Asignar Rol de Administrador al Usuario 'admin'
+INSERT INTO user_roles (user_id, role_id) VALUES
+((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
 
--- Inventario: consultar y actualizar
-INSERT INTO permissions (module_id, operation_id) VALUES
-(2, 2), -- Inventario + read
-(2, 3); -- Inventario + update
+-- 6. Crear Políticas de Acceso para el Rol de Administrador
+-- El administrador necesita permisos CRUD completos sobre los objetos de administración.
 
--- Compras: crear, consultar, aprobar
-INSERT INTO permissions (module_id, operation_id) VALUES
-(3, 1), -- Compras + create
-(3, 2), -- Compras + read
-(3, 5); -- Compras + approve
+-- Permisos sobre Usuarios (USER)
+INSERT INTO policy (role_id, object_entity_id, permission_id) VALUES
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'USER'), (SELECT id FROM permission WHERE name = 'CREATE')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'USER'), (SELECT id FROM permission WHERE name = 'READ')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'USER'), (SELECT id FROM permission WHERE name = 'UPDATE')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'USER'), (SELECT id FROM permission WHERE name = 'DELETE'));
 
--- Ventas: crear, consultar
-INSERT INTO permissions (module_id, operation_id) VALUES
-(4, 1), -- Ventas + create
-(4, 2); -- Ventas + read
+-- Permisos sobre Roles (ROLE)
+INSERT INTO policy (role_id, object_entity_id, permission_id) VALUES
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'ROLE'), (SELECT id FROM permission WHERE name = 'CREATE')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'ROLE'), (SELECT id FROM permission WHERE name = 'READ')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'ROLE'), (SELECT id FROM permission WHERE name = 'UPDATE')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'ROLE'), (SELECT id FROM permission WHERE name = 'DELETE'));
 
--- Políticas: asignar permisos a roles
--- ADMIN = todo
-INSERT INTO policies (role_id, permission_id)
-SELECT 1, id FROM permissions;
+-- Permisos sobre Políticas (POLICY)
+INSERT INTO policy (role_id, object_entity_id, permission_id) VALUES
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'POLICY'), (SELECT id FROM permission WHERE name = 'CREATE')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'POLICY'), (SELECT id FROM permission WHERE name = 'READ')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'POLICY'), (SELECT id FROM permission WHERE name = 'DELETE'));
 
--- PLANNER: producción (create, read), inventario (read)
-INSERT INTO policies (role_id, permission_id) VALUES
-(2, 1), (2, 2), (2, 4);
-
--- OPERATOR: solo lectura en producción e inventario
-INSERT INTO policies (role_id, permission_id) VALUES
-(3, 2), (3, 4);
-
--- MANAGER: aprobar en producción y compras
-INSERT INTO policies (role_id, permission_id) VALUES
-(4, 3), (4, 8);
--- Usuario admin con contraseña en BCrypt (password = admin123)
-INSERT INTO users (username, email, password, estado)
-VALUES ('admin', 'admin@erp.com', '$2a$10$k9vPQ3W3EwYFzldpHD0/7OqFfD5xYZv2ZtJhXswT9qfxXjBgWxK2m', TRUE);
-
--- Asignar rol ADMIN al usuario
-INSERT INTO user_roles (user_id, role_id) VALUES (1, 1);
+-- Permisos sobre Etiquetas (TAG)
+INSERT INTO policy (role_id, object_entity_id, permission_id) VALUES
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'TAG'), (SELECT id FROM permission WHERE name = 'CREATE')),
+((SELECT id FROM roles WHERE name = 'ROLE_ADMIN'), (SELECT id FROM object_entity WHERE name = 'TAG'), (SELECT id FROM permission WHERE name = 'READ'));

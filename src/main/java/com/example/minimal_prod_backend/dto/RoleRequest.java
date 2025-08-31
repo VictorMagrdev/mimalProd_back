@@ -4,9 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class TagRequest {
-    @NotBlank(message = "Tag name is mandatory")
+public class RoleRequest {
+    @NotBlank
     private String name;
     private String description;
-    private Long ownerRoleId;
 }

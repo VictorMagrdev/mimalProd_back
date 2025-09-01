@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/policies")
+@RequestMapping("/api/policies")
 public class PolicyController {
 
     private final PolicyService policyService;

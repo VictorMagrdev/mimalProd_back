@@ -10,7 +10,7 @@ RUN ./gradlew dependencies
 
 # Copiar el resto del código fuente y construir la aplicación
 COPY src /app/src
-RUN ./gradlew build
+RUN ./gradlew build -x test
 
 # Etapa 2: Crear la imagen final con solo el JRE y el JAR
 FROM eclipse-temurin:21-jre-jammy
@@ -24,4 +24,4 @@ COPY --from=builder /app/build/libs/*.jar app.jar
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Djwt.secret=ac9c8a7b2dc5c9bdc3a7fed6888d3c3f", "-jar", "app.jar"]

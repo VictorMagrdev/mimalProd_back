@@ -11,9 +11,6 @@ spring:
         format_sql: true
     show-sql: true
 
-jwt:
-  secret: ac9c8a7b2dc5c9bdc3a7fed6888d3c3f
-  expiration-ms: 3600000
 
 flyway:
   enabled: true

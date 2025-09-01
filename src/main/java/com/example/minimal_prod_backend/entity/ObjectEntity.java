@@ -22,5 +22,6 @@ public class ObjectEntity {
     @JoinTable(name = "object_tags",
             joinColumns = @JoinColumn(name="object_id"),
             inverseJoinColumns = @JoinColumn(name="tag_id"))
+    @Builder.Default
     private Set<Tag> tags = new HashSet<>();
 }

@@ -16,5 +16,6 @@ public class AuditLog {
     private String action;
     private String result;
 
+    @Builder.Default
     private Instant createdAt = Instant.now();
 }

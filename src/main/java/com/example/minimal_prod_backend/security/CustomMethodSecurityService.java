@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.security;
 
+import com.example.minimal_prod_backend.entity.Role;
 import com.example.minimal_prod_backend.entity.User;
 import com.example.minimal_prod_backend.repository.PolicyRepository;
 import com.example.minimal_prod_backend.repository.UserRepository;
@@ -36,14 +37,14 @@ public class CustomMethodSecurityService {
         }
 
         List<Long> roleIds = user.getRoles().stream()
-                .map(role -> role.getId())
+                .map(Role::getId)
                 .collect(Collectors.toList());
 
         if (roleIds.isEmpty()) {
             return false;
         }
 
-        return policyRepository.existsByRole_IdInAndTag_NameAndPermission_Name(roleIds, tagName, permission);
+        return policyRepository.existsByRole_IdInAndTag_NameAndPermission_Action(roleIds, tagName, permission);
     }
 }
 

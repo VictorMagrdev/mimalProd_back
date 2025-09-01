@@ -6,5 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PolicyRepository extends JpaRepository<Policy, Long> {
-    boolean existsByRole_IdInAndTag_NameAndPermission_Name(List<Long> roleIds, String tagName, String permissionName);
+    boolean existsByRole_IdInAndTag_NameAndPermission_Action(
+            List<Long> roleIds,
+            String tagName,
+            String permissionAction
+    );
+
 }

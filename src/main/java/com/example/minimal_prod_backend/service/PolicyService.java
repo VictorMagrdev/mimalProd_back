@@ -6,7 +6,7 @@ import com.example.minimal_prod_backend.entity.Policy;
 import java.util.List;
 
 public interface PolicyService {
-    Policy createPolicy(PolicyRequest request);
     List<Policy> getAllPolicies();
+    Policy createPolicy(PolicyRequest request);
     void deletePolicy(Long id);
 }

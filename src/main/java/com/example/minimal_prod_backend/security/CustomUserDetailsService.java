@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         var authorities = u.getRoles()
                 .stream()
-                .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName()))
+                .map(r -> new SimpleGrantedAuthority( r.getName()))
                 .collect(Collectors.toList());
 
         return User.builder()

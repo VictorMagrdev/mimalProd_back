@@ -19,17 +19,17 @@ INSERT INTO roles (name, description) VALUES
 
 -- 4. Insertar Tags (Etiquetas) para los objetos
 INSERT INTO tags (name, description, owner_role_id) VALUES
-('USER_TAG', 'Etiqueta para usuarios', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
-('ROLE_TAG', 'Etiqueta para roles', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
-('POLICY_TAG', 'Etiqueta para políticas', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
-('TAG_TAG', 'Etiqueta para etiquetas', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+('TAG_USERS', 'Etiqueta para usuarios', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TAG_ROLES', 'Etiqueta para roles', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TAG_POLICIES', 'Etiqueta para políticas', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TAG_GENERAL', 'Etiqueta para etiquetas', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
 
 -- 5. Asociar objetos con tags
 INSERT INTO object_tags (object_id, tag_id) VALUES
-((SELECT id FROM objects WHERE name = 'USER'), (SELECT id FROM tags WHERE name = 'USER_TAG')),
-((SELECT id FROM objects WHERE name = 'ROLE'), (SELECT id FROM tags WHERE name = 'ROLE_TAG')),
-((SELECT id FROM objects WHERE name = 'POLICY'), (SELECT id FROM tags WHERE name = 'POLICY_TAG')),
-((SELECT id FROM objects WHERE name = 'TAG'), (SELECT id FROM tags WHERE name = 'TAG_TAG'));
+((SELECT id FROM objects WHERE name = 'USER'), (SELECT id FROM tags WHERE name = 'TAG_USERS')),
+((SELECT id FROM objects WHERE name = 'ROLE'), (SELECT id FROM tags WHERE name = 'TAG_ROLES')),
+((SELECT id FROM objects WHERE name = 'POLICY'), (SELECT id FROM tags WHERE name = 'TAG_POLICIES')),
+((SELECT id FROM objects WHERE name = 'TAG'), (SELECT id FROM tags WHERE name = 'TAG_GENERAL'));
 
 -- 6. Insertar Usuario Administrador
 -- Contraseña: 'admin123' (bcrypt hash)
@@ -52,7 +52,7 @@ SELECT
     p.id
 FROM roles r, tags t, permissions p
 WHERE r.name = 'ROLE_ADMIN'
-  AND t.name = 'USER_TAG'
+  AND t.name = 'TAG_USERS'
   AND p.action IN ('CREATE','READ','UPDATE','DELETE');
 
 INSERT INTO policies (role_id, tag_id, permission_id)
@@ -62,7 +62,7 @@ SELECT
     p.id
 FROM roles r, tags t, permissions p
 WHERE r.name = 'ROLE_ADMIN'
-  AND t.name = 'ROLE_TAG'
+  AND t.name = 'TAG_ROLES'
   AND p.action IN ('CREATE','READ','UPDATE','DELETE');
 
 INSERT INTO policies (role_id, tag_id, permission_id)
@@ -72,7 +72,7 @@ SELECT
     p.id
 FROM roles r, tags t, permissions p
 WHERE r.name = 'ROLE_ADMIN'
-  AND t.name = 'POLICY_TAG'
+  AND t.name = 'TAG_POLICIES'
   AND p.action IN ('CREATE','READ','DELETE');
 
 INSERT INTO policies (role_id, tag_id, permission_id)
@@ -82,7 +82,7 @@ SELECT
     p.id
 FROM roles r, tags t, permissions p
 WHERE r.name = 'ROLE_ADMIN'
-  AND t.name = 'TAG_TAG'
+  AND t.name = 'TAG_GENERAL'
   AND p.action IN ('CREATE','READ');
 
 -- 9. Insertar algunos atributos de ejemplo

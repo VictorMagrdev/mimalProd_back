@@ -54,7 +54,7 @@ public class AuthServiceImpl implements AuthService {
 
         List<Policy> policies = policyRepository.findByRoleIn(roles);
         List<PolicyResponse> policyResponses = policies.stream()
-                .map(policy -> new PolicyResponse(policy.getTag().getName(), policy.getPermission().getName()))
+                .map(policy -> new PolicyResponse(policy.getTag().getName(), policy.getPermission().getAction()))
                 .collect(Collectors.toList());
 
         return new LoginResponse(token, user.getUsername(), roleNames, policyResponses);

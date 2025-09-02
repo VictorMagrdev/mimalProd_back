@@ -28,11 +28,4 @@ public class TagController {
         return tagService.getAllTags(); 
     }
 
-    @PostMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_GENERAL', 'CREATE')")
-    public ResponseEntity<Tag> create(@Valid @RequestBody TagRequest r) {
-        Tag createdTag = tagService.createTag(r);
-        return new ResponseEntity<>(createdTag, HttpStatus.CREATED);
-    }
-
 }

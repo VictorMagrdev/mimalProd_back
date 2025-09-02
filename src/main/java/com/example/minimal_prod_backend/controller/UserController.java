@@ -50,13 +50,6 @@ public class UserController {
         return userService.updateUser(id, request);
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'DELETE')")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
-
     @PostMapping("/{userId}/roles")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
@@ -70,4 +63,12 @@ public class UserController {
     public void removeRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId) {
         userService.removeRoleFromUser(userId, roleId);
     }
+
+    @PostMapping("/{id}/deactivate")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
+    public void deactivateUser(@PathVariable Long id) {
+        userService.deactivateUser(id);
+    }
+
 }

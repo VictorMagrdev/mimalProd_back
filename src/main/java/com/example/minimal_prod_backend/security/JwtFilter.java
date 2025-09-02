@@ -17,6 +17,7 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
+
     private final JwtUtil jwtUtil;
     private final CustomUserDetailsService userDetailsService;
 
@@ -38,17 +39,21 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         final String jwt = authorizationHeader.substring(7);
-        String username;
+        String username = null;
 
         try {
             username = jwtUtil.extractUsername(jwt);
         } catch (Exception e) {
-            logger.error("Error al extraer el username del token: " + e.getMessage());
             filterChain.doFilter(request, response);
             return;
         }
 
-        if (username == null || SecurityContextHolder.getContext().getAuthentication() != null) {
+        if (username == null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -60,16 +65,10 @@ public class JwtFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(
                             userDetails,
                             null,
-                            userDetails
-                                    .getAuthorities()
+                            userDetails.getAuthorities()
                     );
-            authenticationToken
-                    .setDetails(
-                            new WebAuthenticationDetailsSource()
-                                    .buildDetails(request));
-            SecurityContextHolder
-                    .getContext()
-                    .setAuthentication(authenticationToken);
+            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
 
         filterChain.doFilter(request, response);

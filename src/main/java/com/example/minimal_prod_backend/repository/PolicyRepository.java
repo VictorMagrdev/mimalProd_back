@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface PolicyRepository extends JpaRepository<Policy, Long> {
-    boolean existsByRole_IdInAndTag_NameAndPermission_Action(
+    boolean existsByRole_IdInAndTag_NameIgnoreCaseAndPermission_ActionIgnoreCase(
             List<Long> roleIds,
             String tagName,
             String permissionAction

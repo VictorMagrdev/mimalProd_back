@@ -1,10 +1,12 @@
 package com.example.minimal_prod_backend.service;
 
+import com.example.minimal_prod_backend.dto.RoleResponse;
 import com.example.minimal_prod_backend.dto.UserCreateRequest;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.dto.UserUpdateRequest;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
     UserResponse createUser(UserCreateRequest request);
@@ -14,4 +16,5 @@ public interface UserService {
     void assignRoleToUser(Long userId, Long roleId);
     void removeRoleFromUser(Long userId, Long roleId);
     void deactivateUser(Long id);
+    Set<RoleResponse> getUserRoles(Long userId);
 }

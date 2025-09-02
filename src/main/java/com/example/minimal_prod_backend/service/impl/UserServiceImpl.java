@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
+import com.example.minimal_prod_backend.dto.RoleResponse;
 import com.example.minimal_prod_backend.dto.UserCreateRequest;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.dto.UserUpdateRequest;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -111,6 +113,16 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.setActive(false);
         userRepository.save(user);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<RoleResponse> getUserRoles(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+        return user.getRoles().stream()
+                .map(RoleResponse::new)
+                .collect(Collectors.toSet());
     }
 
 }

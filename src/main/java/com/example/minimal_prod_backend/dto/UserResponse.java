@@ -22,4 +22,8 @@ public class UserResponse {
             this.roles = user.getRoles().stream().map(Role::getName).collect(Collectors.toSet());
         }
     }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
 }

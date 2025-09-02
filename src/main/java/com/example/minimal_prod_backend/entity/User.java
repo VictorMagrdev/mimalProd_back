@@ -24,8 +24,6 @@ public class User {
     @Builder.Default
     private Boolean active = true;
 
-    @Column(columnDefinition = "jsonb")
-    private String metadata;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",

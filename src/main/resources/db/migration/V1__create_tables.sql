@@ -9,8 +9,7 @@ CREATE TABLE users (
   username VARCHAR(150) UNIQUE NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
-  active BOOLEAN DEFAULT TRUE,
-  metadata JSONB
+  active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE user_roles (

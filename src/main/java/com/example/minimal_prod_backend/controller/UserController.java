@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.controller;
 
+import com.example.minimal_prod_backend.dto.RoleResponse;
 import com.example.minimal_prod_backend.dto.UserCreateRequest;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.dto.UserUpdateRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
@@ -55,6 +57,12 @@ public class UserController {
     @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
     public void assignRoleToUser(@PathVariable Long userId, @RequestBody Map<String, Long> payload) {
         userService.assignRoleToUser(userId, payload.get("roleId"));
+    }
+
+    @GetMapping("/{userId}/roles")
+    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'READ')")
+    public Set<RoleResponse> getUserRoles(@PathVariable Long userId) {
+        return userService.getUserRoles(userId);
     }
 
     @DeleteMapping("/{userId}/roles/{roleId}")

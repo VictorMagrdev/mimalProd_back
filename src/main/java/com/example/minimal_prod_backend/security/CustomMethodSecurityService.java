@@ -38,7 +38,9 @@ public class CustomMethodSecurityService {
         if (user == null) {
             return false;
         }
-
+        if (user.getActive() == false) {
+            return false;
+        }
 
         List<Long> roleIds = user.getRoles().stream()
                 .map(Role::getId)
@@ -49,6 +51,6 @@ public class CustomMethodSecurityService {
             return false;
         }
 
-        return policyRepository.existsByRole_IdInAndTag_NameIgnoreCaseAndPermission_ActionIgnoreCase(roleIds, tagName, permission);
+        return policyRepository.existsByRole_IdInAndTag_NameIgnoreCaseAndPermission_Action(roleIds, tagName, permission);
     }
 }

@@ -75,8 +75,9 @@ public class UserController {
     @PostMapping("/{id}/deactivate")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
-    public void deactivateUser(@PathVariable Long id) {
+    public ResponseEntity<String> deactivateUser(@PathVariable Long id) {
         userService.deactivateUser(id);
+        return ResponseEntity.ok("Usuario desactivado");
     }
 
 }

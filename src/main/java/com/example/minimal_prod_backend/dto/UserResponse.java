@@ -13,17 +13,16 @@ public class UserResponse {
     private String username;
     private String email;
     private Set<String> roles;
+    private Boolean active;
 
     public UserResponse(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.email = user.getEmail();
+        this.active = user.getActive();
         if (user.getRoles() != null) {
             this.roles = user.getRoles().stream().map(Role::getName).collect(Collectors.toSet());
         }
     }
 
-    public Set<String> getRoles() {
-        return roles;
-    }
 }

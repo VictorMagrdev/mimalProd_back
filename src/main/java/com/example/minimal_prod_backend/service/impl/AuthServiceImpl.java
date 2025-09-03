@@ -48,15 +48,24 @@ public class AuthServiceImpl implements AuthService {
             throw new InvalidCredentialsException("Invalid username or password");
         }
 
+        if (Boolean.FALSE.equals(user.getActive())) {
+            throw new InvalidCredentialsException("User account is inactive");
+        }
+
         var roles = user.getRoles();
         var roleNames = roles.stream().map(Role::getName).collect(Collectors.toList());
         String token = jwtUtil.generateToken(user.getUsername(), roleNames);
 
         List<Policy> policies = policyRepository.findByRoleIn(roles);
+
         List<PolicyResponse> policyResponses = policies.stream()
-                .map(policy -> new PolicyResponse(policy.getTag().getName(), policy.getPermission().getAction()))
+                .map(p -> new PolicyResponse(
+                        p.getTag().getName(),
+                        p.getPermission().getAction()
+                ))
                 .collect(Collectors.toList());
 
         return new LoginResponse(token, user.getUsername(), roleNames, policyResponses);
     }
+
 }

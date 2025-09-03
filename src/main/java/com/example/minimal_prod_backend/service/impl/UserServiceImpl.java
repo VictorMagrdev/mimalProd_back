@@ -66,9 +66,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserResponse getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        User user = userRepository.findWithRolesById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        System.out.println("Roles: " + user.getRoles());
+        user.getRoles().forEach(r -> System.out.println(r.getName()));
         return new UserResponse(user);
     }
+
 
     @Override
     @Transactional

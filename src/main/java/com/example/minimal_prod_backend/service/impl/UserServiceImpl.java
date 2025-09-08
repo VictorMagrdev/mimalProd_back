@@ -82,6 +82,9 @@ public class UserServiceImpl implements UserService {
         if (request.getEmail() != null) {
             user.setEmail(request.getEmail());
         }
+        if (request.isActive()) {
+            user.setActive(true);
+        }
 
         if (request.getRoleIds() != null) {
             List<Role> roles = roleRepository.findAllById(request.getRoleIds());

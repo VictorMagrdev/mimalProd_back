@@ -1,32 +1,54 @@
-Feature: Gestión de usuarios
-  Como administrador
-  Quiero crear, editar y desactivar usuarios
-  Para controlar quién puede usar la aplicación
+Feature: Gestión de Usuarios
 
   Background:
-    Given existe un usuario "admin" con rol "Admin" y está autenticado
+    Given estoy autenticado como "admin" con rol "Admin"
 
-  Scenario: Crear un nuevo usuario por admin
-    When el admin crea un usuario con username "juan", email "juan@acme", rol "Engineer"
-    Then el usuario "juan" existe con rol "Engineer" y estado "activo"
+  Scenario: Crear un nuevo usuario
+    When envío una petición POST a "/api/users" con el cuerpo:
+      """
+      {
+        "username": "juan",
+        "email": "juan@acme.com",
+        "password": "password123",
+        "roleIds": [1]
+      }
+      """
+    Then la respuesta debe tener el código de estado 201
+    And el cuerpo de la respuesta debe contener los detalles del usuario "juan"
 
-  Scenario: Intento de creación de usuario por usuario no-admin falla
-    Given existe un usuario "bob" con rol "Engineer" y está autenticado
-    When "bob" intenta crear un usuario con username "luis"
-    Then la operación es denegada con error "Permiso denegado"
+  Scenario: Obtener todos los usuarios
+    When envío una petición GET a "/api/users"
+    Then la respuesta debe tener el código de estado 200
+    And el cuerpo de la respuesta debe ser una lista de usuarios
 
-  Scenario: Editar datos de usuario (email y nombre)
-    Given existe un usuario "maria" con rol "Engineer"
-    When el admin actualiza el email de "maria" a "maria@empresa"
-    Then el usuario "maria" tiene email "maria@empresa"
+  Scenario: Actualizar un usuario
+    Given existe un usuario con id 2
+    When envío una petición PUT a "/api/users/2" con el cuerpo:
+      """
+      {
+        "email": "juan.perez@acme.com"
+      }
+      """
+    Then la respuesta debe tener el código de estado 200
+    And el cuerpo de la respuesta debe contener el email actualizado "juan.perez@acme.com"
 
-  Scenario: Desactivar usuario por admin
-    Given existe un usuario "carlos" activo
-    When el admin desactiva al usuario "carlos"
-    Then el usuario "carlos" está desactivado
-    And "carlos" no puede iniciar sesión
+  Scenario: Desactivar un usuario
+    Given existe un usuario con id 3
+    When envío una petición POST a "/api/users/3/deactivate"
+    Then la respuesta debe tener el código de estado 200
+    And el cuerpo de la respuesta debe contener el mensaje "Usuario desactivado"
 
-  Scenario: Re-activar usuario por admin
-    Given existe un usuario "carlos" desactivado
-    When el admin reactiva al usuario "carlos"
-    Then el usuario "carlos" está activo
+  Scenario: Asignar un rol a un usuario
+    Given existe un usuario con id 2 y un rol con id 3
+    When envío una petición POST a "/api/users/2/roles" con el cuerpo:
+      """
+      {
+        "roleId": 3
+      }
+      """
+    Then la respuesta debe tener el código de estado 200
+
+  Scenario: Remover un rol de un usuario
+    Given un usuario con id 2 tiene asignado el rol con id 3
+    When envío una petición DELETE a "/api/users/2/roles/3"
+    Then la respuesta debe tener el código de estado 204

@@ -20,6 +20,9 @@ services:
     container_name: minimal-prod-app
     ports:
       - "8080:8080"
+    volumes:
+      - .:/app
+      - ~/.m2:/root/.m2
     depends_on:
       - db
     environment:

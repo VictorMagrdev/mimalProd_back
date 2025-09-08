@@ -9,5 +9,6 @@ import java.util.List;
 public class UserUpdateRequest {
     @Email
     private String email;
+    private boolean active;
     private List<Long> roleIds;
 }

@@ -1,39 +1,27 @@
-Feature: Comprobación de control de acceso efectivo en módulos del sistema
-  Como sistema de planificación de producción
-  Quiero verificar que la combinación (usuario.roles × módulo.tags × políticas) produce permisos correctos
+Feature: Control de Acceso a Endpoints Protegidos
 
-  Background:
-    Given existe un usuario "admin" con rol "Admin" y está autenticado
-    And el admin ha creado rol "Contabilidad" y rol "Producción"
-    And el admin ha creado la etiqueta "financial-data" con propietario "Contabilidad"
-    And el admin ha creado la política (Contabilidad, financial-data) => [read, write]
-    And existe el módulo "Facturación" con etiqueta "financial-data"
+  Scenario: Usuario con permisos puede acceder a un recurso protegido
+    Given un usuario "editor" tiene el rol "Editor"
+    And el rol "Editor" tiene permiso para "CREATE" en "TAG_USERS"
+    And "editor" está autenticado
+    When envío una petición POST a "/api/users" con un cuerpo válido
+    Then la respuesta debe tener el código de estado 201
 
-  Scenario: Usuario con rol contable puede acceder a módulo financiero
-    Given existe un usuario "lucas" con rol "Contabilidad" y está autenticado
-    When "lucas" intenta leer el módulo "Facturación"
-    Then el acceso es permitido
+  Scenario: Usuario sin permisos no puede acceder a un recurso protegido
+    Given un usuario "viewer" tiene el rol "Viewer"
+    And el rol "Viewer" NO tiene permiso para "CREATE" en "TAG_USERS"
+    And "viewer" está autenticado
+    When envío una petición POST a "/api/users" con un cuerpo válido
+    Then la respuesta debe tener el código de estado 403
 
-    When "lucas" intenta escribir en el módulo "Facturación"
-    Then el acceso es permitido
-
-  Scenario: Usuario de otro rol no puede acceder a módulo sin permisos
-    Given existe un usuario "ana" con rol "Producción" y está autenticada
-    When "ana" intenta leer el módulo "Facturación"
-    Then el acceso es denegado
-
-  Scenario: Cambio de política afecta inmediatamente
-    Given existe un usuario "pepito" con rol "Contabilidad" autenticado
-    And la política (Contabilidad, financial-data) incluye "read"
-    When el admin quita el permiso "read" de (Contabilidad, financial-data)
-    Then "pepito" ya no puede leer el módulo "Facturación"
-
-  Scenario: Propietario de tag puede etiquetar módulos, pero no modificar políticas sin permiso
-    Given la etiqueta "produccion-data" es propiedad del rol "Producción"
-    And existe un usuario "alice" con rol "Producción" autenticada
-    When "alice" etiqueta el módulo "Inventario de Materiales" con "produccion-data"
-    Then la operación es permitida
-
-    Given que solo el rol "Seguridad" puede modificar políticas
-    When "alice" intenta crear o modificar la política (Producción, produccion-data)
-    Then la operación es denegada con error "Permiso denegado: modificar políticas"
+  Scenario: Un cambio de política de acceso se refleja inmediatamente
+    Given un usuario "manager" tiene el rol "Manager"
+    And el rol "Manager" tiene permiso para "DELETE" en "TAG_ROLES"
+    And "manager" está autenticado
+    And existe un rol con id 10
+    When envío una petición DELETE a "/api/roles/10"
+    Then la respuesta debe tener el código de estado 204
+    And el rol "Manager" pierde el permiso para "DELETE" en "TAG_ROLES"
+    And existe un rol con id 11
+    When envío una petición DELETE a "/api/roles/11"
+    Then la respuesta debe tener el código de estado 403

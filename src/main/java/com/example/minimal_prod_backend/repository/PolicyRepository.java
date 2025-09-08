@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import com.example.minimal_prod_backend.entity.Tag;
+import com.example.minimal_prod_backend.entity.Permission;
 
 public interface PolicyRepository extends JpaRepository<Policy, Long> {
     boolean existsByRole_IdInAndTag_NameIgnoreCaseAndPermission_Action(
@@ -17,4 +20,6 @@ public interface PolicyRepository extends JpaRepository<Policy, Long> {
 
     @EntityGraph(attributePaths = {"tag", "permission"})
     List<Policy> findByRoleIn(Collection<Role> roles);
+
+    Optional<Policy> findByRoleAndTagAndPermission(Role role, Tag tag, Permission permission);
 }

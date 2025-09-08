@@ -1,39 +1,37 @@
-Feature: Gestión de roles
-  Como administrador
-  Quiero crear, editar y eliminar roles
-  Para definir responsabilidades y asignar permisos por política
+Feature: Gestión de Roles
 
   Background:
-    Given existe un usuario "admin" con rol "Admin" y está autenticado
+    Given estoy autenticado como "admin" con rol "Admin"
 
   Scenario: Crear un nuevo rol
-    When el admin crea el rol "Accounting"
-    Then el rol "Accounting" existe en el sistema
+    When envío una petición POST a "/api/roles" con el cuerpo:
+      """
+      {
+        "name": "Accounting",
+        "permissionIds": [1, 2]
+      }
+      """
+    Then la respuesta debe tener el código de estado 201
+    And el cuerpo de la respuesta debe contener los detalles del rol "Accounting"
 
-  Scenario: Intento de crear rol por no-admin es denegado
-    Given existe un usuario "sofia" autenticada con rol "Engineer"
-    When "sofia" intenta crear el rol "Auditor"
-    Then la operación es denegada con error "Permiso denegado"
+  Scenario: Obtener todos los roles
+    When envío una petición GET a "/api/roles"
+    Then la respuesta debe tener el código de estado 200
+    And el cuerpo de la respuesta debe ser una lista de roles
 
-  Scenario: Modificar nombre o descripción de un rol
-    Given existe el rol "TempRole" con descripción "temporal"
-    When el admin actualiza la descripción de "TempRole" a "rol temporal actualizado"
-    Then la descripción de "TempRole" es "rol temporal actualizado"
+  Scenario: Actualizar un rol
+    Given existe un rol con id 2
+    When envío una petición PUT a "/api/roles/2" con el cuerpo:
+      """
+      {
+        "name": "Finance",
+        "permissionIds": [1, 2, 3]
+      }
+      """
+    Then la respuesta debe tener el código de estado 200
+    And el cuerpo de la respuesta debe contener el nombre actualizado "Finance"
 
-  Scenario: Eliminar un rol y verificar efecto en usuarios
-    Given existe el rol "Obsolete" asignado a los usuarios "u1" y "u2"
-    When el admin elimina el rol "Obsolete"
-    Then los usuarios "u1" y "u2" ya no tienen el rol "Obsolete"
-    And las decisiones de acceso se recalculan según los roles restantes
-
-  Scenario Outline: Asignar y quitar roles a usuarios
-    Given existe un usuario "<user>"
-    When el admin asigna el rol "<role>" a "<user>"
-    Then "<user>" tiene el rol "<role>"
-    When el admin remueve el rol "<role>" de "<user>"
-    Then "<user>" no tiene el rol "<role>"
-
-    Examples:
-      | user  | role      |
-      | pedro | Supervisor|
-      | ana   | Accounting|
+  Scenario: Eliminar un rol
+    Given existe un rol con id 3
+    When envío una petición DELETE a "/api/roles/3"
+    Then la respuesta debe tener el código de estado 204

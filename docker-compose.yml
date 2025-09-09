@@ -16,12 +16,11 @@ services:
   # Servicio de la Aplicación Spring Boot
   app:
     build: .
-
     container_name: minimal-prod-app
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
+      - .:/app       # hot reload del código
       - ~/.m2:/root/.m2
     depends_on:
       - db
@@ -31,7 +30,6 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/minimalProd
       - SPRING_DATASOURCE_USERNAME=minimal_prod_user
       - SPRING_DATASOURCE_PASSWORD=minimal_prod_pass
-
 
 volumes:
   postgres_data:

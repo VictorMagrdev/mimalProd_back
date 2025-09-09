@@ -1,0 +1,257 @@
+scalar DateTime
+
+type EstadoOrden {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    activo: Boolean
+    creadoEn: DateTime
+}
+
+type TipoCosto {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    activo: Boolean
+    creadoEn: DateTime
+}
+
+type UnidadMedidaTipo {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    creadoEn: DateTime
+}
+
+type UnidadMedida {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    abreviatura: String
+    tipo: UnidadMedidaTipo!
+    esActiva: Boolean
+    esBase: Boolean
+    creadoEn: DateTime
+}
+
+type UnidadConversion {
+    id: ID!
+    origen: UnidadMedida!
+    destino: UnidadMedida!
+    factor: Float!
+}
+
+type Producto {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    unidadBase: UnidadMedida
+    costoBase: Float
+    creadoEn: DateTime
+}
+
+type LoteProduccion {
+    id: ID!
+    numeroLote: String!
+    producto: Producto
+    fabricadoEn: DateTime
+    venceEn: DateTime
+    creadoEn: DateTime
+}
+
+type OrdenProduccion {
+    id: ID!
+    numeroOrden: String!
+    lote: LoteProduccion
+    producto: Producto
+    cantidad: Float!
+    unidad: UnidadMedida
+    estado: EstadoOrden
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    cantidadDesperdicio: Float
+    cantidadProducida: Float
+    creadoPor: Int
+    observaciones: String
+    creadoEn: DateTime
+    actualizadoEn: DateTime
+}
+
+type LineaOrden {
+    id: ID!
+    orden: OrdenProduccion
+    numeroLinea: Int!
+    productoComponente: Producto
+    cantidadRequerida: Float!
+    unidadComponente: UnidadMedida
+    cantidadUsada: Float
+    costoUnitario: Float
+    costoTotal: Float
+    observaciones: String
+    creadoEn: DateTime
+}
+
+type CostoOrden {
+    id: ID!
+    orden: OrdenProduccion
+    tipoCosto: TipoCosto
+    descripcion: String
+    monto: Float!
+    moneda: String
+    registradoEn: DateTime
+}
+
+input EstadoOrdenInput {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    activo: Boolean
+}
+
+input TipoCostoInput {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    activo: Boolean
+}
+
+input UnidadMedidaTipoInput {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+}
+
+input UnidadMedidaInput {
+    codigo: String!
+    nombre: String!
+    abreviatura: String
+    idTipo: ID!
+    esActiva: Boolean
+    esBase: Boolean
+}
+
+input UnidadConversionInput {
+    idOrigen: ID!
+    idDestino: ID!
+    factor: Float!
+}
+
+input ProductoInput {
+    codigo: String!
+    nombre: String!
+    idUnidadBase: ID
+    costoBase: Float
+}
+
+input LoteProduccionInput {
+    numeroLote: String!
+    idProducto: ID
+    fabricadoEn: DateTime
+    venceEn: DateTime
+}
+
+input OrdenProduccionInput {
+    numeroOrden: String!
+    idLote: ID
+    idProducto: ID
+    cantidad: Float!
+    idUnidad: ID
+    idEstado: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    cantidadDesperdicio: Float
+    cantidadProducida: Float
+    creadoPor: Int
+    observaciones: String
+}
+
+input LineaOrdenInput {
+    idOrden: ID!
+    numeroLinea: Int!
+    idProductoComponente: ID
+    cantidadRequerida: Float!
+    idUnidadComponente: ID
+    cantidadUsada: Float
+    costoUnitario: Float
+    observaciones: String
+}
+
+input CostoOrdenInput {
+    idOrden: ID!
+    idTipoCosto: ID!
+    descripcion: String
+    monto: Float!
+    moneda: String!
+}
+
+type Query {
+    estadosOrden: [EstadoOrden]
+    estadoOrden(id: ID!): EstadoOrden
+    tiposCosto: [TipoCosto]
+    tipoCosto(id: ID!): TipoCosto
+    unidadesMedidaTipo: [UnidadMedidaTipo]
+    unidadMedidaTipo(id: ID!): UnidadMedidaTipo
+    unidadesMedida: [UnidadMedida]
+    unidadMedida(id: ID!): UnidadMedida
+    unidadesConversion: [UnidadConversion]
+    unidadConversion(id: ID!): UnidadConversion
+    productos: [Producto]
+    producto(id: ID!): Producto
+    lotesProduccion: [LoteProduccion]
+    loteProduccion(id: ID!): LoteProduccion
+    ordenesProduccion: [OrdenProduccion]
+    ordenProduccion(id: ID!): OrdenProduccion
+    lineasOrden: [LineaOrden]
+    lineaOrden(id: ID!): LineaOrden
+    costosOrden: [CostoOrden]
+    costoOrden(id: ID!): CostoOrden
+}
+
+type Mutation {
+    createEstadoOrden(input: EstadoOrdenInput!): EstadoOrden
+    updateEstadoOrden(id: ID!, input: EstadoOrdenInput!): EstadoOrden
+    deleteEstadoOrden(id: ID!): Boolean
+
+    createTipoCosto(input: TipoCostoInput!): TipoCosto
+    updateTipoCosto(id: ID!, input: TipoCostoInput!): TipoCosto
+    deleteTipoCosto(id: ID!): Boolean
+
+    createUnidadMedidaTipo(input: UnidadMedidaTipoInput!): UnidadMedidaTipo
+    updateUnidadMedidaTipo(id: ID!, input: UnidadMedidaTipoInput!): UnidadMedidaTipo
+    deleteUnidadMedidaTipo(id: ID!): Boolean
+
+    createUnidadMedida(input: UnidadMedidaInput!): UnidadMedida
+    updateUnidadMedida(id: ID!, input: UnidadMedidaInput!): UnidadMedida
+    deleteUnidadMedida(id: ID!): Boolean
+
+    createUnidadConversion(input: UnidadConversionInput!): UnidadConversion
+    updateUnidadConversion(id: ID!, input: UnidadConversionInput!): UnidadConversion
+    deleteUnidadConversion(id: ID!): Boolean
+
+    createProducto(input: ProductoInput!): Producto
+    updateProducto(id: ID!, input: ProductoInput!): Producto
+    deleteProducto(id: ID!): Boolean
+
+    createLoteProduccion(input: LoteProduccionInput!): LoteProduccion
+    updateLoteProduccion(id: ID!, input: LoteProduccionInput!): LoteProduccion
+    deleteLoteProduccion(id: ID!): Boolean
+
+    createOrdenProduccion(input: OrdenProduccionInput!): OrdenProduccion
+    updateOrdenProduccion(id: ID!, input: OrdenProduccionInput!): OrdenProduccion
+    deleteOrdenProduccion(id: ID!): Boolean
+
+    createLineaOrden(input: LineaOrdenInput!): LineaOrden
+    updateLineaOrden(id: ID!, input: LineaOrdenInput!): LineaOrden
+    deleteLineaOrden(id: ID!): Boolean
+
+    createCostoOrden(input: CostoOrdenInput!): CostoOrden
+    updateCostoOrden(id: ID!, input: CostoOrdenInput!): CostoOrden
+    deleteCostoOrden(id: ID!): Boolean
+}

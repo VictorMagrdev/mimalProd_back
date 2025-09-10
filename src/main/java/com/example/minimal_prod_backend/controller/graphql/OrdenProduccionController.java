@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.OrdenProduccion;
+import com.example.minimal_prod_backend.dto.OrdenProduccionInput;
+import com.example.minimal_prod_backend.dto.OrdenProduccionResponse;
 import com.example.minimal_prod_backend.service.OrdenProduccionService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class OrdenProduccionController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'READ')")
-    public List<OrdenProduccion> ordenesProduccion() {
+    public List<OrdenProduccionResponse> ordenesProduccion() {
         return ordenProduccionService.getOrdenesProduccion();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'READ')")
-    public OrdenProduccion ordenProduccion(@Argument Long id) {
+    public OrdenProduccionResponse ordenProduccion(@Argument Integer id) {
         return ordenProduccionService.getOrdenProduccionById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'CREATE')")
-    public OrdenProduccion createOrdenProduccion(@Argument OrdenProduccion ordenProduccion) {
-        return ordenProduccionService.createOrdenProduccion(ordenProduccion);
+    public OrdenProduccionResponse createOrdenProduccion(@Argument("input") OrdenProduccionInput ordenProduccionInput) {
+        return ordenProduccionService.createOrdenProduccion(ordenProduccionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'UPDATE')")
-    public OrdenProduccion updateOrdenProduccion(@Argument Long id, @Argument OrdenProduccion ordenProduccion) {
-        return ordenProduccionService.updateOrdenProduccion(id, ordenProduccion);
+    public OrdenProduccionResponse updateOrdenProduccion(@Argument Integer id, @Argument("input") OrdenProduccionInput ordenProduccionInput) {
+        return ordenProduccionService.updateOrdenProduccion(id, ordenProduccionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'DELETE')")
-    public boolean deleteOrdenProduccion(@Argument Long id) {
+    public boolean deleteOrdenProduccion(@Argument Integer id) {
         ordenProduccionService.deleteOrdenProduccion(id);
         return true;
     }

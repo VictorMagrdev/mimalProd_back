@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.UnidadConversion;
+import com.example.minimal_prod_backend.dto.UnidadConversionInput;
+import com.example.minimal_prod_backend.dto.UnidadConversionResponse;
 import com.example.minimal_prod_backend.service.UnidadConversionService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class UnidadConversionController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'READ')")
-    public List<UnidadConversion> unidadesConversion() {
+    public List<UnidadConversionResponse> unidadesConversion() {
         return unidadConversionService.getUnidadConversiones();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'READ')")
-    public UnidadConversion unidadConversion(@Argument Long id) {
+    public UnidadConversionResponse unidadConversion(@Argument Integer id) {
         return unidadConversionService.getUnidadConversionById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'CREATE')")
-    public UnidadConversion createUnidadConversion(@Argument UnidadConversion unidadConversion) {
-        return unidadConversionService.createUnidadConversion(unidadConversion);
+    public UnidadConversionResponse createUnidadConversion(@Argument("input") UnidadConversionInput unidadConversionInput) {
+        return unidadConversionService.createUnidadConversion(unidadConversionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'UPDATE')")
-    public UnidadConversion updateUnidadConversion(@Argument Long id, @Argument UnidadConversion unidadConversion) {
-        return unidadConversionService.updateUnidadConversion(id, unidadConversion);
+    public UnidadConversionResponse updateUnidadConversion(@Argument Integer id, @Argument("input") UnidadConversionInput unidadConversionInput) {
+        return unidadConversionService.updateUnidadConversion(id, unidadConversionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'DELETE')")
-    public boolean deleteUnidadConversion(@Argument Long id) {
+    public boolean deleteUnidadConversion(@Argument Integer id) {
         unidadConversionService.deleteUnidadConversion(id);
         return true;
     }

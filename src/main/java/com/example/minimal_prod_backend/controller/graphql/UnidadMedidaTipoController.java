@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.UnidadMedidaTipo;
+import com.example.minimal_prod_backend.dto.UnidadMedidaTipoInput;
+import com.example.minimal_prod_backend.dto.UnidadMedidaTipoResponse;
 import com.example.minimal_prod_backend.service.UnidadMedidaTipoService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class UnidadMedidaTipoController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TIPO_TAG', 'READ')")
-    public List<UnidadMedidaTipo> unidadesMedidaTipo() {
+    public List<UnidadMedidaTipoResponse> unidadesMedidaTipo() {
         return unidadMedidaTipoService.getUnidadMedidaTipos();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TIPO_TAG', 'READ')")
-    public UnidadMedidaTipo unidadMedidaTipo(@Argument Long id) {
+    public UnidadMedidaTipoResponse unidadMedidaTipo(@Argument Integer id) {
         return unidadMedidaTipoService.getUnidadMedidaTipoById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TIPO_TAG', 'CREATE')")
-    public UnidadMedidaTipo createUnidadMedidaTipo(@Argument UnidadMedidaTipo unidadMedidaTipo) {
-        return unidadMedidaTipoService.createUnidadMedidaTipo(unidadMedidaTipo);
+    public UnidadMedidaTipoResponse createUnidadMedidaTipo(@Argument("input") UnidadMedidaTipoInput unidadMedidaTipoInput) {
+        return unidadMedidaTipoService.createUnidadMedidaTipo(unidadMedidaTipoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TIPO_TAG', 'UPDATE')")
-    public UnidadMedidaTipo updateUnidadMedidaTipo(@Argument Long id, @Argument UnidadMedidaTipo unidadMedidaTipo) {
-        return unidadMedidaTipoService.updateUnidadMedidaTipo(id, unidadMedidaTipo);
+    public UnidadMedidaTipoResponse updateUnidadMedidaTipo(@Argument Integer id, @Argument("input") UnidadMedidaTipoInput unidadMedidaTipoInput) {
+        return unidadMedidaTipoService.updateUnidadMedidaTipo(id, unidadMedidaTipoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TIPO_TAG', 'DELETE')")
-    public boolean deleteUnidadMedidaTipo(@Argument Long id) {
+    public boolean deleteUnidadMedidaTipo(@Argument Integer id) {
         unidadMedidaTipoService.deleteUnidadMedidaTipo(id);
         return true;
     }

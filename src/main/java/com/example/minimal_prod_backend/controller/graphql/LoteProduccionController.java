@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.LoteProduccion;
+import com.example.minimal_prod_backend.dto.LoteProduccionInput;
+import com.example.minimal_prod_backend.dto.LoteProduccionResponse;
 import com.example.minimal_prod_backend.service.LoteProduccionService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class LoteProduccionController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'READ')")
-    public List<LoteProduccion> lotesProduccion() {
+    public List<LoteProduccionResponse> lotesProduccion() {
         return loteProduccionService.getLotesProduccion();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'READ')")
-    public LoteProduccion loteProduccion(@Argument Long id) {
+    public LoteProduccionResponse loteProduccion(@Argument Integer id) {
         return loteProduccionService.getLoteProduccionById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'CREATE')")
-    public LoteProduccion createLoteProduccion(@Argument LoteProduccion loteProduccion) {
-        return loteProduccionService.createLoteProduccion(loteProduccion);
+    public LoteProduccionResponse createLoteProduccion(@Argument("input") LoteProduccionInput loteProduccionInput) {
+        return loteProduccionService.createLoteProduccion(loteProduccionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'UPDATE')")
-    public LoteProduccion updateLoteProduccion(@Argument Long id, @Argument LoteProduccion loteProduccion) {
-        return loteProduccionService.updateLoteProduccion(id, loteProduccion);
+    public LoteProduccionResponse updateLoteProduccion(@Argument Integer id, @Argument("input") LoteProduccionInput loteProduccionInput) {
+        return loteProduccionService.updateLoteProduccion(id, loteProduccionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'DELETE')")
-    public boolean deleteLoteProduccion(@Argument Long id) {
+    public boolean deleteLoteProduccion(@Argument Integer id) {
         loteProduccionService.deleteLoteProduccion(id);
         return true;
     }

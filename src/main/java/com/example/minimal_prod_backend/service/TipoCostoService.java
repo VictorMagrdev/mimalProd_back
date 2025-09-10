@@ -1,13 +1,14 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.entity.TipoCosto;
+import com.example.minimal_prod_backend.dto.TipoCostoInput;
+import com.example.minimal_prod_backend.dto.TipoCostoResponse;
 
 import java.util.List;
 
 public interface TipoCostoService {
-    List<TipoCosto> getTiposCosto();
-    TipoCosto getTipoCostoById(Long id);
-    TipoCosto createTipoCosto(TipoCosto tipoCosto);
-    TipoCosto updateTipoCosto(Long id, TipoCosto tipoCosto);
-    void deleteTipoCosto(Long id);
+    List<TipoCostoResponse> getTiposCosto();
+    TipoCostoResponse getTipoCostoById(Integer id);
+    TipoCostoResponse createTipoCosto(TipoCostoInput tipoCostoInput);
+    TipoCostoResponse updateTipoCosto(Integer id, TipoCostoInput tipoCostoInput);
+    void deleteTipoCosto(Integer id);
 }

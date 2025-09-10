@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.Producto;
+import com.example.minimal_prod_backend.dto.ProductoInput;
+import com.example.minimal_prod_backend.dto.ProductoResponse;
 import com.example.minimal_prod_backend.service.ProductoService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class ProductoController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'READ')")
-    public List<Producto> productos() {
+    public List<ProductoResponse> productos() {
         return productoService.getProductos();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'READ')")
-    public Producto producto(@Argument Long id) {
+    public ProductoResponse producto(@Argument Integer id) {
         return productoService.getProductoById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'CREATE')")
-    public Producto createProducto(@Argument Producto producto) {
-        return productoService.createProducto(producto);
+    public ProductoResponse createProducto(@Argument("input") ProductoInput productoInput) {
+        return productoService.createProducto(productoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'UPDATE')")
-    public Producto updateProducto(@Argument Long id, @Argument Producto producto) {
-        return productoService.updateProducto(id, producto);
+    public ProductoResponse updateProducto(@Argument Integer id, @Argument("input") ProductoInput productoInput) {
+        return productoService.updateProducto(id, productoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'DELETE')")
-    public boolean deleteProducto(@Argument Long id) {
+    public boolean deleteProducto(@Argument Integer id) {
         productoService.deleteProducto(id);
         return true;
     }

@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.EstadoOrden;
+import com.example.minimal_prod_backend.dto.EstadoOrdenInput;
+import com.example.minimal_prod_backend.dto.EstadoOrdenResponse;
 import com.example.minimal_prod_backend.service.EstadoOrdenService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class EstadoOrdenController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'READ')")
-    public List<EstadoOrden> estadosOrden() {
+    public List<EstadoOrdenResponse> estadosOrden() {
         return estadoOrdenService.getEstadosOrden();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'READ')")
-    public EstadoOrden estadoOrden(@Argument Long id) {
+    public EstadoOrdenResponse estadoOrden(@Argument Integer id) {
         return estadoOrdenService.getEstadoOrdenById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'CREATE')")
-    public EstadoOrden createEstadoOrden(@Argument EstadoOrden estadoOrden) {
-        return estadoOrdenService.createEstadoOrden(estadoOrden);
+    public EstadoOrdenResponse createEstadoOrden(@Argument("input") EstadoOrdenInput estadoOrdenInput) {
+        return estadoOrdenService.createEstadoOrden(estadoOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'UPDATE')")
-    public EstadoOrden updateEstadoOrden(@Argument Long id, @Argument EstadoOrden estadoOrden) {
-        return estadoOrdenService.updateEstadoOrden(id, estadoOrden);
+    public EstadoOrdenResponse updateEstadoOrden(@Argument Integer id, @Argument("input") EstadoOrdenInput estadoOrdenInput) {
+        return estadoOrdenService.updateEstadoOrden(id, estadoOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'DELETE')")
-    public boolean deleteEstadoOrden(@Argument Long id) {
+    public boolean deleteEstadoOrden(@Argument Integer id) {
         estadoOrdenService.deleteEstadoOrden(id);
         return true;
     }

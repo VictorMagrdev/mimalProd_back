@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.TipoCosto;
+import com.example.minimal_prod_backend.dto.TipoCostoInput;
+import com.example.minimal_prod_backend.dto.TipoCostoResponse;
 import com.example.minimal_prod_backend.service.TipoCostoService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class TipoCostoController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'READ')")
-    public List<TipoCosto> tiposCosto() {
+    public List<TipoCostoResponse> tiposCosto() {
         return tipoCostoService.getTiposCosto();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'READ')")
-    public TipoCosto tipoCosto(@Argument Long id) {
+    public TipoCostoResponse tipoCosto(@Argument Integer id) {
         return tipoCostoService.getTipoCostoById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'CREATE')")
-    public TipoCosto createTipoCosto(@Argument TipoCosto tipoCosto) {
-        return tipoCostoService.createTipoCosto(tipoCosto);
+    public TipoCostoResponse createTipoCosto(@Argument("input") TipoCostoInput tipoCostoInput) {
+        return tipoCostoService.createTipoCosto(tipoCostoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'UPDATE')")
-    public TipoCosto updateTipoCosto(@Argument Long id, @Argument TipoCosto tipoCosto) {
-        return tipoCostoService.updateTipoCosto(id, tipoCosto);
+    public TipoCostoResponse updateTipoCosto(@Argument Integer id, @Argument("input") TipoCostoInput tipoCostoInput) {
+        return tipoCostoService.updateTipoCosto(id, tipoCostoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'DELETE')")
-    public boolean deleteTipoCosto(@Argument Long id) {
+    public boolean deleteTipoCosto(@Argument Integer id) {
         tipoCostoService.deleteTipoCosto(id);
         return true;
     }

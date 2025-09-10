@@ -1,49 +1,83 @@
 package com.example.minimal_prod_backend.service.impl;
 
+import com.example.minimal_prod_backend.dto.TipoCostoInput;
+import com.example.minimal_prod_backend.dto.TipoCostoResponse;
 import com.example.minimal_prod_backend.entity.TipoCosto;
+import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.repository.TipoCostoRepository;
 import com.example.minimal_prod_backend.service.TipoCostoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TipoCostoServiceImpl implements TipoCostoService {
 
     private final TipoCostoRepository tipoCostoRepository;
 
-    public TipoCostoServiceImpl(TipoCostoRepository tipoCostoRepository) {
-        this.tipoCostoRepository = tipoCostoRepository;
+    @Override
+    public List<TipoCostoResponse> getTiposCosto() {
+        return tipoCostoRepository.findAll().stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<TipoCosto> getTiposCosto() {
-        return tipoCostoRepository.findAll();
+    public TipoCostoResponse getTipoCostoById(Integer id) {
+        TipoCosto tipoCosto = tipoCostoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TipoCosto not found with id: " + id));
+        return toResponse(tipoCosto);
     }
 
     @Override
-    public TipoCosto getTipoCostoById(Long id) {
-        return tipoCostoRepository.findById(id).orElse(null);
+    public TipoCostoResponse createTipoCosto(TipoCostoInput tipoCostoInput) {
+        TipoCosto tipoCosto = toEntity(tipoCostoInput);
+        return toResponse(tipoCostoRepository.save(tipoCosto));
     }
 
     @Override
-    public TipoCosto createTipoCosto(TipoCosto tipoCosto) {
-        return tipoCostoRepository.save(tipoCosto);
+    public TipoCostoResponse updateTipoCosto(Integer id, TipoCostoInput tipoCostoInput) {
+        TipoCosto existingTipoCosto = tipoCostoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TipoCosto not found with id: " + id));
+        updateEntityFromInput(tipoCostoInput, existingTipoCosto);
+        return toResponse(tipoCostoRepository.save(existingTipoCosto));
     }
 
     @Override
-    public TipoCosto updateTipoCosto(Long id, TipoCosto tipoCosto) {
-        return tipoCostoRepository.findById(id).map(existingTipoCosto -> {
-            existingTipoCosto.setCodigo(tipoCosto.getCodigo());
-            existingTipoCosto.setNombre(tipoCosto.getNombre());
-            existingTipoCosto.setDescripcion(tipoCosto.getDescripcion());
-            existingTipoCosto.setActivo(tipoCosto.isActivo());
-            return tipoCostoRepository.save(existingTipoCosto);
-        }).orElse(null);
-    }
-
-    @Override
-    public void deleteTipoCosto(Long id) {
+    public void deleteTipoCosto(Integer id) {
         tipoCostoRepository.deleteById(id);
+    }
+
+    private TipoCostoResponse toResponse(TipoCosto entity) {
+        if (entity == null) return null;
+        TipoCostoResponse dto = new TipoCostoResponse();
+        dto.setId(entity.getId());
+        dto.setCodigo(entity.getCodigo());
+        dto.setNombre(entity.getNombre());
+        dto.setDescripcion(entity.getDescripcion());
+        dto.setActivo(entity.isActivo());
+        dto.setCreadoEn(entity.getCreadoEn());
+        return dto;
+    }
+
+    private TipoCosto toEntity(TipoCostoInput dto) {
+        if (dto == null) return null;
+        TipoCosto entity = new TipoCosto();
+        entity.setCodigo(dto.getCodigo());
+        entity.setNombre(dto.getNombre());
+        entity.setDescripcion(dto.getDescripcion());
+        entity.setActivo(dto.getActivo());
+        return entity;
+    }
+
+    private void updateEntityFromInput(TipoCostoInput dto, TipoCosto entity) {
+        if (dto == null || entity == null) return;
+        entity.setCodigo(dto.getCodigo());
+        entity.setNombre(dto.getNombre());
+        entity.setDescripcion(dto.getDescripcion());
+        entity.setActivo(dto.getActivo());
     }
 }

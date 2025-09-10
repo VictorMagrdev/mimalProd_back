@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.CostoOrden;
+import com.example.minimal_prod_backend.dto.CostoOrdenInput;
+import com.example.minimal_prod_backend.dto.CostoOrdenResponse;
 import com.example.minimal_prod_backend.service.CostoOrdenService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class CostoOrdenController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'READ')")
-    public List<CostoOrden> costosOrden() {
+    public List<CostoOrdenResponse> costosOrden() {
         return costoOrdenService.getCostosOrden();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'READ')")
-    public CostoOrden costoOrden(@Argument Long id) {
+    public CostoOrdenResponse costoOrden(@Argument Integer id) {
         return costoOrdenService.getCostoOrdenById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'CREATE')")
-    public CostoOrden createCostoOrden(@Argument CostoOrden costoOrden) {
-        return costoOrdenService.createCostoOrden(costoOrden);
+    public CostoOrdenResponse createCostoOrden(@Argument("input") CostoOrdenInput costoOrdenInput) {
+        return costoOrdenService.createCostoOrden(costoOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'UPDATE')")
-    public CostoOrden updateCostoOrden(@Argument Long id, @Argument CostoOrden costoOrden) {
-        return costoOrdenService.updateCostoOrden(id, costoOrden);
+    public CostoOrdenResponse updateCostoOrden(@Argument Integer id, @Argument("input") CostoOrdenInput costoOrdenInput) {
+        return costoOrdenService.updateCostoOrden(id, costoOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'DELETE')")
-    public boolean deleteCostoOrden(@Argument Long id) {
+    public boolean deleteCostoOrden(@Argument Integer id) {
         costoOrdenService.deleteCostoOrden(id);
         return true;
     }

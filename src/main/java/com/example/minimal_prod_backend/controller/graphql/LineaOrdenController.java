@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.LineaOrden;
+import com.example.minimal_prod_backend.dto.LineaOrdenInput;
+import com.example.minimal_prod_backend.dto.LineaOrdenResponse;
 import com.example.minimal_prod_backend.service.LineaOrdenService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class LineaOrdenController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'READ')")
-    public List<LineaOrden> lineasOrden() {
+    public List<LineaOrdenResponse> lineasOrden() {
         return lineaOrdenService.getLineasOrden();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'READ')")
-    public LineaOrden lineaOrden(@Argument Long id) {
+    public LineaOrdenResponse lineaOrden(@Argument Integer id) {
         return lineaOrdenService.getLineaOrdenById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'CREATE')")
-    public LineaOrden createLineaOrden(@Argument LineaOrden lineaOrden) {
-        return lineaOrdenService.createLineaOrden(lineaOrden);
+    public LineaOrdenResponse createLineaOrden(@Argument("input") LineaOrdenInput lineaOrdenInput) {
+        return lineaOrdenService.createLineaOrden(lineaOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'UPDATE')")
-    public LineaOrden updateLineaOrden(@Argument Long id, @Argument LineaOrden lineaOrden) {
-        return lineaOrdenService.updateLineaOrden(id, lineaOrden);
+    public LineaOrdenResponse updateLineaOrden(@Argument Integer id, @Argument("input") LineaOrdenInput lineaOrdenInput) {
+        return lineaOrdenService.updateLineaOrden(id, lineaOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'DELETE')")
-    public boolean deleteLineaOrden(@Argument Long id) {
+    public boolean deleteLineaOrden(@Argument Integer id) {
         lineaOrdenService.deleteLineaOrden(id);
         return true;
     }

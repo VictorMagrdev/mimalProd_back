@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.entity.UnidadMedida;
+import com.example.minimal_prod_backend.dto.UnidadMedidaInput;
+import com.example.minimal_prod_backend.dto.UnidadMedidaResponse;
 import com.example.minimal_prod_backend.service.UnidadMedidaService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -21,31 +22,31 @@ public class UnidadMedidaController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'READ')")
-    public List<UnidadMedida> unidadesMedida() {
+    public List<UnidadMedidaResponse> unidadesMedida() {
         return unidadMedidaService.getUnidadesMedida();
     }
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'READ')")
-    public UnidadMedida unidadMedida(@Argument Long id) {
+    public UnidadMedidaResponse unidadMedida(@Argument Integer id) {
         return unidadMedidaService.getUnidadMedidaById(id);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'CREATE')")
-    public UnidadMedida createUnidadMedida(@Argument UnidadMedida unidadMedida) {
-        return unidadMedidaService.createUnidadMedida(unidadMedida);
+    public UnidadMedidaResponse createUnidadMedida(@Argument("input") UnidadMedidaInput unidadMedidaInput) {
+        return unidadMedidaService.createUnidadMedida(unidadMedidaInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'UPDATE')")
-    public UnidadMedida updateUnidadMedida(@Argument Long id, @Argument UnidadMedida unidadMedida) {
-        return unidadMedidaService.updateUnidadMedida(id, unidadMedida);
+    public UnidadMedidaResponse updateUnidadMedida(@Argument Integer id, @Argument("input") UnidadMedidaInput unidadMedidaInput) {
+        return unidadMedidaService.updateUnidadMedida(id, unidadMedidaInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'DELETE')")
-    public boolean deleteUnidadMedida(@Argument Long id) {
+    public boolean deleteUnidadMedida(@Argument Integer id) {
         unidadMedidaService.deleteUnidadMedida(id);
         return true;
     }

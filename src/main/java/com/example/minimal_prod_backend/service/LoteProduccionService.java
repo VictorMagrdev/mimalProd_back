@@ -1,13 +1,14 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.entity.LoteProduccion;
+import com.example.minimal_prod_backend.dto.LoteProduccionInput;
+import com.example.minimal_prod_backend.dto.LoteProduccionResponse;
 
 import java.util.List;
 
 public interface LoteProduccionService {
-    List<LoteProduccion> getLotesProduccion();
-    LoteProduccion getLoteProduccionById(Long id);
-    LoteProduccion createLoteProduccion(LoteProduccion loteProduccion);
-    LoteProduccion updateLoteProduccion(Long id, LoteProduccion loteProduccion);
-    void deleteLoteProduccion(Long id);
+    List<LoteProduccionResponse> getLotesProduccion();
+    LoteProduccionResponse getLoteProduccionById(Integer id);
+    LoteProduccionResponse createLoteProduccion(LoteProduccionInput loteProduccionInput);
+    LoteProduccionResponse updateLoteProduccion(Integer id, LoteProduccionInput loteProduccionInput);
+    void deleteLoteProduccion(Integer id);
 }

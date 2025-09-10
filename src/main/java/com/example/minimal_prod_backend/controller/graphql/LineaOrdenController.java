@@ -20,31 +20,31 @@ public class LineaOrdenController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('LINEA_ORDEN', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'READ')")
     public List<LineaOrden> lineasOrden() {
         return lineaOrdenService.getLineasOrden();
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('LINEA_ORDEN', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'READ')")
     public LineaOrden lineaOrden(@Argument Long id) {
         return lineaOrdenService.getLineaOrdenById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('LINEA_ORDEN', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'CREATE')")
     public LineaOrden createLineaOrden(@Argument LineaOrden lineaOrden) {
         return lineaOrdenService.createLineaOrden(lineaOrden);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('LINEA_ORDEN', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'UPDATE')")
     public LineaOrden updateLineaOrden(@Argument Long id, @Argument LineaOrden lineaOrden) {
         return lineaOrdenService.updateLineaOrden(id, lineaOrden);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('LINEA_ORDEN', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'DELETE')")
     public boolean deleteLineaOrden(@Argument Long id) {
         lineaOrdenService.deleteLineaOrden(id);
         return true;

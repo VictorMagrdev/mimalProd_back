@@ -1,105 +1,46 @@
--- Add production tag
-INSERT INTO tags (name, description) VALUES ('PRODUCCION', 'Permisos para el modulo de produccion');
+-- 1. Crear objetos (uno por uno)
+INSERT INTO objects (name, type, metadata) VALUES ('ESTADO_ORDEN', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('TIPO_COSTO', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('UNIDAD_MEDIDA_TIPO', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('UNIDAD_MEDIDA', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('UNIDAD_CONVERSION', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('PRODUCTO', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('LOTE_PRODUCCION', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('ORDEN_PRODUCCION', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('LINEA_ORDEN', 'DOMAIN','{"description":"test"}');
+INSERT INTO objects (name, type, metadata) VALUES ('COSTO_ORDEN', 'DOMAIN','{"description":"test"}');
 
--- Add object entities
-INSERT INTO object_entities (name, description) VALUES
-('ESTADO_ORDEN', 'Entidad para los estados de las ordenes de produccion'),
-('TIPO_COSTO', 'Entidad para los tipos de costos'),
-('UNIDAD_MEDIDA_TIPO', 'Entidad para los tipos de unidades de medida'),
-('UNIDAD_MEDIDA', 'Entidad para las unidades de medida'),
-('UNIDAD_CONVERSION', 'Entidad para las conversiones de unidades de medida'),
-('PRODUCTO', 'Entidad para los productos'),
-('LOTE_PRODUCCION', 'Entidad para los lotes de produccion'),
-('ORDEN_PRODUCCION', 'Entidad para las ordenes de produccion'),
-('LINEA_ORDEN', 'Entidad para las lineas de las ordenes de produccion'),
-('COSTO_ORDEN', 'Entidad para los costos de las ordenes de produccion');
+-- 2. Crear tags (uno por uno)
+INSERT INTO tags (name, description, owner_role_id) VALUES ('ESTADO_ORDEN_TAG', 'Tag para ESTADO_ORDEN', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('TIPO_COSTO_TAG', 'Tag para TIPO_COSTO', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('UNIDAD_MEDIDA_TIPO_TAG', 'Tag para UNIDAD_MEDIDA_TIPO', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('UNIDAD_MEDIDA_TAG', 'Tag para UNIDAD_MEDIDA', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('UNIDAD_CONVERSION_TAG', 'Tag para UNIDAD_CONVERSION', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('PRODUCTO_TAG', 'Tag para PRODUCTO', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('LOTE_PRODUCCION_TAG', 'Tag para LOTE_PRODUCCION', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('ORDEN_PRODUCCION_TAG', 'Tag para ORDEN_PRODUCCION', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('LINEA_ORDEN_TAG', 'Tag para LINEA_ORDEN', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
+INSERT INTO tags (name, description, owner_role_id) VALUES ('COSTO_ORDEN_TAG', 'Tag para COSTO_ORDEN', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
 
--- Add permissions
-DO $$
-DECLARE
-    tag_id bigint;
-    object_id bigint;
-BEGIN
-    -- Get tag id
-    SELECT id INTO tag_id FROM tags WHERE name = 'PRODUCCION';
+-- 3. Asociar objetos con tags
+INSERT INTO object_tags (object_id, tag_id)
+SELECT o.id, t.id FROM objects o JOIN tags t ON t.name = o.name || '_TAG';
 
-    -- ESTADO_ORDEN
-    SELECT id INTO object_id FROM object_entities WHERE name = 'ESTADO_ORDEN';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- TIPO_COSTO
-    SELECT id INTO object_id FROM object_entities WHERE name = 'TIPO_COSTO';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- UNIDAD_MEDIDA_TIPO
-    SELECT id INTO object_id FROM object_entities WHERE name = 'UNIDAD_MEDIDA_TIPO';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- UNIDAD_MEDIDA
-    SELECT id INTO object_id FROM object_entities WHERE name = 'UNIDAD_MEDIDA';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- UNIDAD_CONVERSION
-    SELECT id INTO object_id FROM object_entities WHERE name = 'UNIDAD_CONVERSION';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- PRODUCTO
-    SELECT id INTO object_id FROM object_entities WHERE name = 'PRODUCTO';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- LOTE_PRODUCCION
-    SELECT id INTO object_id FROM object_entities WHERE name = 'LOTE_PRODUCCION';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- ORDEN_PRODUCCION
-    SELECT id INTO object_id FROM object_entities WHERE name = 'ORDEN_PRODUCCION';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- LINEA_ORDEN
-    SELECT id INTO object_id FROM object_entities WHERE name = 'LINEA_ORDEN';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-
-    -- COSTO_ORDEN
-    SELECT id INTO object_id FROM object_entities WHERE name = 'COSTO_ORDEN';
-    INSERT INTO permissions (action, object_entity_id, tag_id) VALUES
-    ('CREATE', object_id, tag_id),
-    ('READ', object_id, tag_id),
-    ('UPDATE', object_id, tag_id),
-    ('DELETE', object_id, tag_id);
-END $$;
+-- 4. Crear policies (ADMIN + tags + permisos universales)
+INSERT INTO policies (role_id, tag_id, permission_id)
+SELECT r.id, t.id, p.id
+FROM roles r
+JOIN tags t ON t.name IN (
+    'ESTADO_ORDEN_TAG',
+    'TIPO_COSTO_TAG',
+    'UNIDAD_MEDIDA_TIPO_TAG',
+    'UNIDAD_MEDIDA_TAG',
+    'UNIDAD_CONVERSION_TAG',
+    'PRODUCTO_TAG',
+    'LOTE_PRODUCCION_TAG',
+    'ORDEN_PRODUCCION_TAG',
+    'LINEA_ORDEN_TAG',
+    'COSTO_ORDEN_TAG'
+)
+JOIN permissions p ON p.action IN ('CREATE','READ','UPDATE','DELETE')
+WHERE r.name = 'ROLE_ADMIN';

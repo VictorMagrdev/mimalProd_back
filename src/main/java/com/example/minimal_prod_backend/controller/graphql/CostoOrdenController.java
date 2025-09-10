@@ -20,31 +20,31 @@ public class CostoOrdenController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('COSTO_ORDEN', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'READ')")
     public List<CostoOrden> costosOrden() {
         return costoOrdenService.getCostosOrden();
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('COSTO_ORDEN', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'READ')")
     public CostoOrden costoOrden(@Argument Long id) {
         return costoOrdenService.getCostoOrdenById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('COSTO_ORDEN', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'CREATE')")
     public CostoOrden createCostoOrden(@Argument CostoOrden costoOrden) {
         return costoOrdenService.createCostoOrden(costoOrden);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('COSTO_ORDEN', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'UPDATE')")
     public CostoOrden updateCostoOrden(@Argument Long id, @Argument CostoOrden costoOrden) {
         return costoOrdenService.updateCostoOrden(id, costoOrden);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('COSTO_ORDEN', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'DELETE')")
     public boolean deleteCostoOrden(@Argument Long id) {
         costoOrdenService.deleteCostoOrden(id);
         return true;

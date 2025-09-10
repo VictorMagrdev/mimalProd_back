@@ -20,31 +20,31 @@ public class EstadoOrdenController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('ESTADO_ORDEN', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'READ')")
     public List<EstadoOrden> estadosOrden() {
         return estadoOrdenService.getEstadosOrden();
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('ESTADO_ORDEN', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'READ')")
     public EstadoOrden estadoOrden(@Argument Long id) {
         return estadoOrdenService.getEstadoOrdenById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('ESTADO_ORDEN', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'CREATE')")
     public EstadoOrden createEstadoOrden(@Argument EstadoOrden estadoOrden) {
         return estadoOrdenService.createEstadoOrden(estadoOrden);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('ESTADO_ORDEN', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'UPDATE')")
     public EstadoOrden updateEstadoOrden(@Argument Long id, @Argument EstadoOrden estadoOrden) {
         return estadoOrdenService.updateEstadoOrden(id, estadoOrden);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('ESTADO_ORDEN', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'DELETE')")
     public boolean deleteEstadoOrden(@Argument Long id) {
         estadoOrdenService.deleteEstadoOrden(id);
         return true;

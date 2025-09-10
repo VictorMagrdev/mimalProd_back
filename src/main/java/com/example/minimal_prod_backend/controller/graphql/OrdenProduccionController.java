@@ -20,31 +20,31 @@ public class OrdenProduccionController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('ORDEN_PRODUCCION', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'READ')")
     public List<OrdenProduccion> ordenesProduccion() {
         return ordenProduccionService.getOrdenesProduccion();
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('ORDEN_PRODUCCION', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'READ')")
     public OrdenProduccion ordenProduccion(@Argument Long id) {
         return ordenProduccionService.getOrdenProduccionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('ORDEN_PRODUCCION', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'CREATE')")
     public OrdenProduccion createOrdenProduccion(@Argument OrdenProduccion ordenProduccion) {
         return ordenProduccionService.createOrdenProduccion(ordenProduccion);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('ORDEN_PRODUCCION', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'UPDATE')")
     public OrdenProduccion updateOrdenProduccion(@Argument Long id, @Argument OrdenProduccion ordenProduccion) {
         return ordenProduccionService.updateOrdenProduccion(id, ordenProduccion);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('ORDEN_PRODUCCION', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'DELETE')")
     public boolean deleteOrdenProduccion(@Argument Long id) {
         ordenProduccionService.deleteOrdenProduccion(id);
         return true;

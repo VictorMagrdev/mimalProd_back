@@ -20,31 +20,31 @@ public class LoteProduccionController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('LOTE_PRODUCCION', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'READ')")
     public List<LoteProduccion> lotesProduccion() {
         return loteProduccionService.getLotesProduccion();
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('LOTE_PRODUCCION', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'READ')")
     public LoteProduccion loteProduccion(@Argument Long id) {
         return loteProduccionService.getLoteProduccionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('LOTE_PRODUCCION', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'CREATE')")
     public LoteProduccion createLoteProduccion(@Argument LoteProduccion loteProduccion) {
         return loteProduccionService.createLoteProduccion(loteProduccion);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('LOTE_PRODUCCION', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'UPDATE')")
     public LoteProduccion updateLoteProduccion(@Argument Long id, @Argument LoteProduccion loteProduccion) {
         return loteProduccionService.updateLoteProduccion(id, loteProduccion);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('LOTE_PRODUCCION', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'DELETE')")
     public boolean deleteLoteProduccion(@Argument Long id) {
         loteProduccionService.deleteLoteProduccion(id);
         return true;

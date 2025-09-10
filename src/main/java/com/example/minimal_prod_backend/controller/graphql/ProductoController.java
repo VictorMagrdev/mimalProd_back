@@ -20,31 +20,31 @@ public class ProductoController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('PRODUCTO', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'READ')")
     public List<Producto> productos() {
         return productoService.getProductos();
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('PRODUCTO', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'READ')")
     public Producto producto(@Argument Long id) {
         return productoService.getProductoById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('PRODUCTO', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'CREATE')")
     public Producto createProducto(@Argument Producto producto) {
         return productoService.createProducto(producto);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('PRODUCTO', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'UPDATE')")
     public Producto updateProducto(@Argument Long id, @Argument Producto producto) {
         return productoService.updateProducto(id, producto);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('PRODUCTO', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'DELETE')")
     public boolean deleteProducto(@Argument Long id) {
         productoService.deleteProducto(id);
         return true;

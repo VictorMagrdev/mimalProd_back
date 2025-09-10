@@ -17,7 +17,7 @@ public class OrdenProduccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "numero_orden", unique = true, nullable = false)
     private String numeroOrden;

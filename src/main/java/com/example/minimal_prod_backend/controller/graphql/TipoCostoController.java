@@ -20,31 +20,31 @@ public class TipoCostoController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('TIPO_COSTO', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'READ')")
     public List<TipoCosto> tiposCosto() {
         return tipoCostoService.getTiposCosto();
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('TIPO_COSTO', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'READ')")
     public TipoCosto tipoCosto(@Argument Long id) {
         return tipoCostoService.getTipoCostoById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('TIPO_COSTO', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'CREATE')")
     public TipoCosto createTipoCosto(@Argument TipoCosto tipoCosto) {
         return tipoCostoService.createTipoCosto(tipoCosto);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('TIPO_COSTO', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'UPDATE')")
     public TipoCosto updateTipoCosto(@Argument Long id, @Argument TipoCosto tipoCosto) {
         return tipoCostoService.updateTipoCosto(id, tipoCosto);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('TIPO_COSTO', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'DELETE')")
     public boolean deleteTipoCosto(@Argument Long id) {
         tipoCostoService.deleteTipoCosto(id);
         return true;

@@ -20,31 +20,31 @@ public class UnidadMedidaController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('UNIDAD_MEDIDA', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'READ')")
     public List<UnidadMedida> unidadesMedida() {
         return unidadMedidaService.getUnidadesMedida();
     }
 
     @QueryMapping
-    @PreAuthorize("hasPermission('UNIDAD_MEDIDA', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'READ')")
     public UnidadMedida unidadMedida(@Argument Long id) {
         return unidadMedidaService.getUnidadMedidaById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('UNIDAD_MEDIDA', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'CREATE')")
     public UnidadMedida createUnidadMedida(@Argument UnidadMedida unidadMedida) {
         return unidadMedidaService.createUnidadMedida(unidadMedida);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('UNIDAD_MEDIDA', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'UPDATE')")
     public UnidadMedida updateUnidadMedida(@Argument Long id, @Argument UnidadMedida unidadMedida) {
         return unidadMedidaService.updateUnidadMedida(id, unidadMedida);
     }
 
     @MutationMapping
-    @PreAuthorize("hasPermission('UNIDAD_MEDIDA', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TAG', 'DELETE')")
     public boolean deleteUnidadMedida(@Argument Long id) {
         unidadMedidaService.deleteUnidadMedida(id);
         return true;

@@ -5,7 +5,6 @@ import com.example.minimal_prod_backend.entity.User;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data

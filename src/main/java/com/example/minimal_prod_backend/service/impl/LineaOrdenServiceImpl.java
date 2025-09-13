@@ -41,7 +41,7 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
 
     @Override
     @Transactional(readOnly = true)
-    public LineaOrdenResponse getLineaOrdenById(Integer id) {
+    public LineaOrdenResponse getLineaOrdenById(Long id) {
         LineaOrden lineaOrden = lineaOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("LineaOrden not found with id: " + id));
         return toResponse(lineaOrden);
@@ -56,7 +56,7 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
 
     @Override
     @Transactional
-    public LineaOrdenResponse updateLineaOrden(Integer id, LineaOrdenInput lineaOrdenInput) {
+    public LineaOrdenResponse updateLineaOrden(Long id, LineaOrdenInput lineaOrdenInput) {
         LineaOrden existingLineaOrden = lineaOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("LineaOrden not found with id: " + id));
         updateEntityFromInput(lineaOrdenInput, existingLineaOrden);
@@ -64,7 +64,7 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
     }
 
     @Override
-    public void deleteLineaOrden(Integer id) {
+    public void deleteLineaOrden(Long id) {
         lineaOrdenRepository.deleteById(id);
     }
 

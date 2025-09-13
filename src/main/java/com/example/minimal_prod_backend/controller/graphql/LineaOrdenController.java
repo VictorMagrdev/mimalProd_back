@@ -28,7 +28,7 @@ public class LineaOrdenController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'READ')")
-    public LineaOrdenResponse lineaOrden(@Argument Integer id) {
+    public LineaOrdenResponse lineaOrden(@Argument Long id) {
         return lineaOrdenService.getLineaOrdenById(id);
     }
 
@@ -40,13 +40,13 @@ public class LineaOrdenController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'UPDATE')")
-    public LineaOrdenResponse updateLineaOrden(@Argument Integer id, @Argument("input") LineaOrdenInput lineaOrdenInput) {
+    public LineaOrdenResponse updateLineaOrden(@Argument Long id, @Argument("input") LineaOrdenInput lineaOrdenInput) {
         return lineaOrdenService.updateLineaOrden(id, lineaOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'DELETE')")
-    public boolean deleteLineaOrden(@Argument Integer id) {
+    public boolean deleteLineaOrden(@Argument Long id) {
         lineaOrdenService.deleteLineaOrden(id);
         return true;
     }

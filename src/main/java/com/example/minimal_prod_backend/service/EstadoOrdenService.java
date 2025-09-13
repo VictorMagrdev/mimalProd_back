@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface EstadoOrdenService {
     List<EstadoOrdenResponse> getEstadosOrden();
-    EstadoOrdenResponse getEstadoOrdenById(Integer id);
+    EstadoOrdenResponse getEstadoOrdenById(Long id);
     EstadoOrdenResponse createEstadoOrden(EstadoOrdenInput estadoOrdenInput);
-    EstadoOrdenResponse updateEstadoOrden(Integer id, EstadoOrdenInput estadoOrdenInput);
-    void deleteEstadoOrden(Integer id);
+    EstadoOrdenResponse updateEstadoOrden(Long id, EstadoOrdenInput estadoOrdenInput);
+    void deleteEstadoOrden(Long id);
 }

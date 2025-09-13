@@ -28,7 +28,7 @@ public class LoteProduccionController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'READ')")
-    public LoteProduccionResponse loteProduccion(@Argument Integer id) {
+    public LoteProduccionResponse loteProduccion(@Argument Long id) {
         return loteProduccionService.getLoteProduccionById(id);
     }
 
@@ -40,13 +40,13 @@ public class LoteProduccionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'UPDATE')")
-    public LoteProduccionResponse updateLoteProduccion(@Argument Integer id, @Argument("input") LoteProduccionInput loteProduccionInput) {
+    public LoteProduccionResponse updateLoteProduccion(@Argument Long id, @Argument("input") LoteProduccionInput loteProduccionInput) {
         return loteProduccionService.updateLoteProduccion(id, loteProduccionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'DELETE')")
-    public boolean deleteLoteProduccion(@Argument Integer id) {
+    public boolean deleteLoteProduccion(@Argument Long id) {
         loteProduccionService.deleteLoteProduccion(id);
         return true;
     }

@@ -28,7 +28,7 @@ public class OrdenProduccionController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'READ')")
-    public OrdenProduccionResponse ordenProduccion(@Argument Integer id) {
+    public OrdenProduccionResponse ordenProduccion(@Argument Long id) {
         return ordenProduccionService.getOrdenProduccionById(id);
     }
 
@@ -40,13 +40,13 @@ public class OrdenProduccionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'UPDATE')")
-    public OrdenProduccionResponse updateOrdenProduccion(@Argument Integer id, @Argument("input") OrdenProduccionInput ordenProduccionInput) {
+    public OrdenProduccionResponse updateOrdenProduccion(@Argument Long id, @Argument("input") OrdenProduccionInput ordenProduccionInput) {
         return ordenProduccionService.updateOrdenProduccion(id, ordenProduccionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'DELETE')")
-    public boolean deleteOrdenProduccion(@Argument Integer id) {
+    public boolean deleteOrdenProduccion(@Argument Long id) {
         ordenProduccionService.deleteOrdenProduccion(id);
         return true;
     }

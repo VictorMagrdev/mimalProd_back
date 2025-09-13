@@ -28,7 +28,7 @@ public class UnidadConversionController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'READ')")
-    public UnidadConversionResponse unidadConversion(@Argument Integer id) {
+    public UnidadConversionResponse unidadConversion(@Argument Long id) {
         return unidadConversionService.getUnidadConversionById(id);
     }
 
@@ -40,13 +40,13 @@ public class UnidadConversionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'UPDATE')")
-    public UnidadConversionResponse updateUnidadConversion(@Argument Integer id, @Argument("input") UnidadConversionInput unidadConversionInput) {
+    public UnidadConversionResponse updateUnidadConversion(@Argument Long id, @Argument("input") UnidadConversionInput unidadConversionInput) {
         return unidadConversionService.updateUnidadConversion(id, unidadConversionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'DELETE')")
-    public boolean deleteUnidadConversion(@Argument Integer id) {
+    public boolean deleteUnidadConversion(@Argument Long id) {
         unidadConversionService.deleteUnidadConversion(id);
         return true;
     }

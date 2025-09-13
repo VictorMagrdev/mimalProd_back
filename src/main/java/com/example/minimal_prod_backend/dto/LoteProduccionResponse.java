@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class LoteProduccionResponse {
-    private Integer id;
+    private Long id;
     private String numeroLote;
     private ProductoResponse producto;
     private LocalDateTime fabricadoEn;

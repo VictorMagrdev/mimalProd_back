@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 public class ProductoInput {
     private String codigo;
     private String nombre;
-    private Integer idUnidadBase;
+    private Long idUnidadBase;
     private BigDecimal costoBase;
 }

@@ -26,7 +26,7 @@ public class UnidadMedidaTipoServiceImpl implements UnidadMedidaTipoService {
     }
 
     @Override
-    public UnidadMedidaTipoResponse getUnidadMedidaTipoById(Integer id) {
+    public UnidadMedidaTipoResponse getUnidadMedidaTipoById(Long id) {
         UnidadMedidaTipo unidadMedidaTipo = unidadMedidaTipoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadMedidaTipo not found with id: " + id));
         return toResponse(unidadMedidaTipo);
@@ -39,7 +39,7 @@ public class UnidadMedidaTipoServiceImpl implements UnidadMedidaTipoService {
     }
 
     @Override
-    public UnidadMedidaTipoResponse updateUnidadMedidaTipo(Integer id, UnidadMedidaTipoInput unidadMedidaTipoInput) {
+    public UnidadMedidaTipoResponse updateUnidadMedidaTipo(Long id, UnidadMedidaTipoInput unidadMedidaTipoInput) {
         UnidadMedidaTipo existingUnidadMedidaTipo = unidadMedidaTipoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadMedidaTipo not found with id: " + id));
         updateEntityFromInput(unidadMedidaTipoInput, existingUnidadMedidaTipo);
@@ -47,7 +47,7 @@ public class UnidadMedidaTipoServiceImpl implements UnidadMedidaTipoService {
     }
 
     @Override
-    public void deleteUnidadMedidaTipo(Integer id) {
+    public void deleteUnidadMedidaTipo(Long id) {
         unidadMedidaTipoRepository.deleteById(id);
     }
 

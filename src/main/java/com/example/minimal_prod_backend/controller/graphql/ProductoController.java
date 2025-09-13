@@ -28,7 +28,7 @@ public class ProductoController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'READ')")
-    public ProductoResponse producto(@Argument Integer id) {
+    public ProductoResponse producto(@Argument Long id) {
         return productoService.getProductoById(id);
     }
 
@@ -40,13 +40,13 @@ public class ProductoController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'UPDATE')")
-    public ProductoResponse updateProducto(@Argument Integer id, @Argument("input") ProductoInput productoInput) {
+    public ProductoResponse updateProducto(@Argument Long id, @Argument("input") ProductoInput productoInput) {
         return productoService.updateProducto(id, productoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('PRODUCTO_TAG', 'DELETE')")
-    public boolean deleteProducto(@Argument Integer id) {
+    public boolean deleteProducto(@Argument Long id) {
         productoService.deleteProducto(id);
         return true;
     }

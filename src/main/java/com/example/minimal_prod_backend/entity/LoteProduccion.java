@@ -16,7 +16,7 @@ public class LoteProduccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "numero_lote", unique = true, nullable = false)
     private String numeroLote;

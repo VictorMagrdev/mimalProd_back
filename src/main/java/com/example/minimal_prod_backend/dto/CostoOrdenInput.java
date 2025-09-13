@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 @Data
 public class CostoOrdenInput {
-    private Integer idOrden;
-    private Integer idTipoCosto;
+    private Long idOrden;
+    private Long idTipoCosto;
     private String descripcion;
     private BigDecimal monto;
     private String moneda;

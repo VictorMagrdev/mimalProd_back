@@ -28,7 +28,7 @@ public class UnidadMedidaTipoController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TIPO_TAG', 'READ')")
-    public UnidadMedidaTipoResponse unidadMedidaTipo(@Argument Integer id) {
+    public UnidadMedidaTipoResponse unidadMedidaTipo(@Argument Long id) {
         return unidadMedidaTipoService.getUnidadMedidaTipoById(id);
     }
 
@@ -40,13 +40,13 @@ public class UnidadMedidaTipoController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TIPO_TAG', 'UPDATE')")
-    public UnidadMedidaTipoResponse updateUnidadMedidaTipo(@Argument Integer id, @Argument("input") UnidadMedidaTipoInput unidadMedidaTipoInput) {
+    public UnidadMedidaTipoResponse updateUnidadMedidaTipo(@Argument Long id, @Argument("input") UnidadMedidaTipoInput unidadMedidaTipoInput) {
         return unidadMedidaTipoService.updateUnidadMedidaTipo(id, unidadMedidaTipoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDAD_MEDIDA_TIPO_TAG', 'DELETE')")
-    public boolean deleteUnidadMedidaTipo(@Argument Integer id) {
+    public boolean deleteUnidadMedidaTipo(@Argument Long id) {
         unidadMedidaTipoService.deleteUnidadMedidaTipo(id);
         return true;
     }

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface LineaOrdenService {
     List<LineaOrdenResponse> getLineasOrden();
-    LineaOrdenResponse getLineaOrdenById(Integer id);
+    LineaOrdenResponse getLineaOrdenById(Long id);
     LineaOrdenResponse createLineaOrden(LineaOrdenInput lineaOrdenInput);
-    LineaOrdenResponse updateLineaOrden(Integer id, LineaOrdenInput lineaOrdenInput);
-    void deleteLineaOrden(Integer id);
+    LineaOrdenResponse updateLineaOrden(Long id, LineaOrdenInput lineaOrdenInput);
+    void deleteLineaOrden(Long id);
 }

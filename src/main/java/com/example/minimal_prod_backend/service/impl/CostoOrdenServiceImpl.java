@@ -37,7 +37,7 @@ public class CostoOrdenServiceImpl implements CostoOrdenService {
 
     @Override
     @Transactional(readOnly = true)
-    public CostoOrdenResponse getCostoOrdenById(Integer id) {
+    public CostoOrdenResponse getCostoOrdenById(Long id) {
         CostoOrden costoOrden = costoOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("CostoOrden not found with id: " + id));
         return toResponse(costoOrden);
@@ -52,7 +52,7 @@ public class CostoOrdenServiceImpl implements CostoOrdenService {
 
     @Override
     @Transactional
-    public CostoOrdenResponse updateCostoOrden(Integer id, CostoOrdenInput costoOrdenInput) {
+    public CostoOrdenResponse updateCostoOrden(Long id, CostoOrdenInput costoOrdenInput) {
         CostoOrden existingCostoOrden = costoOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("CostoOrden not found with id: " + id));
         updateEntityFromInput(costoOrdenInput, existingCostoOrden);
@@ -60,7 +60,7 @@ public class CostoOrdenServiceImpl implements CostoOrdenService {
     }
 
     @Override
-    public void deleteCostoOrden(Integer id) {
+    public void deleteCostoOrden(Long id) {
         costoOrdenRepository.deleteById(id);
     }
 

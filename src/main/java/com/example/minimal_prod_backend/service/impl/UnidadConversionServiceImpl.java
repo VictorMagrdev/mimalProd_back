@@ -33,7 +33,7 @@ public class UnidadConversionServiceImpl implements UnidadConversionService {
 
     @Override
     @Transactional(readOnly = true)
-    public UnidadConversionResponse getUnidadConversionById(Integer id) {
+    public UnidadConversionResponse getUnidadConversionById(Long id) {
         UnidadConversion unidadConversion = unidadConversionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadConversion not found with id: " + id));
         return toResponse(unidadConversion);
@@ -48,7 +48,7 @@ public class UnidadConversionServiceImpl implements UnidadConversionService {
 
     @Override
     @Transactional
-    public UnidadConversionResponse updateUnidadConversion(Integer id, UnidadConversionInput unidadConversionInput) {
+    public UnidadConversionResponse updateUnidadConversion(Long id, UnidadConversionInput unidadConversionInput) {
         UnidadConversion existingUnidadConversion = unidadConversionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadConversion not found with id: " + id));
         updateEntityFromInput(unidadConversionInput, existingUnidadConversion);
@@ -56,7 +56,7 @@ public class UnidadConversionServiceImpl implements UnidadConversionService {
     }
 
     @Override
-    public void deleteUnidadConversion(Integer id) {
+    public void deleteUnidadConversion(Long id) {
         unidadConversionRepository.deleteById(id);
     }
 

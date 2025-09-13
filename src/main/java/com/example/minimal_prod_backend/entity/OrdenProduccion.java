@@ -17,7 +17,7 @@ public class OrdenProduccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "numero_orden", unique = true, nullable = false)
     private String numeroOrden;
@@ -60,7 +60,7 @@ public class OrdenProduccion {
     private BigDecimal cantidadProducida = BigDecimal.ZERO;
 
     @Column(name = "creado_por")
-    private Integer creadoPor;
+    private Long creadoPor;
 
     private String observaciones;
 

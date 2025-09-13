@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class UnidadMedidaTipoResponse {
-    private Integer id;
+    private Long id;
     private String codigo;
     private String nombre;
     private String descripcion;

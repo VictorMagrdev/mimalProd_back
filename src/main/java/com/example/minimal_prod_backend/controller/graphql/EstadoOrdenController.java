@@ -28,7 +28,7 @@ public class EstadoOrdenController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'READ')")
-    public EstadoOrdenResponse estadoOrden(@Argument Integer id) {
+    public EstadoOrdenResponse estadoOrden(@Argument Long id) {
         return estadoOrdenService.getEstadoOrdenById(id);
     }
 
@@ -40,13 +40,13 @@ public class EstadoOrdenController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'UPDATE')")
-    public EstadoOrdenResponse updateEstadoOrden(@Argument Integer id, @Argument("input") EstadoOrdenInput estadoOrdenInput) {
+    public EstadoOrdenResponse updateEstadoOrden(@Argument Long id, @Argument("input") EstadoOrdenInput estadoOrdenInput) {
         return estadoOrdenService.updateEstadoOrden(id, estadoOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTADO_ORDEN_TAG', 'DELETE')")
-    public boolean deleteEstadoOrden(@Argument Integer id) {
+    public boolean deleteEstadoOrden(@Argument Long id) {
         estadoOrdenService.deleteEstadoOrden(id);
         return true;
     }

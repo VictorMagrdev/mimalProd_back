@@ -16,7 +16,7 @@ public class UnidadConversion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "id_origen", nullable = false)

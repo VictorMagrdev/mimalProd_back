@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Data
 public class UnidadConversionInput {
-    private Integer idOrigen;
-    private Integer idDestino;
+    private Long idOrigen;
+    private Long idDestino;
     private BigDecimal factor;
 }

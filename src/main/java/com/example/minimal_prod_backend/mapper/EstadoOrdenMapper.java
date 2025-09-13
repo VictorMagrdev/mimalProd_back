@@ -17,7 +17,7 @@ public class EstadoOrdenMapper {
         dto.setCodigo(entity.getCodigo());
         dto.setNombre(entity.getNombre());
         dto.setDescripcion(entity.getDescripcion());
-        dto.setActivo(entity.getActivo());
+        dto.setActivo(entity.isActivo());
         dto.setCreadoEn(entity.getCreadoEn());
         return dto;
     }

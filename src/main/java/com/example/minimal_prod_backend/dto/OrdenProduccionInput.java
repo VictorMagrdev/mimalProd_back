@@ -8,17 +8,17 @@ import java.time.LocalDateTime;
 @Data
 public class OrdenProduccionInput {
     private String numeroOrden;
-    private Integer idLote;
+    private Long idLote;
     private Long idProducto;
     private BigDecimal cantidad;
-    private Integer idUnidad;
-    private Integer idEstado;
+    private Long idUnidad;
+    private Long idEstado;
     private LocalDateTime inicioPlanificado;
     private LocalDateTime finPlanificado;
     private LocalDateTime inicioReal;
     private LocalDateTime finReal;
     private BigDecimal cantidadDesperdicio;
     private BigDecimal cantidadProducida;
-    private Integer creadoPor;
+    private Long creadoPor;
     private String observaciones;
 }

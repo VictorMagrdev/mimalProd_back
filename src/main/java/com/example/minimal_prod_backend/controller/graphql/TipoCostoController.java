@@ -28,7 +28,7 @@ public class TipoCostoController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'READ')")
-    public TipoCostoResponse tipoCosto(@Argument Integer id) {
+    public TipoCostoResponse tipoCosto(@Argument Long id) {
         return tipoCostoService.getTipoCostoById(id);
     }
 
@@ -40,13 +40,13 @@ public class TipoCostoController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'UPDATE')")
-    public TipoCostoResponse updateTipoCosto(@Argument Integer id, @Argument("input") TipoCostoInput tipoCostoInput) {
+    public TipoCostoResponse updateTipoCosto(@Argument Long id, @Argument("input") TipoCostoInput tipoCostoInput) {
         return tipoCostoService.updateTipoCosto(id, tipoCostoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'DELETE')")
-    public boolean deleteTipoCosto(@Argument Integer id) {
+    public boolean deleteTipoCosto(@Argument Long id) {
         tipoCostoService.deleteTipoCosto(id);
         return true;
     }

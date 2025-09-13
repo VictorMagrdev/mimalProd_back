@@ -28,7 +28,7 @@ public class CostoOrdenController {
 
     @QueryMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'READ')")
-    public CostoOrdenResponse costoOrden(@Argument Integer id) {
+    public CostoOrdenResponse costoOrden(@Argument Long id) {
         return costoOrdenService.getCostoOrdenById(id);
     }
 
@@ -40,13 +40,13 @@ public class CostoOrdenController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'UPDATE')")
-    public CostoOrdenResponse updateCostoOrden(@Argument Integer id, @Argument("input") CostoOrdenInput costoOrdenInput) {
+    public CostoOrdenResponse updateCostoOrden(@Argument Long id, @Argument("input") CostoOrdenInput costoOrdenInput) {
         return costoOrdenService.updateCostoOrden(id, costoOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'DELETE')")
-    public boolean deleteCostoOrden(@Argument Integer id) {
+    public boolean deleteCostoOrden(@Argument Long id) {
         costoOrdenService.deleteCostoOrden(id);
         return true;
     }

@@ -26,7 +26,7 @@ public class TipoCostoServiceImpl implements TipoCostoService {
     }
 
     @Override
-    public TipoCostoResponse getTipoCostoById(Integer id) {
+    public TipoCostoResponse getTipoCostoById(Long id) {
         TipoCosto tipoCosto = tipoCostoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("TipoCosto not found with id: " + id));
         return toResponse(tipoCosto);
@@ -39,7 +39,7 @@ public class TipoCostoServiceImpl implements TipoCostoService {
     }
 
     @Override
-    public TipoCostoResponse updateTipoCosto(Integer id, TipoCostoInput tipoCostoInput) {
+    public TipoCostoResponse updateTipoCosto(Long id, TipoCostoInput tipoCostoInput) {
         TipoCosto existingTipoCosto = tipoCostoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("TipoCosto not found with id: " + id));
         updateEntityFromInput(tipoCostoInput, existingTipoCosto);
@@ -47,7 +47,7 @@ public class TipoCostoServiceImpl implements TipoCostoService {
     }
 
     @Override
-    public void deleteTipoCosto(Integer id) {
+    public void deleteTipoCosto(Long id) {
         tipoCostoRepository.deleteById(id);
     }
 

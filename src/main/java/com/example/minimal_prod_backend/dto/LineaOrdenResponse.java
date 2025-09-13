@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class LineaOrdenResponse {
-    private Integer id;
+    private Long id;
     private OrdenProduccionResponse orden;
     private Integer numeroLinea;
     private ProductoResponse productoComponente;

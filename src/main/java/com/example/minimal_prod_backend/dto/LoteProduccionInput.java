@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 public class LoteProduccionInput {
     private String numeroLote;
-    private Integer idProducto;
+    private Long idProducto;
     private LocalDateTime fabricadoEn;
     private LocalDateTime venceEn;
 }

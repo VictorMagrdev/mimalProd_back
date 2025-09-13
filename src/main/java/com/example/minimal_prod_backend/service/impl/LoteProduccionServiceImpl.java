@@ -33,7 +33,7 @@ public class LoteProduccionServiceImpl implements LoteProduccionService {
 
     @Override
     @Transactional(readOnly = true)
-    public LoteProduccionResponse getLoteProduccionById(Integer id) {
+    public LoteProduccionResponse getLoteProduccionById(Long id) {
         LoteProduccion loteProduccion = loteProduccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + id));
         return toResponse(loteProduccion);
@@ -48,7 +48,7 @@ public class LoteProduccionServiceImpl implements LoteProduccionService {
 
     @Override
     @Transactional
-    public LoteProduccionResponse updateLoteProduccion(Integer id, LoteProduccionInput loteProduccionInput) {
+    public LoteProduccionResponse updateLoteProduccion(Long id, LoteProduccionInput loteProduccionInput) {
         LoteProduccion existingLoteProduccion = loteProduccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + id));
         updateEntityFromInput(loteProduccionInput, existingLoteProduccion);
@@ -56,7 +56,7 @@ public class LoteProduccionServiceImpl implements LoteProduccionService {
     }
 
     @Override
-    public void deleteLoteProduccion(Integer id) {
+    public void deleteLoteProduccion(Long id) {
         loteProduccionRepository.deleteById(id);
     }
 

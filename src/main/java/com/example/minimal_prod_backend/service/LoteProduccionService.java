@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface LoteProduccionService {
     List<LoteProduccionResponse> getLotesProduccion();
-    LoteProduccionResponse getLoteProduccionById(Integer id);
+    LoteProduccionResponse getLoteProduccionById(Long id);
     LoteProduccionResponse createLoteProduccion(LoteProduccionInput loteProduccionInput);
-    LoteProduccionResponse updateLoteProduccion(Integer id, LoteProduccionInput loteProduccionInput);
-    void deleteLoteProduccion(Integer id);
+    LoteProduccionResponse updateLoteProduccion(Long id, LoteProduccionInput loteProduccionInput);
+    void deleteLoteProduccion(Long id);
 }

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface OrdenProduccionService {
     List<OrdenProduccionResponse> getOrdenesProduccion();
-    OrdenProduccionResponse getOrdenProduccionById(Integer id);
+    OrdenProduccionResponse getOrdenProduccionById(Long id);
     OrdenProduccionResponse createOrdenProduccion(OrdenProduccionInput ordenProduccionInput);
-    OrdenProduccionResponse updateOrdenProduccion(Integer id, OrdenProduccionInput ordenProduccionInput);
-    void deleteOrdenProduccion(Integer id);
+    OrdenProduccionResponse updateOrdenProduccion(Long id, OrdenProduccionInput ordenProduccionInput);
+    void deleteOrdenProduccion(Long id);
 }

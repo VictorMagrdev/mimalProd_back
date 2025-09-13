@@ -33,7 +33,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional(readOnly = true)
-    public ProductoResponse getProductoById(Integer id) {
+    public ProductoResponse getProductoById(Long id) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + id));
         return toResponse(producto);
@@ -48,7 +48,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional
-    public ProductoResponse updateProducto(Integer id, ProductoInput productoInput) {
+    public ProductoResponse updateProducto(Long id, ProductoInput productoInput) {
         Producto existingProducto = productoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + id));
         updateEntityFromInput(productoInput, existingProducto);
@@ -56,7 +56,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public void deleteProducto(Integer id) {
+    public void deleteProducto(Long id) {
         productoRepository.deleteById(id);
     }
 

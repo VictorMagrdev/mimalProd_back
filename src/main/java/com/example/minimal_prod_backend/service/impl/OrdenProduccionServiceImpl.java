@@ -32,7 +32,7 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 
     @Override
     @Transactional(readOnly = true)
-    public OrdenProduccionResponse getOrdenProduccionById(Integer id) {
+    public OrdenProduccionResponse getOrdenProduccionById(Long id) {
         OrdenProduccion ordenProduccion = ordenProduccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + id));
         return toResponse(ordenProduccion);
@@ -47,7 +47,7 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 
     @Override
     @Transactional
-    public OrdenProduccionResponse updateOrdenProduccion(Integer id, OrdenProduccionInput ordenProduccionInput) {
+    public OrdenProduccionResponse updateOrdenProduccion(Long id, OrdenProduccionInput ordenProduccionInput) {
         OrdenProduccion existingOrdenProduccion = ordenProduccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + id));
         updateEntityFromInput(ordenProduccionInput, existingOrdenProduccion);
@@ -55,7 +55,7 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     }
 
     @Override
-    public void deleteOrdenProduccion(Integer id) {
+    public void deleteOrdenProduccion(Long id) {
         ordenProduccionRepository.deleteById(id);
     }
 
@@ -136,7 +136,7 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
             entity.setLote(lote);
         }
         if (dto.getIdProducto() != null) {
-            Producto producto = productoRepository.findById(Math.toIntExact(dto.getIdProducto())).orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
+            Producto producto = productoRepository.findById(dto.getIdProducto()).orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
             entity.setProducto(producto);
         }
         if (dto.getIdUnidad() != null) {

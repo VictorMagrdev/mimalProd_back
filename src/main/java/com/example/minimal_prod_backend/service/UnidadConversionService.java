@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface UnidadConversionService {
     List<UnidadConversionResponse> getUnidadConversiones();
-    UnidadConversionResponse getUnidadConversionById(Integer id);
+    UnidadConversionResponse getUnidadConversionById(Long id);
     UnidadConversionResponse createUnidadConversion(UnidadConversionInput unidadConversionInput);
-    UnidadConversionResponse updateUnidadConversion(Integer id, UnidadConversionInput unidadConversionInput);
-    void deleteUnidadConversion(Integer id);
+    UnidadConversionResponse updateUnidadConversion(Long id, UnidadConversionInput unidadConversionInput);
+    void deleteUnidadConversion(Long id);
 }

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class OrdenProduccionResponse {
-    private Integer id;
+    private Long id;
     private String numeroOrden;
     private LoteProduccionResponse lote;
     private ProductoResponse producto;
@@ -20,7 +20,7 @@ public class OrdenProduccionResponse {
     private LocalDateTime finReal;
     private BigDecimal cantidadDesperdicio;
     private BigDecimal cantidadProducida;
-    private Integer creadoPor;
+    private Long creadoPor;
     private String observaciones;
     private LocalDateTime creadoEn;
     private LocalDateTime actualizadoEn;

@@ -33,7 +33,7 @@ public class UnidadMedidaServiceImpl implements UnidadMedidaService {
 
     @Override
     @Transactional(readOnly = true)
-    public UnidadMedidaResponse getUnidadMedidaById(Integer id) {
+    public UnidadMedidaResponse getUnidadMedidaById(Long id) {
         UnidadMedida unidadMedida = unidadMedidaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + id));
         return toResponse(unidadMedida);
@@ -48,7 +48,7 @@ public class UnidadMedidaServiceImpl implements UnidadMedidaService {
 
     @Override
     @Transactional
-    public UnidadMedidaResponse updateUnidadMedida(Integer id, UnidadMedidaInput unidadMedidaInput) {
+    public UnidadMedidaResponse updateUnidadMedida(Long id, UnidadMedidaInput unidadMedidaInput) {
         UnidadMedida existingUnidadMedida = unidadMedidaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + id));
         updateEntityFromInput(unidadMedidaInput, existingUnidadMedida);
@@ -56,7 +56,7 @@ public class UnidadMedidaServiceImpl implements UnidadMedidaService {
     }
 
     @Override
-    public void deleteUnidadMedida(Integer id) {
+    public void deleteUnidadMedida(Long id) {
         unidadMedidaRepository.deleteById(id);
     }
 

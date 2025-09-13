@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface UnidadMedidaTipoService {
     List<UnidadMedidaTipoResponse> getUnidadMedidaTipos();
-    UnidadMedidaTipoResponse getUnidadMedidaTipoById(Integer id);
+    UnidadMedidaTipoResponse getUnidadMedidaTipoById(Long id);
     UnidadMedidaTipoResponse createUnidadMedidaTipo(UnidadMedidaTipoInput unidadMedidaTipoInput);
-    UnidadMedidaTipoResponse updateUnidadMedidaTipo(Integer id, UnidadMedidaTipoInput unidadMedidaTipoInput);
-    void deleteUnidadMedidaTipo(Integer id);
+    UnidadMedidaTipoResponse updateUnidadMedidaTipo(Long id, UnidadMedidaTipoInput unidadMedidaTipoInput);
+    void deleteUnidadMedidaTipo(Long id);
 }

@@ -6,11 +6,11 @@ import java.math.BigDecimal;
 
 @Data
 public class LineaOrdenInput {
-    private Integer idOrden;
+    private Long idOrden;
     private Integer numeroLinea;
-    private Integer idProductoComponente;
+    private Long idProductoComponente;
     private BigDecimal cantidadRequerida;
-    private Integer idUnidadComponente;
+    private Long idUnidadComponente;
     private BigDecimal cantidadUsada;
     private BigDecimal costoUnitario;
     private String observaciones;

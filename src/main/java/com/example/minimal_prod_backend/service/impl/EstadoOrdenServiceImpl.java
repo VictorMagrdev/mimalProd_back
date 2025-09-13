@@ -26,7 +26,7 @@ public class EstadoOrdenServiceImpl implements EstadoOrdenService {
     }
 
     @Override
-    public EstadoOrdenResponse getEstadoOrdenById(Integer id) {
+    public EstadoOrdenResponse getEstadoOrdenById(Long id) {
         EstadoOrden estadoOrden = estadoOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("EstadoOrden not found with id: " + id));
         return toResponse(estadoOrden);
@@ -39,7 +39,7 @@ public class EstadoOrdenServiceImpl implements EstadoOrdenService {
     }
 
     @Override
-    public EstadoOrdenResponse updateEstadoOrden(Integer id, EstadoOrdenInput estadoOrdenInput) {
+    public EstadoOrdenResponse updateEstadoOrden(Long id, EstadoOrdenInput estadoOrdenInput) {
         EstadoOrden existingEstadoOrden = estadoOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("EstadoOrden not found with id: " + id));
         updateEntityFromInput(estadoOrdenInput, existingEstadoOrden);
@@ -47,7 +47,7 @@ public class EstadoOrdenServiceImpl implements EstadoOrdenService {
     }
 
     @Override
-    public void deleteEstadoOrden(Integer id) {
+    public void deleteEstadoOrden(Long id) {
         estadoOrdenRepository.deleteById(id);
     }
 

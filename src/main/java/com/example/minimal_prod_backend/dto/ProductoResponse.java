@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ProductoResponse {
-    private Integer id;
+    private Long id;
     private String codigo;
     private String nombre;
     private UnidadMedidaResponse unidadBase;

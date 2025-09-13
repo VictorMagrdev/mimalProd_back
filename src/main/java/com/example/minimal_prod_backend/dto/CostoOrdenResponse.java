@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class CostoOrdenResponse {
-    private Integer id;
+    private Long id;
     private OrdenProduccionResponse orden;
     private TipoCostoResponse tipoCosto;
     private String descripcion;

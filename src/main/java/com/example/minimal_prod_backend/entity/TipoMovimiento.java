@@ -2,19 +2,19 @@ package com.example.minimal_prod_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "producto")
-public class Producto {
-
+@Table(name = "tipo_movimiento")
+public class TipoMovimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,20 +25,11 @@ public class Producto {
     @Column(nullable = false)
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "id_metodo_valoracion")
-    private MetodoValoracion metodoValoracion;
+    @Column(nullable = false)
+    private  String descripcion;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipo")
-    private TipoProducto tipo;
-
-    @ManyToOne
-    @JoinColumn(name = "id_unidad_base")
-    private UnidadMedida unidadBase;
-
-    @Column(name = "costo_base")
-    private BigDecimal costoBase = BigDecimal.ZERO;
+    @Builder.Default
+    private Boolean afecta_wip = false;
 
     @Column(name = "creado_en", updatable = false)
     private LocalDateTime creadoEn = LocalDateTime.now();

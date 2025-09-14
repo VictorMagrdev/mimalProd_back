@@ -43,10 +43,26 @@ CREATE TABLE unidad_conversion (
   CONSTRAINT uq_conversion UNIQUE (id_origen, id_destino)
 );
 
+CREATE TABLE tipo_producto (
+  id BIGSERIAL PRIMARY KEY,
+  codigo VARCHAR(50) UNIQUE NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion TEXT
+);
+-- Métodos de valoración de inventario (ej: FIFO, LIFO, PROMEDIO)
+CREATE TABLE metodo_valoracion (
+  id BIGSERIAL PRIMARY KEY,
+  codigo VARCHAR(50) UNIQUE NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion TEXT
+);
+
 CREATE TABLE producto (
   id BIGSERIAL PRIMARY KEY,
   codigo VARCHAR(64) UNIQUE,
   nombre TEXT NOT NULL,
+  id_metodo_valoracion BIGINT REFERENCES metodo_valoracion(id),
+  id_tipo BIGINT REFERENCES tipo_producto(id),
   id_unidad_base BIGINT REFERENCES unidad_medida(id),
   costo_base NUMERIC(18,4) DEFAULT 0,
   creado_en TIMESTAMP DEFAULT now()

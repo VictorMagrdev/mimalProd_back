@@ -44,10 +44,26 @@ type UnidadConversion {
     factor: Float!
 }
 
+type TipoProducto{
+    id:ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String!
+}
+
+type MetodoValoracion{
+    id:ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String!
+}
+
 type Producto {
     id: ID!
     codigo: String!
     nombre: String!
+    metodoValoracion: MetodoValoracion
+    tipo: TipoProducto
     unidadBase: UnidadMedida
     costoBase: Float
     creadoEn: DateTime
@@ -106,6 +122,217 @@ type CostoOrden {
     registradoEn: DateTime
 }
 
+type TipoBodega {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    bodegas: [Bodega]
+}
+
+type Bodega {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    tipo: TipoBodega
+    creadoEn: DateTime
+    inventario: [InventarioLote]
+}
+
+type TipoMovimiento {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    afectaWip: Boolean
+    creadoEn: DateTime
+    movimientos: [MovimientoInventario]
+}
+
+type MovimientoInventario {
+    id: ID!
+    fecha: DateTime
+    bodegaOrigen: Bodega
+    bodegaDestino: Bodega
+    tipo: TipoMovimiento
+    referencia: String
+    observaciones: String
+    creadoPor: Int
+    creadoEn: DateTime
+    detalles: [MovimientoInventarioDetalle]
+}
+
+type MovimientoInventarioDetalle {
+    id: ID!
+    movimiento: MovimientoInventario!
+    producto: Producto!
+    lote: LoteProduccion
+    cantidad: Float!
+    unidad: UnidadMedida
+    costoUnitario: Float
+    costoTotal: Float
+}
+
+type InventarioLote {
+    id: ID!
+    producto: Producto!
+    lote: LoteProduccion
+    bodega: Bodega!
+    cantidad: Float!
+    unidad: UnidadMedida
+    actualizadoEn: DateTime
+}
+
+type ReservaMaterialOrden {
+    id: ID!
+    orden: OrdenProduccion!
+    producto: Producto!
+    lote: LoteProduccion
+    cantidadReservada: Float!
+    unidad: UnidadMedida
+    fechaReserva: DateTime
+}
+
+type EstacionProduccion {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    orden: Int!
+    creadoEn: DateTime
+}
+
+type OrdenEstacion {
+    id: ID!
+    orden: OrdenProduccion!
+    estacion: EstacionProduccion!
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    estado: String
+    observaciones: String
+}
+
+type OrdenEvento {
+    id: ID!
+    orden: OrdenProduccion!
+    evento: String!
+    descripcion: String
+    fecha: DateTime
+}
+
+type ConteoCiclico {
+    id: ID!
+    producto: Producto!
+    bodega: Bodega!
+    lote: LoteProduccion
+    cantidadContada: Float!
+    unidad: UnidadMedida
+    fecha: DateTime
+    discrepancias: [DiscrepanciaInventario]
+}
+
+type DiscrepanciaInventario {
+    id: ID!
+    conteo: ConteoCiclico!
+    cantidadSistema: Float!
+    cantidadContada: Float!
+    diferencia: Float!
+    resuelto: Boolean
+}
+
+type PuntoReorden {
+    id: ID!
+    producto: Producto!
+    stockMinimo: Float!
+    stockSeguridad: Float
+    unidad: UnidadMedida
+}
+
+input TipoBodegaInput {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+}
+
+input BodegaInput {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    idTipo: ID!
+}
+
+input TipoMovimientoInput {
+    codigo: String!
+    nombre: String!
+    afectaWip: Boolean
+}
+
+input MovimientoInventarioInput {
+    idBodegaOrigen: ID
+    idBodegaDestino: ID
+    idTipoMovimiento: ID!
+    referencia: String
+    observaciones: String
+    creadoPor: Int
+}
+
+input MovimientoInventarioDetalleInput {
+    idMovimiento: ID!
+    idProducto: ID!
+    idLote: ID
+    cantidad: Float!
+    idUnidad: ID!
+    costoUnitario: Float
+}
+
+input ReservaMaterialOrdenInput {
+    idOrden: ID!
+    idProducto: ID!
+    idLote: ID
+    cantidadReservada: Float!
+    idUnidad: ID!
+}
+
+input EstacionProduccionInput {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    orden: Int!
+}
+
+input OrdenEstacionInput {
+    idOrden: ID!
+    idEstacion: ID!
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    estado: String
+    observaciones: String
+}
+
+input OrdenEventoInput {
+    idOrden: ID!
+    evento: String!
+    descripcion: String
+}
+
+input ConteoCiclicoInput {
+    idProducto: ID!
+    idBodega: ID!
+    idLote: ID
+    cantidadContada: Float!
+    idUnidad: ID!
+}
+
+input PuntoReordenInput {
+    idProducto: ID!
+    stockMinimo: Float!
+    stockSeguridad: Float
+    idUnidad: ID!
+}
 input EstadoOrdenInput {
     codigo: String!
     nombre: String!
@@ -146,7 +373,10 @@ input ProductoInput {
     nombre: String!
     idUnidadBase: ID
     costoBase: Float
+    idMetodoValoracion: ID
+    idTipoProducto: ID
 }
+
 
 input LoteProduccionInput {
     numeroLote: String!
@@ -191,7 +421,38 @@ input CostoOrdenInput {
     moneda: String!
 }
 
+input MetodoValoracionInput {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+}
+
+input TipoProductoInput {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+}
 type Query {
+    tiposBodega: [TipoBodega]
+    tipoBodega(id: ID!): TipoBodega
+    bodegas: [Bodega]
+    bodega(id: ID!): Bodega
+    tiposMovimiento: [TipoMovimiento]
+    tipoMovimiento(id: ID!): TipoMovimiento
+    movimientosInventario: [MovimientoInventario]
+    movimientoInventario(id: ID!): MovimientoInventario
+    inventarioLotes: [InventarioLote]
+    reservasMaterial: [ReservaMaterialOrden]
+    estacionesProduccion: [EstacionProduccion]
+    ordenesEstacion: [OrdenEstacion]
+    ordenesEvento: [OrdenEvento]
+    conteosCiclicos: [ConteoCiclico]
+    discrepanciasInventario: [DiscrepanciaInventario]
+    puntosReorden: [PuntoReorden]
+    metodosValoracion: [MetodoValoracion]
+    metodoValoracion(id: ID!): MetodoValoracion
+    tiposProducto: [TipoProducto]
+    tipoProducto(id: ID!): TipoProducto
     estadosOrden: [EstadoOrden]
     estadoOrden(id: ID!): EstadoOrden
     tiposCosto: [TipoCosto]
@@ -254,4 +515,39 @@ type Mutation {
     createCostoOrden(input: CostoOrdenInput!): CostoOrden
     updateCostoOrden(id: ID!, input: CostoOrdenInput!): CostoOrden
     deleteCostoOrden(id: ID!): Boolean
+
+    createTipoBodega(input: TipoBodegaInput!): TipoBodega
+    updateTipoBodega(id: ID!, input: TipoBodegaInput!): TipoBodega
+    deleteTipoBodega(id: ID!): Boolean
+
+    createBodega(input: BodegaInput!): Bodega
+    updateBodega(id: ID!, input: BodegaInput!): Bodega
+    deleteBodega(id: ID!): Boolean
+
+    createTipoMovimiento(input: TipoMovimientoInput!): TipoMovimiento
+    updateTipoMovimiento(id: ID!, input: TipoMovimientoInput!): TipoMovimiento
+    deleteTipoMovimiento(id: ID!): Boolean
+
+    createMovimientoInventario(input: MovimientoInventarioInput!): MovimientoInventario
+    createMovimientoInventarioDetalle(input: MovimientoInventarioDetalleInput!): MovimientoInventarioDetalle
+
+    createReservaMaterialOrden(input: ReservaMaterialOrdenInput!): ReservaMaterialOrden
+
+    createEstacionProduccion(input: EstacionProduccionInput!): EstacionProduccion
+    updateEstacionProduccion(id: ID!, input: EstacionProduccionInput!): EstacionProduccion
+    deleteEstacionProduccion(id: ID!): Boolean
+
+    createOrdenEstacion(input: OrdenEstacionInput!): OrdenEstacion
+    createOrdenEvento(input: OrdenEventoInput!): OrdenEvento
+
+    createConteoCiclico(input: ConteoCiclicoInput!): ConteoCiclico
+    createPuntoReorden(input: PuntoReordenInput!): PuntoReorden
+
+    createMetodoValoracion(input: MetodoValoracionInput!): MetodoValoracion
+    updateMetodoValoracion(id: ID!, input: MetodoValoracionInput!): MetodoValoracion
+    deleteMetodoValoracion(id: ID!): Boolean
+
+    createTipoProducto(input: TipoProductoInput!): TipoProducto
+    updateTipoProducto(id: ID!, input: TipoProductoInput!): TipoProducto
+    deleteTipoProducto(id: ID!): Boolean
 }

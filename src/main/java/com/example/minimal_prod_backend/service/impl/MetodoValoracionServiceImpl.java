@@ -1,0 +1,53 @@
+package com.example.minimal_prod_backend.service.impl;
+
+import com.example.minimal_prod_backend.dto.MetodoValoracionInput;
+import com.example.minimal_prod_backend.entity.MetodoValoracion;
+import com.example.minimal_prod_backend.repository.MetodoValoracionRepository;
+import com.example.minimal_prod_backend.service.MetodoValoracionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class MetodoValoracionServiceImpl implements MetodoValoracionService {
+
+    private final MetodoValoracionRepository metodoValoracionRepository;
+
+    @Override
+    public List<MetodoValoracion> findAll() {
+        return (List<MetodoValoracion>) metodoValoracionRepository.findAll();
+    }
+
+    @Override
+    public MetodoValoracion findById(Long id) {
+        return metodoValoracionRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public MetodoValoracion save(MetodoValoracionInput input) {
+        MetodoValoracion metodoValoracion = new MetodoValoracion();
+        metodoValoracion.setCodigo(input.getCodigo());
+        metodoValoracion.setNombre(input.getNombre());
+        metodoValoracion.setDescripcion(input.getDescripcion());
+        return metodoValoracionRepository.save(metodoValoracion);
+    }
+
+    @Override
+    public MetodoValoracion update(Long id, MetodoValoracionInput input) {
+        MetodoValoracion metodoValoracion = metodoValoracionRepository.findById(id).orElse(null);
+        if (metodoValoracion != null) {
+            metodoValoracion.setCodigo(input.getCodigo());
+            metodoValoracion.setNombre(input.getNombre());
+            metodoValoracion.setDescripcion(input.getDescripcion());
+            return metodoValoracionRepository.save(metodoValoracion);
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        metodoValoracionRepository.deleteById(id);
+    }
+}

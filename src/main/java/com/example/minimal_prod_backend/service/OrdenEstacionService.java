@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface OrdenEstacionService {
     List<OrdenEstacionResponse> getOrdenesEstacion();
+
     OrdenEstacionResponse getOrdenEstacionById(Long id);
+
     OrdenEstacionResponse createOrdenEstacion(OrdenEstacionInput ordenEstacionInput);
+
     OrdenEstacionResponse updateOrdenEstacion(Long id, OrdenEstacionInput ordenEstacionInput);
+
     void deleteOrdenEstacion(Long id);
 }

@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface MetodoValoracionService {
     List<MetodoValoracion> findAll();
+
     MetodoValoracion findById(Long id);
+
     MetodoValoracion save(MetodoValoracionInput input);
+
     MetodoValoracion update(Long id, MetodoValoracionInput input);
+
     void delete(Long id);
 }

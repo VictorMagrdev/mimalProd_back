@@ -500,22 +500,6 @@ type Mutation {
     updateProducto(id: ID!, input: ProductoInput!): Producto
     deleteProducto(id: ID!): Boolean
 
-    createLoteProduccion(input: LoteProduccionInput!): LoteProduccion
-    updateLoteProduccion(id: ID!, input: LoteProduccionInput!): LoteProduccion
-    deleteLoteProduccion(id: ID!): Boolean
-
-    createOrdenProduccion(input: OrdenProduccionInput!): OrdenProduccion
-    updateOrdenProduccion(id: ID!, input: OrdenProduccionInput!): OrdenProduccion
-    deleteOrdenProduccion(id: ID!): Boolean
-
-    createLineaOrden(input: LineaOrdenInput!): LineaOrden
-    updateLineaOrden(id: ID!, input: LineaOrdenInput!): LineaOrden
-    deleteLineaOrden(id: ID!): Boolean
-
-    createCostoOrden(input: CostoOrdenInput!): CostoOrden
-    updateCostoOrden(id: ID!, input: CostoOrdenInput!): CostoOrden
-    deleteCostoOrden(id: ID!): Boolean
-
     createTipoBodega(input: TipoBodegaInput!): TipoBodega
     updateTipoBodega(id: ID!, input: TipoBodegaInput!): TipoBodega
     deleteTipoBodega(id: ID!): Boolean
@@ -528,19 +512,10 @@ type Mutation {
     updateTipoMovimiento(id: ID!, input: TipoMovimientoInput!): TipoMovimiento
     deleteTipoMovimiento(id: ID!): Boolean
 
-    createMovimientoInventario(input: MovimientoInventarioInput!): MovimientoInventario
-    createMovimientoInventarioDetalle(input: MovimientoInventarioDetalleInput!): MovimientoInventarioDetalle
-
-    createReservaMaterialOrden(input: ReservaMaterialOrdenInput!): ReservaMaterialOrden
-
     createEstacionProduccion(input: EstacionProduccionInput!): EstacionProduccion
     updateEstacionProduccion(id: ID!, input: EstacionProduccionInput!): EstacionProduccion
     deleteEstacionProduccion(id: ID!): Boolean
 
-    createOrdenEstacion(input: OrdenEstacionInput!): OrdenEstacion
-    createOrdenEvento(input: OrdenEventoInput!): OrdenEvento
-
-    createConteoCiclico(input: ConteoCiclicoInput!): ConteoCiclico
     createPuntoReorden(input: PuntoReordenInput!): PuntoReorden
 
     createMetodoValoracion(input: MetodoValoracionInput!): MetodoValoracion
@@ -550,4 +525,18 @@ type Mutation {
     createTipoProducto(input: TipoProductoInput!): TipoProducto
     updateTipoProducto(id: ID!, input: TipoProductoInput!): TipoProducto
     deleteTipoProducto(id: ID!): Boolean
+
+    # --- Mutaciones de Producción e Inventario por Eventos ---
+
+    # Creación de entidades raíz que inician un flujo
+    createOrdenProduccion(input: OrdenProduccionInput!): OrdenProduccion
+    createLineaOrden(input: LineaOrdenInput!): LineaOrden
+    createConteoCiclico(input: ConteoCiclicoInput!): ConteoCiclico
+    createMovimientoInventarioAjuste(input: MovimientoInventarioInput!, detalles: [MovimientoInventarioDetalleInput!]!): MovimientoInventario
+
+    # Acciones que disparan eventos de ciclo de vida
+    iniciarOrdenProduccion(id: ID!): OrdenProduccion
+    avanzarEstacionProduccion(ordenEstacionId: ID!): OrdenEstacion
+    finalizarOrdenProduccion(id: ID!): OrdenProduccion # Forzada/manual
+    consumirLineaOrden(id: ID!): LineaOrden
 }

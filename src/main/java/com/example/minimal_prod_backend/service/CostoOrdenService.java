@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface CostoOrdenService {
     List<CostoOrdenResponse> getCostosOrden();
+
     CostoOrdenResponse getCostoOrdenById(Long id);
+
     CostoOrdenResponse createCostoOrden(CostoOrdenInput costoOrdenInput);
+
     CostoOrdenResponse updateCostoOrden(Long id, CostoOrdenInput costoOrdenInput);
+
     void deleteCostoOrden(Long id);
 }

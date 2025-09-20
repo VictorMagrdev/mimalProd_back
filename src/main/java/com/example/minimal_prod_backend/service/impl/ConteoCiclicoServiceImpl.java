@@ -1,15 +1,18 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.*;
+import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
+import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
 import com.example.minimal_prod_backend.entity.*;
+import com.example.minimal_prod_backend.events.ConteoEjecutadoEvent;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.ConteoCiclicoMapper;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.service.ConteoCiclicoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,113 +23,60 @@ public class ConteoCiclicoServiceImpl implements ConteoCiclicoService {
     private final BodegaRepository bodegaRepository;
     private final LoteProduccionRepository loteProduccionRepository;
     private final UnidadMedidaRepository unidadMedidaRepository;
+    private final ApplicationEventPublisher eventPublisher;
+    private final ConteoCiclicoMapper mapper;
 
     @Override
     public List<ConteoCiclicoResponse> getConteosCiclicos() {
-        return conteoCiclicoRepository.findAll().stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+        return mapper.toResponseList(conteoCiclicoRepository.findAll());
     }
 
     @Override
     public ConteoCiclicoResponse getConteoCiclicoById(Long id) {
         ConteoCiclico conteoCiclico = conteoCiclicoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ConteoCiclico not found with id: " + id));
-        return toResponse(conteoCiclico);
+        return mapper.toResponse(conteoCiclico);
     }
 
     @Override
-    public ConteoCiclicoResponse createConteoCiclico(ConteoCiclicoInput conteoCiclicoInput) {
-        ConteoCiclico conteoCiclico = toEntity(conteoCiclicoInput);
-        return toResponse(conteoCiclicoRepository.save(conteoCiclico));
+    public ConteoCiclicoResponse createConteoCiclico(ConteoCiclicoInput input) {
+        ConteoCiclico entity = mapper.toEntity(input);
+
+        attachRelations(input, entity);
+
+        ConteoCiclico saved = conteoCiclicoRepository.save(entity);
+
+        eventPublisher.publishEvent(new ConteoEjecutadoEvent(this, saved.getId()));
+
+        return mapper.toResponse(saved);
     }
 
     @Override
-    public ConteoCiclicoResponse updateConteoCiclico(Long id, ConteoCiclicoInput conteoCiclicoInput) {
-        ConteoCiclico existingConteoCiclico = conteoCiclicoRepository.findById(id)
+    public ConteoCiclicoResponse updateConteoCiclico(Long id, ConteoCiclicoInput input) {
+        ConteoCiclico existing = conteoCiclicoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ConteoCiclico not found with id: " + id));
-        updateEntityFromInput(conteoCiclicoInput, existingConteoCiclico);
-        return toResponse(conteoCiclicoRepository.save(existingConteoCiclico));
+
+        mapper.updateEntityFromInput(input, existing);
+
+        attachRelations(input, existing);
+
+        ConteoCiclico saved = conteoCiclicoRepository.save(existing);
+
+        eventPublisher.publishEvent(new ConteoEjecutadoEvent(this, saved.getId()));
+
+        return mapper.toResponse(saved);
     }
 
     @Override
-    public void deleteConteoCiclico(Long id) {
+    public boolean deleteConteoCiclico(Long id) {
+        if (!conteoCiclicoRepository.existsById(id)) {
+            return false;
+        }
         conteoCiclicoRepository.deleteById(id);
+        return true;
     }
 
-    private ConteoCiclicoResponse toResponse(ConteoCiclico entity) {
-        if (entity == null) return null;
-        ConteoCiclicoResponse dto = new ConteoCiclicoResponse();
-        dto.setId(entity.getId());
-        dto.setCantidadContada(entity.getCantidadContada());
-        dto.setFecha(entity.getFecha());
-
-        if (entity.getProducto() != null) {
-            dto.setProducto(new ProductoResponse());
-            dto.getProducto().setId(entity.getProducto().getId());
-            dto.getProducto().setNombre(entity.getProducto().getNombre());
-        }
-
-        if (entity.getBodega() != null) {
-            dto.setBodega(new BodegaResponse());
-            dto.getBodega().setId(entity.getBodega().getId());
-            dto.getBodega().setNombre(entity.getBodega().getNombre());
-        }
-
-        if (entity.getLote() != null) {
-            dto.setLote(new LoteProduccionResponse());
-            dto.getLote().setId(entity.getLote().getId());
-            dto.getLote().setNumeroLote(entity.getLote().getNumeroLote());
-        }
-
-        if (entity.getUnidad() != null) {
-            dto.setUnidad(new UnidadMedidaResponse());
-            dto.getUnidad().setId(entity.getUnidad().getId());
-            dto.getUnidad().setNombre(entity.getUnidad().getNombre());
-        }
-
-        return dto;
-    }
-
-    private ConteoCiclico toEntity(ConteoCiclicoInput dto) {
-        if (dto == null) return null;
-        ConteoCiclico entity = new ConteoCiclico();
-        entity.setCantidadContada(dto.getCantidadContada());
-        entity.setFecha(dto.getFecha());
-
-        if (dto.getIdProducto() != null) {
-            Producto producto = productoRepository.findById(dto.getIdProducto())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getIdProducto()));
-            entity.setProducto(producto);
-        }
-
-        if (dto.getIdBodega() != null) {
-            Bodega bodega = bodegaRepository.findById(dto.getIdBodega())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + dto.getIdBodega()));
-            entity.setBodega(bodega);
-        }
-
-        if (dto.getIdLote() != null) {
-            LoteProduccion lote = loteProduccionRepository.findById(dto.getIdLote())
-                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.getIdLote()));
-            entity.setLote(lote);
-        }
-
-        if (dto.getIdUnidad() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidad())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.getIdUnidad()));
-            entity.setUnidad(unidad);
-        }
-
-        return entity;
-    }
-
-    private void updateEntityFromInput(ConteoCiclicoInput dto, ConteoCiclico entity) {
-        if (dto == null || entity == null) return;
-
-        entity.setCantidadContada(dto.getCantidadContada());
-        entity.setFecha(dto.getFecha());
-
+    private void attachRelations(ConteoCiclicoInput dto, ConteoCiclico entity) {
         if (dto.getIdProducto() != null) {
             Producto producto = productoRepository.findById(dto.getIdProducto())
                     .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getIdProducto()));

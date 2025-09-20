@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface TipoCostoService {
     List<TipoCostoResponse> getTiposCosto();
+
     TipoCostoResponse getTipoCostoById(Long id);
+
     TipoCostoResponse createTipoCosto(TipoCostoInput tipoCostoInput);
+
     TipoCostoResponse updateTipoCosto(Long id, TipoCostoInput tipoCostoInput);
+
     void deleteTipoCosto(Long id);
 }

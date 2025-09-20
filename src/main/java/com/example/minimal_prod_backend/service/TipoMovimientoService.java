@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface TipoMovimientoService {
     List<TipoMovimientoResponse> getTiposMovimiento();
+
     TipoMovimientoResponse getTipoMovimientoById(Long id);
+
     TipoMovimientoResponse createTipoMovimiento(TipoMovimientoInput tipoMovimientoInput);
+
     TipoMovimientoResponse updateTipoMovimiento(Long id, TipoMovimientoInput tipoMovimientoInput);
+
     void deleteTipoMovimiento(Long id);
 }

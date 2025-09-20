@@ -17,7 +17,7 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 
     @Override
     public List<TipoProducto> findAll() {
-        return (List<TipoProducto>) tipoProductoRepository.findAll();
+        return tipoProductoRepository.findAll();
     }
 
     @Override

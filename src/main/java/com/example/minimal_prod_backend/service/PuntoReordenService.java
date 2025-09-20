@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface PuntoReordenService {
     List<PuntoReordenResponse> getPuntosReorden();
+
     PuntoReordenResponse getPuntoReordenById(Long id);
+
     PuntoReordenResponse createPuntoReorden(PuntoReordenInput puntoReordenInput);
+
     PuntoReordenResponse updatePuntoReorden(Long id, PuntoReordenInput puntoReordenInput);
+
     void deletePuntoReorden(Long id);
 }

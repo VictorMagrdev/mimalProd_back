@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface MovimientoInventarioDetalleService {
     List<MovimientoInventarioDetalleResponse> getMovimientosInventarioDetalle();
+
     MovimientoInventarioDetalleResponse getMovimientoInventarioDetalleById(Long id);
+
     MovimientoInventarioDetalleResponse createMovimientoInventarioDetalle(MovimientoInventarioDetalleInput movimientoInventarioDetalleInput);
+
     MovimientoInventarioDetalleResponse updateMovimientoInventarioDetalle(Long id, MovimientoInventarioDetalleInput movimientoInventarioDetalleInput);
+
     void deleteMovimientoInventarioDetalle(Long id);
 }

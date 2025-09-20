@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface ReservaMaterialOrdenService {
     List<ReservaMaterialOrdenResponse> getReservasMaterialOrden();
+
     ReservaMaterialOrdenResponse getReservaMaterialOrdenById(Long id);
+
     ReservaMaterialOrdenResponse createReservaMaterialOrden(ReservaMaterialOrdenInput reservaMaterialOrdenInput);
+
     ReservaMaterialOrdenResponse updateReservaMaterialOrden(Long id, ReservaMaterialOrdenInput reservaMaterialOrdenInput);
+
     void deleteReservaMaterialOrden(Long id);
 }

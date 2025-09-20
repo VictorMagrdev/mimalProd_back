@@ -2,10 +2,9 @@ package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.UnidadConversionInput;
 import com.example.minimal_prod_backend.dto.UnidadConversionResponse;
-import com.example.minimal_prod_backend.dto.UnidadMedidaResponse;
 import com.example.minimal_prod_backend.entity.UnidadConversion;
-import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.UnidadConversionMapper;
 import com.example.minimal_prod_backend.repository.UnidadConversionRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
 import com.example.minimal_prod_backend.service.UnidadConversionService;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,13 +20,12 @@ public class UnidadConversionServiceImpl implements UnidadConversionService {
 
     private final UnidadConversionRepository unidadConversionRepository;
     private final UnidadMedidaRepository unidadMedidaRepository;
+    private final UnidadConversionMapper mapper;
 
     @Override
     @Transactional(readOnly = true)
     public List<UnidadConversionResponse> getUnidadConversiones() {
-        return unidadConversionRepository.findAll().stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+        return mapper.toResponseList(unidadConversionRepository.findAll());
     }
 
     @Override
@@ -36,14 +33,15 @@ public class UnidadConversionServiceImpl implements UnidadConversionService {
     public UnidadConversionResponse getUnidadConversionById(Long id) {
         UnidadConversion unidadConversion = unidadConversionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadConversion not found with id: " + id));
-        return toResponse(unidadConversion);
+        return mapper.toResponse(unidadConversion);
     }
 
     @Override
     @Transactional
     public UnidadConversionResponse createUnidadConversion(UnidadConversionInput unidadConversionInput) {
-        UnidadConversion unidadConversion = toEntity(unidadConversionInput);
-        return toResponse(unidadConversionRepository.save(unidadConversion));
+        UnidadConversion unidadConversion = mapper.toEntity(unidadConversionInput);
+        attachRelations(unidadConversionInput, unidadConversion);
+        return mapper.toResponse(unidadConversionRepository.save(unidadConversion));
     }
 
     @Override
@@ -51,8 +49,9 @@ public class UnidadConversionServiceImpl implements UnidadConversionService {
     public UnidadConversionResponse updateUnidadConversion(Long id, UnidadConversionInput unidadConversionInput) {
         UnidadConversion existingUnidadConversion = unidadConversionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadConversion not found with id: " + id));
-        updateEntityFromInput(unidadConversionInput, existingUnidadConversion);
-        return toResponse(unidadConversionRepository.save(existingUnidadConversion));
+        mapper.updateEntityFromInput(unidadConversionInput, existingUnidadConversion);
+        attachRelations(unidadConversionInput, existingUnidadConversion);
+        return mapper.toResponse(unidadConversionRepository.save(existingUnidadConversion));
     }
 
     @Override
@@ -60,52 +59,14 @@ public class UnidadConversionServiceImpl implements UnidadConversionService {
         unidadConversionRepository.deleteById(id);
     }
 
-    private UnidadConversionResponse toResponse(UnidadConversion entity) {
-        if (entity == null) return null;
-        UnidadConversionResponse dto = new UnidadConversionResponse();
-        dto.setId(entity.getId());
-        dto.setFactor(entity.getFactor());
-        dto.setOrigen(toUnidadMedidaResponse(entity.getOrigen()));
-        dto.setDestino(toUnidadMedidaResponse(entity.getDestino()));
-        return dto;
-    }
-
-    private UnidadMedidaResponse toUnidadMedidaResponse(UnidadMedida entity) {
-        if (entity == null) return null;
-        UnidadMedidaResponse dto = new UnidadMedidaResponse();
-        dto.setId(entity.getId());
-        dto.setCodigo(entity.getCodigo());
-        dto.setNombre(entity.getNombre());
-        dto.setAbreviatura(entity.getAbreviatura());
-        dto.setEsActiva(entity.isEsActiva());
-        dto.setEsBase(entity.isEsBase());
-        dto.setCreadoEn(entity.getCreadoEn());
-        // Tipo is not mapped here to avoid deep nesting, can be added if needed
-        return dto;
-    }
-
-    private UnidadConversion toEntity(UnidadConversionInput dto) {
-        if (dto == null) return null;
-        UnidadConversion entity = new UnidadConversion();
-        updateEntityFromInput(dto, entity);
-        return entity;
-    }
-
-    private void updateEntityFromInput(UnidadConversionInput dto, UnidadConversion entity) {
-        if (dto == null || entity == null) return;
-
-        entity.setFactor(dto.getFactor());
-
+    private void attachRelations(UnidadConversionInput dto, UnidadConversion entity) {
         if (dto.getIdOrigen() != null) {
-            UnidadMedida origen = unidadMedidaRepository.findById(dto.getIdOrigen())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida (origen) not found with id: " + dto.getIdOrigen()));
-            entity.setOrigen(origen);
+            entity.setOrigen(unidadMedidaRepository.findById(dto.getIdOrigen())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida (origen) not found with id: " + dto.getIdOrigen())));
         }
-
         if (dto.getIdDestino() != null) {
-            UnidadMedida destino = unidadMedidaRepository.findById(dto.getIdDestino())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida (destino) not found with id: " + dto.getIdDestino()));
-            entity.setDestino(destino);
+            entity.setDestino(unidadMedidaRepository.findById(dto.getIdDestino())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida (destino) not found with id: " + dto.getIdDestino())));
         }
     }
 }

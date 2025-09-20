@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface ConteoCiclicoService {
     List<ConteoCiclicoResponse> getConteosCiclicos();
+
     ConteoCiclicoResponse getConteoCiclicoById(Long id);
-    ConteoCiclicoResponse createConteoCiclico(ConteoCiclicoInput conteoCiclicoInput);
-    ConteoCiclicoResponse updateConteoCiclico(Long id, ConteoCiclicoInput conteoCiclicoInput);
-    void deleteConteoCiclico(Long id);
+
+    ConteoCiclicoResponse createConteoCiclico(ConteoCiclicoInput input);
+
+    ConteoCiclicoResponse updateConteoCiclico(Long id, ConteoCiclicoInput input);
+
+    boolean deleteConteoCiclico(Long id);
 }

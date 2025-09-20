@@ -2,10 +2,10 @@ package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.ProductoInput;
 import com.example.minimal_prod_backend.dto.ProductoResponse;
-import com.example.minimal_prod_backend.dto.UnidadMedidaResponse;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.ProductoMapper;
 import com.example.minimal_prod_backend.repository.ProductoRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
 import com.example.minimal_prod_backend.service.ProductoService;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,13 +21,12 @@ public class ProductoServiceImpl implements ProductoService {
 
     private final ProductoRepository productoRepository;
     private final UnidadMedidaRepository unidadMedidaRepository;
+    private final ProductoMapper mapper;
 
     @Override
     @Transactional(readOnly = true)
     public List<ProductoResponse> getProductos() {
-        return productoRepository.findAll().stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+        return mapper.toResponseList(productoRepository.findAll());
     }
 
     @Override
@@ -36,72 +34,45 @@ public class ProductoServiceImpl implements ProductoService {
     public ProductoResponse getProductoById(Long id) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + id));
-        return toResponse(producto);
+        return mapper.toResponse(producto);
     }
 
     @Override
     @Transactional
-    public ProductoResponse createProducto(ProductoInput productoInput) {
-        Producto producto = toEntity(productoInput);
-        return toResponse(productoRepository.save(producto));
-    }
+    public ProductoResponse createProducto(ProductoInput input) {
+        Producto entity = mapper.toEntity(input);
 
-    @Override
-    @Transactional
-    public ProductoResponse updateProducto(Long id, ProductoInput productoInput) {
-        Producto existingProducto = productoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + id));
-        updateEntityFromInput(productoInput, existingProducto);
-        return toResponse(productoRepository.save(existingProducto));
-    }
-
-    @Override
-    public void deleteProducto(Long id) {
-        productoRepository.deleteById(id);
-    }
-
-    private ProductoResponse toResponse(Producto entity) {
-        if (entity == null) return null;
-        ProductoResponse dto = new ProductoResponse();
-        dto.setId(entity.getId());
-        dto.setCodigo(entity.getCodigo());
-        dto.setNombre(entity.getNombre());
-        dto.setCostoBase(entity.getCostoBase());
-        dto.setCreadoEn(entity.getCreadoEn());
-
-        if (entity.getUnidadBase() != null) {
-            UnidadMedidaResponse unidadDto = new UnidadMedidaResponse();
-            unidadDto.setId(entity.getUnidadBase().getId());
-            unidadDto.setCodigo(entity.getUnidadBase().getCodigo());
-            unidadDto.setNombre(entity.getUnidadBase().getNombre());
-            unidadDto.setAbreviatura(entity.getUnidadBase().getAbreviatura());
-            // Avoid deep nesting for tipo
-            dto.setUnidadBase(unidadDto);
+        if (input.getIdUnidadBase() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(input.getIdUnidadBase())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getIdUnidadBase()));
+            entity.setUnidadBase(unidad);
         }
 
-        return dto;
+        return mapper.toResponse(productoRepository.save(entity));
     }
 
-    private Producto toEntity(ProductoInput dto) {
-        if (dto == null) return null;
-        Producto entity = new Producto();
-        updateEntityFromInput(dto, entity);
-        return entity;
-    }
+    @Override
+    @Transactional
+    public ProductoResponse updateProducto(Long id, ProductoInput input) {
+        Producto entity = productoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + id));
 
-    private void updateEntityFromInput(ProductoInput dto, Producto entity) {
-        if (dto == null || entity == null) return;
+        mapper.updateEntityFromInput(input, entity);
 
-        entity.setCodigo(dto.getCodigo());
-        entity.setNombre(dto.getNombre());
-        entity.setCostoBase(dto.getCostoBase());
-
-        if (dto.getIdUnidadBase() != null) {
-            UnidadMedida unidadMedida = unidadMedidaRepository.findById(dto.getIdUnidadBase())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.getIdUnidadBase()));
-            entity.setUnidadBase(unidadMedida);
+        if (input.getIdUnidadBase() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(input.getIdUnidadBase())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getIdUnidadBase()));
+            entity.setUnidadBase(unidad);
         } else {
             entity.setUnidadBase(null);
         }
+
+        return mapper.toResponse(productoRepository.save(entity));
+    }
+
+    @Override
+    @Transactional
+    public void deleteProducto(Long id) {
+        productoRepository.deleteById(id);
     }
 }

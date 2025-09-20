@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface TipoBodegaService {
     List<TipoBodegaResponse> getTiposBodega();
+
     TipoBodegaResponse getTipoBodegaById(Long id);
+
     TipoBodegaResponse createTipoBodega(TipoBodegaInput tipoBodegaInput);
+
     TipoBodegaResponse updateTipoBodega(Long id, TipoBodegaInput tipoBodegaInput);
+
     void deleteTipoBodega(Long id);
 }

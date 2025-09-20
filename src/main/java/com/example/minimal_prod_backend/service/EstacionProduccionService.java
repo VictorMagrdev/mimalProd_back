@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface EstacionProduccionService {
     List<EstacionProduccionResponse> getEstacionesProduccion();
+
     EstacionProduccionResponse getEstacionProduccionById(Long id);
+
     EstacionProduccionResponse createEstacionProduccion(EstacionProduccionInput estacionProduccionInput);
+
     EstacionProduccionResponse updateEstacionProduccion(Long id, EstacionProduccionInput estacionProduccionInput);
+
     void deleteEstacionProduccion(Long id);
 }

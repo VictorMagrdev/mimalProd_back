@@ -2,10 +2,12 @@ package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.*;
 import com.example.minimal_prod_backend.entity.*;
+import com.example.minimal_prod_backend.events.OrdenCreadaEvent;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.service.OrdenProduccionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     private final ProductoRepository productoRepository;
     private final UnidadMedidaRepository unidadMedidaRepository;
     private final EstadoOrdenRepository estadoOrdenRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional(readOnly = true)
@@ -42,7 +45,12 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     @Transactional
     public OrdenProduccionResponse createOrdenProduccion(OrdenProduccionInput ordenProduccionInput) {
         OrdenProduccion ordenProduccion = toEntity(ordenProduccionInput);
-        return toResponse(ordenProduccionRepository.save(ordenProduccion));
+        OrdenProduccion savedOrden = ordenProduccionRepository.save(ordenProduccion);
+
+        // 🔥 Disparamos evento al crear la orden
+        eventPublisher.publishEvent(new OrdenCreadaEvent(this, savedOrden.getId()));
+
+        return toResponse(savedOrden);
     }
 
     @Override
@@ -132,19 +140,23 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
         entity.setObservaciones(dto.getObservaciones());
 
         if (dto.getIdLote() != null) {
-            LoteProduccion lote = loteProduccionRepository.findById(dto.getIdLote()).orElseThrow(() -> new ResourceNotFoundException("Lote not found"));
+            LoteProduccion lote = loteProduccionRepository.findById(dto.getIdLote())
+                    .orElseThrow(() -> new ResourceNotFoundException("Lote not found"));
             entity.setLote(lote);
         }
         if (dto.getIdProducto() != null) {
-            Producto producto = productoRepository.findById(dto.getIdProducto()).orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
+            Producto producto = productoRepository.findById(dto.getIdProducto())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
             entity.setProducto(producto);
         }
         if (dto.getIdUnidad() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidad()).orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found"));
+            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidad())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found"));
             entity.setUnidad(unidad);
         }
         if (dto.getIdEstado() != null) {
-            EstadoOrden estado = estadoOrdenRepository.findById(dto.getIdEstado()).orElseThrow(() -> new ResourceNotFoundException("EstadoOrden not found"));
+            EstadoOrden estado = estadoOrdenRepository.findById(dto.getIdEstado())
+                    .orElseThrow(() -> new ResourceNotFoundException("EstadoOrden not found"));
             entity.setEstado(estado);
         }
     }

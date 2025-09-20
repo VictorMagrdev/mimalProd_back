@@ -1,14 +1,12 @@
+// LineaOrdenServiceImpl.java
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.LineaOrdenInput;
-import com.example.minimal_prod_backend.dto.LineaOrdenResponse;
-import com.example.minimal_prod_backend.dto.OrdenProduccionResponse;
-import com.example.minimal_prod_backend.dto.ProductoResponse;
-import com.example.minimal_prod_backend.dto.UnidadMedidaResponse;
+import com.example.minimal_prod_backend.dto.*;
 import com.example.minimal_prod_backend.entity.LineaOrden;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
+import com.example.minimal_prod_backend.events.LineaOrdenCreadaEvent;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.repository.LineaOrdenRepository;
 import com.example.minimal_prod_backend.repository.OrdenProduccionRepository;
@@ -16,6 +14,7 @@ import com.example.minimal_prod_backend.repository.ProductoRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
 import com.example.minimal_prod_backend.service.LineaOrdenService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +29,7 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
     private final OrdenProduccionRepository ordenProduccionRepository;
     private final ProductoRepository productoRepository;
     private final UnidadMedidaRepository unidadMedidaRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional(readOnly = true)
@@ -51,7 +51,12 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
     @Transactional
     public LineaOrdenResponse createLineaOrden(LineaOrdenInput lineaOrdenInput) {
         LineaOrden lineaOrden = toEntity(lineaOrdenInput);
-        return toResponse(lineaOrdenRepository.save(lineaOrden));
+        LineaOrden saved = lineaOrdenRepository.save(lineaOrden);
+
+        // 🔥 Disparamos el evento al crear
+        eventPublisher.publishEvent(new LineaOrdenCreadaEvent(this, saved.getId()));
+
+        return toResponse(saved);
     }
 
     @Override
@@ -64,10 +69,12 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
     }
 
     @Override
+    @Transactional
     public void deleteLineaOrden(Long id) {
         lineaOrdenRepository.deleteById(id);
     }
 
+    // ------------------- MAPPERS -------------------
     private LineaOrdenResponse toResponse(LineaOrden entity) {
         if (entity == null) return null;
         LineaOrdenResponse dto = new LineaOrdenResponse();
@@ -123,15 +130,18 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
         entity.setObservaciones(dto.getObservaciones());
 
         if (dto.getIdOrden() != null) {
-            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getIdOrden()).orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found"));
+            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getIdOrden())
+                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found"));
             entity.setOrden(orden);
         }
         if (dto.getIdProductoComponente() != null) {
-            Producto producto = productoRepository.findById(dto.getIdProductoComponente()).orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
+            Producto producto = productoRepository.findById(dto.getIdProductoComponente())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
             entity.setProductoComponente(producto);
         }
         if (dto.getIdUnidadComponente() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidadComponente()).orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found"));
+            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidadComponente())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found"));
             entity.setUnidadComponente(unidad);
         }
     }

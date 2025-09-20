@@ -43,4 +43,7 @@ public class MovimientoInventario {
 
     @Column(name = "creado_en", updatable = false)
     private LocalDateTime creado_en = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "movimiento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private java.util.List<MovimientoInventarioDetalle> detalles = new java.util.ArrayList<>();
 }

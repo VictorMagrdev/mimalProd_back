@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface DiscrepanciaInventarioService {
     List<DiscrepanciaInventarioResponse> getDiscrepanciasInventario();
+
     DiscrepanciaInventarioResponse getDiscrepanciaInventarioById(Long id);
+
     DiscrepanciaInventarioResponse createDiscrepanciaInventario(DiscrepanciaInventarioInput discrepanciaInventarioInput);
+
     DiscrepanciaInventarioResponse updateDiscrepanciaInventario(Long id, DiscrepanciaInventarioInput discrepanciaInventarioInput);
+
     void deleteDiscrepanciaInventario(Long id);
 }

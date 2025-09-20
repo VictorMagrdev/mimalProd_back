@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface InventarioLoteService {
     List<InventarioLoteResponse> getInventarioLotes();
+
     InventarioLoteResponse getInventarioLoteById(Long id);
+
     InventarioLoteResponse createInventarioLote(InventarioLoteInput inventarioLoteInput);
+
     InventarioLoteResponse updateInventarioLote(Long id, InventarioLoteInput inventarioLoteInput);
+
     void deleteInventarioLote(Long id);
 }

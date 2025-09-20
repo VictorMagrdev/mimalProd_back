@@ -47,7 +47,7 @@ public class ConteoCiclicoController {
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('CONTEO_CICLICO_TAG', 'DELETE')")
     public boolean deleteConteoCiclico(@Argument Long id) {
-        conteoCiclicoService.deleteConteoCiclico(id);
-        return true;
+        return conteoCiclicoService.deleteConteoCiclico(id);
     }
+
 }

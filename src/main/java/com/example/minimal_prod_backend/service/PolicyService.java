@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface PolicyService {
     List<Policy> getAllPolicies();
+
     Policy createPolicy(PolicyRequest request);
+
     void deletePolicy(Long id);
 }

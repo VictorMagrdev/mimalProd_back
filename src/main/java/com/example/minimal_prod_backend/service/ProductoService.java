@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface ProductoService {
     List<ProductoResponse> getProductos();
+
     ProductoResponse getProductoById(Long id);
+
     ProductoResponse createProducto(ProductoInput productoInput);
+
     ProductoResponse updateProducto(Long id, ProductoInput productoInput);
+
     void deleteProducto(Long id);
 }

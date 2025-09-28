@@ -10,6 +10,8 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface TipoCostoMapper {
 
@@ -17,7 +19,7 @@ public interface TipoCostoMapper {
             @Mapping(target = "id", ignore = true),
     })
     TipoCosto toEntity(TipoCostoInput input);
-
+    List<TipoCostoResponse> toResponseList(List<TipoCosto> conteos);
     TipoCostoResponse toResponse(TipoCosto entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

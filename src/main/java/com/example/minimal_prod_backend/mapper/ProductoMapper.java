@@ -10,6 +10,8 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ProductoMapper {
 
@@ -20,7 +22,7 @@ public interface ProductoMapper {
             @Mapping(source = "unidadBaseId", target = "unidadBase.id")
     })
     Producto toEntity(ProductoInput input);
-
+    List<ProductoResponse> toResponseList(List<Producto> conteos);
     @Mappings({
         @Mapping(source = "metodoValoracion.id", target = "metodoValoracionId"),
         @Mapping(source = "tipo.id", target = "tipoId"),

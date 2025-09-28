@@ -10,6 +10,8 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface MovimientoInventarioMapper {
 
@@ -21,7 +23,7 @@ public interface MovimientoInventarioMapper {
             @Mapping(source = "creadoPor", target = "creadoPor.id")
     })
     MovimientoInventario toEntity(MovimientoInventarioInput input);
-
+    List<MovimientoInventarioResponse> toResponseList(List<MovimientoInventario> conteos);
     @Mappings({
         @Mapping(source = "bodegaOrigen.id", target = "bodegaOrigenId"),
         @Mapping(source = "bodegaDestino.id", target = "bodegaDestinoId"),

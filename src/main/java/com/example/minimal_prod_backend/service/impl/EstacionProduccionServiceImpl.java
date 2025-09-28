@@ -4,6 +4,7 @@ import com.example.minimal_prod_backend.dto.EstacionProduccionInput;
 import com.example.minimal_prod_backend.dto.EstacionProduccionResponse;
 import com.example.minimal_prod_backend.entity.EstacionProduccion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.EstacionProduccionMapper;
 import com.example.minimal_prod_backend.repository.EstacionProduccionRepository;
 import com.example.minimal_prod_backend.service.EstacionProduccionService;
 import lombok.RequiredArgsConstructor;

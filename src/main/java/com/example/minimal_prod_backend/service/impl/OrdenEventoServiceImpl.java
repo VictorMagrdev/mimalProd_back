@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.service.impl;
 import com.example.minimal_prod_backend.dto.*;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.OrdenEventoMapper;
 import com.example.minimal_prod_backend.repository.OrdenEventoRepository;
 import com.example.minimal_prod_backend.repository.OrdenProduccionRepository;
 import com.example.minimal_prod_backend.service.OrdenEventoService;
@@ -61,9 +62,9 @@ public class OrdenEventoServiceImpl implements OrdenEventoService {
     }
 
     private void attachRelations(OrdenEventoInput dto, OrdenEvento entity) {
-        if (dto.getIdOrden() != null) {
-            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getIdOrden())
-                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.getIdOrden()));
+        if (dto.getOrdenId() != null) {
+            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getOrdenId())
+                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.getOrdenId()));
             entity.setOrden(orden);
         } else {
             entity.setOrden(null);

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.TagRequest;
+import com.example.minimal_prod_backend.dto.TagInput;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Tag;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -33,10 +33,10 @@ public class TagServiceImpl implements TagService {
 
     @Override
     @Transactional
-    public Tag createTag(TagRequest r) {
+    public Tag createTag(TagInput r) {
         Tag t = Tag.builder()
-                .name(r.getName())
-                .description(r.getDescription())
+                .nombre(r.getNombre())
+                .descripcion(r.getDescripcion())
                 .build();
         if (r.getOwnerRoleId() != null) {
             Rol owner = roleRepository.findById(r.getOwnerRoleId())

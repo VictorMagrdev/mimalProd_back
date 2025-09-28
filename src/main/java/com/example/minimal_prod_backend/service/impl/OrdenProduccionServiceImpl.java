@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.service.impl;
 import com.example.minimal_prod_backend.dto.*;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.OrdenProduccionMapper;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.service.OrdenProduccionService;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,6 @@ import java.util.List;
 public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 
     private final OrdenProduccionRepository ordenProduccionRepository;
-    private final LoteProduccionRepository loteProduccionRepository;
-    private final ProductoRepository productoRepository;
-    private final UnidadMedidaRepository unidadMedidaRepository;
-    private final EstadoOrdenRepository estadoOrdenRepository;
     private final OrdenProduccionMapper mapper;
 
     @Override
@@ -40,7 +37,6 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     @Transactional
     public OrdenProduccionResponse createOrdenProduccion(OrdenProduccionInput input) {
         OrdenProduccion entity = mapper.toEntity(input);
-        attachRelations(input, entity);
         OrdenProduccion saved = ordenProduccionRepository.save(entity);
         return mapper.toResponse(saved);
     }
@@ -52,7 +48,6 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + id));
 
         mapper.updateEntityFromInput(input, existing);
-        attachRelations(input, existing);
 
         return mapper.toResponse(ordenProduccionRepository.save(existing));
     }
@@ -62,29 +57,4 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
         ordenProduccionRepository.deleteById(id);
     }
 
-    /**
-     * Maneja las relaciones que necesitan consulta en repositorios externos.
-     */
-    private void attachRelations(OrdenProduccionInput dto, OrdenProduccion entity) {
-        if (dto.getIdLote() != null) {
-            LoteProduccion lote = loteProduccionRepository.findById(dto.getIdLote())
-                    .orElseThrow(() -> new ResourceNotFoundException("Lote not found"));
-            entity.setLote(lote);
-        }
-        if (dto.getIdProducto() != null) {
-            Producto producto = productoRepository.findById(dto.getIdProducto())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
-            entity.setProducto(producto);
-        }
-        if (dto.getIdUnidad() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidad())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found"));
-            entity.setUnidad(unidad);
-        }
-        if (dto.getIdEstado() != null) {
-            EstadoOrden estado = estadoOrdenRepository.findById(dto.getIdEstado())
-                    .orElseThrow(() -> new ResourceNotFoundException("EstadoOrden not found"));
-            entity.setEstado(estado);
-        }
-    }
 }

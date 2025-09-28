@@ -10,6 +10,8 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UnidadConversionMapper {
 
@@ -19,7 +21,7 @@ public interface UnidadConversionMapper {
             @Mapping(source = "destinoId", target = "destino.id")
     })
     UnidadConversion toEntity(UnidadConversionInput input);
-
+    List<UnidadConversionResponse> toResponseList(List<UnidadConversion> conteos);
     @Mappings({
         @Mapping(source = "origen.id", target = "origenId"),
         @Mapping(source = "destino.id", target = "destinoId")

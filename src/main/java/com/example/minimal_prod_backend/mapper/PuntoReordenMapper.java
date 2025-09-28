@@ -10,6 +10,8 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface PuntoReordenMapper {
 
@@ -19,7 +21,7 @@ public interface PuntoReordenMapper {
             @Mapping(source = "unidadId", target = "unidad.id")
     })
     PuntoReorden toEntity(PuntoReordenInput input);
-
+    List<PuntoReordenResponse> toResponseList(List<PuntoReorden> conteos);
     @Mappings({
         @Mapping(source = "producto.id", target = "productoId"),
         @Mapping(source = "unidad.id", target = "unidadId")

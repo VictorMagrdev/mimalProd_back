@@ -2,12 +2,15 @@ package com.example.minimal_prod_backend.mapper;
 
 import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioInput;
 import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioResponse;
+import com.example.minimal_prod_backend.entity.ConteoCiclico;
 import com.example.minimal_prod_backend.entity.DiscrepanciaInventario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface DiscrepanciaInventarioMapper {
@@ -17,6 +20,7 @@ public interface DiscrepanciaInventarioMapper {
             @Mapping(target = "id", ignore = true)
     })
     DiscrepanciaInventario toEntity(DiscrepanciaInventarioInput input);
+    List<DiscrepanciaInventarioResponse> toResponseList(List<DiscrepanciaInventario> conteos);
 
     @Mappings({
             @Mapping(target = "conteoId", source = "conteo.id")

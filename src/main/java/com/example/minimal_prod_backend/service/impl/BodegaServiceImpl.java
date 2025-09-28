@@ -5,6 +5,7 @@ import com.example.minimal_prod_backend.dto.BodegaResponse;
 import com.example.minimal_prod_backend.entity.Bodega;
 import com.example.minimal_prod_backend.entity.TipoBodega;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.BodegaMapper;
 import com.example.minimal_prod_backend.repository.BodegaRepository;
 import com.example.minimal_prod_backend.repository.TipoBodegaRepository;
 import com.example.minimal_prod_backend.service.BodegaService;
@@ -41,9 +42,9 @@ public class BodegaServiceImpl implements BodegaService {
     public BodegaResponse createBodega(BodegaInput bodegaInput) {
         Bodega bodega = bodegaMapper.toEntity(bodegaInput);
 
-        if (bodegaInput.getIdTipo() != null) {
-            TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.getIdTipo())
-                    .orElseThrow(() -> new ResourceNotFoundException("TipoBodega not found with id: " + bodegaInput.getIdTipo()));
+        if (bodegaInput.getTipoBodegaId() != null) {
+            TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.getTipoBodegaId())
+                    .orElseThrow(() -> new ResourceNotFoundException("TipoBodega not found with id: " + bodegaInput.getTipoBodegaId()));
             bodega.setTipo(tipo);
         }
 
@@ -59,9 +60,9 @@ public class BodegaServiceImpl implements BodegaService {
         existingBodega.setNombre(bodegaInput.getNombre());
         existingBodega.setDescripcion(bodegaInput.getDescripcion());
 
-        if (bodegaInput.getIdTipo() != null) {
-            TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.getIdTipo())
-                    .orElseThrow(() -> new ResourceNotFoundException("TipoBodega not found with id: " + bodegaInput.getIdTipo()));
+        if (bodegaInput.getTipoBodegaId() != null) {
+            TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.getTipoBodegaId())
+                    .orElseThrow(() -> new ResourceNotFoundException("TipoBodega not found with id: " + bodegaInput.getTipoBodegaId()));
             existingBodega.setTipo(tipo);
         }
 

@@ -5,6 +5,7 @@ import com.example.minimal_prod_backend.dto.ProductoResponse;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.ProductoMapper;
 import com.example.minimal_prod_backend.repository.ProductoRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
 import com.example.minimal_prod_backend.service.ProductoService;
@@ -41,9 +42,9 @@ public class ProductoServiceImpl implements ProductoService {
     public ProductoResponse createProducto(ProductoInput input) {
         Producto entity = mapper.toEntity(input);
 
-        if (input.getIdUnidadBase() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(input.getIdUnidadBase())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getIdUnidadBase()));
+        if (input.getUnidadBaseId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(input.getUnidadBaseId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getUnidadBaseId()));
             entity.setUnidadBase(unidad);
         }
 
@@ -58,9 +59,9 @@ public class ProductoServiceImpl implements ProductoService {
 
         mapper.updateEntityFromInput(input, entity);
 
-        if (input.getIdUnidadBase() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(input.getIdUnidadBase())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getIdUnidadBase()));
+        if (input.getUnidadBaseId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(input.getUnidadBaseId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getUnidadBaseId()));
             entity.setUnidadBase(unidad);
         } else {
             entity.setUnidadBase(null);

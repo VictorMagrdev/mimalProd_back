@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.PolicyRequest;
+import com.example.minimal_prod_backend.dto.PoliticaInput;
 import com.example.minimal_prod_backend.entity.Permiso;
 import com.example.minimal_prod_backend.entity.Politica;
 import com.example.minimal_prod_backend.entity.Rol;
@@ -31,13 +31,13 @@ public class PolicyServiceImpl implements PolicyService {
     }
 
     @Override
-    public Politica createPolicy(PolicyRequest request) {
-        Rol role = roleRepository.findById(request.roleId()).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
-        Tag tag = tagRepository.findById(request.tagId()).orElseThrow(() -> new ResourceNotFoundException("Tag not found"));
-        Permiso permiso = permissionRepository.findById(request.permissionId()).orElseThrow(() -> new ResourceNotFoundException("Permission not found"));
+    public Politica createPolicy(PoliticaInput request) {
+        Rol role = roleRepository.findById(request.getRolId()).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+        Tag tag = tagRepository.findById(request.getTagId()).orElseThrow(() -> new ResourceNotFoundException("Tag not found"));
+        Permiso permiso = permissionRepository.findById(request.getPermisoId()).orElseThrow(() -> new ResourceNotFoundException("Permission not found"));
 
         Politica politica = Politica.builder()
-                .role(role)
+                .rol(role)
                 .tag(tag)
                 .permiso(permiso)
                 .build();

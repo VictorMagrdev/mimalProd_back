@@ -9,6 +9,8 @@ import org.mapstruct.Mappings;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface EstadoOrdenMapper {
 
@@ -17,7 +19,7 @@ public interface EstadoOrdenMapper {
             @Mapping(target = "creadoEn", ignore = true)
     })
     EstadoOrden toEntity(EstadoOrdenInput input);
-
+    List<EstadoOrdenResponse> toResponseList(List<EstadoOrden> conteos);
     EstadoOrdenResponse toResponse(EstadoOrden entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

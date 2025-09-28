@@ -6,6 +6,7 @@ import com.example.minimal_prod_backend.entity.Bodega;
 import com.example.minimal_prod_backend.entity.MovimientoInventario;
 import com.example.minimal_prod_backend.entity.TipoMovimiento;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.MovimientoInventarioMapper;
 import com.example.minimal_prod_backend.repository.BodegaRepository;
 import com.example.minimal_prod_backend.repository.MovimientoInventarioRepository;
 import com.example.minimal_prod_backend.repository.TipoMovimientoRepository;
@@ -69,21 +70,21 @@ public class MovimientoInventarioServiceImpl implements MovimientoInventarioServ
      * Maneja relaciones con otras entidades (BodegaOrigen, BodegaDestino, TipoMovimiento).
      */
     private void attachRelations(MovimientoInventarioInput dto, MovimientoInventario entity) {
-        if (dto.getIdBodegaOrigen() != null) {
-            Bodega bodegaOrigen = bodegaRepository.findById(dto.getIdBodegaOrigen())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega Origen not found with id: " + dto.getIdBodegaOrigen()));
+        if (dto.getBodegaDestinoId() != null) {
+            Bodega bodegaOrigen = bodegaRepository.findById(dto.getBodegaDestinoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Bodega Origen not found with id: " + dto.getBodegaDestinoId()));
             entity.setBodegaOrigen(bodegaOrigen);
         }
 
-        if (dto.getIdBodegaDestino() != null) {
-            Bodega bodegaDestino = bodegaRepository.findById(dto.getIdBodegaDestino())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega Destino not found with id: " + dto.getIdBodegaDestino()));
+        if (dto.getBodegaDestinoId() != null) {
+            Bodega bodegaDestino = bodegaRepository.findById(dto.getBodegaDestinoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Bodega Destino not found with id: " + dto.getBodegaDestinoId()));
             entity.setBodegaDestino(bodegaDestino);
         }
 
-        if (dto.getIdTipoMovimiento() != null) {
-            TipoMovimiento tipoMovimiento = tipoMovimientoRepository.findById(dto.getIdTipoMovimiento())
-                    .orElseThrow(() -> new ResourceNotFoundException("Tipo Movimiento not found with id: " + dto.getIdTipoMovimiento()));
+        if (dto.getTipoMovimientoId() != null) {
+            TipoMovimiento tipoMovimiento = tipoMovimientoRepository.findById(dto.getTipoMovimientoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Tipo Movimiento not found with id: " + dto.getTipoMovimientoId()));
             entity.setTipoMovimiento(tipoMovimiento);
         }
     }

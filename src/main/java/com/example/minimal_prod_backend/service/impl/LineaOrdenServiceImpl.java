@@ -7,6 +7,7 @@ import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.LineaOrdenMapper;
 import com.example.minimal_prod_backend.repository.LineaOrdenRepository;
 import com.example.minimal_prod_backend.repository.OrdenProduccionRepository;
 import com.example.minimal_prod_backend.repository.ProductoRepository;
@@ -70,18 +71,18 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
     }
 
     private void attachRelations(LineaOrdenInput dto, LineaOrden entity) {
-        if (dto.getIdOrden() != null) {
-            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getIdOrden())
+        if (dto.getOrdenId() != null) {
+            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getOrdenId())
                     .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found"));
             entity.setOrden(orden);
         }
-        if (dto.getIdProductoComponente() != null) {
-            Producto producto = productoRepository.findById(dto.getIdProductoComponente())
+        if (dto.getProductoComponenteId() != null) {
+            Producto producto = productoRepository.findById(dto.getProductoComponenteId())
                     .orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
             entity.setProductoComponente(producto);
         }
-        if (dto.getIdUnidadComponente() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidadComponente())
+        if (dto.getUnidadComponenteId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getUnidadComponenteId())
                     .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found"));
             entity.setUnidadComponente(unidad);
         }

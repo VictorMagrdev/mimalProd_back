@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.service.impl;
 import com.example.minimal_prod_backend.dto.*;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.LoteProduccionMapper;
 import com.example.minimal_prod_backend.repository.LoteProduccionRepository;
 import com.example.minimal_prod_backend.repository.ProductoRepository;
 import com.example.minimal_prod_backend.service.LoteProduccionService;
@@ -61,9 +62,9 @@ public class LoteProduccionServiceImpl implements LoteProduccionService {
     }
 
     private void attachRelations(LoteProduccionInput dto, LoteProduccion entity) {
-        if (dto.getIdProducto() != null) {
-            Producto producto = productoRepository.findById(dto.getIdProducto())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getIdProducto()));
+        if (dto.getProductoId() != null) {
+            Producto producto = productoRepository.findById(dto.getProductoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getProductoId()));
             entity.setProducto(producto);
         } else {
             entity.setProducto(null);

@@ -2,7 +2,7 @@ package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.LoginRequest;
 import com.example.minimal_prod_backend.dto.LoginResponse;
-import com.example.minimal_prod_backend.dto.PolicyResponse;
+import com.example.minimal_prod_backend.dto.PoliticaLoginResponse;
 import com.example.minimal_prod_backend.entity.Politica;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Usuario;
@@ -48,20 +48,20 @@ public class AuthServiceImpl implements AuthService {
             throw new InvalidCredentialsException("Invalid username or password");
         }
 
-        if (Boolean.FALSE.equals(usuario.getActive())) {
+        if (Boolean.FALSE.equals(usuario.getActivo())) {
             throw new InvalidCredentialsException("User account is inactive");
         }
 
         var roles = usuario.getRoles();
-        var roleNames = roles.stream().map(Rol::getName).collect(Collectors.toList());
+        var roleNames = roles.stream().map(Rol::getNombre).collect(Collectors.toList());
         String token = jwtUtil.generateToken(usuario.getUsername(), roleNames);
 
         List<Politica> policies = policyRepository.findByRoleIn(roles);
 
-        List<PolicyResponse> policyResponses = policies.stream()
-                .map(p -> new PolicyResponse(
-                        p.getTag().getName(),
-                        p.getPermiso().getAction()
+        List<PoliticaLoginResponse> policyResponses = policies.stream()
+                .map(p -> new PoliticaLoginResponse(
+                        p.getTag().getNombre(),
+                        p.getPermiso().getAccion()
                 ))
                 .collect(Collectors.toList());
 

@@ -6,6 +6,7 @@ import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.entity.PuntoReorden;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.PuntoReordenMapper;
 import com.example.minimal_prod_backend.repository.ProductoRepository;
 import com.example.minimal_prod_backend.repository.PuntoReordenRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
@@ -40,15 +41,15 @@ public class PuntoReordenServiceImpl implements PuntoReordenService {
     public PuntoReordenResponse createPuntoReorden(PuntoReordenInput input) {
         PuntoReorden entity = mapper.toEntity(input);
 
-        if (input.getIdProducto() != null) {
-            Producto producto = productoRepository.findById(input.getIdProducto())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + input.getIdProducto()));
+        if (input.getProductoId() != null) {
+            Producto producto = productoRepository.findById(input.getProductoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + input.getProductoId()));
             entity.setProducto(producto);
         }
 
-        if (input.getIdUnidad() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(input.getIdUnidad())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getIdUnidad()));
+        if (input.getUnidadId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(input.getUnidadId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getUnidadId()));
             entity.setUnidad(unidad);
         }
 
@@ -62,15 +63,15 @@ public class PuntoReordenServiceImpl implements PuntoReordenService {
 
         mapper.updateEntityFromInput(input, entity);
 
-        if (input.getIdProducto() != null) {
-            Producto producto = productoRepository.findById(input.getIdProducto())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + input.getIdProducto()));
+        if (input.getProductoId() != null) {
+            Producto producto = productoRepository.findById(input.getProductoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + input.getProductoId()));
             entity.setProducto(producto);
         }
 
-        if (input.getIdUnidad() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(input.getIdUnidad())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getIdUnidad()));
+        if (input.getUnidadId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(input.getUnidadId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getUnidadId()));
             entity.setUnidad(unidad);
         }
 

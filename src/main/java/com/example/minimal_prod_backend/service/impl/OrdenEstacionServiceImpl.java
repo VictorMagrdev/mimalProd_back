@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.service.impl;
 import com.example.minimal_prod_backend.dto.*;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.OrdenEstacionMapper;
 import com.example.minimal_prod_backend.repository.EstacionProduccionRepository;
 import com.example.minimal_prod_backend.repository.OrdenEstacionRepository;
 import com.example.minimal_prod_backend.repository.OrdenProduccionRepository;
@@ -63,17 +64,17 @@ public class OrdenEstacionServiceImpl implements OrdenEstacionService {
     }
 
     private void attachRelations(OrdenEstacionInput dto, OrdenEstacion entity) {
-        if (dto.getIdOrden() != null) {
-            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getIdOrden())
-                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.getIdOrden()));
+        if (dto.getOrdenId() != null) {
+            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getOrdenId())
+                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.getOrdenId()));
             entity.setOrden(orden);
         } else {
             entity.setOrden(null);
         }
 
-        if (dto.getIdEstacion() != null) {
-            EstacionProduccion estacion = estacionProduccionRepository.findById(dto.getIdEstacion())
-                    .orElseThrow(() -> new ResourceNotFoundException("EstacionProduccion not found with id: " + dto.getIdEstacion()));
+        if (dto.getEstacionId() != null) {
+            EstacionProduccion estacion = estacionProduccionRepository.findById(dto.getEstacionId())
+                    .orElseThrow(() -> new ResourceNotFoundException("EstacionProduccion not found with id: " + dto.getEstacionId()));
             entity.setEstacion(estacion);
         } else {
             entity.setEstacion(null);

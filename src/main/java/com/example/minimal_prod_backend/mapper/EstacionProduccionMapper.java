@@ -9,6 +9,8 @@ import org.mapstruct.Mappings;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface EstacionProduccionMapper {
 
@@ -17,7 +19,7 @@ public interface EstacionProduccionMapper {
             @Mapping(target = "creadoEn", ignore = true)
     })
     EstacionProduccion toEntity(EstacionProduccionInput input);
-
+    List<EstacionProduccionResponse> toResponseList(List<EstacionProduccion> conteos);
     @Mappings({
             @Mapping(target = "creadoEn", source = "creadoEn")
     })

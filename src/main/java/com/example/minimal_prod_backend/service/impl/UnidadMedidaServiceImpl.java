@@ -5,6 +5,7 @@ import com.example.minimal_prod_backend.dto.UnidadMedidaResponse;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.entity.UnidadMedidaTipo;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.UnidadMedidaMapper;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaTipoRepository;
 import com.example.minimal_prod_backend.service.UnidadMedidaService;
@@ -60,9 +61,9 @@ public class UnidadMedidaServiceImpl implements UnidadMedidaService {
     }
 
     private void attachTipo(UnidadMedidaInput dto, UnidadMedida entity) {
-        if (dto.getIdTipo() != null) {
-            UnidadMedidaTipo tipo = unidadMedidaTipoRepository.findById(dto.getIdTipo())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedidaTipo not found with id: " + dto.getIdTipo()));
+        if (dto.getUnidadMedidaTipoId() != null) {
+            UnidadMedidaTipo tipo = unidadMedidaTipoRepository.findById(dto.getUnidadMedidaTipoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedidaTipo not found with id: " + dto.getUnidadMedidaTipoId()));
             entity.setTipo(tipo);
         }
     }

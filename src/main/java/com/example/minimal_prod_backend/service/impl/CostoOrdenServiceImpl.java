@@ -6,6 +6,7 @@ import com.example.minimal_prod_backend.entity.CostoOrden;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.entity.TipoCosto;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.CostoOrdenMapper;
 import com.example.minimal_prod_backend.repository.CostoOrdenRepository;
 import com.example.minimal_prod_backend.repository.OrdenProduccionRepository;
 import com.example.minimal_prod_backend.repository.TipoCostoRepository;
@@ -63,14 +64,14 @@ public class CostoOrdenServiceImpl implements CostoOrdenService {
     }
 
     private void attachRelations(CostoOrdenInput dto, CostoOrden entity) {
-        if (dto.getIdOrden() != null) {
-            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getIdOrden())
-                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.getIdOrden()));
+        if (dto.getOrdenId() != null) {
+            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getOrdenId())
+                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.getOrdenId()));
             entity.setOrden(orden);
         }
-        if (dto.getIdTipoCosto() != null) {
-            TipoCosto tipoCosto = tipoCostoRepository.findById(dto.getIdTipoCosto())
-                    .orElseThrow(() -> new ResourceNotFoundException("TipoCosto not found with id: " + dto.getIdTipoCosto()));
+        if (dto.getTipoCostoId() != null) {
+            TipoCosto tipoCosto = tipoCostoRepository.findById(dto.getTipoCostoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("TipoCosto not found with id: " + dto.getTipoCostoId()));
             entity.setTipoCosto(tipoCosto);
         }
     }

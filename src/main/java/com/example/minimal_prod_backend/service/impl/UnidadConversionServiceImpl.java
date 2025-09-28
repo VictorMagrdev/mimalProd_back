@@ -4,6 +4,7 @@ import com.example.minimal_prod_backend.dto.UnidadConversionInput;
 import com.example.minimal_prod_backend.dto.UnidadConversionResponse;
 import com.example.minimal_prod_backend.entity.UnidadConversion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.UnidadConversionMapper;
 import com.example.minimal_prod_backend.repository.UnidadConversionRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
 import com.example.minimal_prod_backend.service.UnidadConversionService;
@@ -59,13 +60,13 @@ public class UnidadConversionServiceImpl implements UnidadConversionService {
     }
 
     private void attachRelations(UnidadConversionInput dto, UnidadConversion entity) {
-        if (dto.getIdOrigen() != null) {
-            entity.setOrigen(unidadMedidaRepository.findById(dto.getIdOrigen())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida (origen) not found with id: " + dto.getIdOrigen())));
+        if (dto.getOrigenId() != null) {
+            entity.setOrigen(unidadMedidaRepository.findById(dto.getOrigenId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida (origen) not found with id: " + dto.getOrigenId())));
         }
-        if (dto.getIdDestino() != null) {
-            entity.setDestino(unidadMedidaRepository.findById(dto.getIdDestino())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida (destino) not found with id: " + dto.getIdDestino())));
+        if (dto.getDestinoId() != null) {
+            entity.setDestino(unidadMedidaRepository.findById(dto.getDestinoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida (destino) not found with id: " + dto.getDestinoId())));
         }
     }
 }

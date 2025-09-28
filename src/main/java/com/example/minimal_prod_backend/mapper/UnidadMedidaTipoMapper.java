@@ -9,6 +9,8 @@ import org.mapstruct.Mappings;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UnidadMedidaTipoMapper {
 
@@ -16,7 +18,7 @@ public interface UnidadMedidaTipoMapper {
             @Mapping(target = "id", ignore = true),
     })
     UnidadMedidaTipo toEntity(UnidadMedidaTipoInput input);
-
+    List<UnidadMedidaTipoResponse> toResponseList(List<UnidadMedidaTipo> conteos);
     UnidadMedidaTipoResponse toResponse(UnidadMedidaTipo entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

@@ -9,6 +9,8 @@ import org.mapstruct.Mappings;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ConteoCiclicoMapper {
 
@@ -30,7 +32,7 @@ public interface ConteoCiclicoMapper {
             @Mapping(target = "fecha", source = "fecha")
     })
     ConteoCiclicoResponse toResponse(ConteoCiclico conteoCiclico);
-
+    List<ConteoCiclicoResponse> toResponseList(List<ConteoCiclico> conteos);
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "producto.id", source = "productoId"),

@@ -1,7 +1,10 @@
 package com.example.minimal_prod_backend.service.impl;
 
+import com.example.minimal_prod_backend.dto.InventarioLoteInput;
+import com.example.minimal_prod_backend.dto.InventarioLoteResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.InventarioLoteMapper;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.service.InventarioLoteService;
 import lombok.RequiredArgsConstructor;
@@ -63,27 +66,27 @@ public class InventarioLoteServiceImpl implements InventarioLoteService {
      * Resolver relaciones de IDs a entidades persistidas.
      */
     private void attachRelations(InventarioLoteInput dto, InventarioLote entity) {
-        if (dto.getIdProducto() != null) {
-            Producto producto = productoRepository.findById(dto.getIdProducto())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getIdProducto()));
+        if (dto.getProductoId() != null) {
+            Producto producto = productoRepository.findById(dto.getProductoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getProductoId()));
             entity.setProducto(producto);
         }
 
-        if (dto.getIdLote() != null) {
-            LoteProduccion lote = loteProduccionRepository.findById(dto.getIdLote())
-                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.getIdLote()));
+        if (dto.getLoteId() != null) {
+            LoteProduccion lote = loteProduccionRepository.findById(dto.getLoteId())
+                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.getLoteId()));
             entity.setLote(lote);
         }
 
-        if (dto.getIdBodega() != null) {
-            Bodega bodega = bodegaRepository.findById(dto.getIdBodega())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + dto.getIdBodega()));
+        if (dto.getBodegaId() != null) {
+            Bodega bodega = bodegaRepository.findById(dto.getBodegaId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + dto.getBodegaId()));
             entity.setBodega(bodega);
         }
 
-        if (dto.getIdUnidad() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidad())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.getIdUnidad()));
+        if (dto.getUnidadId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getUnidadId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.getUnidadId()));
             entity.setUnidad(unidad);
         }
     }

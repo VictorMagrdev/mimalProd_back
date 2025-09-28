@@ -1,18 +1,21 @@
 package com.example.minimal_prod_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -31,10 +34,12 @@ public class OrdenProduccion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unidad_id")
+    @ToString.Exclude
     private UnidadMedida unidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_id")
+    @ToString.Exclude
     private EstadoOrden estado;
 
     @Column(name = "inicio_planificado")
@@ -57,6 +62,7 @@ public class OrdenProduccion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creado_por")
+    @ToString.Exclude
     private Usuario creadoPor;
 
     @Column(length = 150)
@@ -76,6 +82,22 @@ public class OrdenProduccion {
             joinColumns = @JoinColumn(name = "orden_id"),
             inverseJoinColumns = @JoinColumn(name = "lote_id")
     )
+    @ToString.Exclude
     private Set<LoteProduccion> lotes = new HashSet<>();
 
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        OrdenProduccion that = (OrdenProduccion) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
 }

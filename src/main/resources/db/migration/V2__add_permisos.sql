@@ -5,13 +5,6 @@ INSERT INTO permissions (action, description) VALUES
 ('UPDATE', 'Permite actualizar registros existentes'),
 ('DELETE', 'Permite eliminar registros existentes');
 
--- 2. Insertar Objetos (Módulos)
-INSERT INTO objects (name, type, metadata) VALUES
-('USER', 'ENTITY', '{"description":"Administración de Usuarios"}'),
-('ROLE', 'ENTITY', '{"description":"Administración de Roles"}'),
-('POLICY', 'ENTITY', '{"description":"Administración de Políticas de Acceso"}'),
-('TAG', 'ENTITY', '{"description":"Administración de Etiquetas"}');
-
 -- 3. Insertar Roles
 INSERT INTO roles (name, description) VALUES
 ('ROLE_ADMIN', 'Administrador del sistema con acceso a la configuración'),
@@ -19,17 +12,52 @@ INSERT INTO roles (name, description) VALUES
 
 -- 4. Insertar Tags (Etiquetas) para los objetos
 INSERT INTO tags (name, description, owner_role_id) VALUES
-('TAG_USERS', 'Etiqueta para usuarios', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
-('TAG_ROLES', 'Etiqueta para roles', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
-('TAG_POLICIES', 'Etiqueta para políticas', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
-('TAG_GENERAL', 'Etiqueta para etiquetas', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
-
--- 5. Asociar objetos con tags
-INSERT INTO object_tags (object_id, tag_id) VALUES
-((SELECT id FROM objects WHERE name = 'USER'), (SELECT id FROM tags WHERE name = 'TAG_USERS')),
-((SELECT id FROM objects WHERE name = 'ROLE'), (SELECT id FROM tags WHERE name = 'TAG_ROLES')),
-((SELECT id FROM objects WHERE name = 'POLICY'), (SELECT id FROM tags WHERE name = 'TAG_POLICIES')),
-((SELECT id FROM objects WHERE name = 'TAG'), (SELECT id FROM tags WHERE name = 'TAG_GENERAL'));
+('ROLES_TAG', 'Etiqueta para roles', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('CENTROS_COSTO_TAG', 'Etiqueta para centros_costo', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('USUARIOS_TAG', 'Etiqueta para usuarios', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('USUARIO_ROLES_TAG', 'Etiqueta para usuario_roles', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TAGS_TAG', 'Etiqueta para tags', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('PERMISOS_TAG', 'Etiqueta para permisos', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('POLITICAS_TAG', 'Etiqueta para politicas', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ESTADOS_ORDEN_TAG', 'Etiqueta para estados_orden', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TIPOS_COSTO_TAG', 'Etiqueta para tipos_costo', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('UNIDADES_MEDIDA_TIPO_TAG', 'Etiqueta para unidades_medida_tipo', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('UNIDADES_MEDIDA_TAG', 'Etiqueta para unidades_medida', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('UNIDADES_CONVERSION_TAG', 'Etiqueta para unidades_conversion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TIPOS_PRODUCTO_TAG', 'Etiqueta para tipos_producto', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('METODOS_VALORACION_TAG', 'Etiqueta para metodos_valoracion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('PRODUCTOS_TAG', 'Etiqueta para productos', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('LOTES_PRODUCCION_TAG', 'Etiqueta para lotes_produccion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ORDENES_PRODUCCION_TAG', 'Etiqueta para ordenes_produccion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ORDENES_LOTES_TAG', 'Etiqueta para ordenes_lotes', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('LINEAS_ORDEN_TAG', 'Etiqueta para lineas_orden', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('COSTOS_ORDEN_TAG', 'Etiqueta para costos_orden', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TIPOS_BODEGA_TAG', 'Etiqueta para tipos_bodega', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('BODEGAS_TAG', 'Etiqueta para bodegas', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TIPOS_MOVIMIENTO_TAG', 'Etiqueta para tipos_movimiento', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('MOVIMIENTOS_INVENTARIO_TAG', 'Etiqueta para movimientos_inventario', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('MOVIMIENTO_INVENTARIO_DETALLE_TAG', 'Etiqueta para movimiento_inventario_detalle', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('INVENTARIOS_LOTE_TAG', 'Etiqueta para inventarios_lote', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('RESERVAS_MATERIAL_ORDEN_TAG', 'Etiqueta para reservas_material_orden', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ESTACIONES_PRODUCCION_TAG', 'Etiqueta para estaciones_produccion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ESTADOS_ORDEN_ESTACION_TAG', 'Etiqueta para estados_orden_estacion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ORDENES_ESTACION_TAG', 'Etiqueta para ordenes_estacion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ORDENES_EVENTO_TAG', 'Etiqueta para ordenes_evento', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('CONTEOS_CICLICO_TAG', 'Etiqueta para conteos_ciclico', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('DISCREPANCIAS_INVENTARIO_TAG', 'Etiqueta para discrepancias_inventario', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('PUNTOS_REORDEN_TAG', 'Etiqueta para puntos_reorden', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ESTADOS_ASIGNACION_TAG', 'Etiqueta para estados_asignacion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ESTADOS_APROBACION_TAG', 'Etiqueta para estados_aprobacion', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TIPOS_ACTIVIDAD_TAG', 'Etiqueta para tipos_actividad', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ESTADOS_ORDEN_TRABAJO_TAG', 'Etiqueta para estados_orden_trabajo', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TIPOS_ORDEN_TRABAJO_TAG', 'Etiqueta para tipos_orden_trabajo', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ORDENES_TRABAJO_TAG', 'Etiqueta para ordenes_trabajo', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('FUNCIONES_TAREA_TAG', 'Etiqueta para funciones_tarea', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('ASIGNACIONES_TAG', 'Etiqueta para asignaciones', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('HOJAS_TIMESHEET_TAG', 'Etiqueta para hojas_timesheet', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('REGISTROS_TIEMPO_TAG', 'Etiqueta para registros_tiempo', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('EXCEPCIONES_TIEMPO_TAG', 'Etiqueta para excepciones_tiempo', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN')),
+('TARIFAS_EMPLEADO_TAG', 'Etiqueta para tarifas_empleado', (SELECT id FROM roles WHERE name = 'ROLE_ADMIN'));
 
 -- 6. Insertar Usuario Administrador
 -- Contraseña: 'admin123' (bcrypt hash)

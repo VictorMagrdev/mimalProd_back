@@ -9,18 +9,24 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE) // ← Agregar esta línea
 public interface UnidadMedidaMapper {
 
+    // Método principal para mapeo simple
+    @Named("toResponseSimple")
     UnidadMedidaResponse toResponse(UnidadMedida entity);
 
-    UnidadMedida toEntity(UnidadMedidaInput dto);
-
-    List<UnidadMedidaResponse> toResponseList(List<UnidadMedida> entities);
-
-    // 🔹 Mapping de nested Tipo
+    // Método para mapeo con tipo - hacerlo único
+    @Named("toResponseWithTipo")
     @Mapping(target = "tipo", source = "tipo")
     UnidadMedidaResponse toResponseWithTipo(UnidadMedida entity);
+
+    // Especificar cuál método usar para la lista
+    @IterableMapping(qualifiedByName = "toResponseSimple")
+    List<UnidadMedidaResponse> toResponseList(List<UnidadMedida> entities);
+
+    UnidadMedida toEntity(UnidadMedidaInput dto);
 
     UnidadMedidaTipoResponse toTipoResponse(UnidadMedidaTipo tipo);
 

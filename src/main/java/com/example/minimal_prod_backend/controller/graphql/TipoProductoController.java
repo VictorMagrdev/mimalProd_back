@@ -10,40 +10,36 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class TipoProductoController {
 
     private final TipoProductoService tipoProductoService;
-    private final TipoProductoMapper tipoProductoMapper;
 
     @QueryMapping
     public List<TipoProductoResponse> tiposProducto() {
-        return tipoProductoService.findAll().stream()
-                .map(tipoProductoMapper::toResponse)
-                .collect(Collectors.toList());
+        return tipoProductoService.getTiposProducto();
     }
 
     @QueryMapping
     public TipoProductoResponse tipoProducto(@Argument Long id) {
-        return tipoProductoMapper.toResponse(tipoProductoService.findById(id));
+        return tipoProductoService.getTipoProductoById(id);
     }
 
     @MutationMapping
     public TipoProductoResponse createTipoProducto(@Argument TipoProductoInput input) {
-        return tipoProductoMapper.toResponse(tipoProductoService.save(input));
+        return tipoProductoService.createTipoProducto(input);
     }
 
     @MutationMapping
     public TipoProductoResponse updateTipoProducto(@Argument Long id, @Argument TipoProductoInput input) {
-        return tipoProductoMapper.toResponse(tipoProductoService.update(id, input));
+        return tipoProductoService.updateTipoProducto(id, input);
     }
 
     @MutationMapping
     public boolean deleteTipoProducto(@Argument Long id) {
-        tipoProductoService.delete(id);
+        tipoProductoService.deleteTipoProducto(id);
         return true;
     }
 }

@@ -1,53 +1,58 @@
 package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.TipoProductoInput;
+import com.example.minimal_prod_backend.dto.TipoProductoResponse;
 import com.example.minimal_prod_backend.entity.TipoProducto;
+import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.TipoProductoMapper;
 import com.example.minimal_prod_backend.repository.TipoProductoRepository;
 import com.example.minimal_prod_backend.service.TipoProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TipoProductoServiceImpl implements TipoProductoService {
 
     private final TipoProductoRepository tipoProductoRepository;
+    private final TipoProductoMapper tipoProductoMapper;
 
     @Override
-    public List<TipoProducto> findAll() {
-        return tipoProductoRepository.findAll();
+    public List<TipoProductoResponse> getTiposProducto() {
+        return tipoProductoRepository.findAll().stream()
+                .map(tipoProductoMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public TipoProducto findById(Long id) {
-        return tipoProductoRepository.findById(id).orElse(null);
+    public TipoProductoResponse getTipoProductoById(Long id) {
+        TipoProducto tipoProducto = tipoProductoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TipoProducto not found with id: " + id));
+        return tipoProductoMapper.toResponse(tipoProducto);
     }
 
     @Override
-    public TipoProducto save(TipoProductoInput input) {
-        TipoProducto tipoProducto = new TipoProducto();
-        tipoProducto.setCodigo(input.getCodigo());
-        tipoProducto.setNombre(input.getNombre());
-        tipoProducto.setDescripcion(input.getDescripcion());
-        return tipoProductoRepository.save(tipoProducto);
+    public TipoProductoResponse createTipoProducto(TipoProductoInput tipoProductoInput) {
+        TipoProducto tipoProducto = tipoProductoMapper.toEntity(tipoProductoInput);
+        return tipoProductoMapper.toResponse(tipoProductoRepository.save(tipoProducto));
     }
 
     @Override
-    public TipoProducto update(Long id, TipoProductoInput input) {
-        TipoProducto tipoProducto = tipoProductoRepository.findById(id).orElse(null);
-        if (tipoProducto != null) {
-            tipoProducto.setCodigo(input.getCodigo());
-            tipoProducto.setNombre(input.getNombre());
-            tipoProducto.setDescripcion(input.getDescripcion());
-            return tipoProductoRepository.save(tipoProducto);
-        }
-        return null;
+    public TipoProductoResponse updateTipoProducto(Long id, TipoProductoInput tipoProductoInput) {
+        TipoProducto existingTipoProducto = tipoProductoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TipoProducto not found with id: " + id));
+
+        tipoProductoMapper.updateEntityFromInput(tipoProductoInput, existingTipoProducto);
+        return tipoProductoMapper.toResponse(tipoProductoRepository.save(existingTipoProducto));
     }
 
     @Override
-    public void delete(Long id) {
-        tipoProductoRepository.deleteById(id);
+    public void deleteTipoProducto(Long id) {
+        TipoProducto tipoProducto = tipoProductoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TipoProducto not found with id: " + id));
+        tipoProductoRepository.delete(tipoProducto);
     }
 }

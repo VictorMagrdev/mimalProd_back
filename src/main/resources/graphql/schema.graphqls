@@ -44,15 +44,15 @@ type UnidadConversion {
     factor: Float!
 }
 
-type TipoProducto{
-    id:ID!
+type TipoProducto {
+    id: ID!
     codigo: String!
     nombre: String!
     descripcion: String!
 }
 
-type MetodoValoracion{
-    id:ID!
+type MetodoValoracion {
+    id: ID!
     codigo: String!
     nombre: String!
     descripcion: String!
@@ -294,7 +294,13 @@ input ReservaMaterialOrdenInput {
     cantidadReservada: Float!
     idUnidad: ID!
 }
-
+input InventarioLoteInput {
+    idProducto: ID!
+    idLote: ID
+    idBodega: ID!
+    cantidad: Float!
+    idUnidad: ID
+}
 input EstacionProduccionInput {
     codigo: String!
     nombre: String!
@@ -376,7 +382,6 @@ input ProductoInput {
     idMetodoValoracion: ID
     idTipoProducto: ID
 }
-
 
 input LoteProduccionInput {
     numeroLote: String!
@@ -485,7 +490,10 @@ type Mutation {
     deleteTipoCosto(id: ID!): Boolean
 
     createUnidadMedidaTipo(input: UnidadMedidaTipoInput!): UnidadMedidaTipo
-    updateUnidadMedidaTipo(id: ID!, input: UnidadMedidaTipoInput!): UnidadMedidaTipo
+    updateUnidadMedidaTipo(
+        id: ID!
+        input: UnidadMedidaTipoInput!
+    ): UnidadMedidaTipo
     deleteUnidadMedidaTipo(id: ID!): Boolean
 
     createUnidadMedida(input: UnidadMedidaInput!): UnidadMedida
@@ -493,7 +501,10 @@ type Mutation {
     deleteUnidadMedida(id: ID!): Boolean
 
     createUnidadConversion(input: UnidadConversionInput!): UnidadConversion
-    updateUnidadConversion(id: ID!, input: UnidadConversionInput!): UnidadConversion
+    updateUnidadConversion(
+        id: ID!
+        input: UnidadConversionInput!
+    ): UnidadConversion
     deleteUnidadConversion(id: ID!): Boolean
 
     createProducto(input: ProductoInput!): Producto
@@ -513,30 +524,51 @@ type Mutation {
     deleteTipoMovimiento(id: ID!): Boolean
 
     createEstacionProduccion(input: EstacionProduccionInput!): EstacionProduccion
-    updateEstacionProduccion(id: ID!, input: EstacionProduccionInput!): EstacionProduccion
+    updateEstacionProduccion(
+        id: ID!
+        input: EstacionProduccionInput!
+    ): EstacionProduccion
     deleteEstacionProduccion(id: ID!): Boolean
 
     createPuntoReorden(input: PuntoReordenInput!): PuntoReorden
 
     createMetodoValoracion(input: MetodoValoracionInput!): MetodoValoracion
-    updateMetodoValoracion(id: ID!, input: MetodoValoracionInput!): MetodoValoracion
+    updateMetodoValoracion(
+        id: ID!
+        input: MetodoValoracionInput!
+    ): MetodoValoracion
     deleteMetodoValoracion(id: ID!): Boolean
 
     createTipoProducto(input: TipoProductoInput!): TipoProducto
     updateTipoProducto(id: ID!, input: TipoProductoInput!): TipoProducto
     deleteTipoProducto(id: ID!): Boolean
 
-    # --- Mutaciones de Producción e Inventario por Eventos ---
-
-    # Creación de entidades raíz que inician un flujo
     createOrdenProduccion(input: OrdenProduccionInput!): OrdenProduccion
     createLineaOrden(input: LineaOrdenInput!): LineaOrden
     createConteoCiclico(input: ConteoCiclicoInput!): ConteoCiclico
-    createMovimientoInventarioAjuste(input: MovimientoInventarioInput!, detalles: [MovimientoInventarioDetalleInput!]!): MovimientoInventario
+    createMovimientoInventarioAjuste(
+        input: MovimientoInventarioInput!
+        detalles: [MovimientoInventarioDetalleInput!]!
+    ): MovimientoInventario
 
-    # Acciones que disparan eventos de ciclo de vida
     iniciarOrdenProduccion(id: ID!): OrdenProduccion
     avanzarEstacionProduccion(ordenEstacionId: ID!): OrdenEstacion
-    finalizarOrdenProduccion(id: ID!): OrdenProduccion # Forzada/manual
+    finalizarOrdenProduccion(id: ID!): OrdenProduccion
     consumirLineaOrden(id: ID!): LineaOrden
+
+    createInventarioLote(input: InventarioLoteInput!): InventarioLote
+    updateInventarioLote(id: ID!, input: InventarioLoteInput!): InventarioLote
+    deleteInventarioLote(id: ID!): Boolean
+
+    createReservaMaterialOrden(input: ReservaMaterialOrdenInput!): ReservaMaterialOrden
+    updateReservaMaterialOrden(id: ID!, input: ReservaMaterialOrdenInput!): ReservaMaterialOrden
+    deleteReservaMaterialOrden(id: ID!): Boolean
+
+    createLoteProduccion(input: LoteProduccionInput!): LoteProduccion
+    createOrdenEstacion(input: OrdenEstacionInput!): OrdenEstacion
+    createOrdenEvento(input: OrdenEventoInput!): OrdenEvento
+    createCostoOrden(input: CostoOrdenInput!): CostoOrden
+    b(
+        input: MovimientoInventarioInput!
+    ): MovimientoInventario
 }

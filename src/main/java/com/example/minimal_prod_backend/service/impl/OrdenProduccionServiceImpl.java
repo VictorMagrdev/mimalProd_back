@@ -2,17 +2,15 @@ package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.*;
 import com.example.minimal_prod_backend.entity.*;
-import com.example.minimal_prod_backend.events.OrdenCreadaEvent;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
+import com.example.minimal_prod_backend.mapper.OrdenProduccionMapper;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.service.OrdenProduccionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,14 +21,12 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     private final ProductoRepository productoRepository;
     private final UnidadMedidaRepository unidadMedidaRepository;
     private final EstadoOrdenRepository estadoOrdenRepository;
-    private final ApplicationEventPublisher eventPublisher;
+    private final OrdenProduccionMapper mapper;
 
     @Override
     @Transactional(readOnly = true)
     public List<OrdenProduccionResponse> getOrdenesProduccion() {
-        return ordenProduccionRepository.findAll().stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+        return mapper.toResponseList(ordenProduccionRepository.findAll());
     }
 
     @Override
@@ -38,28 +34,28 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     public OrdenProduccionResponse getOrdenProduccionById(Long id) {
         OrdenProduccion ordenProduccion = ordenProduccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + id));
-        return toResponse(ordenProduccion);
+        return mapper.toResponse(ordenProduccion);
     }
 
     @Override
     @Transactional
-    public OrdenProduccionResponse createOrdenProduccion(OrdenProduccionInput ordenProduccionInput) {
-        OrdenProduccion ordenProduccion = toEntity(ordenProduccionInput);
-        OrdenProduccion savedOrden = ordenProduccionRepository.save(ordenProduccion);
-
-        // 🔥 Disparamos evento al crear la orden
-        eventPublisher.publishEvent(new OrdenCreadaEvent(this, savedOrden.getId()));
-
-        return toResponse(savedOrden);
+    public OrdenProduccionResponse createOrdenProduccion(OrdenProduccionInput input) {
+        OrdenProduccion entity = mapper.toEntity(input);
+        attachRelations(input, entity);
+        OrdenProduccion saved = ordenProduccionRepository.save(entity);
+        return mapper.toResponse(saved);
     }
 
     @Override
     @Transactional
-    public OrdenProduccionResponse updateOrdenProduccion(Long id, OrdenProduccionInput ordenProduccionInput) {
-        OrdenProduccion existingOrdenProduccion = ordenProduccionRepository.findById(id)
+    public OrdenProduccionResponse updateOrdenProduccion(Long id, OrdenProduccionInput input) {
+        OrdenProduccion existing = ordenProduccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + id));
-        updateEntityFromInput(ordenProduccionInput, existingOrdenProduccion);
-        return toResponse(ordenProduccionRepository.save(existingOrdenProduccion));
+
+        mapper.updateEntityFromInput(input, existing);
+        attachRelations(input, existing);
+
+        return mapper.toResponse(ordenProduccionRepository.save(existing));
     }
 
     @Override
@@ -67,78 +63,10 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
         ordenProduccionRepository.deleteById(id);
     }
 
-    private OrdenProduccionResponse toResponse(OrdenProduccion entity) {
-        if (entity == null) return null;
-        OrdenProduccionResponse dto = new OrdenProduccionResponse();
-        dto.setId(entity.getId());
-        dto.setNumeroOrden(entity.getNumeroOrden());
-        dto.setCantidad(entity.getCantidad());
-        dto.setInicioPlanificado(entity.getInicioPlanificado());
-        dto.setFinPlanificado(entity.getFinPlanificado());
-        dto.setInicioReal(entity.getInicioReal());
-        dto.setFinReal(entity.getFinReal());
-        dto.setCantidadDesperdicio(entity.getCantidadDesperdicio());
-        dto.setCantidadProducida(entity.getCantidadProducida());
-        dto.setCreadoPor(entity.getCreadoPor());
-        dto.setObservaciones(entity.getObservaciones());
-        dto.setCreadoEn(entity.getCreadoEn());
-        dto.setActualizadoEn(entity.getActualizadoEn());
-
-        if (entity.getLote() != null) {
-            LoteProduccionResponse loteDto = new LoteProduccionResponse();
-            loteDto.setId(entity.getLote().getId());
-            loteDto.setNumeroLote(entity.getLote().getNumeroLote());
-            dto.setLote(loteDto);
-        }
-
-        if (entity.getProducto() != null) {
-            ProductoResponse productoDto = new ProductoResponse();
-            productoDto.setId(entity.getProducto().getId());
-            productoDto.setCodigo(entity.getProducto().getCodigo());
-            productoDto.setNombre(entity.getProducto().getNombre());
-            dto.setProducto(productoDto);
-        }
-
-        if (entity.getUnidad() != null) {
-            UnidadMedidaResponse unidadDto = new UnidadMedidaResponse();
-            unidadDto.setId(entity.getUnidad().getId());
-            unidadDto.setNombre(entity.getUnidad().getNombre());
-            unidadDto.setAbreviatura(entity.getUnidad().getAbreviatura());
-            dto.setUnidad(unidadDto);
-        }
-
-        if (entity.getEstado() != null) {
-            EstadoOrdenResponse estadoDto = new EstadoOrdenResponse();
-            estadoDto.setId(entity.getEstado().getId());
-            estadoDto.setCodigo(entity.getEstado().getCodigo());
-            estadoDto.setNombre(entity.getEstado().getNombre());
-            dto.setEstado(estadoDto);
-        }
-
-        return dto;
-    }
-
-    private OrdenProduccion toEntity(OrdenProduccionInput dto) {
-        if (dto == null) return null;
-        OrdenProduccion entity = new OrdenProduccion();
-        updateEntityFromInput(dto, entity);
-        return entity;
-    }
-
-    private void updateEntityFromInput(OrdenProduccionInput dto, OrdenProduccion entity) {
-        if (dto == null || entity == null) return;
-
-        entity.setNumeroOrden(dto.getNumeroOrden());
-        entity.setCantidad(dto.getCantidad());
-        entity.setInicioPlanificado(dto.getInicioPlanificado());
-        entity.setFinPlanificado(dto.getFinPlanificado());
-        entity.setInicioReal(dto.getInicioReal());
-        entity.setFinReal(dto.getFinReal());
-        entity.setCantidadDesperdicio(dto.getCantidadDesperdicio());
-        entity.setCantidadProducida(dto.getCantidadProducida());
-        entity.setCreadoPor(dto.getCreadoPor());
-        entity.setObservaciones(dto.getObservaciones());
-
+    /**
+     * Maneja las relaciones que necesitan consulta en repositorios externos.
+     */
+    private void attachRelations(OrdenProduccionInput dto, OrdenProduccion entity) {
         if (dto.getIdLote() != null) {
             LoteProduccion lote = loteProduccionRepository.findById(dto.getIdLote())
                     .orElseThrow(() -> new ResourceNotFoundException("Lote not found"));

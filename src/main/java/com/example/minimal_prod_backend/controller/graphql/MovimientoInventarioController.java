@@ -44,10 +44,4 @@ public class MovimientoInventarioController {
         return movimientoInventarioService.updateMovimientoInventario(id, movimientoInventarioInput);
     }
 
-    @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTO_INVENTARIO_TAG', 'DELETE')")
-    public boolean deleteMovimientoInventario(@Argument Long id) {
-        movimientoInventarioService.deleteMovimientoInventario(id);
-        return true;
-    }
 }

@@ -2,6 +2,8 @@ package com.example.minimal_prod_backend.controller.graphql;
 
 import com.example.minimal_prod_backend.dto.MetodoValoracionInput;
 import com.example.minimal_prod_backend.dto.MetodoValoracionResponse;
+import com.example.minimal_prod_backend.entity.MetodoValoracion;
+import com.example.minimal_prod_backend.mapper.MetodoValoracionMapper;
 import com.example.minimal_prod_backend.service.MetodoValoracionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -28,17 +30,22 @@ public class MetodoValoracionController {
 
     @QueryMapping
     public MetodoValoracionResponse metodoValoracion(@Argument Long id) {
-        return metodoValoracionMapper.toResponse(metodoValoracionService.findById(id));
+        MetodoValoracion metodoValoracion = metodoValoracionService.findById(id);
+        if (metodoValoracion == null) return null;
+        return metodoValoracionMapper.toResponse(metodoValoracion);
     }
 
     @MutationMapping
     public MetodoValoracionResponse createMetodoValoracion(@Argument MetodoValoracionInput input) {
-        return metodoValoracionMapper.toResponse(metodoValoracionService.save(input));
+        MetodoValoracion metodoValoracion = metodoValoracionService.save(input);
+        return metodoValoracionMapper.toResponse(metodoValoracion);
     }
 
     @MutationMapping
     public MetodoValoracionResponse updateMetodoValoracion(@Argument Long id, @Argument MetodoValoracionInput input) {
-        return metodoValoracionMapper.toResponse(metodoValoracionService.update(id, input));
+        MetodoValoracion metodoValoracion = metodoValoracionService.update(id, input);
+        if (metodoValoracion == null) return null;
+        return metodoValoracionMapper.toResponse(metodoValoracion);
     }
 
     @MutationMapping

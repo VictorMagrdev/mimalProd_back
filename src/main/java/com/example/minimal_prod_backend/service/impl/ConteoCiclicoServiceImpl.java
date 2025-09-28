@@ -3,7 +3,6 @@ package com.example.minimal_prod_backend.service.impl;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
 import com.example.minimal_prod_backend.entity.*;
-import com.example.minimal_prod_backend.events.ConteoEjecutadoEvent;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.ConteoCiclicoMapper;
 import com.example.minimal_prod_backend.repository.*;
@@ -46,8 +45,6 @@ public class ConteoCiclicoServiceImpl implements ConteoCiclicoService {
 
         ConteoCiclico saved = conteoCiclicoRepository.save(entity);
 
-        eventPublisher.publishEvent(new ConteoEjecutadoEvent(this, saved.getId()));
-
         return mapper.toResponse(saved);
     }
 
@@ -61,8 +58,6 @@ public class ConteoCiclicoServiceImpl implements ConteoCiclicoService {
         attachRelations(input, existing);
 
         ConteoCiclico saved = conteoCiclicoRepository.save(existing);
-
-        eventPublisher.publishEvent(new ConteoEjecutadoEvent(this, saved.getId()));
 
         return mapper.toResponse(saved);
     }

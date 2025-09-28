@@ -1,14 +1,17 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class PuntoReordenResponse {
     private Long id;
-    private ProductoResponse producto;
+    private Long productoId;
     private BigDecimal stockMinimo;
     private BigDecimal stockSeguridad;
-    private UnidadMedidaResponse unidad;
+    private Long unidadId;
 }

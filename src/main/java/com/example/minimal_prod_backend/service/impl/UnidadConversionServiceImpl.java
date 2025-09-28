@@ -4,7 +4,6 @@ import com.example.minimal_prod_backend.dto.UnidadConversionInput;
 import com.example.minimal_prod_backend.dto.UnidadConversionResponse;
 import com.example.minimal_prod_backend.entity.UnidadConversion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.UnidadConversionMapper;
 import com.example.minimal_prod_backend.repository.UnidadConversionRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
 import com.example.minimal_prod_backend.service.UnidadConversionService;

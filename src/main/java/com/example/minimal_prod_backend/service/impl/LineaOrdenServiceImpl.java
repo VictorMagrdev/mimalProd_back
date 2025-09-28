@@ -7,7 +7,6 @@ import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.LineaOrdenMapper;
 import com.example.minimal_prod_backend.repository.LineaOrdenRepository;
 import com.example.minimal_prod_backend.repository.OrdenProduccionRepository;
 import com.example.minimal_prod_backend.repository.ProductoRepository;

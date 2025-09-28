@@ -1,11 +1,14 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class BodegaInput {
     private String codigo;
     private String nombre;
     private String descripcion;
-    private Long idTipo;
+    private Long tipoBodegaId;
 }

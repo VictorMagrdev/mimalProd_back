@@ -4,7 +4,6 @@ import com.example.minimal_prod_backend.dto.UnidadMedidaTipoInput;
 import com.example.minimal_prod_backend.dto.UnidadMedidaTipoResponse;
 import com.example.minimal_prod_backend.entity.UnidadMedidaTipo;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.UnidadMedidaTipoMapper;
 import com.example.minimal_prod_backend.repository.UnidadMedidaTipoRepository;
 import com.example.minimal_prod_backend.service.UnidadMedidaTipoService;
 import lombok.RequiredArgsConstructor;

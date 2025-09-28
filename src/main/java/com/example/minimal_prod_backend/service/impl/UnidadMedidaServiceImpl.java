@@ -5,7 +5,6 @@ import com.example.minimal_prod_backend.dto.UnidadMedidaResponse;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.entity.UnidadMedidaTipo;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.UnidadMedidaMapper;
 import com.example.minimal_prod_backend.repository.UnidadMedidaRepository;
 import com.example.minimal_prod_backend.repository.UnidadMedidaTipoRepository;
 import com.example.minimal_prod_backend.service.UnidadMedidaService;

@@ -4,7 +4,6 @@ import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleInput;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.MovimientoInventarioDetalleMapper;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.service.MovimientoInventarioDetalleService;
 import lombok.RequiredArgsConstructor;

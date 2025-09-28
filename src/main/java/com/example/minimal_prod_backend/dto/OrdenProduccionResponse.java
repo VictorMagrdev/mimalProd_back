@@ -1,27 +1,28 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class OrdenProduccionResponse {
     private Long id;
     private String numeroOrden;
-    private LoteProduccionResponse lote;
-    private ProductoResponse producto;
     private BigDecimal cantidad;
-    private UnidadMedidaResponse unidad;
-    private EstadoOrdenResponse estado;
-    private LocalDateTime inicioPlanificado;
-    private LocalDateTime finPlanificado;
-    private LocalDateTime inicioReal;
-    private LocalDateTime finReal;
+    private Long unidadId;
+    private Long estadoId;
+    private OffsetDateTime inicioPlanificado;
+    private OffsetDateTime finPlanificado;
+    private OffsetDateTime inicioReal;
+    private OffsetDateTime finReal;
     private BigDecimal cantidadDesperdicio;
     private BigDecimal cantidadProducida;
     private Long creadoPor;
     private String observaciones;
-    private LocalDateTime creadoEn;
-    private LocalDateTime actualizadoEn;
+    private OffsetDateTime creadoEn;
+    private OffsetDateTime actualizadoEn;
 }

@@ -6,7 +6,6 @@ import com.example.minimal_prod_backend.entity.Bodega;
 import com.example.minimal_prod_backend.entity.MovimientoInventario;
 import com.example.minimal_prod_backend.entity.TipoMovimiento;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.MovimientoInventarioMapper;
 import com.example.minimal_prod_backend.repository.BodegaRepository;
 import com.example.minimal_prod_backend.repository.MovimientoInventarioRepository;
 import com.example.minimal_prod_backend.repository.TipoMovimientoRepository;

@@ -1,14 +1,17 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class OrdenEventoResponse {
     private Long id;
-    private OrdenProduccionResponse orden;
+    private Long ordenId;
     private String evento;
     private String descripcion;
-    private LocalDateTime fecha;
+    private OffsetDateTime fecha;
 }

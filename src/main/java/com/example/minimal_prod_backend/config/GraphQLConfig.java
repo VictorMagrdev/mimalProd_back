@@ -4,76 +4,160 @@ import graphql.GraphQLContext;
 import graphql.execution.CoercedVariables;
 import graphql.language.StringValue;
 import graphql.language.Value;
-import graphql.schema.*;
+import graphql.schema.Coercing;
+import graphql.schema.CoercingParseLiteralException;
+import graphql.schema.CoercingParseValueException;
+import graphql.schema.CoercingSerializeException;
+import graphql.schema.GraphQLScalarType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.graphql.execution.RuntimeWiringConfigurer;
+import org.springframework.lang.NonNull;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Locale;
+import java.util.function.Function;
 
 @Configuration
 public class GraphQLConfig {
 
+    private static <T> T parseOrThrow(Object input, Function<Object, T> parser, String typeName) {
+        try {
+            return parser.apply(input);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to parse " + typeName + " from input: " + input, e);
+        }
+    }
+
+    private static OffsetDateTime parseOffsetDateTime(String value) {
+        return OffsetDateTime.parse(value, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+    }
+
+    private static BigDecimal parseBigDecimal(Object value) {
+        if (value instanceof BigDecimal) return (BigDecimal) value;
+        if (value instanceof Number) return new BigDecimal(value.toString());
+        if (value instanceof String) return new BigDecimal((String) value);
+        throw new IllegalArgumentException("Cannot parse BigDecimal from: " + value);
+    }
+
     @Bean
     public RuntimeWiringConfigurer runtimeWiringConfigurer() {
-        return wiringBuilder -> wiringBuilder.scalar(dateTimeScalar());
+        return builder -> builder
+                .scalar(dateTimeScalar())
+                .scalar(numericScalar())
+                .scalar(intervalScalar());
     }
 
     @Bean
     public GraphQLScalarType dateTimeScalar() {
         return GraphQLScalarType.newScalar()
                 .name("DateTime")
-                .description("A custom scalar that handles LocalDateTime")
-                .coercing(new Coercing<LocalDateTime, String>() {
-                    private final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                .description("Custom scalar for TIMESTAMPTZ / OffsetDateTime")
+                .coercing(new Coercing<OffsetDateTime, String>() {
                     @Override
-                    public String serialize(Object dataFetcherResult,
-                                            GraphQLContext context,
-                                            Locale locale) throws CoercingSerializeException {
-                        try {
-                            if (dataFetcherResult instanceof LocalDateTime) {
-                                return ((LocalDateTime) dataFetcherResult).format(formatter);
-                            }
-                            throw new CoercingSerializeException("Expected a LocalDateTime object.");
-                        } catch (RuntimeException e) {
-                            throw new CoercingSerializeException("Unable to serialize LocalDateTime", e);
-                        }
+                    public String serialize(@NonNull Object dataFetcherResult,
+                                            @NonNull GraphQLContext context,
+                                            @NonNull Locale locale) {
+                        if (!(dataFetcherResult instanceof OffsetDateTime))
+                            throw new CoercingSerializeException("Expected an OffsetDateTime object.");
+                        return ((OffsetDateTime) dataFetcherResult).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
                     }
 
                     @Override
-                    public LocalDateTime parseValue(Object input,
-                                                    GraphQLContext context,
-                                                    Locale locale) throws CoercingParseValueException {
-                        try {
-                            if (input instanceof String) {
-                                return LocalDateTime.parse((String) input, formatter);
-                            }
+                    public OffsetDateTime parseValue(@NonNull Object input,
+                                                     @NonNull GraphQLContext context,
+                                                     @NonNull Locale locale) {
+                        if (!(input instanceof String))
                             throw new CoercingParseValueException("Expected a String.");
-                        } catch (DateTimeParseException e) {
-                            throw new CoercingParseValueException("Not a valid ISO_LOCAL_DATE_TIME: " + input, e);
-                        } catch (RuntimeException e) {
-                            throw new CoercingParseValueException("Unable to parse value for LocalDateTime", e);
-                        }
+                        return parseOrThrow(input, v -> parseOffsetDateTime((String) v), "OffsetDateTime");
                     }
 
                     @Override
-                    public LocalDateTime parseLiteral(Value<?> input,
-                                                      CoercedVariables variables,
-                                                      GraphQLContext context,
-                                                      Locale locale) throws CoercingParseLiteralException {
-                        if (input instanceof StringValue) {
-                            try {
-                                return LocalDateTime.parse(((StringValue) input).getValue(), formatter);
-                            } catch (DateTimeParseException e) {
-                                throw new CoercingParseLiteralException("Not a valid ISO_LOCAL_DATE_TIME: " + input, e);
-                            } catch (RuntimeException e) {
-                                throw new CoercingParseLiteralException("Unable to parse literal for LocalDateTime", e);
-                            }
-                        }
-                        throw new CoercingParseLiteralException("Expected a StringValue.");
+                    public OffsetDateTime parseLiteral(@NonNull Value<?> input,
+                                                       @NonNull CoercedVariables variables,
+                                                       @NonNull GraphQLContext context,
+                                                       @NonNull Locale locale) {
+                        if (!(input instanceof StringValue))
+                            throw new CoercingParseLiteralException("Expected a StringValue.");
+                        String value = ((StringValue) input).getValue();
+                        return parseOrThrow(value, v -> parseOffsetDateTime((String) v), "OffsetDateTime");
+                    }
+
+                })
+                .build();
+    }
+
+    @Bean
+    public GraphQLScalarType numericScalar() {
+        return GraphQLScalarType.newScalar()
+                .name("Numeric")
+                .description("Custom scalar for BigDecimal")
+                .coercing(new Coercing<BigDecimal, String>() {
+                    @Override
+                    public String serialize(@NonNull Object dataFetcherResult,
+                                            @NonNull GraphQLContext context,
+                                            @NonNull Locale locale) {
+                        if (!(dataFetcherResult instanceof BigDecimal))
+                            throw new CoercingSerializeException("Expected a BigDecimal object.");
+                        return ((BigDecimal) dataFetcherResult).toPlainString();
+                    }
+
+                    @Override
+                    public BigDecimal parseValue(@NonNull Object input,
+                                                 @NonNull GraphQLContext context,
+                                                 @NonNull Locale locale) {
+                        return parseOrThrow(input, GraphQLConfig::parseBigDecimal, "BigDecimal");
+                    }
+
+                    @Override
+                    public BigDecimal parseLiteral(@NonNull Value<?> input,
+                                                   @NonNull CoercedVariables variables,
+                                                   @NonNull GraphQLContext context,
+                                                   @NonNull Locale locale) {
+                        if (!(input instanceof StringValue))
+                            throw new CoercingParseLiteralException("Expected a StringValue.");
+                        return parseOrThrow(((StringValue) input).getValue(), GraphQLConfig::parseBigDecimal, "BigDecimal");
+                    }
+                })
+                .build();
+    }
+
+    @Bean
+    public GraphQLScalarType intervalScalar() {
+        return GraphQLScalarType.newScalar()
+                .name("Interval")
+                .description("Custom scalar for Interval represented as ISO-8601 duration string")
+                .coercing(new Coercing<String, String>() {
+                    private String validateString(@NonNull Object value) {
+                        if (!(value instanceof String))
+                            throw new CoercingSerializeException("Expected a String for Interval.");
+                        return (String) value;
+                    }
+
+                    @Override
+                    public String serialize(@NonNull Object dataFetcherResult,
+                                            @NonNull GraphQLContext context,
+                                            @NonNull Locale locale) {
+                        return validateString(dataFetcherResult);
+                    }
+
+                    @Override
+                    public String parseValue(@NonNull Object input,
+                                             @NonNull GraphQLContext context,
+                                             @NonNull Locale locale) {
+                        return validateString(input);
+                    }
+
+                    @Override
+                    public String parseLiteral(@NonNull Value<?> input,
+                                               @NonNull CoercedVariables variables,
+                                               @NonNull GraphQLContext context,
+                                               @NonNull Locale locale) {
+                        if (!(input instanceof StringValue))
+                            throw new CoercingParseLiteralException("Expected a StringValue for Interval.");
+                        return ((StringValue) input).getValue();
                     }
                 })
                 .build();

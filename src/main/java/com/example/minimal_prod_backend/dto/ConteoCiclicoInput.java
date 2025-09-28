@@ -1,16 +1,19 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ConteoCiclicoInput {
-    private Long idProducto;
-    private Long idBodega;
-    private Long idLote;
+    private Long productoId;
+    private Long bodegaId;
+    private Long loteId;
     private BigDecimal cantidadContada;
-    private Long idUnidad;
-    private LocalDateTime fecha;
+    private Long unidadId;
+    private OffsetDateTime fecha;
 }

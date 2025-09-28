@@ -1,15 +1,16 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class DiscrepanciaInventarioResponse {
     private Long id;
-    private ConteoCiclicoResponse conteo;
+    private Long conteoId;
     private BigDecimal cantidadSistema;
-    private BigDecimal cantidadContada;
-    private BigDecimal diferencia;
     private Boolean resuelto;
 }

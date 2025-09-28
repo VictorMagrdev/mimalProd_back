@@ -1,13 +1,16 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class LoteProduccionInput {
     private String numeroLote;
-    private Long idProducto;
-    private LocalDateTime fabricadoEn;
-    private LocalDateTime venceEn;
+    private Long productoId;
+    private OffsetDateTime fabricadoEn;
+    private OffsetDateTime venceEn;
 }

@@ -1,17 +1,20 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class UnidadMedidaResponse {
     private Long id;
     private String codigo;
     private String nombre;
     private String abreviatura;
-    private UnidadMedidaTipoResponse tipo;
-    private Boolean esActiva;
-    private Boolean esBase;
-    private LocalDateTime creadoEn;
+    private Long unidadMedidaTipoId;
+    private Boolean activa;
+    private Boolean base;
+    private OffsetDateTime creadoEn;
 }

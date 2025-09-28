@@ -5,7 +5,6 @@ import com.example.minimal_prod_backend.dto.BodegaResponse;
 import com.example.minimal_prod_backend.entity.Bodega;
 import com.example.minimal_prod_backend.entity.TipoBodega;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.BodegaMapper;
 import com.example.minimal_prod_backend.repository.BodegaRepository;
 import com.example.minimal_prod_backend.repository.TipoBodegaRepository;
 import com.example.minimal_prod_backend.service.BodegaService;

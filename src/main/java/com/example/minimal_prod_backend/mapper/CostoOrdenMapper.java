@@ -2,28 +2,37 @@ package com.example.minimal_prod_backend.mapper;
 
 import com.example.minimal_prod_backend.dto.CostoOrdenInput;
 import com.example.minimal_prod_backend.dto.CostoOrdenResponse;
-import com.example.minimal_prod_backend.dto.OrdenProduccionResponse;
-import com.example.minimal_prod_backend.dto.TipoCostoResponse;
 import com.example.minimal_prod_backend.entity.CostoOrden;
-import com.example.minimal_prod_backend.entity.OrdenProduccion;
-import com.example.minimal_prod_backend.entity.TipoCosto;
-import org.mapstruct.*;
-
-import java.util.List;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
 public interface CostoOrdenMapper {
 
-    CostoOrdenResponse toResponse(CostoOrden entity);
+    @Mappings({
+            @Mapping(target = "orden.id", source = "ordenId"),
+            @Mapping(target = "tipoCosto.id", source = "tipoCostoId"),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "registradoEn", ignore = true)
+    })
+    CostoOrden toEntity(CostoOrdenInput input);
 
-    CostoOrden toEntity(CostoOrdenInput dto);
-
-    List<CostoOrdenResponse> toResponseList(List<CostoOrden> entities);
-
-    OrdenProduccionResponse toOrdenResponse(OrdenProduccion orden);
-
-    TipoCostoResponse toTipoCostoResponse(TipoCosto tipoCosto);
+    @Mappings({
+            @Mapping(target = "ordenId", source = "orden.id"),
+            @Mapping(target = "tipoCostoId", source = "tipoCosto.id"),
+            @Mapping(target = "registradoEn", source = "registradoEn")
+    })
+    CostoOrdenResponse toResponse(CostoOrden costoOrden);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntityFromInput(CostoOrdenInput dto, @MappingTarget CostoOrden entity);
+    @Mappings({
+            @Mapping(target = "orden.id", source = "ordenId"),
+            @Mapping(target = "tipoCosto.id", source = "tipoCostoId"),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "registradoEn", ignore = true)
+    })
+    void updateEntityFromInput(CostoOrdenInput input, CostoOrden entity);
 }

@@ -4,7 +4,6 @@ import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.ConteoCiclicoMapper;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.service.ConteoCiclicoService;
 import lombok.RequiredArgsConstructor;

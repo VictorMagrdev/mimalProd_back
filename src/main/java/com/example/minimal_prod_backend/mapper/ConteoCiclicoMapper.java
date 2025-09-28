@@ -1,32 +1,44 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.*;
-import com.example.minimal_prod_backend.entity.*;
-import org.mapstruct.*;
-
-import java.util.List;
+import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
+import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
+import com.example.minimal_prod_backend.entity.ConteoCiclico;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
 public interface ConteoCiclicoMapper {
 
-    ConteoCiclicoResponse toResponse(ConteoCiclico entity);
+    @Mappings({
+            @Mapping(target = "producto.id", source = "productoId"),
+            @Mapping(target = "bodega.id", source = "bodegaId"),
+            @Mapping(target = "lote.id", source = "loteId"),
+            @Mapping(target = "unidad.id", source = "unidadId"),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "fecha", source = "fecha")
+    })
+    ConteoCiclico toEntity(ConteoCiclicoInput input);
 
-    List<ConteoCiclicoResponse> toResponseList(List<ConteoCiclico> entities);
+    @Mappings({
+            @Mapping(target = "productoId", source = "producto.id"),
+            @Mapping(target = "bodegaId", source = "bodega.id"),
+            @Mapping(target = "loteId", source = "lote.id"),
+            @Mapping(target = "unidadId", source = "unidad.id"),
+            @Mapping(target = "fecha", source = "fecha")
+    })
+    ConteoCiclicoResponse toResponse(ConteoCiclico conteoCiclico);
 
-    ProductoResponse toProductoResponse(Producto entity);
-    BodegaResponse toBodegaResponse(Bodega entity);
-    LoteProduccionResponse toLoteProduccionResponse(LoteProduccion entity);
-    UnidadMedidaResponse toUnidadMedidaResponse(UnidadMedida entity);
-
-    @Mapping(target = "producto", ignore = true)
-    @Mapping(target = "bodega", ignore = true)
-    @Mapping(target = "lote", ignore = true)
-    @Mapping(target = "unidad", ignore = true)
-    ConteoCiclico toEntity(ConteoCiclicoInput dto);
-
-    @Mapping(target = "producto", ignore = true)
-    @Mapping(target = "bodega", ignore = true)
-    @Mapping(target = "lote", ignore = true)
-    @Mapping(target = "unidad", ignore = true)
-    void updateEntityFromInput(ConteoCiclicoInput dto, @MappingTarget ConteoCiclico entity);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mappings({
+            @Mapping(target = "producto.id", source = "productoId"),
+            @Mapping(target = "bodega.id", source = "bodegaId"),
+            @Mapping(target = "lote.id", source = "loteId"),
+            @Mapping(target = "unidad.id", source = "unidadId"),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "fecha", source = "fecha")
+    })
+    void updateEntityFromInput(ConteoCiclicoInput input, ConteoCiclico entity);
 }

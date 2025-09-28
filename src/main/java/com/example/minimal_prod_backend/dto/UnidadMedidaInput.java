@@ -1,13 +1,16 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class UnidadMedidaInput {
     private String codigo;
     private String nombre;
     private String abreviatura;
-    private Long idTipo;
-    private Boolean esActiva;
-    private Boolean esBase;
+    private Long unidadMedidaTipoId;
+    private Boolean activa;
+    private Boolean base;
 }

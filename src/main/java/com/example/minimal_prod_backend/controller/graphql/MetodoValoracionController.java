@@ -3,7 +3,6 @@ package com.example.minimal_prod_backend.controller.graphql;
 import com.example.minimal_prod_backend.dto.MetodoValoracionInput;
 import com.example.minimal_prod_backend.dto.MetodoValoracionResponse;
 import com.example.minimal_prod_backend.entity.MetodoValoracion;
-import com.example.minimal_prod_backend.mapper.MetodoValoracionMapper;
 import com.example.minimal_prod_backend.service.MetodoValoracionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;

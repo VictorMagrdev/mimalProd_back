@@ -4,7 +4,6 @@ import com.example.minimal_prod_backend.dto.TipoMovimientoInput;
 import com.example.minimal_prod_backend.dto.TipoMovimientoResponse;
 import com.example.minimal_prod_backend.entity.TipoMovimiento;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.TipoMovimientoMapper;
 import com.example.minimal_prod_backend.repository.TipoMovimientoRepository;
 import com.example.minimal_prod_backend.service.TipoMovimientoService;
 import lombok.RequiredArgsConstructor;

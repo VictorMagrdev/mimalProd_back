@@ -4,7 +4,6 @@ import com.example.minimal_prod_backend.dto.TipoProductoInput;
 import com.example.minimal_prod_backend.dto.TipoProductoResponse;
 import com.example.minimal_prod_backend.entity.TipoProducto;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.TipoProductoMapper;
 import com.example.minimal_prod_backend.repository.TipoProductoRepository;
 import com.example.minimal_prod_backend.service.TipoProductoService;
 import lombok.RequiredArgsConstructor;

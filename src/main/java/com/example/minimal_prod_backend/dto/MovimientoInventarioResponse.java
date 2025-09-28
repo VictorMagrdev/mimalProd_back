@@ -1,17 +1,21 @@
 package com.example.minimal_prod_backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class MovimientoInventarioResponse {
     private Long id;
-    private LocalDateTime fecha;
-    private BodegaResponse bodegaOrigen;
-    private BodegaResponse bodegaDestino;
-    private TipoMovimientoResponse tipoMovimiento;
+    private OffsetDateTime fecha;
+    private Long bodegaOrigenId;
+    private Long bodegaDestinoId;
+    private Long tipoMovimientoId;
+    private String referencia;
     private String observaciones;
     private Long creadoPor;
-    private LocalDateTime creadoEn;
+    private OffsetDateTime creadoEn;
 }

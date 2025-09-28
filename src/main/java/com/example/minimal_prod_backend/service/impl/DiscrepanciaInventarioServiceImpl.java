@@ -5,7 +5,6 @@ import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioResponse;
 import com.example.minimal_prod_backend.entity.ConteoCiclico;
 import com.example.minimal_prod_backend.entity.DiscrepanciaInventario;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
-import com.example.minimal_prod_backend.mapper.DiscrepanciaInventarioMapper;
 import com.example.minimal_prod_backend.repository.ConteoCiclicoRepository;
 import com.example.minimal_prod_backend.repository.DiscrepanciaInventarioRepository;
 import com.example.minimal_prod_backend.service.DiscrepanciaInventarioService;

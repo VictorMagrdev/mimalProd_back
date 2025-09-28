@@ -3,19 +3,27 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.EstadoOrdenInput;
 import com.example.minimal_prod_backend.dto.EstadoOrdenResponse;
 import com.example.minimal_prod_backend.entity.EstadoOrden;
-import org.mapstruct.*;
-
-import java.util.List;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
 public interface EstadoOrdenMapper {
 
+    @Mappings({
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "creadoEn", ignore = true)
+    })
+    EstadoOrden toEntity(EstadoOrdenInput input);
+
     EstadoOrdenResponse toResponse(EstadoOrden entity);
 
-    EstadoOrden toEntity(EstadoOrdenInput dto);
-
-    List<EstadoOrdenResponse> toResponseList(List<EstadoOrden> entities);
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntityFromInput(EstadoOrdenInput dto, @MappingTarget EstadoOrden entity);
+    @Mappings({
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "creadoEn", ignore = true)
+    })
+    void updateEntityFromInput(EstadoOrdenInput input, EstadoOrden entity);
 }

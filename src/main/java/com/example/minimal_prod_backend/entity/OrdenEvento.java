@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "orden_evento")
+@Table(name = "ordenes_evento")
 public class OrdenEvento {
 
     @Id
@@ -21,15 +21,15 @@ public class OrdenEvento {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_orden")
+    @JoinColumn(name = "orden_id")
     private OrdenProduccion orden;
 
     @Column(length = 100, nullable = false)
     private String evento;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 150)
     private String descripcion;
 
     @Column(name = "fecha")
-    private LocalDateTime fecha;
+    private LocalDateTime fecha = LocalDateTime.now();
 }

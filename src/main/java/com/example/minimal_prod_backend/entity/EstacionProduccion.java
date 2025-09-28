@@ -12,9 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(
-        name = "estacion_produccion"
-)
+@Table(name = "estaciones_produccion")
 public class EstacionProduccion {
 
     @Id
@@ -27,12 +25,12 @@ public class EstacionProduccion {
     @Column(length = 100, nullable = false)
     private String nombre;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 150)
     private String descripcion;
 
     @Column(nullable = false)
     private Integer orden;
 
-    @Column(name = "creado_en")
+    @Column(name = "creado_en", insertable = false, updatable = false)
     private LocalDateTime creadoEn;
 }

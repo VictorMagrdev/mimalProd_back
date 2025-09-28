@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "linea_orden")
+@Table(name = "lineas_orden")
 public class LineaOrden {
 
     @Id
@@ -21,21 +21,21 @@ public class LineaOrden {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_orden")
+    @JoinColumn(name = "orden_id")
     private OrdenProduccion orden;
 
     @Column(name = "numero_linea", nullable = false)
     private int numeroLinea = 1;
 
     @ManyToOne
-    @JoinColumn(name = "id_producto_componente")
+    @JoinColumn(name = "producto_componente_id")
     private Producto productoComponente;
 
     @Column(name = "cantidad_requerida", nullable = false)
     private BigDecimal cantidadRequerida = BigDecimal.ZERO;
 
     @ManyToOne
-    @JoinColumn(name = "id_unidad_componente")
+    @JoinColumn(name = "unidad_componente_id")
     private UnidadMedida unidadComponente;
 
     @Column(name = "cantidad_usada")

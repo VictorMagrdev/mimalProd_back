@@ -15,9 +15,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(
-        name = "inventario_lote",
+        name = "inventarios_lote",
         uniqueConstraints = {
-                @UniqueConstraint(name = "uq_producto_lote_bodega", columnNames = {"id_producto", "id_lote", "id_bodega"})
+                @UniqueConstraint(
+                        name = "uq_producto_lote_bodega",
+                        columnNames = {"producto_id", "lote_id", "bodega_id"}
+                )
         }
 )
 public class InventarioLote {
@@ -27,24 +30,24 @@ public class InventarioLote {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_lote")
+    @JoinColumn(name = "lote_id")
     private LoteProduccion lote;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_bodega")
+    @JoinColumn(name = "bodega_id")
     private Bodega bodega;
 
     @Column(nullable = false, precision = 18, scale = 6)
     private BigDecimal cantidad = BigDecimal.ZERO;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_unidad")
+    @JoinColumn(name = "unidad_id")
     private UnidadMedida unidad;
 
-    @Column(name = "actualizado_en")
+    @Column(name = "actualizado_en", insertable = false, updatable = false)
     private LocalDateTime actualizadoEn;
 }

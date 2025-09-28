@@ -1,9 +1,7 @@
 package com.example.minimal_prod_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -11,7 +9,12 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "unidad_conversion")
+@Table(
+        name = "unidades_conversion",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uq_conversion", columnNames = {"origen_id", "destino_id"})
+        }
+)
 public class UnidadConversion {
 
     @Id
@@ -19,13 +22,13 @@ public class UnidadConversion {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_origen", nullable = false)
+    @JoinColumn(name = "origen_id", nullable = false)
     private UnidadMedida origen;
 
     @ManyToOne
-    @JoinColumn(name = "id_destino", nullable = false)
+    @JoinColumn(name = "destino_id", nullable = false)
     private UnidadMedida destino;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 18, scale = 8)
     private BigDecimal factor;
 }

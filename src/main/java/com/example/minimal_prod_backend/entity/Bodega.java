@@ -11,23 +11,23 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "bodega")
+@Table(name = "bodegas")
 public class Bodega {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String codigo;
 
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
-    private  String descripcion;
+    private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo")
+    @JoinColumn(name = "tipo_bodega_id", nullable = false)
     private TipoBodega tipo;
 
     @Column(name = "creado_en", updatable = false)

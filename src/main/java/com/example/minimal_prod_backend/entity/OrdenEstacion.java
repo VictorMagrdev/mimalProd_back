@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "orden_estacion")
+@Table(name = "ordenes_estacion")
 public class OrdenEstacion {
 
     @Id
@@ -21,11 +21,11 @@ public class OrdenEstacion {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_orden")
+    @JoinColumn(name = "orden_id")
     private OrdenProduccion orden;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_estacion")
+    @JoinColumn(name = "estacion_id")
     private EstacionProduccion estacion;
 
     @Column(name = "inicio_planificado")
@@ -40,9 +40,10 @@ public class OrdenEstacion {
     @Column(name = "fin_real")
     private LocalDateTime finReal;
 
-    @Column(length = 50)
-    private String estado;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estado_orden_estacion_id")
+    private EstadoOrdenEstacion estado;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 150)
     private String observaciones;
 }

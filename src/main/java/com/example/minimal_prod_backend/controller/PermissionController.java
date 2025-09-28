@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller;
 
-import com.example.minimal_prod_backend.entity.Permission;
+import com.example.minimal_prod_backend.entity.Permiso;
 import com.example.minimal_prod_backend.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +23,7 @@ public class PermissionController {
 
     @GetMapping
     @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'READ')")
-    public List<Permission> getAllPermissions() {
+    public List<Permiso> getAllPermissions() {
         return permissionService.getAllPermissions();
     }
 }

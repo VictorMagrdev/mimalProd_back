@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "conteo_ciclico")
+@Table(name = "conteos_ciclico")
 public class ConteoCiclico {
 
     @Id
@@ -22,24 +22,24 @@ public class ConteoCiclico {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_bodega")
+    @JoinColumn(name = "bodega_id")
     private Bodega bodega;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_lote")
+    @JoinColumn(name = "lote_id")
     private LoteProduccion lote;
 
     @Column(name = "cantidad_contada", precision = 18, scale = 6, nullable = false)
     private BigDecimal cantidadContada;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_unidad")
+    @JoinColumn(name = "unidad_id")
     private UnidadMedida unidad;
 
     @Column(name = "fecha")
-    private LocalDateTime fecha;
+    private LocalDateTime fecha = LocalDateTime.now();
 }

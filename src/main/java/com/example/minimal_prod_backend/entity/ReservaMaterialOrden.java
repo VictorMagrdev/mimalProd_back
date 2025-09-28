@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "reserva_material_orden")
+@Table(name = "reservas_material_orden")
 public class ReservaMaterialOrden {
 
     @Id
@@ -22,24 +22,24 @@ public class ReservaMaterialOrden {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_orden")
+    @JoinColumn(name = "orden_id")
     private OrdenProduccion orden;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_lote")
+    @JoinColumn(name = "lote_id")
     private LoteProduccion lote;
 
     @Column(name = "cantidad_reservada", precision = 18, scale = 6)
     private BigDecimal cantidadReservada;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_unidad")
+    @JoinColumn(name = "unidad_id")
     private UnidadMedida unidad;
 
-    @Column(name = "fecha_reserva")
+    @Column(name = "fecha_reserva", insertable = false, updatable = false)
     private LocalDateTime fechaReserva;
 }

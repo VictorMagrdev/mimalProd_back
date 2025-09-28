@@ -9,19 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tipo_bodega")
+@Table(name = "tipos_bodega")
 public class TipoBodega {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String codigo;
 
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
-    private  String descripcion;
-
+    private String descripcion;
 }
+

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller;
 
 import com.example.minimal_prod_backend.dto.PolicyRequest;
-import com.example.minimal_prod_backend.entity.Policy;
+import com.example.minimal_prod_backend.entity.Politica;
 import com.example.minimal_prod_backend.service.PolicyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +21,13 @@ public class PolicyController {
 
     @GetMapping
     @PreAuthorize("@customSecurity.hasPermission('TAG_POLICIES', 'READ')")
-    public List<Policy> getAllPolicies() {
+    public List<Politica> getAllPolicies() {
         return policyService.getAllPolicies();
     }
 
     @PostMapping
     @PreAuthorize("@customSecurity.hasPermission('TAG_POLICIES', 'CREATE')")
-    public ResponseEntity<Policy> createPolicy(@Valid @RequestBody PolicyRequest request) {
+    public ResponseEntity<Politica> createPolicy(@Valid @RequestBody PolicyRequest request) {
         return new ResponseEntity<>(policyService.createPolicy(request), HttpStatus.CREATED);
     }
 

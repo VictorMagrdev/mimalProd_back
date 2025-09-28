@@ -1,16 +1,16 @@
 package com.example.minimal_prod_backend.service;
 
 import com.example.minimal_prod_backend.dto.RoleRequest;
-import com.example.minimal_prod_backend.entity.Role;
+import com.example.minimal_prod_backend.entity.Rol;
 
 import java.util.List;
 
 public interface RoleService {
-    Role createRole(RoleRequest request);
+    Rol createRole(RoleRequest request);
 
-    List<Role> getAllRoles();
+    List<Rol> getAllRoles();
 
-    Role updateRole(Long id, RoleRequest request);
+    Rol updateRole(Long id, RoleRequest request);
 
     void deleteRole(Long id);
 }

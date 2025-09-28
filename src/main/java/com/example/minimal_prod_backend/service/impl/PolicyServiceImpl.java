@@ -1,9 +1,9 @@
 package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.PolicyRequest;
-import com.example.minimal_prod_backend.entity.Permission;
-import com.example.minimal_prod_backend.entity.Policy;
-import com.example.minimal_prod_backend.entity.Role;
+import com.example.minimal_prod_backend.entity.Permiso;
+import com.example.minimal_prod_backend.entity.Politica;
+import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Tag;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.repository.PermissionRepository;
@@ -26,23 +26,23 @@ public class PolicyServiceImpl implements PolicyService {
     private final PermissionRepository permissionRepository;
 
     @Override
-    public List<Policy> getAllPolicies() {
+    public List<Politica> getAllPolicies() {
         return policyRepository.findAll();
     }
 
     @Override
-    public Policy createPolicy(PolicyRequest request) {
-        Role role = roleRepository.findById(request.roleId()).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+    public Politica createPolicy(PolicyRequest request) {
+        Rol role = roleRepository.findById(request.roleId()).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
         Tag tag = tagRepository.findById(request.tagId()).orElseThrow(() -> new ResourceNotFoundException("Tag not found"));
-        Permission permission = permissionRepository.findById(request.permissionId()).orElseThrow(() -> new ResourceNotFoundException("Permission not found"));
+        Permiso permiso = permissionRepository.findById(request.permissionId()).orElseThrow(() -> new ResourceNotFoundException("Permission not found"));
 
-        Policy policy = Policy.builder()
+        Politica politica = Politica.builder()
                 .role(role)
                 .tag(tag)
-                .permission(permission)
+                .permiso(permiso)
                 .build();
 
-        return policyRepository.save(policy);
+        return policyRepository.save(politica);
     }
 
     @Override

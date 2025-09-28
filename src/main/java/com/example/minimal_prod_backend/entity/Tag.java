@@ -11,11 +11,11 @@ public class Tag {
     private Long id;
 
     @Column(unique=true, nullable=false)
-    private String name;
+    private String nombre;
 
-    private String description;
+    private String descripcion;
 
     @ManyToOne
     @JoinColumn(name = "owner_role_id")
-    private Role ownerRole;
+    private Rol ownerRole;
 }

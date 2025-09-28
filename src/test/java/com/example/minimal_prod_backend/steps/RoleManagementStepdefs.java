@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.steps;
 
+import com.example.minimal_prod_backend.entity.Rol;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -44,7 +45,7 @@ public class RoleManagementStepdefs extends BaseStepdefs {
 
     @Given("existe un rol con id {int}")
     public void existeUnRolConId(int id) {
-        roleRepository.save(com.example.minimal_prod_backend.entity.Role.builder().id((long)id).name("role"+id).build());
+        roleRepository.save(Rol.builder().id((long)id).name("role"+id).build());
     }
 
     @When("envío una petición PUT a {string} con el cuerpo:")

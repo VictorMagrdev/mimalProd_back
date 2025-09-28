@@ -1,41 +1,42 @@
 package com.example.minimal_prod_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "unidad_medida")
+@Table(name = "unidades_medida")
 public class UnidadMedida {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 50)
     private String codigo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String nombre;
 
+    @Column(length = 50)
     private String abreviatura;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo", nullable = false)
+    @JoinColumn(name = "unidad_medida_tipo_id", nullable = false)
     private UnidadMedidaTipo tipo;
 
-    @Column(name = "es_activa")
-    private boolean esActiva = true;
+    @Column(name = "activa")
+    private boolean activa = true;
 
-    @Column(name = "es_base")
-    private boolean esBase = false;
+    @Column(name = "base")
+    private boolean base = false;
 
+    @CreationTimestamp
     @Column(name = "creado_en", updatable = false)
-    private LocalDateTime creadoEn = LocalDateTime.now();
+    private OffsetDateTime creadoEn;
 }

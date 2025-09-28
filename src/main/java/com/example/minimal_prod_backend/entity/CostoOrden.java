@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "costo_orden")
+@Table(name = "costos_orden")
 public class CostoOrden {
 
     @Id
@@ -20,11 +20,11 @@ public class CostoOrden {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_orden")
+    @JoinColumn(name = "orden_id")
     private OrdenProduccion orden;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_costo")
+    @JoinColumn(name = "tipo_costo_id")
     private TipoCosto tipoCosto;
 
     private String descripcion;
@@ -32,8 +32,10 @@ public class CostoOrden {
     @Column(nullable = false)
     private BigDecimal monto = BigDecimal.ZERO;
 
+    @Column(nullable = false)
     private String moneda = "COP";
 
-    @Column(name = "registrado_en")
+    @Column(name = "registrado_en", updatable = false)
     private LocalDateTime registradoEn = LocalDateTime.now();
 }
+

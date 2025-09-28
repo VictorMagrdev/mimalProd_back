@@ -21,25 +21,25 @@ public class MovimientoInventarioDetalle {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_movimiento")
+    @JoinColumn(name = "movimiento_id")
     private MovimientoInventario movimiento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_lote")
+    @JoinColumn(name = "lote_id")
     private LoteProduccion lote;
 
     @Column(nullable = false, precision = 18, scale = 6)
     private BigDecimal cantidad = BigDecimal.ZERO;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_unidad")
+    @JoinColumn(name = "unidad_id")
     private UnidadMedida unidad;
 
-    @Column(precision = 18, scale = 6)
+    @Column(name = "costo_unitario", precision = 18, scale = 6)
     private BigDecimal costoUnitario = BigDecimal.ZERO;
 
     @Column(name = "costo_total", precision = 18, scale = 6, insertable = false, updatable = false)

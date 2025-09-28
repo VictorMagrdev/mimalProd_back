@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller;
 
 import com.example.minimal_prod_backend.dto.RoleRequest;
-import com.example.minimal_prod_backend.entity.Role;
+import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.service.RoleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +25,19 @@ public class RoleController {
 
     @PostMapping
     @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'CREATE')")
-    public ResponseEntity<Role> createRole(@Valid @RequestBody RoleRequest request) {
+    public ResponseEntity<Rol> createRole(@Valid @RequestBody RoleRequest request) {
         return new ResponseEntity<>(roleService.createRole(request), HttpStatus.CREATED);
     }
 
     @GetMapping
     @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'READ')")
-    public List<Role> getAllRoles() {
+    public List<Rol> getAllRoles() {
         return roleService.getAllRoles();
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'UPDATE')")
-    public Role updateRole(@PathVariable Long id, @Valid @RequestBody RoleRequest request) {
+    public Rol updateRole(@PathVariable Long id, @Valid @RequestBody RoleRequest request) {
         return roleService.updateRole(id, request);
     }
 

@@ -12,7 +12,7 @@ CREATE TABLE centros_costo (
 
 CREATE TABLE usuarios (  
   id BIGSERIAL PRIMARY KEY,  
-  usuarioname VARCHAR(150) UNIQUE NOT NULL,  
+  username VARCHAR(150) UNIQUE NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,  
   password VARCHAR(255) NOT NULL,
   telefono VARCHAR(255) NOT NULL,  
@@ -52,14 +52,6 @@ CREATE TABLE politicas (
   tag_id BIGINT REFERENCES tags(id),  
   permiso_id BIGINT REFERENCES permisos(id),  
   UNIQUE (rol_id, tag_id, permiso_id)  
-);  
-
-CREATE TABLE policy_conditions (  
-  id BIGSERIAL PRIMARY KEY,  
-  politica_id BIGINT REFERENCES politicas(id) ON DELETE CASCADE,  
-  attribute_name VARCHAR(150) NOT NULL,  
-  operator VARCHAR(10) NOT NULL,  
-  expected_value VARCHAR(50)  
 );
 
 CREATE TABLE estados_orden (  
@@ -236,7 +228,7 @@ CREATE TABLE movimiento_inventario_detalle (
   costo_unitario NUMERIC(18,6) DEFAULT 0,  
   costo_total NUMERIC(18,6) GENERATED ALWAYS AS (cantidad * costo_unitario) STORED  
 );  
-  
+
 CREATE TABLE inventarios_lote (  
   id BIGSERIAL PRIMARY KEY,  
   producto_id BIGINT REFERENCES productos(id),  
@@ -247,7 +239,7 @@ CREATE TABLE inventarios_lote (
   actualizado_en TIMESTAMPTZ DEFAULT now(),  
   CONSTRAINT uq_producto_lote_bodega UNIQUE (producto_id, lote_id, bodega_id)  
 );  
-  
+
 CREATE TABLE reservas_material_orden (  
   id BIGSERIAL PRIMARY KEY,  
   orden_id BIGINT REFERENCES ordenes_produccion(id),  

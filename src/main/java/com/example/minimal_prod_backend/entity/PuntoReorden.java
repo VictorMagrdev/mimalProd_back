@@ -13,14 +13,15 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "punto_reorden")
+@Table(name = "puntos_reorden")
 public class PuntoReorden {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @Column(name = "stock_minimo", precision = 18, scale = 6, nullable = false)
@@ -30,6 +31,6 @@ public class PuntoReorden {
     private BigDecimal stockSeguridad = BigDecimal.ZERO;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_unidad")
+    @JoinColumn(name = "unidad_id")
     private UnidadMedida unidad;
 }

@@ -2,26 +2,25 @@ package com.example.minimal_prod_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "metodos_valoracion")
-public class MetodoValoracion {
+@Table(name = "estados_orden_estacion")
+public class EstadoOrdenEstacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false, length = 50)
-    private String codigo;
-
-    @Column(nullable = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String nombre;
 
-    @Column(length = 150)
+    @Column(length = 100)
     private String descripcion;
 }

@@ -1,5 +1,8 @@
 package com.example.minimal_prod_backend.steps;
 
+import com.example.minimal_prod_backend.entity.Permiso;
+import com.example.minimal_prod_backend.entity.Politica;
+import com.example.minimal_prod_backend.entity.Rol;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.cucumber.java.en.And;
@@ -53,10 +56,10 @@ public class PolicyManagementStepdefs extends BaseStepdefs {
 
     @Given("existe una política con id {int}")
     public void existeUnaPoliticaConId(int id) {
-        com.example.minimal_prod_backend.entity.Role role = roleRepository.save(com.example.minimal_prod_backend.entity.Role.builder().name("roleForPolicy"+id).build());
+        Rol role = roleRepository.save(Rol.builder().name("roleForPolicy"+id).build());
         com.example.minimal_prod_backend.entity.Tag tag = tagRepository.save(com.example.minimal_prod_backend.entity.Tag.builder().name("tagForPolicy"+id).build());
-        com.example.minimal_prod_backend.entity.Permission permission = permissionRepository.save(com.example.minimal_prod_backend.entity.Permission.builder().action("READ").build());
-        policyRepository.save(com.example.minimal_prod_backend.entity.Policy.builder().id((long)id).role(role).tag(tag).permission(permission).build());
+        Permiso permiso = permissionRepository.save(Permiso.builder().action("READ").build());
+        policyRepository.save(Politica.builder().id((long)id).role(role).tag(tag).permiso(permiso).build());
     }
 
     @When("envío una petición DELETE a {string}")

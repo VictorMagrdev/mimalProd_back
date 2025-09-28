@@ -3,9 +3,9 @@ package com.example.minimal_prod_backend.service.impl;
 import com.example.minimal_prod_backend.dto.LoginRequest;
 import com.example.minimal_prod_backend.dto.LoginResponse;
 import com.example.minimal_prod_backend.dto.PolicyResponse;
-import com.example.minimal_prod_backend.entity.Policy;
-import com.example.minimal_prod_backend.entity.Role;
-import com.example.minimal_prod_backend.entity.User;
+import com.example.minimal_prod_backend.entity.Politica;
+import com.example.minimal_prod_backend.entity.Rol;
+import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.exception.InvalidCredentialsException;
 import com.example.minimal_prod_backend.repository.PolicyRepository;
 import com.example.minimal_prod_backend.repository.UserRepository;
@@ -41,31 +41,31 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional(readOnly = true)
     public LoginResponse login(LoginRequest rq) {
-        User user = userRepository.findByUsername(rq.getUsername())
+        Usuario usuario = userRepository.findByUsername(rq.getUsername())
                 .orElseThrow(() -> new InvalidCredentialsException("Invalid username or password"));
 
-        if (!passwordEncoder.matches(rq.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(rq.getPassword(), usuario.getPassword())) {
             throw new InvalidCredentialsException("Invalid username or password");
         }
 
-        if (Boolean.FALSE.equals(user.getActive())) {
+        if (Boolean.FALSE.equals(usuario.getActive())) {
             throw new InvalidCredentialsException("User account is inactive");
         }
 
-        var roles = user.getRoles();
-        var roleNames = roles.stream().map(Role::getName).collect(Collectors.toList());
-        String token = jwtUtil.generateToken(user.getUsername(), roleNames);
+        var roles = usuario.getRoles();
+        var roleNames = roles.stream().map(Rol::getName).collect(Collectors.toList());
+        String token = jwtUtil.generateToken(usuario.getUsername(), roleNames);
 
-        List<Policy> policies = policyRepository.findByRoleIn(roles);
+        List<Politica> policies = policyRepository.findByRoleIn(roles);
 
         List<PolicyResponse> policyResponses = policies.stream()
                 .map(p -> new PolicyResponse(
                         p.getTag().getName(),
-                        p.getPermission().getAction()
+                        p.getPermiso().getAction()
                 ))
                 .collect(Collectors.toList());
 
-        return new LoginResponse(token, user.getUsername(), roleNames, policyResponses);
+        return new LoginResponse(token, usuario.getUsername(), roleNames, policyResponses);
     }
 
 }

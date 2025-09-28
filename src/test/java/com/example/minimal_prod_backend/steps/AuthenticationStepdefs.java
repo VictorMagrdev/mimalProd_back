@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.steps;
 
+import com.example.minimal_prod_backend.entity.Usuario;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.cucumber.java.en.And;
@@ -11,12 +12,12 @@ public class AuthenticationStepdefs extends BaseStepdefs {
 
     @Given("un usuario existe con el nombre de usuario {string} y la contraseña {string}")
     public void unUsuarioExisteConElNombreDeUsuarioYLaContraseña(String username, String password) {
-        userRepository.save(com.example.minimal_prod_backend.entity.User.builder().username(username).password(passwordEncoder.encode(password)).email(username + "@example.com").build());
+        userRepository.save(Usuario.builder().username(username).password(passwordEncoder.encode(password)).email(username + "@example.com").build());
     }
 
     @Given("un usuario inactivo existe con el nombre de usuario {string} y la contraseña {string}")
     public void unUsuarioInactivoExiste(String username, String password) {
-        userRepository.save(com.example.minimal_prod_backend.entity.User.builder().username(username).password(passwordEncoder.encode(password)).email(username + "@example.com").active(false).build());
+        userRepository.save(Usuario.builder().username(username).password(passwordEncoder.encode(password)).email(username + "@example.com").active(false).build());
     }
 
     

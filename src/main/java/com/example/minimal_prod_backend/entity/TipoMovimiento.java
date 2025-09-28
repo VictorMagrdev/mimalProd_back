@@ -13,23 +13,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tipo_movimiento")
+@Table(name = "tipos_movimiento")
 public class TipoMovimiento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, length = 50)
     private String codigo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(nullable = false)
-    private  String descripcion;
+    @Column(length = 255)
+    private String descripcion;
 
+    @Column(name = "afecta_wip", nullable = false)
     @Builder.Default
-    private Boolean afecta_wip = false;
+    private Boolean afectaWip = false;
 
     @Column(name = "creado_en", updatable = false)
     private LocalDateTime creadoEn = LocalDateTime.now();

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.dto;
 
-import com.example.minimal_prod_backend.entity.Role;
-import com.example.minimal_prod_backend.entity.User;
+import com.example.minimal_prod_backend.entity.Rol;
+import com.example.minimal_prod_backend.entity.Usuario;
 import lombok.Data;
 
 import java.util.List;
@@ -15,13 +15,13 @@ public class UserResponse {
     private List<String> roles;
     private Boolean active;
 
-    public UserResponse(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        this.email = user.getEmail();
-        this.active = user.getActive();
-        if (user.getRoles() != null) {
-            this.roles = user.getRoles().stream().map(Role::getName).collect(Collectors.toList());
+    public UserResponse(Usuario usuario) {
+        this.id = usuario.getId();
+        this.username = usuario.getUsername();
+        this.email = usuario.getEmail();
+        this.active = usuario.getActive();
+        if (usuario.getRoles() != null) {
+            this.roles = usuario.getRoles().stream().map(Rol::getName).collect(Collectors.toList());
         }
     }
 

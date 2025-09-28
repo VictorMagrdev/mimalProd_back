@@ -13,36 +13,40 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "movimiento_inventario")
+@Table(name = "movimientos_inventario")
 public class MovimientoInventario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha", updatable = false)
+    @Column(updatable = false)
     private LocalDateTime fecha = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "id_bodega_origen")
+    @JoinColumn(name = "bodega_origen_id")
     private Bodega bodegaOrigen;
 
     @ManyToOne
-    @JoinColumn(name = "id_bodega_destino")
-    private  Bodega bodegaDestino;
+    @JoinColumn(name = "bodega_destino_id")
+    private Bodega bodegaDestino;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_movimiento")
+    @JoinColumn(name = "tipo_movimiento_id")
     private TipoMovimiento tipoMovimiento;
 
-    @Column(nullable = false)
-    private  String observaciones;
+    @Column(length = 150)
+    private String referencia;
 
-    @Column(nullable = false)
-    private  Long creadoPor;
+    @Column(length = 150)
+    private String observaciones;
+
+    @ManyToOne
+    @JoinColumn(name = "creado_por")
+    private Usuario creadoPor;
 
     @Column(name = "creado_en", updatable = false)
-    private LocalDateTime creado_en = LocalDateTime.now();
+    private LocalDateTime creadoEn = LocalDateTime.now();
 
     @OneToMany(mappedBy = "movimiento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private java.util.List<MovimientoInventarioDetalle> detalles = new java.util.ArrayList<>();

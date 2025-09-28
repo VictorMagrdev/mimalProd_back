@@ -4,33 +4,41 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "lote_produccion")
+@Table(name = "lotes_produccion")
 public class LoteProduccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "numero_lote", unique = true, nullable = false)
+    @Column(name = "numero_lote", unique = true, nullable = false, length = 100)
     private String numeroLote;
 
-    @ManyToOne
-    @JoinColumn(name = "id_producto")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @Column(name = "fabricado_en")
-    private LocalDateTime fabricadoEn;
+    private OffsetDateTime fabricadoEn;
 
     @Column(name = "vence_en")
-    private LocalDateTime venceEn;
+    private OffsetDateTime venceEn;
 
+    @CreationTimestamp
     @Column(name = "creado_en", updatable = false)
-    private LocalDateTime creadoEn = LocalDateTime.now();
+    private OffsetDateTime creadoEn;
+
+    @ManyToMany(mappedBy = "lotes")
+    private Set<OrdenProduccion> ordenes = new HashSet<>();
+
 }

@@ -4,8 +4,8 @@ import com.example.minimal_prod_backend.dto.RoleResponse;
 import com.example.minimal_prod_backend.dto.UserCreateRequest;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.dto.UserUpdateRequest;
-import com.example.minimal_prod_backend.entity.Role;
-import com.example.minimal_prod_backend.entity.User;
+import com.example.minimal_prod_backend.entity.Rol;
+import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.exception.UsernameAlreadyExistsException;
 import com.example.minimal_prod_backend.repository.RoleRepository;
@@ -42,19 +42,19 @@ public class UserServiceImpl implements UserService {
             throw new UsernameAlreadyExistsException("Username already exists: " + request.getUsername());
         });
 
-        User user = User.builder()
+        Usuario usuario = Usuario.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
 
         if (request.getRoleIds() != null && !request.getRoleIds().isEmpty()) {
-            List<Role> roles = roleRepository.findAllById(request.getRoleIds());
-            user.setRoles(new HashSet<>(roles));
+            List<Rol> roles = roleRepository.findAllById(request.getRoleIds());
+            usuario.setRoles(new HashSet<>(roles));
         }
 
-        User savedUser = userRepository.save(user);
-        return new UserResponse(savedUser);
+        Usuario savedUsuario = userRepository.save(usuario);
+        return new UserResponse(savedUsuario);
     }
 
     @Override
@@ -66,67 +66,67 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserResponse getUserById(Long id) {
-        User user = userRepository.findWithRolesById(id)
+        Usuario usuario = userRepository.findWithRolesById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
-        user.getRoles().forEach(r -> System.out.println(r.getName()));
-        return new UserResponse(user);
+        usuario.getRoles().forEach(r -> System.out.println(r.getName()));
+        return new UserResponse(usuario);
     }
 
 
     @Override
     @Transactional
     public UserResponse updateUser(Long id, UserUpdateRequest request) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        Usuario usuario = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
         if (request.getEmail() != null) {
-            user.setEmail(request.getEmail());
+            usuario.setEmail(request.getEmail());
         }
         if (request.isActive()) {
-            user.setActive(true);
+            usuario.setActive(true);
         }
 
         if (request.getRoleIds() != null) {
-            List<Role> roles = roleRepository.findAllById(request.getRoleIds());
-            user.setRoles(new HashSet<>(roles));
+            List<Rol> roles = roleRepository.findAllById(request.getRoleIds());
+            usuario.setRoles(new HashSet<>(roles));
         }
 
-        User updatedUser = userRepository.save(user);
-        return new UserResponse(updatedUser);
+        Usuario updatedUsuario = userRepository.save(usuario);
+        return new UserResponse(updatedUsuario);
     }
 
     @Override
     @Transactional
     public void assignRoleToUser(Long userId, Long roleId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        Role role = roleRepository.findById(roleId).orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + roleId));
-        user.getRoles().add(role);
-        userRepository.save(user);
+        Usuario usuario = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+        Rol role = roleRepository.findById(roleId).orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + roleId));
+        usuario.getRoles().add(role);
+        userRepository.save(usuario);
     }
 
     @Override
     @Transactional
     public void removeRoleFromUser(Long userId, Long roleId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        Role role = roleRepository.findById(roleId).orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + roleId));
-        user.getRoles().remove(role);
-        userRepository.save(user);
+        Usuario usuario = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+        Rol role = roleRepository.findById(roleId).orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + roleId));
+        usuario.getRoles().remove(role);
+        userRepository.save(usuario);
     }
 
     @Override
     @Transactional
     public void deactivateUser(Long id) {
-        User user = userRepository.findById(id)
+        Usuario usuario = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setActive(false);
-        userRepository.save(user);
+        usuario.setActive(false);
+        userRepository.save(usuario);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Set<RoleResponse> getUserRoles(Long userId) {
-        User user = userRepository.findById(userId)
+        Usuario usuario = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        return user.getRoles().stream()
+        return usuario.getRoles().stream()
                 .map(RoleResponse::new)
                 .collect(Collectors.toSet());
     }

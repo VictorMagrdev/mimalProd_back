@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.RoleRequest;
-import com.example.minimal_prod_backend.entity.Role;
+import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.repository.RoleRepository;
 import com.example.minimal_prod_backend.service.RoleService;
@@ -23,8 +23,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public Role createRole(RoleRequest request) {
-        Role role = new Role();
+    public Rol createRole(RoleRequest request) {
+        Rol role = new Rol();
         role.setName(request.getName());
         role.setDescription(request.getDescription());
         return roleRepository.save(role);
@@ -32,14 +32,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Role> getAllRoles() {
+    public List<Rol> getAllRoles() {
         return roleRepository.findAll();
     }
 
     @Override
     @Transactional
-    public Role updateRole(Long id, RoleRequest request) {
-        Role role = roleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + id));
+    public Rol updateRole(Long id, RoleRequest request) {
+        Rol role = roleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + id));
         role.setName(request.getName());
         role.setDescription(request.getDescription());
         return roleRepository.save(role);

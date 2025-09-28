@@ -1,0 +1,62 @@
+package com.example.minimal_prod_backend.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.OffsetDateTime;
+import java.util.*;
+
+@Entity
+@Table(name = "usuarios")
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+public class Usuario {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique=true, nullable=false)
+    private String username;
+
+    @Column(unique=true, nullable=false)
+    private String email;
+
+    @Column(nullable=false)
+    private String password;
+
+    @Column(nullable = false, length = 255)
+    private String telefono;
+
+    @Column(name = "codigo_empleado", unique = true, length = 150)
+    private String codigoEmpleado;
+
+    @Column(nullable = false, length = 150)
+    private String nombre;
+
+    @Column(nullable = false, length = 150)
+    private String apellidos;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "centro_costo_id")
+    private CentroCosto centroCosto;
+
+    @Column(name = "capacidad_horas_dia", precision = 5, scale = 2)
+    private Double capacidadHorasDia = 8.0;
+
+    @Builder.Default
+    private Boolean activo = true;
+
+    @CreationTimestamp
+    @Column(name = "creado_en", updatable = false)
+    private OffsetDateTime creadoEn;
+
+    @UpdateTimestamp
+    @Column(name = "actualizado_en")
+    private OffsetDateTime actualizadoEn;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="role_id"))
+    private Set<Rol> roles = new HashSet<>();
+}

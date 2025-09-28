@@ -4,69 +4,78 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "orden_produccion")
+@Table(name = "ordenes_produccion")
 public class OrdenProduccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "numero_orden", unique = true, nullable = false)
+    @Column(name = "numero_orden", unique = true, nullable = false, length = 100)
     private String numeroOrden;
 
-    @ManyToOne
-    @JoinColumn(name = "id_lote")
-    private LoteProduccion lote;
-
-    @ManyToOne
-    @JoinColumn(name = "id_producto")
-    private Producto producto;
-
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 18, scale = 6)
     private BigDecimal cantidad = BigDecimal.ZERO;
 
-    @ManyToOne
-    @JoinColumn(name = "id_unidad")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "unidad_id")
     private UnidadMedida unidad;
 
-    @ManyToOne
-    @JoinColumn(name = "id_estado")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estado_id")
     private EstadoOrden estado;
 
     @Column(name = "inicio_planificado")
-    private LocalDateTime inicioPlanificado;
+    private OffsetDateTime inicioPlanificado;
 
     @Column(name = "fin_planificado")
-    private LocalDateTime finPlanificado;
+    private OffsetDateTime finPlanificado;
 
     @Column(name = "inicio_real")
-    private LocalDateTime inicioReal;
+    private OffsetDateTime inicioReal;
 
     @Column(name = "fin_real")
-    private LocalDateTime finReal;
+    private OffsetDateTime finReal;
 
-    @Column(name = "cantidad_desperdicio")
+    @Column(name = "cantidad_desperdicio", precision = 18, scale = 6)
     private BigDecimal cantidadDesperdicio = BigDecimal.ZERO;
 
-    @Column(name = "cantidad_producida")
+    @Column(name = "cantidad_producida", precision = 18, scale = 6)
     private BigDecimal cantidadProducida = BigDecimal.ZERO;
 
-    @Column(name = "creado_por")
-    private Long creadoPor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "creado_por")
+    private Usuario creadoPor;
 
+    @Column(length = 150)
     private String observaciones;
 
+    @CreationTimestamp
     @Column(name = "creado_en", updatable = false)
-    private LocalDateTime creadoEn = LocalDateTime.now();
+    private OffsetDateTime creadoEn;
 
+    @UpdateTimestamp
     @Column(name = "actualizado_en")
-    private LocalDateTime actualizadoEn = LocalDateTime.now();
+    private OffsetDateTime actualizadoEn;
+
+    @ManyToMany
+    @JoinTable(
+            name = "ordenes_lotes",
+            joinColumns = @JoinColumn(name = "orden_id"),
+            inverseJoinColumns = @JoinColumn(name = "lote_id")
+    )
+    private Set<LoteProduccion> lotes = new HashSet<>();
+
 }

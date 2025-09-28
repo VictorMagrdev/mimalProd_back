@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.security;
 
-import com.example.minimal_prod_backend.entity.Role;
-import com.example.minimal_prod_backend.entity.User;
+import com.example.minimal_prod_backend.entity.Rol;
+import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.repository.PolicyRepository;
 import com.example.minimal_prod_backend.repository.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -34,16 +34,16 @@ public class CustomMethodSecurityService {
 
         String username = authentication.getName();
 
-        User user = userRepository.findByUsername(username).orElse(null);
-        if (user == null) {
+        Usuario usuario = userRepository.findByUsername(username).orElse(null);
+        if (usuario == null) {
             return false;
         }
-        if (user.getActive() == false) {
+        if (usuario.getActive() == false) {
             return false;
         }
 
-        List<Long> roleIds = user.getRoles().stream()
-                .map(Role::getId)
+        List<Long> roleIds = usuario.getRoles().stream()
+                .map(Rol::getId)
                 .collect(Collectors.toList());
 
 

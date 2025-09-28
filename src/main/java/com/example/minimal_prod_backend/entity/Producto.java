@@ -4,42 +4,44 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "producto")
+@Table(name = "productos")
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 64)
     private String codigo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 150)
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "id_metodo_valoracion")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "metodo_valoracion_id")
     private MetodoValoracion metodoValoracion;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipo")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo_id")
     private TipoProducto tipo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_unidad_base")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "unidad_base_id")
     private UnidadMedida unidadBase;
 
-    @Column(name = "costo_base")
+    @Column(name = "costo_base", precision = 18, scale = 4)
     private BigDecimal costoBase = BigDecimal.ZERO;
 
+    @CreationTimestamp
     @Column(name = "creado_en", updatable = false)
-    private LocalDateTime creadoEn = LocalDateTime.now();
+    private OffsetDateTime creadoEn;
 }

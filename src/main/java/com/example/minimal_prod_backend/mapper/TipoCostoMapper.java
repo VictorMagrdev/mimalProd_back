@@ -3,12 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.TipoCostoInput;
 import com.example.minimal_prod_backend.dto.TipoCostoResponse;
 import com.example.minimal_prod_backend.entity.TipoCosto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -19,7 +14,9 @@ public interface TipoCostoMapper {
             @Mapping(target = "id", ignore = true),
     })
     TipoCosto toEntity(TipoCostoInput input);
+
     List<TipoCostoResponse> toResponseList(List<TipoCosto> conteos);
+
     TipoCostoResponse toResponse(TipoCosto entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

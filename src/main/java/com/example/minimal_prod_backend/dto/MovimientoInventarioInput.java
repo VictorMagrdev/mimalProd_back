@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MovimientoInventarioInput {
     private OffsetDateTime fecha;
     private Long bodegaOrigenId;

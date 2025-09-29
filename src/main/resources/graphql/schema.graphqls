@@ -1,11 +1,7 @@
-# Scalars personalizados
 scalar DateTime
 scalar Numeric
 scalar Interval
 
-##########################
-# Estados de Orden
-##########################
 type EstadoOrden {
     id: ID!
     codigo: String!
@@ -22,9 +18,6 @@ input EstadoOrdenInput {
     activo: Boolean
 }
 
-##########################
-# Tipos de Costo
-##########################
 type TipoCosto {
     id: ID!
     codigo: String!
@@ -41,9 +34,6 @@ input TipoCostoInput {
     activo: Boolean
 }
 
-##########################
-# Unidades de Medida
-##########################
 type UnidadMedidaTipo {
     id: ID!
     codigo: String!
@@ -95,9 +85,6 @@ input UnidadConversionInput {
     factor: Numeric!
 }
 
-##########################
-# Productos
-##########################
 type TipoProducto {
     id: ID!
     codigo: String!
@@ -149,9 +136,6 @@ input ProductoInput {
     costo_base: Numeric
 }
 
-##########################
-# Lotes de Producción
-##########################
 type LoteProduccion {
     id: ID!
     numero_lote: String!
@@ -169,9 +153,6 @@ input LoteProduccionInput {
     vence_en: DateTime
 }
 
-##########################
-# Ordenes de Producción
-##########################
 type OrdenProduccion {
     id: ID!
     numero_orden: String!
@@ -209,9 +190,6 @@ input OrdenProduccionInput {
     observaciones: String
 }
 
-##########################
-# Lineas de Orden
-##########################
 type LineaOrden {
     id: ID!
     orden_id: ID
@@ -239,9 +217,6 @@ input LineaOrdenInput {
     observaciones: String
 }
 
-##########################
-# Costos de Orden
-##########################
 type CostoOrden {
     id: ID!
     orden_id: ID
@@ -260,9 +235,6 @@ input CostoOrdenInput {
     monto: Numeric
     moneda: String
 }
-##########################
-# Bodegas
-##########################
 type TipoBodega {
     id: ID!
     codigo: String!
@@ -293,9 +265,6 @@ input BodegaInput {
     tipo_bodega_id: ID
 }
 
-##########################
-# Movimientos de Inventario
-##########################
 type TipoMovimiento {
     id: ID!
     codigo: String!
@@ -358,9 +327,6 @@ input MovimientoInventarioDetalleInput {
     costo_unitario: Numeric
 }
 
-##########################
-# Inventario por Lote
-##########################
 type InventarioLote {
     id: ID!
     producto_id: ID
@@ -379,9 +345,6 @@ input InventarioLoteInput {
     unidad_id: ID
 }
 
-##########################
-# Reservas de Material
-##########################
 type ReservaMaterialOrden {
     id: ID!
     orden_id: ID
@@ -400,9 +363,6 @@ input ReservaMaterialOrdenInput {
     unidad_id: ID
 }
 
-##########################
-# Estaciones de Producción
-##########################
 type EstacionProduccion {
     id: ID!
     codigo: String!
@@ -455,9 +415,6 @@ input OrdenEstacionInput {
     observaciones: String
 }
 
-##########################
-# Eventos de Orden
-##########################
 type OrdenEvento {
     id: ID!
     orden_id: ID
@@ -473,9 +430,6 @@ input OrdenEventoInput {
     fecha: DateTime
 }
 
-##########################
-# Conteos y Discrepancias
-##########################
 type ConteoCiclico {
     id: ID!
     producto_id: ID
@@ -509,9 +463,6 @@ input DiscrepanciaInventarioInput {
     resuelto: Boolean
 }
 
-##########################
-# Puntos de Reorden
-##########################
 type PuntoReorden {
     id: ID!
     producto_id: ID
@@ -527,9 +478,6 @@ input PuntoReordenInput {
     unidad_id: ID
 }
 
-##########################
-# Ordenes de Trabajo y Asignaciones
-##########################
 type EstadoAsignacion {
     id: ID!
     nombre: String!
@@ -629,9 +577,6 @@ input AsignacionInput {
     funcion_tarea: ID
 }
 
-##########################
-# Timesheets y Registros
-##########################
 type HojaTimesheet {
     id: ID!
     usuario_id: ID
@@ -693,9 +638,6 @@ input ExcepcionTiempoInput {
     resuelto: Boolean
 }
 
-##########################
-# Tarifas Empleado
-##########################
 type TarifaEmpleado {
     id: ID!
     usuario_id: ID
@@ -714,9 +656,6 @@ input TarifaEmpleadoInput {
     vigente_hasta: DateTime
 }
 
-##########################
-# Queries y Mutations
-##########################
 type Query {
     tiposBodega: [TipoBodega]
     bodegas: [Bodega]

@@ -3,11 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.BodegaInput;
 import com.example.minimal_prod_backend.dto.BodegaResponse;
 import com.example.minimal_prod_backend.entity.Bodega;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface BodegaMapper {

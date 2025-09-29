@@ -17,7 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(name = "hojas_timesheet", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"usuario_id","inicio_periodo","fin_periodo"})
+        @UniqueConstraint(columnNames = {"usuario_id", "inicio_periodo", "fin_periodo"})
 })
 public class HojaTimesheet {
 

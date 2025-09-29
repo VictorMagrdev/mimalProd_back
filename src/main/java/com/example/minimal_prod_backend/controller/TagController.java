@@ -4,7 +4,9 @@ import com.example.minimal_prod_backend.entity.Tag;
 import com.example.minimal_prod_backend.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class TagController {
 
     @GetMapping
     @PreAuthorize("@customSecurity.hasPermission('TAG_GENERAL', 'READ')")
-    public List<Tag> list() { 
-        return tagService.getAllTags(); 
+    public List<Tag> list() {
+        return tagService.getAllTags();
     }
 
 }

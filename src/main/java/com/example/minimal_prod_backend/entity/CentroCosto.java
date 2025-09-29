@@ -17,7 +17,7 @@ public class CentroCosto {
 
     private String codigo;
 
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     private String nombre;
 
 }

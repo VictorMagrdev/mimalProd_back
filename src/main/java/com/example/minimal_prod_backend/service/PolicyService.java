@@ -1,6 +1,5 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.PolicyRequest;
 import com.example.minimal_prod_backend.dto.PoliticaInput;
 import com.example.minimal_prod_backend.entity.Politica;
 

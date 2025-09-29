@@ -45,7 +45,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserResponse createUser(UserCreateRequest request) {
         userRepository.findByUsername(request.getUsername())
-                .ifPresent(u -> { throw new UsernameAlreadyExistsException("Username already exists: " + request.getUsername()); });
+                .ifPresent(u -> {
+                    throw new UsernameAlreadyExistsException("Username already exists: " + request.getUsername());
+                });
 
         Usuario usuario = new Usuario();
         usuario.setUsername(request.getUsername());

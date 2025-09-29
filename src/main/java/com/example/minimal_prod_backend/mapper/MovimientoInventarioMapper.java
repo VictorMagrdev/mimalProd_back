@@ -3,12 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioInput;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioResponse;
 import com.example.minimal_prod_backend.entity.MovimientoInventario;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -23,12 +18,14 @@ public interface MovimientoInventarioMapper {
             @Mapping(source = "creadoPor", target = "creadoPor.id")
     })
     MovimientoInventario toEntity(MovimientoInventarioInput input);
+
     List<MovimientoInventarioResponse> toResponseList(List<MovimientoInventario> conteos);
+
     @Mappings({
-        @Mapping(source = "bodegaOrigen.id", target = "bodegaOrigenId"),
-        @Mapping(source = "bodegaDestino.id", target = "bodegaDestinoId"),
-        @Mapping(source = "tipoMovimiento.id", target = "tipoMovimientoId"),
-        @Mapping(source = "creadoPor.id", target = "creadoPor")
+            @Mapping(source = "bodegaOrigen.id", target = "bodegaOrigenId"),
+            @Mapping(source = "bodegaDestino.id", target = "bodegaDestinoId"),
+            @Mapping(source = "tipoMovimiento.id", target = "tipoMovimientoId"),
+            @Mapping(source = "creadoPor.id", target = "creadoPor")
     })
     MovimientoInventarioResponse toResponse(MovimientoInventario entity);
 

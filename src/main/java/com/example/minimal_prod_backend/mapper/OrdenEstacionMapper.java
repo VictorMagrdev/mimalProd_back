@@ -3,12 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.OrdenEstacionInput;
 import com.example.minimal_prod_backend.dto.OrdenEstacionResponse;
 import com.example.minimal_prod_backend.entity.OrdenEstacion;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface OrdenEstacionMapper {
@@ -22,9 +17,9 @@ public interface OrdenEstacionMapper {
     OrdenEstacion toEntity(OrdenEstacionInput input);
 
     @Mappings({
-        @Mapping(source = "orden.id", target = "ordenId"),
-        @Mapping(source = "estacion.id", target = "estacionId"),
-        @Mapping(source = "estado.id", target = "estadoOrdenEstacionId")
+            @Mapping(source = "orden.id", target = "ordenId"),
+            @Mapping(source = "estacion.id", target = "estacionId"),
+            @Mapping(source = "estado.id", target = "estadoOrdenEstacionId")
     })
     OrdenEstacionResponse toResponse(OrdenEstacion entity);
 

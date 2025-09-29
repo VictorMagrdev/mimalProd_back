@@ -3,12 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.TagInput;
 import com.example.minimal_prod_backend.dto.TagResponse;
 import com.example.minimal_prod_backend.entity.Tag;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface TagMapper {
@@ -20,7 +15,7 @@ public interface TagMapper {
     Tag toEntity(TagInput input);
 
     @Mappings({
-        @Mapping(source = "ownerRole.id", target = "ownerRoleId")
+            @Mapping(source = "ownerRole.id", target = "ownerRoleId")
     })
     TagResponse toResponse(Tag entity);
 

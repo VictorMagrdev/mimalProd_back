@@ -34,7 +34,8 @@ public interface UserMapper {
                 .collect(Collectors.toSet());
     }
 
-    @Mapping(target = "roles", ignore = true) // para crear/update no usamos roles aquí
+    @Mapping(target = "roles", ignore = true)
+        // para crear/update no usamos roles aquí
     Usuario toUsuario(UserResponse response);
 
     RoleResponse toRoleResponse(Rol rol);

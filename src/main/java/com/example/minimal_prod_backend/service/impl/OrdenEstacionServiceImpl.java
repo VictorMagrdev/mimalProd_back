@@ -1,7 +1,10 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.*;
-import com.example.minimal_prod_backend.entity.*;
+import com.example.minimal_prod_backend.dto.OrdenEstacionInput;
+import com.example.minimal_prod_backend.dto.OrdenEstacionResponse;
+import com.example.minimal_prod_backend.entity.EstacionProduccion;
+import com.example.minimal_prod_backend.entity.OrdenEstacion;
+import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.OrdenEstacionMapper;
 import com.example.minimal_prod_backend.repository.EstacionProduccionRepository;

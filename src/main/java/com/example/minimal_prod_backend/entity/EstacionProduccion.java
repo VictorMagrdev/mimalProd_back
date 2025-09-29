@@ -1,4 +1,5 @@
 package com.example.minimal_prod_backend.entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;

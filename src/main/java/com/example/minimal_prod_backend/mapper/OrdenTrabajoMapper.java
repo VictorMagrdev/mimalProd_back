@@ -3,12 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.OrdenTrabajoInput;
 import com.example.minimal_prod_backend.dto.OrdenTrabajoResponse;
 import com.example.minimal_prod_backend.entity.OrdenTrabajo;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface OrdenTrabajoMapper {
@@ -21,8 +16,8 @@ public interface OrdenTrabajoMapper {
     OrdenTrabajo toEntity(OrdenTrabajoInput input);
 
     @Mappings({
-        @Mapping(source = "tipo.id", target = "tipoId"),
-        @Mapping(source = "estado.id", target = "estadoId")
+            @Mapping(source = "tipo.id", target = "tipoId"),
+            @Mapping(source = "estado.id", target = "estadoId")
     })
     OrdenTrabajoResponse toResponse(OrdenTrabajo entity);
 

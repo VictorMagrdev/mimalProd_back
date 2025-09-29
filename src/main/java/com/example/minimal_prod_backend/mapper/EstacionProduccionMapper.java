@@ -3,11 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.EstacionProduccionInput;
 import com.example.minimal_prod_backend.dto.EstacionProduccionResponse;
 import com.example.minimal_prod_backend.entity.EstacionProduccion;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -19,7 +15,9 @@ public interface EstacionProduccionMapper {
             @Mapping(target = "creadoEn", ignore = true)
     })
     EstacionProduccion toEntity(EstacionProduccionInput input);
+
     List<EstacionProduccionResponse> toResponseList(List<EstacionProduccion> conteos);
+
     @Mappings({
             @Mapping(target = "creadoEn", source = "creadoEn")
     })

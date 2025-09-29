@@ -3,12 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.LoteProduccionInput;
 import com.example.minimal_prod_backend.dto.LoteProduccionResponse;
 import com.example.minimal_prod_backend.entity.LoteProduccion;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface LoteProduccionMapper {
@@ -20,7 +15,7 @@ public interface LoteProduccionMapper {
     LoteProduccion toEntity(LoteProduccionInput input);
 
     @Mappings({
-        @Mapping(source = "producto.id", target = "productoId")
+            @Mapping(source = "producto.id", target = "productoId")
     })
     LoteProduccionResponse toResponse(LoteProduccion entity);
 

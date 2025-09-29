@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrdenTrabajoInput {
     private String referencia;
     private Long tipoId;

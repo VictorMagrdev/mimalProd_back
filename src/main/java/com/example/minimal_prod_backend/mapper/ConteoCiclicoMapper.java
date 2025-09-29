@@ -3,11 +3,7 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
 import com.example.minimal_prod_backend.entity.ConteoCiclico;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -32,7 +28,9 @@ public interface ConteoCiclicoMapper {
             @Mapping(target = "fecha", source = "fecha")
     })
     ConteoCiclicoResponse toResponse(ConteoCiclico conteoCiclico);
+
     List<ConteoCiclicoResponse> toResponseList(List<ConteoCiclico> conteos);
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "producto.id", source = "productoId"),

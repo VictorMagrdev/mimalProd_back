@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class DiscrepanciaInventarioInput {
     private Long conteoId;
     private BigDecimal cantidadSistema;

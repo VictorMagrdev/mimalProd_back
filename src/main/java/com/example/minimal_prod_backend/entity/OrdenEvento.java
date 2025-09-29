@@ -32,6 +32,7 @@ public class OrdenEvento {
     @Column(length = 150)
     private String descripcion;
 
+    @Builder.Default
     @Column(name = "fecha")
     private LocalDateTime fecha = LocalDateTime.now();
 

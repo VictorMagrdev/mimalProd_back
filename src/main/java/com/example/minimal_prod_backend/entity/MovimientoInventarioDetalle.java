@@ -37,6 +37,7 @@ public class MovimientoInventarioDetalle {
     private LoteProduccion lote;
 
     @Column(nullable = false, precision = 18, scale = 6)
+    @Builder.Default
     private BigDecimal cantidad = BigDecimal.ZERO;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,6 +46,7 @@ public class MovimientoInventarioDetalle {
     private UnidadMedida unidad;
 
     @Column(name = "costo_unitario", precision = 18, scale = 6)
+    @Builder.Default
     private BigDecimal costoUnitario = BigDecimal.ZERO;
 
     @Column(name = "costo_total", precision = 18, scale = 6, insertable = false, updatable = false)

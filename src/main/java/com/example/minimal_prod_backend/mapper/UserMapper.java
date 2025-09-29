@@ -34,8 +34,5 @@ public interface UserMapper {
                 .collect(Collectors.toSet());
     }
 
-    @Mapping(target = "roles", ignore = true)
-    Usuario toUsuario(UserResponse response);
-
     RoleResponse toRoleResponse(Rol rol);
 }

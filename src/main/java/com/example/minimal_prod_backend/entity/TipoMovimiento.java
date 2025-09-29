@@ -35,6 +35,7 @@ public class TipoMovimiento {
     private Boolean afectaWip = false;
 
     @Column(name = "creado_en", updatable = false)
+    @Builder.Default
     private LocalDateTime creadoEn = LocalDateTime.now();
 
     @Override

@@ -55,6 +55,7 @@ public class MovimientoInventario {
 
     @OneToMany(mappedBy = "movimiento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @ToString.Exclude
+    @Builder.Default
     private List<MovimientoInventarioDetalle> detalles = new ArrayList<>();
 
     @Override

@@ -46,6 +46,7 @@ public class Usuario {
     @JoinColumn(name = "centro_costo_id")
     private CentroCosto centroCosto;
 
+    @Builder.Default
     @Column(name = "capacidad_horas_dia", precision = 5, scale = 2)
     private Double capacidadHorasDia = 8.0;
 
@@ -64,5 +65,6 @@ public class Usuario {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Builder.Default
     private Set<Rol> roles = new HashSet<>();
 }

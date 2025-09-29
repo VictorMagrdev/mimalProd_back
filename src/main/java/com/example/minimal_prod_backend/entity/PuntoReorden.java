@@ -29,6 +29,7 @@ public class PuntoReorden {
     @Column(name = "stock_minimo", precision = 18, scale = 6, nullable = false)
     private BigDecimal stockMinimo;
 
+    @Builder.Default
     @Column(name = "stock_seguridad", precision = 18, scale = 6)
     private BigDecimal stockSeguridad = BigDecimal.ZERO;
 

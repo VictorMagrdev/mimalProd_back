@@ -30,6 +30,7 @@ public class DiscrepanciaInventario {
     private BigDecimal cantidadSistema;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean resuelto = false;
 
     @Override

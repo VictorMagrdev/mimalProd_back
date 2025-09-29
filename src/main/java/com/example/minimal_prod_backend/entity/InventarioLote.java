@@ -46,6 +46,7 @@ public class InventarioLote {
     private Bodega bodega;
 
     @Column(nullable = false, precision = 18, scale = 6)
+    @Builder.Default
     private BigDecimal cantidad = BigDecimal.ZERO;
 
     @ManyToOne(fetch = FetchType.LAZY)

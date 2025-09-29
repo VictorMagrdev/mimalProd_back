@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.TipoBodegaInput;
+import com.example.minimal_prod_backend.dto.TipoBodegaRequest;
 import com.example.minimal_prod_backend.dto.TipoBodegaResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface TipoBodegaService {
 
     TipoBodegaResponse getTipoBodegaById(Long id);
 
-    TipoBodegaResponse createTipoBodega(TipoBodegaInput tipoBodegaInput);
+    TipoBodegaResponse createTipoBodega(TipoBodegaRequest tipoBodegaInput);
 
-    TipoBodegaResponse updateTipoBodega(Long id, TipoBodegaInput tipoBodegaInput);
+    TipoBodegaResponse updateTipoBodega(Long id, TipoBodegaRequest tipoBodegaInput);
 
     void deleteTipoBodega(Long id);
 }

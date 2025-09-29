@@ -26,5 +26,5 @@ public interface BodegaMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
-    void updateEntityFromInput(BodegaInput input, Bodega entity);
+    void updateEntityFromInput(BodegaInput input, @MappingTarget Bodega entity);
 }

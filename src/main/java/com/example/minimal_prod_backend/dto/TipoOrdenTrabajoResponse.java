@@ -1,16 +1,3 @@
 package com.example.minimal_prod_backend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class TipoOrdenTrabajoResponse {
-    private Long id;
-    private String nombre;
-    private String descripcion;
-}
+public record TipoOrdenTrabajoResponse(Integer id, String nombre, String descripcion) {}

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.EstadoAprobacionInput;
+import com.example.minimal_prod_backend.dto.EstadoAprobacionRequest;
 import com.example.minimal_prod_backend.dto.EstadoAprobacionResponse;
 import com.example.minimal_prod_backend.entity.EstadoAprobacion;
 import org.mapstruct.*;
@@ -11,7 +11,7 @@ public interface EstadoAprobacionMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    EstadoAprobacion toEntity(EstadoAprobacionInput input);
+    EstadoAprobacion toEntity(EstadoAprobacionRequest input);
 
     EstadoAprobacionResponse toResponse(EstadoAprobacion entity);
 
@@ -19,5 +19,5 @@ public interface EstadoAprobacionMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    void updateEntityFromInput(EstadoAprobacionInput input, EstadoAprobacion entity);
+    void updateEntityFromInput(EstadoAprobacionRequest input, @MappingTarget EstadoAprobacion entity);
 }

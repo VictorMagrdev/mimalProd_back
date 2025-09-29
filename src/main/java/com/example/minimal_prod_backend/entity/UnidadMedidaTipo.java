@@ -11,9 +11,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "unidades_medida_tipo")
 public class UnidadMedidaTipo {

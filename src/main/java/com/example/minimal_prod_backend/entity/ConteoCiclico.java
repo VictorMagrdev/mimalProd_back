@@ -13,7 +13,6 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "conteos_ciclico")
@@ -46,6 +45,7 @@ public class ConteoCiclico {
     @ToString.Exclude
     private UnidadMedida unidad;
 
+    @Builder.Default
     @Column(name = "fecha")
     private LocalDateTime fecha = LocalDateTime.now();
 

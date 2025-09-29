@@ -34,5 +34,5 @@ public interface CostoOrdenMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "registradoEn", ignore = true)
     })
-    void updateEntityFromInput(CostoOrdenInput input, CostoOrden entity);
+    void updateEntityFromInput(CostoOrdenInput input, @MappingTarget CostoOrden entity);
 }

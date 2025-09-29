@@ -23,5 +23,5 @@ public interface UnidadMedidaTipoMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
     })
-    void updateEntityFromInput(UnidadMedidaTipoInput input, UnidadMedidaTipo entity);
+    void updateEntityFromInput(UnidadMedidaTipoInput input, @MappingTarget UnidadMedidaTipo entity);
 }

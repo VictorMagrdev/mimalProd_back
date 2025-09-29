@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.TipoMovimientoInput;
+import com.example.minimal_prod_backend.dto.TipoMovimientoRequest;
 import com.example.minimal_prod_backend.dto.TipoMovimientoResponse;
 import com.example.minimal_prod_backend.service.TipoMovimientoService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class TipoMovimientoController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_MOVIMIENTO_TAG', 'CREATE')")
-    public TipoMovimientoResponse createTipoMovimiento(@Argument("input") TipoMovimientoInput tipoMovimientoInput) {
+    public TipoMovimientoResponse createTipoMovimiento(@Argument("input") TipoMovimientoRequest tipoMovimientoInput) {
         return tipoMovimientoService.createTipoMovimiento(tipoMovimientoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPO_MOVIMIENTO_TAG', 'UPDATE')")
-    public TipoMovimientoResponse updateTipoMovimiento(@Argument Long id, @Argument("input") TipoMovimientoInput tipoMovimientoInput) {
+    public TipoMovimientoResponse updateTipoMovimiento(@Argument Long id, @Argument("input") TipoMovimientoRequest tipoMovimientoInput) {
         return tipoMovimientoService.updateTipoMovimiento(id, tipoMovimientoInput);
     }
 

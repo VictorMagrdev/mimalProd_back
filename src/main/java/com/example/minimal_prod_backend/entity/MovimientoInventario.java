@@ -14,7 +14,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "movimientos_inventario")
@@ -24,6 +23,7 @@ public class MovimientoInventario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Builder.Default
     @Column(updatable = false)
     private LocalDateTime fecha = LocalDateTime.now();
 
@@ -49,6 +49,7 @@ public class MovimientoInventario {
     @JoinColumn(name = "creado_por")
     private Usuario creadoPor;
 
+    @Builder.Default
     @Column(name = "creado_en", updatable = false)
     private LocalDateTime creadoEn = LocalDateTime.now();
 

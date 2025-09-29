@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.TipoActividadInput;
+import com.example.minimal_prod_backend.dto.TipoActividadRequest;
 import com.example.minimal_prod_backend.dto.TipoActividadResponse;
 import com.example.minimal_prod_backend.entity.TipoActividad;
 import org.mapstruct.*;
@@ -11,7 +11,7 @@ public interface TipoActividadMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    TipoActividad toEntity(TipoActividadInput input);
+    TipoActividad toEntity(TipoActividadRequest input);
 
     TipoActividadResponse toResponse(TipoActividad entity);
 
@@ -19,5 +19,5 @@ public interface TipoActividadMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    void updateEntityFromInput(TipoActividadInput input, @MappingTarget TipoActividad entity);
+    void updateEntityFromInput(TipoActividadRequest input, @MappingTarget TipoActividad entity);
 }

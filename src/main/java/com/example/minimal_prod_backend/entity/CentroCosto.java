@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "centros_costo")
 @Getter
 @Setter
-@NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 public class CentroCosto {

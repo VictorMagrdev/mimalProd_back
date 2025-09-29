@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.HojaTimesheetInput;
+import com.example.minimal_prod_backend.dto.HojaTimesheetRequest;
 import com.example.minimal_prod_backend.dto.HojaTimesheetResponse;
 import com.example.minimal_prod_backend.entity.HojaTimesheet;
 import org.mapstruct.*;
@@ -14,7 +14,7 @@ public interface HojaTimesheetMapper {
             @Mapping(source = "estadoAprobacionId", target = "estadoAprobacion.id"),
             @Mapping(source = "aprobadoPor", target = "aprobadoPor.id")
     })
-    HojaTimesheet toEntity(HojaTimesheetInput input);
+    HojaTimesheet toEntity(HojaTimesheetRequest input);
 
     @Mappings({
             @Mapping(source = "usuario.id", target = "usuarioId"),
@@ -30,5 +30,5 @@ public interface HojaTimesheetMapper {
             @Mapping(source = "estadoAprobacionId", target = "estadoAprobacion.id"),
             @Mapping(source = "aprobadoPor", target = "aprobadoPor.id")
     })
-    void updateEntityFromInput(HojaTimesheetInput input, @MappingTarget HojaTimesheet entity);
+    void updateEntityFromInput(HojaTimesheetRequest input, @MappingTarget HojaTimesheet entity);
 }

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.FuncionTareaInput;
+import com.example.minimal_prod_backend.dto.FuncionTareaRequest;
 import com.example.minimal_prod_backend.dto.FuncionTareaResponse;
 import com.example.minimal_prod_backend.entity.FuncionTarea;
 import org.mapstruct.*;
@@ -11,7 +11,7 @@ public interface FuncionTareaMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    FuncionTarea toEntity(FuncionTareaInput input);
+    FuncionTarea toEntity(FuncionTareaRequest input);
 
     FuncionTareaResponse toResponse(FuncionTarea entity);
 
@@ -19,5 +19,5 @@ public interface FuncionTareaMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    void updateEntityFromInput(FuncionTareaInput input, @MappingTarget FuncionTarea entity);
+    void updateEntityFromInput(FuncionTareaRequest input, @MappingTarget FuncionTarea entity);
 }

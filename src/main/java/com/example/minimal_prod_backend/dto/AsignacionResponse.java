@@ -1,26 +1,17 @@
 package com.example.minimal_prod_backend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class AsignacionResponse {
-    private Long id;
-    private Long ordenTrabajoId;
-    private Long usuarioId;
-    private OffsetDateTime inicioPlanificado;
-    private OffsetDateTime finPlanificado;
-    private BigDecimal horasPlanificadas;
-    private Long asignadoPor;
-    private Long estadoAsignacionId;
-    private Long funcionTarea;
-    private OffsetDateTime creadoEn;
-}
+public record AsignacionResponse(
+        Long id,
+        Long ordenTrabajoId,
+        Long usuarioId,
+        OffsetDateTime inicioPlanificado,
+        OffsetDateTime finPlanificado,
+        BigDecimal horasPlanificadas,
+        Long asignadoPor,
+        Long estadoAsignacionId,
+        Long funcionTareaId,
+        OffsetDateTime creadoEn
+) {}

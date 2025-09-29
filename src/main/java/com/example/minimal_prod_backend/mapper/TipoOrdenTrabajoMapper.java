@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.TipoOrdenTrabajoInput;
+import com.example.minimal_prod_backend.dto.TipoOrdenTrabajoRequest;
 import com.example.minimal_prod_backend.dto.TipoOrdenTrabajoResponse;
 import com.example.minimal_prod_backend.entity.TipoOrdenTrabajo;
 import org.mapstruct.*;
@@ -11,7 +11,7 @@ public interface TipoOrdenTrabajoMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    TipoOrdenTrabajo toEntity(TipoOrdenTrabajoInput input);
+    TipoOrdenTrabajo toEntity(TipoOrdenTrabajoRequest input);
 
     TipoOrdenTrabajoResponse toResponse(TipoOrdenTrabajo entity);
 
@@ -19,5 +19,5 @@ public interface TipoOrdenTrabajoMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    void updateEntityFromInput(TipoOrdenTrabajoInput input, @MappingTarget TipoOrdenTrabajo entity);
+    void updateEntityFromInput(TipoOrdenTrabajoRequest input, @MappingTarget TipoOrdenTrabajo entity);
 }

@@ -40,5 +40,5 @@ public interface ConteoCiclicoMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "fecha", source = "fecha")
     })
-    void updateEntityFromInput(ConteoCiclicoInput input, ConteoCiclico entity);
+    void updateEntityFromInput(ConteoCiclicoInput input, @MappingTarget ConteoCiclico entity);
 }

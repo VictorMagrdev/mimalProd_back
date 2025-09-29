@@ -28,5 +28,5 @@ public interface EstacionProduccionMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
-    void updateEntityFromInput(EstacionProduccionInput input, EstacionProduccion entity);
+    void updateEntityFromInput(EstacionProduccionInput input, @MappingTarget EstacionProduccion entity);
 }

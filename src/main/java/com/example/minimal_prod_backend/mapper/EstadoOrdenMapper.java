@@ -25,5 +25,5 @@ public interface EstadoOrdenMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
-    void updateEntityFromInput(EstadoOrdenInput input, EstadoOrden entity);
+    void updateEntityFromInput(EstadoOrdenInput input, @MappingTarget EstadoOrden entity);
 }

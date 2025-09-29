@@ -28,5 +28,5 @@ public interface DiscrepanciaInventarioMapper {
             @Mapping(target = "conteo.id", source = "conteoId"),
             @Mapping(target = "id", ignore = true)
     })
-    void updateEntityFromInput(DiscrepanciaInventarioInput input, DiscrepanciaInventario entity);
+    void updateEntityFromInput(DiscrepanciaInventarioInput input, @MappingTarget DiscrepanciaInventario entity);
 }

@@ -21,31 +21,31 @@ public class DiscrepanciaInventarioController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIA_INVENTARIO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIAS_INVENTARIO_TAG', 'READ')")
     public List<DiscrepanciaInventarioResponse> discrepanciasInventario() {
         return discrepanciaInventarioService.getDiscrepanciasInventario();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIA_INVENTARIO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIAS_INVENTARIO_TAG', 'READ')")
     public DiscrepanciaInventarioResponse discrepanciaInventario(@Argument Long id) {
         return discrepanciaInventarioService.getDiscrepanciaInventarioById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIA_INVENTARIO_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIAS_INVENTARIO_TAG', 'CREATE')")
     public DiscrepanciaInventarioResponse createDiscrepanciaInventario(@Argument("input") DiscrepanciaInventarioInput discrepanciaInventarioInput) {
         return discrepanciaInventarioService.createDiscrepanciaInventario(discrepanciaInventarioInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIA_INVENTARIO_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIAS_INVENTARIO_TAG', 'UPDATE')")
     public DiscrepanciaInventarioResponse updateDiscrepanciaInventario(@Argument Long id, @Argument("input") DiscrepanciaInventarioInput discrepanciaInventarioInput) {
         return discrepanciaInventarioService.updateDiscrepanciaInventario(id, discrepanciaInventarioInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIA_INVENTARIO_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIAS_INVENTARIO_TAG', 'DELETE')")
     public boolean deleteDiscrepanciaInventario(@Argument Long id) {
         discrepanciaInventarioService.deleteDiscrepanciaInventario(id);
         return true;

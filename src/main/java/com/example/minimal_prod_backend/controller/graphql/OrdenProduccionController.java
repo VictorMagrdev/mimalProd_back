@@ -21,31 +21,31 @@ public class OrdenProduccionController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_PRODUCCION_TAG', 'READ')")
     public List<OrdenProduccionResponse> ordenesProduccion() {
         return ordenProduccionService.getOrdenesProduccion();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_PRODUCCION_TAG', 'READ')")
     public OrdenProduccionResponse ordenProduccion(@Argument Long id) {
         return ordenProduccionService.getOrdenProduccionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_PRODUCCION_TAG', 'CREATE')")
     public OrdenProduccionResponse createOrdenProduccion(@Argument("input") OrdenProduccionInput ordenProduccionInput) {
         return ordenProduccionService.createOrdenProduccion(ordenProduccionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_PRODUCCION_TAG', 'UPDATE')")
     public OrdenProduccionResponse updateOrdenProduccion(@Argument Long id, @Argument("input") OrdenProduccionInput ordenProduccionInput) {
         return ordenProduccionService.updateOrdenProduccion(id, ordenProduccionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_PRODUCCION_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_PRODUCCION_TAG', 'DELETE')")
     public boolean deleteOrdenProduccion(@Argument Long id) {
         ordenProduccionService.deleteOrdenProduccion(id);
         return true;

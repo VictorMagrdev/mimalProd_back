@@ -21,31 +21,31 @@ public class TipoMovimientoController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_MOVIMIENTO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_MOVIMIENTO_TAG', 'READ')")
     public List<TipoMovimientoResponse> tiposMovimiento() {
         return tipoMovimientoService.getTiposMovimiento();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_MOVIMIENTO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_MOVIMIENTO_TAG', 'READ')")
     public TipoMovimientoResponse tipoMovimiento(@Argument Long id) {
         return tipoMovimientoService.getTipoMovimientoById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_MOVIMIENTO_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_MOVIMIENTO_TAG', 'CREATE')")
     public TipoMovimientoResponse createTipoMovimiento(@Argument("input") TipoMovimientoRequest tipoMovimientoInput) {
         return tipoMovimientoService.createTipoMovimiento(tipoMovimientoInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_MOVIMIENTO_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_MOVIMIENTO_TAG', 'UPDATE')")
     public TipoMovimientoResponse updateTipoMovimiento(@Argument Long id, @Argument("input") TipoMovimientoRequest tipoMovimientoInput) {
         return tipoMovimientoService.updateTipoMovimiento(id, tipoMovimientoInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_MOVIMIENTO_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_MOVIMIENTO_TAG', 'DELETE')")
     public boolean deleteTipoMovimiento(@Argument Long id) {
         tipoMovimientoService.deleteTipoMovimiento(id);
         return true;

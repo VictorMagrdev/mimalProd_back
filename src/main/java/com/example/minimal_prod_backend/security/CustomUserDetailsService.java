@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         var authorities = u.getRoles()
                 .stream()
-                .map(r -> new SimpleGrantedAuthority(r.getName()))
+                .map(r -> new SimpleGrantedAuthority(r.getNombre()))
                 .collect(Collectors.toList());
 
         return User.builder()
@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
-                .disabled(!u.getActive())
+                .disabled(!u.getActivo())
                 .build();
     }
 }

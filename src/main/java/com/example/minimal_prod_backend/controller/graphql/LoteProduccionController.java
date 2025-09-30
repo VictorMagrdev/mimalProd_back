@@ -21,31 +21,31 @@ public class LoteProduccionController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTES_PRODUCCION_TAG', 'READ')")
     public List<LoteProduccionResponse> lotesProduccion() {
         return loteProduccionService.getLotesProduccion();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTES_PRODUCCION_TAG', 'READ')")
     public LoteProduccionResponse loteProduccion(@Argument Long id) {
         return loteProduccionService.getLoteProduccionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTES_PRODUCCION_TAG', 'CREATE')")
     public LoteProduccionResponse createLoteProduccion(@Argument("input") LoteProduccionInput loteProduccionInput) {
         return loteProduccionService.createLoteProduccion(loteProduccionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTES_PRODUCCION_TAG', 'UPDATE')")
     public LoteProduccionResponse updateLoteProduccion(@Argument Long id, @Argument("input") LoteProduccionInput loteProduccionInput) {
         return loteProduccionService.updateLoteProduccion(id, loteProduccionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('LOTE_PRODUCCION_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('LOTES_PRODUCCION_TAG', 'DELETE')")
     public boolean deleteLoteProduccion(@Argument Long id) {
         loteProduccionService.deleteLoteProduccion(id);
         return true;

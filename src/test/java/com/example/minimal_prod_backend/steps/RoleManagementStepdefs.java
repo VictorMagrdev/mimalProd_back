@@ -45,7 +45,7 @@ public class RoleManagementStepdefs extends BaseStepdefs {
 
     @Given("existe un rol con id {int}")
     public void existeUnRolConId(int id) {
-        roleRepository.save(Rol.builder().id((long)id).name("role"+id).build());
+        roleRepository.save(Rol.builder().id((long)id).nombre("role"+id).build());
     }
 
     @When("envío una petición PUT a {string} con el cuerpo:")

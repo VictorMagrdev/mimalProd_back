@@ -8,16 +8,12 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface EstadoAsignacionMapper {
 
-    @Mappings({
-            @Mapping(target = "id", ignore = true)
-    })
+    @Mapping(target = "id", ignore = true)
     EstadoAsignacion toEntity(EstadoAsignacionRequest input);
 
     EstadoAsignacionResponse toResponse(EstadoAsignacion entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mappings({
-            @Mapping(target = "id", ignore = true)
-    })
-    void updateEntityFromInput(EstadoAsignacionRequest input, EstadoAsignacion entity);
+    @Mapping(target = "id", ignore = true)
+    void updateEntityFromInput(EstadoAsignacionRequest input, @MappingTarget EstadoAsignacion entity);
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +22,5 @@ public class MovimientoInventarioResponse {
     private String observaciones;
     private Long creadoPor;
     private OffsetDateTime creadoEn;
+    List<MovimientoInventarioDetalleInput> detalles;
 }

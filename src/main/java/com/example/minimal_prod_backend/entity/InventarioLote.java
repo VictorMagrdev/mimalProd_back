@@ -6,6 +6,7 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Getter
@@ -55,7 +56,7 @@ public class InventarioLote {
     private UnidadMedida unidad;
 
     @Column(name = "actualizado_en", insertable = false, updatable = false)
-    private LocalDateTime actualizadoEn;
+    private OffsetDateTime actualizadoEn;
 
     @Override
     public final boolean equals(Object o) {

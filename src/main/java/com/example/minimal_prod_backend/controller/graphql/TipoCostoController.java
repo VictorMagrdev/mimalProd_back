@@ -21,31 +21,31 @@ public class TipoCostoController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_COSTO_TAG', 'READ')")
     public List<TipoCostoResponse> tiposCosto() {
         return tipoCostoService.getTiposCosto();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_COSTO_TAG', 'READ')")
     public TipoCostoResponse tipoCosto(@Argument Long id) {
         return tipoCostoService.getTipoCostoById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_COSTO_TAG', 'CREATE')")
     public TipoCostoResponse createTipoCosto(@Argument("input") TipoCostoInput tipoCostoInput) {
         return tipoCostoService.createTipoCosto(tipoCostoInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_COSTO_TAG', 'UPDATE')")
     public TipoCostoResponse updateTipoCosto(@Argument Long id, @Argument("input") TipoCostoInput tipoCostoInput) {
         return tipoCostoService.updateTipoCosto(id, tipoCostoInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_COSTO_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_COSTO_TAG', 'DELETE')")
     public boolean deleteTipoCosto(@Argument Long id) {
         tipoCostoService.deleteTipoCosto(id);
         return true;

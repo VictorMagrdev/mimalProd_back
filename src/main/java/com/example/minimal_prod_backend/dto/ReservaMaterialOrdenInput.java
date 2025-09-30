@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 @Data
 @NoArgsConstructor
@@ -17,4 +18,5 @@ public class ReservaMaterialOrdenInput {
     private Long loteId;
     private BigDecimal cantidadReservada;
     private Long unidadId;
+    private OffsetDateTime fechaReserva;
 }

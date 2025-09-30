@@ -16,7 +16,7 @@ public class AccessControlStepdefs extends BaseStepdefs {
 
     @Given("un usuario {string} tiene el rol {string}")
     public void unUsuarioTieneElRol(String username, String roleName) {
-        Rol role = roleRepository.findByName(roleName).orElseGet(() -> roleRepository.save(Rol.builder().name(roleName).build()));
+        Rol role = roleRepository.findByName(roleName).orElseGet(() -> roleRepository.save(Rol.builder().nombre(roleName).build()));
         Usuario usuario = Usuario.builder()
                 .username(username)
                 .password(passwordEncoder.encode("password"))
@@ -29,10 +29,10 @@ public class AccessControlStepdefs extends BaseStepdefs {
     @Given("el rol {string} tiene permiso para {string} en {string}")
     public void elRolTienePermisoParaEn(String roleName, String action, String tagName) {
         Rol role = roleRepository.findByName(roleName).orElseThrow();
-        Tag tag = tagRepository.findByName(tagName).orElseGet(() -> tagRepository.save(Tag.builder().name(tagName).build()));
-        Permiso permiso = permissionRepository.findByAction(action).orElseGet(() -> permissionRepository.save(Permiso.builder().action(action).build()));
+        Tag tag = tagRepository.findByName(tagName).orElseGet(() -> tagRepository.save(Tag.builder().nombre(tagName).build()));
+        Permiso permiso = permissionRepository.findByAction(action).orElseGet(() -> permissionRepository.save(Permiso.builder().accion(action).build()));
 
-        policyRepository.save(Politica.builder().role(role).tag(tag).permiso(permiso).build());
+        policyRepository.save(Politica.builder().rol(role).tag(tag).permiso(permiso).build());
     }
 
     @Given("{string} está autenticado")
@@ -59,7 +59,7 @@ public class AccessControlStepdefs extends BaseStepdefs {
 
     @Given("existe un rol con id {long}")
     public void existeUnRolConId(long id) {
-        roleRepository.save(Rol.builder().id(id).name("role" + id).build());
+        roleRepository.save(Rol.builder().id(id).nombre("role" + id).build());
     }
 
     @When("envío una petición DELETE a {string}")

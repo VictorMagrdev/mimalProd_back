@@ -21,31 +21,31 @@ public class TipoBodegaController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_BODEGA_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_BODEGA_TAG', 'READ')")
     public List<TipoBodegaResponse> tiposBodega() {
         return tipoBodegaService.getTiposBodega();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_BODEGA_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_BODEGA_TAG', 'READ')")
     public TipoBodegaResponse tipoBodega(@Argument Long id) {
         return tipoBodegaService.getTipoBodegaById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_BODEGA_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_BODEGA_TAG', 'CREATE')")
     public TipoBodegaResponse createTipoBodega(@Argument("input") TipoBodegaRequest tipoBodegaInput) {
         return tipoBodegaService.createTipoBodega(tipoBodegaInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_BODEGA_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_BODEGA_TAG', 'UPDATE')")
     public TipoBodegaResponse updateTipoBodega(@Argument Long id, @Argument("input") TipoBodegaRequest tipoBodegaInput) {
         return tipoBodegaService.updateTipoBodega(id, tipoBodegaInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TIPO_BODEGA_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('TIPOS_BODEGA_TAG', 'DELETE')")
     public boolean deleteTipoBodega(@Argument Long id) {
         tipoBodegaService.deleteTipoBodega(id);
         return true;

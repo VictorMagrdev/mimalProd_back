@@ -21,31 +21,31 @@ public class CostoOrdenController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTOS_ORDEN_TAG', 'READ')")
     public List<CostoOrdenResponse> costosOrden() {
         return costoOrdenService.getCostosOrden();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTOS_ORDEN_TAG', 'READ')")
     public CostoOrdenResponse costoOrden(@Argument Long id) {
         return costoOrdenService.getCostoOrdenById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTOS_ORDEN_TAG', 'CREATE')")
     public CostoOrdenResponse createCostoOrden(@Argument("input") CostoOrdenInput costoOrdenInput) {
         return costoOrdenService.createCostoOrden(costoOrdenInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTOS_ORDEN_TAG', 'UPDATE')")
     public CostoOrdenResponse updateCostoOrden(@Argument Long id, @Argument("input") CostoOrdenInput costoOrdenInput) {
         return costoOrdenService.updateCostoOrden(id, costoOrdenInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('COSTO_ORDEN_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('COSTOS_ORDEN_TAG', 'DELETE')")
     public boolean deleteCostoOrden(@Argument Long id) {
         costoOrdenService.deleteCostoOrden(id);
         return true;

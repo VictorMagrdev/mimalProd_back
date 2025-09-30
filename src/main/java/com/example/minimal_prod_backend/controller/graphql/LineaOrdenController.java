@@ -21,31 +21,31 @@ public class LineaOrdenController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEAS_ORDEN_TAG', 'READ')")
     public List<LineaOrdenResponse> lineasOrden() {
         return lineaOrdenService.getLineasOrden();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEAS_ORDEN_TAG', 'READ')")
     public LineaOrdenResponse lineaOrden(@Argument Long id) {
         return lineaOrdenService.getLineaOrdenById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEAS_ORDEN_TAG', 'CREATE')")
     public LineaOrdenResponse createLineaOrden(@Argument("input") LineaOrdenInput lineaOrdenInput) {
         return lineaOrdenService.createLineaOrden(lineaOrdenInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEAS_ORDEN_TAG', 'UPDATE')")
     public LineaOrdenResponse updateLineaOrden(@Argument Long id, @Argument("input") LineaOrdenInput lineaOrdenInput) {
         return lineaOrdenService.updateLineaOrden(id, lineaOrdenInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('LINEA_ORDEN_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('LINEAS_ORDEN_TAG', 'DELETE')")
     public boolean deleteLineaOrden(@Argument Long id) {
         lineaOrdenService.deleteLineaOrden(id);
         return true;

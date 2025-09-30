@@ -6,6 +6,7 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Getter
@@ -38,7 +39,7 @@ public class CostoOrden {
     private String moneda = "COP";
 
     @Column(name = "registrado_en", updatable = false)
-    private LocalDateTime registradoEn = LocalDateTime.now();
+    private OffsetDateTime registradoEn = OffsetDateTime.now();
 
     @Override
     public final boolean equals(Object o) {

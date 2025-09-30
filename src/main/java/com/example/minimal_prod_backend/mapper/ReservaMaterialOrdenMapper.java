@@ -15,7 +15,8 @@ public interface ReservaMaterialOrdenMapper {
             @Mapping(source = "ordenId", target = "orden.id"),
             @Mapping(source = "productoId", target = "producto.id"),
             @Mapping(source = "loteId", target = "lote.id"),
-            @Mapping(source = "unidadId", target = "unidad.id")
+            @Mapping(source = "unidadId", target = "unidad.id"),
+            @Mapping(source = "fechaReserva", target = "fechaReserva")
     })
     ReservaMaterialOrden toEntity(ReservaMaterialOrdenInput input);
 
@@ -35,7 +36,8 @@ public interface ReservaMaterialOrdenMapper {
             @Mapping(source = "ordenId", target = "orden.id"),
             @Mapping(source = "productoId", target = "producto.id"),
             @Mapping(source = "loteId", target = "lote.id"),
-            @Mapping(source = "unidadId", target = "unidad.id")
+            @Mapping(source = "unidadId", target = "unidad.id"),
+            @Mapping(source = "fechaReserva", target = "fechaReserva")
     })
     void updateEntityFromInput(ReservaMaterialOrdenInput input, @MappingTarget ReservaMaterialOrden entity);
 }

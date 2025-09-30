@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @NoArgsConstructor
@@ -19,5 +20,5 @@ public class InventarioLoteResponse {
     private Long bodegaId;
     private BigDecimal cantidad;
     private Long unidadId;
-    private LocalDateTime actualizadoEn;
+    private OffsetDateTime actualizadoEn;
 }

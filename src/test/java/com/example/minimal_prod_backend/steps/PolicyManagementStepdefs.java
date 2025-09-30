@@ -56,10 +56,10 @@ public class PolicyManagementStepdefs extends BaseStepdefs {
 
     @Given("existe una política con id {int}")
     public void existeUnaPoliticaConId(int id) {
-        Rol role = roleRepository.save(Rol.builder().name("roleForPolicy"+id).build());
-        com.example.minimal_prod_backend.entity.Tag tag = tagRepository.save(com.example.minimal_prod_backend.entity.Tag.builder().name("tagForPolicy"+id).build());
-        Permiso permiso = permissionRepository.save(Permiso.builder().action("READ").build());
-        policyRepository.save(Politica.builder().id((long)id).role(role).tag(tag).permiso(permiso).build());
+        Rol role = roleRepository.save(Rol.builder().nombre("roleForPolicy"+id).build());
+        com.example.minimal_prod_backend.entity.Tag tag = tagRepository.save(com.example.minimal_prod_backend.entity.Tag.builder().nombre("tagForPolicy"+id).build());
+        Permiso permiso = permissionRepository.save(Permiso.builder().accion("READ").build());
+        policyRepository.save(Politica.builder().id((long)id).rol(role).tag(tag).permiso(permiso).build());
     }
 
     @When("envío una petición DELETE a {string}")

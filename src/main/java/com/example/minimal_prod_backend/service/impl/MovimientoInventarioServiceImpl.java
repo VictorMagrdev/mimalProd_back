@@ -70,21 +70,21 @@ public class MovimientoInventarioServiceImpl implements MovimientoInventarioServ
      * Maneja relaciones con otras entidades (BodegaOrigen, BodegaDestino, TipoMovimiento).
      */
     private void attachRelations(MovimientoInventarioInput dto, MovimientoInventario entity) {
-        if (dto.getBodegaDestinoId() != null) {
-            Bodega bodegaOrigen = bodegaRepository.findById(dto.getBodegaDestinoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega Origen not found with id: " + dto.getBodegaDestinoId()));
+        if (dto.bodegaOrigenId() != null) {
+            Bodega bodegaOrigen = bodegaRepository.findById(dto.bodegaOrigenId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Bodega Origen not found with id: " + dto.bodegaOrigenId()));
             entity.setBodegaOrigen(bodegaOrigen);
         }
 
-        if (dto.getBodegaDestinoId() != null) {
-            Bodega bodegaDestino = bodegaRepository.findById(dto.getBodegaDestinoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega Destino not found with id: " + dto.getBodegaDestinoId()));
+        if (dto.bodegaDestinoId() != null) {
+            Bodega bodegaDestino = bodegaRepository.findById(dto.bodegaDestinoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Bodega Destino not found with id: " + dto.bodegaDestinoId()));
             entity.setBodegaDestino(bodegaDestino);
         }
 
-        if (dto.getTipoMovimientoId() != null) {
-            TipoMovimiento tipoMovimiento = tipoMovimientoRepository.findById(dto.getTipoMovimientoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Tipo Movimiento not found with id: " + dto.getTipoMovimientoId()));
+        if (dto.tipoMovimientoId() != null) {
+            TipoMovimiento tipoMovimiento = tipoMovimientoRepository.findById(dto.tipoMovimientoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Tipo Movimiento not found with id: " + dto.tipoMovimientoId()));
             entity.setTipoMovimiento(tipoMovimiento);
         }
     }

@@ -21,31 +21,31 @@ public class BodegaController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('BODEGA_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('BODEGAS_TAG', 'READ')")
     public List<BodegaResponse> bodegas() {
         return bodegaService.getBodegas();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('BODEGA_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('BODEGAS_TAG', 'READ')")
     public BodegaResponse bodega(@Argument Long id) {
         return bodegaService.getBodegaById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('BODEGA_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('BODEGAS_TAG', 'CREATE')")
     public BodegaResponse createBodega(@Argument("input") BodegaInput bodegaInput) {
         return bodegaService.createBodega(bodegaInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('BODEGA_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('BODEGAS_TAG', 'UPDATE')")
     public BodegaResponse updateBodega(@Argument Long id, @Argument("input") BodegaInput bodegaInput) {
         return bodegaService.updateBodega(id, bodegaInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('BODEGA_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('BODEGAS_TAG', 'DELETE')")
     public boolean deleteBodega(@Argument Long id) {
         bodegaService.deleteBodega(id);
         return true;

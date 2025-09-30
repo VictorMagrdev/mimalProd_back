@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -35,7 +36,7 @@ public class EstacionProduccionServiceImpl implements EstacionProduccionService 
     @Override
     public EstacionProduccionResponse createEstacionProduccion(EstacionProduccionInput estacionProduccionInput) {
         EstacionProduccion estacionProduccion = estacionProduccionMapper.toEntity(estacionProduccionInput);
-        estacionProduccion.setCreadoEn(LocalDateTime.now());
+        estacionProduccion.setCreadoEn(OffsetDateTime.now());
         return estacionProduccionMapper.toResponse(estacionProduccionRepository.save(estacionProduccion));
     }
 

@@ -21,25 +21,25 @@ public class MovimientoInventarioController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTO_INVENTARIO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTOS_INVENTARIO_TAG', 'READ')")
     public List<MovimientoInventarioResponse> movimientosInventario() {
         return movimientoInventarioService.getMovimientosInventario();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTO_INVENTARIO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTOS_INVENTARIO_TAG', 'READ')")
     public MovimientoInventarioResponse movimientoInventario(@Argument Long id) {
         return movimientoInventarioService.getMovimientoInventarioById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTO_INVENTARIO_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTOS_INVENTARIO_TAG', 'CREATE')")
     public MovimientoInventarioResponse createMovimientoInventario(@Argument("input") MovimientoInventarioInput movimientoInventarioInput) {
         return movimientoInventarioService.createMovimientoInventario(movimientoInventarioInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTO_INVENTARIO_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTOS_INVENTARIO_TAG', 'UPDATE')")
     public MovimientoInventarioResponse updateMovimientoInventario(@Argument Long id, @Argument("input") MovimientoInventarioInput movimientoInventarioInput) {
         return movimientoInventarioService.updateMovimientoInventario(id, movimientoInventarioInput);
     }

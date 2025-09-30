@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Getter
@@ -32,16 +33,16 @@ public class OrdenEstacion {
     private EstacionProduccion estacion;
 
     @Column(name = "inicio_planificado")
-    private LocalDateTime inicioPlanificado;
+    private OffsetDateTime inicioPlanificado;
 
     @Column(name = "fin_planificado")
-    private LocalDateTime finPlanificado;
+    private OffsetDateTime  finPlanificado;
 
     @Column(name = "inicio_real")
-    private LocalDateTime inicioReal;
+    private OffsetDateTime  inicioReal;
 
     @Column(name = "fin_real")
-    private LocalDateTime finReal;
+    private OffsetDateTime  finReal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_orden_estacion_id")

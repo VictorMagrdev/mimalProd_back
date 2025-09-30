@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Getter
@@ -34,7 +35,7 @@ public class OrdenEvento {
 
     @Builder.Default
     @Column(name = "fecha")
-    private LocalDateTime fecha = LocalDateTime.now();
+    private OffsetDateTime fecha = OffsetDateTime.now();
 
     @Override
     public final boolean equals(Object o) {

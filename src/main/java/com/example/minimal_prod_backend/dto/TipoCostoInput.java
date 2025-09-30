@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.OffsetDateTime;
+
 // ========================= TIPO COSTO =========================
 @Data
 @NoArgsConstructor
@@ -15,4 +17,5 @@ public class TipoCostoInput {
     private String nombre;
     private String descripcion;
     private Boolean activo;
+    private OffsetDateTime creadoEn;
 }

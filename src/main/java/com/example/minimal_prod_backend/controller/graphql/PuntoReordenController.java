@@ -21,31 +21,31 @@ public class PuntoReordenController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('PUNTO_REORDEN_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('PUNTOS_REORDEN_TAG', 'READ')")
     public List<PuntoReordenResponse> puntosReorden() {
         return puntoReordenService.getPuntosReorden();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('PUNTO_REORDEN_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('PUNTOS_REORDEN_TAG', 'READ')")
     public PuntoReordenResponse puntoReorden(@Argument Long id) {
         return puntoReordenService.getPuntoReordenById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('PUNTO_REORDEN_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('PUNTOS_REORDEN_TAG', 'CREATE')")
     public PuntoReordenResponse createPuntoReorden(@Argument("input") PuntoReordenInput puntoReordenInput) {
         return puntoReordenService.createPuntoReorden(puntoReordenInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('PUNTO_REORDEN_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('PUNTOS_REORDEN_TAG', 'UPDATE')")
     public PuntoReordenResponse updatePuntoReorden(@Argument Long id, @Argument("input") PuntoReordenInput puntoReordenInput) {
         return puntoReordenService.updatePuntoReorden(id, puntoReordenInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('PUNTO_REORDEN_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('PUNTOS_REORDEN_TAG', 'DELETE')")
     public boolean deletePuntoReorden(@Argument Long id) {
         puntoReordenService.deletePuntoReorden(id);
         return true;

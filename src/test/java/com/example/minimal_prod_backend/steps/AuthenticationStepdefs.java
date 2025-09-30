@@ -17,7 +17,7 @@ public class AuthenticationStepdefs extends BaseStepdefs {
 
     @Given("un usuario inactivo existe con el nombre de usuario {string} y la contraseña {string}")
     public void unUsuarioInactivoExiste(String username, String password) {
-        userRepository.save(Usuario.builder().username(username).password(passwordEncoder.encode(password)).email(username + "@example.com").active(false).build());
+        userRepository.save(Usuario.builder().username(username).password(passwordEncoder.encode(password)).email(username + "@example.com").activo(false).build());
     }
 
     

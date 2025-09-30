@@ -21,31 +21,31 @@ public class ConteoCiclicoController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('CONTEO_CICLICO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('CONTEOS_CICLICO_TAG', 'READ')")
     public List<ConteoCiclicoResponse> conteosCiclicos() {
         return conteoCiclicoService.getConteosCiclicos();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('CONTEO_CICLICO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('CONTEOS_CICLICO_TAG', 'READ')")
     public ConteoCiclicoResponse conteoCiclico(@Argument Long id) {
         return conteoCiclicoService.getConteoCiclicoById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('CONTEO_CICLICO_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('CONTEOS_CICLICO_TAG', 'CREATE')")
     public ConteoCiclicoResponse createConteoCiclico(@Argument("input") ConteoCiclicoInput conteoCiclicoInput) {
         return conteoCiclicoService.createConteoCiclico(conteoCiclicoInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('CONTEO_CICLICO_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('CONTEOS_CICLICO_TAG', 'UPDATE')")
     public ConteoCiclicoResponse updateConteoCiclico(@Argument Long id, @Argument("input") ConteoCiclicoInput conteoCiclicoInput) {
         return conteoCiclicoService.updateConteoCiclico(id, conteoCiclicoInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('CONTEO_CICLICO_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('CONTEOS_CICLICO_TAG', 'DELETE')")
     public boolean deleteConteoCiclico(@Argument Long id) {
         return conteoCiclicoService.deleteConteoCiclico(id);
     }

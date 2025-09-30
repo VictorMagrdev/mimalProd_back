@@ -38,7 +38,7 @@ public class CustomMethodSecurityService {
         if (usuario == null) {
             return false;
         }
-        if (usuario.getActive() == false) {
+        if (usuario.getActivo() == false) {
             return false;
         }
 

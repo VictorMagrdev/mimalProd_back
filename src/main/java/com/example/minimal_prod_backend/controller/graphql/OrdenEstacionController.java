@@ -21,31 +21,31 @@ public class OrdenEstacionController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_ESTACION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_ESTACION_TAG', 'READ')")
     public List<OrdenEstacionResponse> ordenesEstacion() {
         return ordenEstacionService.getOrdenesEstacion();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_ESTACION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_ESTACION_TAG', 'READ')")
     public OrdenEstacionResponse ordenEstacion(@Argument Long id) {
         return ordenEstacionService.getOrdenEstacionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_ESTACION_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_ESTACION_TAG', 'CREATE')")
     public OrdenEstacionResponse createOrdenEstacion(@Argument("input") OrdenEstacionInput ordenEstacionInput) {
         return ordenEstacionService.createOrdenEstacion(ordenEstacionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_ESTACION_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_ESTACION_TAG', 'UPDATE')")
     public OrdenEstacionResponse updateOrdenEstacion(@Argument Long id, @Argument("input") OrdenEstacionInput ordenEstacionInput) {
         return ordenEstacionService.updateOrdenEstacion(id, ordenEstacionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_ESTACION_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_ESTACION_TAG', 'DELETE')")
     public boolean deleteOrdenEstacion(@Argument Long id) {
         ordenEstacionService.deleteOrdenEstacion(id);
         return true;

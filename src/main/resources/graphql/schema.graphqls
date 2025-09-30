@@ -1,4 +1,5 @@
 scalar DateTime
+scalar Date
 scalar Numeric
 scalar Interval
 
@@ -11,7 +12,7 @@ type EstadoOrden {
     creado_en: DateTime
 }
 
-input EstadoOrdenInput {
+input EstadoOrdenRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -27,7 +28,7 @@ type TipoCosto {
     creado_en: DateTime
 }
 
-input TipoCostoInput {
+input TipoCostoRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -43,7 +44,7 @@ type UnidadMedidaTipo {
     unidades: [UnidadMedida]
 }
 
-input UnidadMedidaTipoInput {
+input UnidadMedidaTipoRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -61,7 +62,7 @@ type UnidadMedida {
     tipo: UnidadMedidaTipo
 }
 
-input UnidadMedidaInput {
+input UnidadMedidaRequest {
     codigo: String!
     nombre: String!
     abreviatura: String
@@ -79,7 +80,7 @@ type UnidadConversion {
     destino: UnidadMedida
 }
 
-input UnidadConversionInput {
+input UnidadConversionRequest {
     origen_id: ID
     destino_id: ID
     factor: Numeric!
@@ -93,7 +94,7 @@ type TipoProducto {
     productos: [Producto]
 }
 
-input TipoProductoInput {
+input TipoProductoRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -107,7 +108,7 @@ type MetodoValoracion {
     productos: [Producto]
 }
 
-input MetodoValoracionInput {
+input MetodoValoracionRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -127,7 +128,7 @@ type Producto {
     unidad_base: UnidadMedida
 }
 
-input ProductoInput {
+input ProductoRequest {
     codigo: String
     nombre: String!
     metodo_valoracion_id: ID
@@ -146,7 +147,7 @@ type LoteProduccion {
     producto: Producto
 }
 
-input LoteProduccionInput {
+input LoteProduccionRequest {
     numero_lote: String!
     producto_id: ID
     fabricado_en: DateTime
@@ -175,7 +176,7 @@ type OrdenProduccion {
     costos: [CostoOrden]
 }
 
-input OrdenProduccionInput {
+input OrdenProduccionRequest {
     numero_orden: String!
     cantidad: Numeric
     unidad_id: ID
@@ -206,7 +207,7 @@ type LineaOrden {
     unidad_componente: UnidadMedida
 }
 
-input LineaOrdenInput {
+input LineaOrdenRequest {
     orden_id: ID
     numero_linea: Int
     producto_componente_id: ID
@@ -228,7 +229,7 @@ type CostoOrden {
     tipo_costo: TipoCosto
 }
 
-input CostoOrdenInput {
+input CostoOrdenRequest {
     orden_id: ID
     tipo_costo_id: ID
     descripcion: String
@@ -242,7 +243,7 @@ type TipoBodega {
     descripcion: String
 }
 
-input TipoBodegaInput {
+input TipoBodegaRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -258,7 +259,7 @@ type Bodega {
     tipo: TipoBodega
 }
 
-input BodegaInput {
+input BodegaRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -274,7 +275,7 @@ type TipoMovimiento {
     creado_en: DateTime
 }
 
-input TipoMovimientoInput {
+input TipoMovimientoRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -297,7 +298,7 @@ type MovimientoInventario {
     detalles: [MovimientoInventarioDetalle]
 }
 
-input MovimientoInventarioInput {
+input MovimientoInventarioRequest {
     fecha: DateTime
     bodega_origen_id: ID
     bodega_destino_id: ID
@@ -318,7 +319,7 @@ type MovimientoInventarioDetalle {
     costo_total: Numeric
 }
 
-input MovimientoInventarioDetalleInput {
+input MovimientoInventarioDetalleRequest {
     movimiento_id: ID
     producto_id: ID
     lote_id: ID
@@ -337,7 +338,7 @@ type InventarioLote {
     actualizado_en: DateTime
 }
 
-input InventarioLoteInput {
+input InventarioLoteRequest {
     producto_id: ID
     lote_id: ID
     bodega_id: ID
@@ -355,7 +356,7 @@ type ReservaMaterialOrden {
     fecha_reserva: DateTime
 }
 
-input ReservaMaterialOrdenInput {
+input ReservaMaterialOrdenRequest {
     orden_id: ID
     producto_id: ID
     lote_id: ID
@@ -372,7 +373,7 @@ type EstacionProduccion {
     creado_en: DateTime
 }
 
-input EstacionProduccionInput {
+input EstacionProduccionRequest {
     codigo: String!
     nombre: String!
     descripcion: String
@@ -385,7 +386,7 @@ type EstadoOrdenEstacion {
     descripcion: String
 }
 
-input EstadoOrdenEstacionInput {
+input EstadoOrdenEstacionRequest {
     nombre: String!
     descripcion: String
 }
@@ -404,7 +405,7 @@ type OrdenEstacion {
     estado: EstadoOrdenEstacion
 }
 
-input OrdenEstacionInput {
+input OrdenEstacionRequest {
     orden_id: ID
     estacion_id: ID
     inicio_planificado: DateTime
@@ -423,7 +424,7 @@ type OrdenEvento {
     fecha: DateTime
 }
 
-input OrdenEventoInput {
+input OrdenEventoRequest {
     orden_id: ID
     evento: String!
     descripcion: String
@@ -440,7 +441,7 @@ type ConteoCiclico {
     fecha: DateTime
 }
 
-input ConteoCiclicoInput {
+input ConteoCiclicoRequest {
     producto_id: ID
     bodega_id: ID
     lote_id: ID
@@ -457,7 +458,7 @@ type DiscrepanciaInventario {
     conteo: ConteoCiclico
 }
 
-input DiscrepanciaInventarioInput {
+input DiscrepanciaInventarioRequest {
     conteo_id: ID
     cantidad_sistema: Numeric
     resuelto: Boolean
@@ -471,7 +472,7 @@ type PuntoReorden {
     unidad_id: ID
 }
 
-input PuntoReordenInput {
+input PuntoReordenRequest {
     producto_id: ID
     stock_minimo: Numeric
     stock_seguridad: Numeric
@@ -484,7 +485,7 @@ type EstadoAsignacion {
     descripcion: String
 }
 
-input EstadoAsignacionInput {
+input EstadoAsignacionRequest {
     nombre: String!
     descripcion: String
 }
@@ -495,7 +496,7 @@ type EstadoAprobacion {
     descripcion: String
 }
 
-input EstadoAprobacionInput {
+input EstadoAprobacionRequest {
     nombre: String!
     descripcion: String
 }
@@ -506,7 +507,7 @@ type TipoActividad {
     descripcion: String
 }
 
-input TipoActividadInput {
+input TipoActividadRequest {
     nombre: String!
     descripcion: String
 }
@@ -517,7 +518,7 @@ type TipoOrdenTrabajo {
     descripcion: String
 }
 
-input TipoOrdenTrabajoInput {
+input TipoOrdenTrabajoRequest {
     nombre: String!
     descripcion: String
 }
@@ -533,7 +534,7 @@ type OrdenTrabajo {
     creado_en: DateTime
 }
 
-input OrdenTrabajoInput {
+input OrdenTrabajoRequest {
     referencia: String
     tipo_id: ID
     descripcion: String
@@ -548,7 +549,7 @@ type FuncionTarea {
     descripcion: String
 }
 
-input FuncionTareaInput {
+input FuncionTareaRequest {
     nombre: String!
     descripcion: String
 }
@@ -566,7 +567,7 @@ type Asignacion {
     creado_en: DateTime
 }
 
-input AsignacionInput {
+input AsignacionRequest {
     orden_trabajo_id: ID
     usuario_id: ID
     inicio_planificado: DateTime
@@ -588,7 +589,7 @@ type HojaTimesheet {
     creado_en: DateTime
 }
 
-input HojaTimesheetInput {
+input HojaTimesheetRequest {
     usuario_id: ID
     inicio_periodo: DateTime
     fin_periodo: DateTime
@@ -612,7 +613,7 @@ type RegistroTiempo {
     actualizado_en: DateTime
 }
 
-input RegistroTiempoInput {
+input RegistroTiempoRequest {
     asignacion_id: ID
     inicio_tz: DateTime
     fin_tz: DateTime
@@ -631,11 +632,10 @@ type ExcepcionTiempo {
     resuelto: Boolean
 }
 
-input ExcepcionTiempoInput {
-    usuario_id: ID
+input ExcepcionTiempoRequest {
+    usuario_id: ID!
     periodo: String
     detalles: String
-    resuelto: Boolean
 }
 
 type TarifaEmpleado {
@@ -643,17 +643,17 @@ type TarifaEmpleado {
     usuario_id: ID
     tarifa: Numeric
     moneda: String
-    vigente_desde: DateTime
-    vigente_hasta: DateTime
+    vigente_desde: Date
+    vigente_hasta: Date
     creado_en: DateTime
 }
 
-input TarifaEmpleadoInput {
-    usuario_id: ID
+input TarifaEmpleadoRequest {
+    usuario_id: ID!
     tarifa: Numeric
     moneda: String
-    vigente_desde: DateTime
-    vigente_hasta: DateTime
+    vigente_desde: Date
+    vigente_hasta: Date
 }
 
 type Query {
@@ -672,14 +672,19 @@ type Query {
     puntosReorden: [PuntoReorden]
     estadosAsignacion: [EstadoAsignacion]
     estadosAprobacion: [EstadoAprobacion]
+    estadoAprobacion(id: ID!): EstadoAprobacion
     tiposActividad: [TipoActividad]
     ordenesTrabajo: [OrdenTrabajo]
     funcionesTarea: [FuncionTarea]
     asignaciones: [Asignacion]
+    asignacion(id: ID!): Asignacion
     hojasTimesheet: [HojaTimesheet]
     registrosTiempo: [RegistroTiempo]
+    registroTiempo(id: ID!): RegistroTiempo
     excepcionesTiempo: [ExcepcionTiempo]
+    excepcionTiempo(id: ID!): ExcepcionTiempo
     tarifasEmpleado: [TarifaEmpleado]
+    tarifaEmpleado(id: ID!): TarifaEmpleado
     estadosOrden: [EstadoOrden]
     tiposCosto: [TipoCosto]
     unidadesMedidaTipos: [UnidadMedidaTipo]
@@ -694,99 +699,105 @@ type Query {
 
 
 type Mutation {
-    createEstadoOrden(input: EstadoOrdenInput!): EstadoOrden
-    updateEstadoOrden(id: ID!, input: EstadoOrdenInput!): EstadoOrden
+    createEstadoOrden(input: EstadoOrdenRequest!): EstadoOrden
+    updateEstadoOrden(id: ID!, input: EstadoOrdenRequest!): EstadoOrden
     deleteEstadoOrden(id: ID!): Boolean
 
-    createTipoCosto(input: TipoCostoInput!): TipoCosto
-    updateTipoCosto(id: ID!, input: TipoCostoInput!): TipoCosto
+    createTipoCosto(input: TipoCostoRequest!): TipoCosto
+    updateTipoCosto(id: ID!, input: TipoCostoRequest!): TipoCosto
     deleteTipoCosto(id: ID!): Boolean
 
-    createUnidadMedidaTipo(input: UnidadMedidaTipoInput!): UnidadMedidaTipo
-    updateUnidadMedidaTipo(id: ID!, input: UnidadMedidaTipoInput!): UnidadMedidaTipo
+    createUnidadMedidaTipo(input: UnidadMedidaTipoRequest!): UnidadMedidaTipo
+    updateUnidadMedidaTipo(id: ID!, input: UnidadMedidaTipoRequest!): UnidadMedidaTipo
     deleteUnidadMedidaTipo(id: ID!): Boolean
 
-    createUnidadMedida(input: UnidadMedidaInput!): UnidadMedida
-    updateUnidadMedida(id: ID!, input: UnidadMedidaInput!): UnidadMedida
+    createUnidadMedida(input: UnidadMedidaRequest!): UnidadMedida
+    updateUnidadMedida(id: ID!, input: UnidadMedidaRequest!): UnidadMedida
     deleteUnidadMedida(id: ID!): Boolean
 
-    createProducto(input: ProductoInput!): Producto
-    updateProducto(id: ID!, input: ProductoInput!): Producto
+    createProducto(input: ProductoRequest!): Producto
+    updateProducto(id: ID!, input: ProductoRequest!): Producto
     deleteProducto(id: ID!): Boolean
 
-    createLoteProduccion(input: LoteProduccionInput!): LoteProduccion
-    updateLoteProduccion(id: ID!, input: LoteProduccionInput!): LoteProduccion
+    createLoteProduccion(input: LoteProduccionRequest!): LoteProduccion
+    updateLoteProduccion(id: ID!, input: LoteProduccionRequest!): LoteProduccion
     deleteLoteProduccion(id: ID!): Boolean
 
-    createOrdenProduccion(input: OrdenProduccionInput!): OrdenProduccion
-    updateOrdenProduccion(id: ID!, input: OrdenProduccionInput!): OrdenProduccion
+    createOrdenProduccion(input: OrdenProduccionRequest!): OrdenProduccion
+    updateOrdenProduccion(id: ID!, input: OrdenProduccionRequest!): OrdenProduccion
     deleteOrdenProduccion(id: ID!): Boolean
 
-    createBodega(input: BodegaInput!): Bodega
-    updateBodega(id: ID!, input: BodegaInput!): Bodega
+    createBodega(input: BodegaRequest!): Bodega
+    updateBodega(id: ID!, input: BodegaRequest!): Bodega
     deleteBodega(id: ID!): Boolean
 
-    createMovimientoInventario(input: MovimientoInventarioInput!): MovimientoInventario
-    updateMovimientoInventario(id: ID!, input: MovimientoInventarioInput!): MovimientoInventario
+    createMovimientoInventario(input: MovimientoInventarioRequest!): MovimientoInventario
+    updateMovimientoInventario(id: ID!, input: MovimientoInventarioRequest!): MovimientoInventario
     deleteMovimientoInventario(id: ID!): Boolean
 
-    createMovimientoInventarioDetalle(input: MovimientoInventarioDetalleInput!): MovimientoInventarioDetalle
-    updateMovimientoInventarioDetalle(id: ID!, input: MovimientoInventarioDetalleInput!): MovimientoInventarioDetalle
+    createMovimientoInventarioDetalle(input: MovimientoInventarioDetalleRequest!): MovimientoInventarioDetalle
+    updateMovimientoInventarioDetalle(id: ID!, input: MovimientoInventarioDetalleRequest!): MovimientoInventarioDetalle
     deleteMovimientoInventarioDetalle(id: ID!): Boolean
 
-    createInventarioLote(input: InventarioLoteInput!): InventarioLote
-    updateInventarioLote(id: ID!, input: InventarioLoteInput!): InventarioLote
+    createInventarioLote(input: InventarioLoteRequest!): InventarioLote
+    updateInventarioLote(id: ID!, input: InventarioLoteRequest!): InventarioLote
     deleteInventarioLote(id: ID!): Boolean
 
-    createReservaMaterialOrden(input: ReservaMaterialOrdenInput!): ReservaMaterialOrden
-    updateReservaMaterialOrden(id: ID!, input: ReservaMaterialOrdenInput!): ReservaMaterialOrden
+    createReservaMaterialOrden(input: ReservaMaterialOrdenRequest!): ReservaMaterialOrden
+    updateReservaMaterialOrden(id: ID!, input: ReservaMaterialOrdenRequest!): ReservaMaterialOrden
     deleteReservaMaterialOrden(id: ID!): Boolean
 
-    createEstacionProduccion(input: EstacionProduccionInput!): EstacionProduccion
-    updateEstacionProduccion(id: ID!, input: EstacionProduccionInput!): EstacionProduccion
+    createEstacionProduccion(input: EstacionProduccionRequest!): EstacionProduccion
+    updateEstacionProduccion(id: ID!, input: EstacionProduccionRequest!): EstacionProduccion
     deleteEstacionProduccion(id: ID!): Boolean
 
-    createOrdenEstacion(input: OrdenEstacionInput!): OrdenEstacion
-    updateOrdenEstacion(id: ID!, input: OrdenEstacionInput!): OrdenEstacion
+    createOrdenEstacion(input: OrdenEstacionRequest!): OrdenEstacion
+    updateOrdenEstacion(id: ID!, input: OrdenEstacionRequest!): OrdenEstacion
     deleteOrdenEstacion(id: ID!): Boolean
 
-    createOrdenEvento(input: OrdenEventoInput!): OrdenEvento
-    updateOrdenEvento(id: ID!, input: OrdenEventoInput!): OrdenEvento
+    createOrdenEvento(input: OrdenEventoRequest!): OrdenEvento
+    updateOrdenEvento(id: ID!, input: OrdenEventoRequest!): OrdenEvento
     deleteOrdenEvento(id: ID!): Boolean
 
-    createConteoCiclico(input: ConteoCiclicoInput!): ConteoCiclico
-    updateConteoCiclico(id: ID!, input: ConteoCiclicoInput!): ConteoCiclico
+    createConteoCiclico(input: ConteoCiclicoRequest!): ConteoCiclico
+    updateConteoCiclico(id: ID!, input: ConteoCiclicoRequest!): ConteoCiclico
     deleteConteoCiclico(id: ID!): Boolean
 
-    createDiscrepanciaInventario(input: DiscrepanciaInventarioInput!): DiscrepanciaInventario
-    updateDiscrepanciaInventario(id: ID!, input: DiscrepanciaInventarioInput!): DiscrepanciaInventario
+    createDiscrepanciaInventario(input: DiscrepanciaInventarioRequest!): DiscrepanciaInventario
+    updateDiscrepanciaInventario(id: ID!, input: DiscrepanciaInventarioRequest!): DiscrepanciaInventario
     deleteDiscrepanciaInventario(id: ID!): Boolean
 
-    createPuntoReorden(input: PuntoReordenInput!): PuntoReorden
-    updatePuntoReorden(id: ID!, input: PuntoReordenInput!): PuntoReorden
+    createPuntoReorden(input: PuntoReordenRequest!): PuntoReorden
+    updatePuntoReorden(id: ID!, input: PuntoReordenRequest!): PuntoReorden
     deletePuntoReorden(id: ID!): Boolean
 
-    createOrdenTrabajo(input: OrdenTrabajoInput!): OrdenTrabajo
-    updateOrdenTrabajo(id: ID!, input: OrdenTrabajoInput!): OrdenTrabajo
+    createOrdenTrabajo(input: OrdenTrabajoRequest!): OrdenTrabajo
+    updateOrdenTrabajo(id: ID!, input: OrdenTrabajoRequest!): OrdenTrabajo
     deleteOrdenTrabajo(id: ID!): Boolean
 
-    createAsignacion(input: AsignacionInput!): Asignacion
-    updateAsignacion(id: ID!, input: AsignacionInput!): Asignacion
+    createAsignacion(input: AsignacionRequest!): Asignacion
+    updateAsignacion(id: ID!, input: AsignacionRequest!): Asignacion
     deleteAsignacion(id: ID!): Boolean
 
-    createHojaTimesheet(input: HojaTimesheetInput!): HojaTimesheet
-    updateHojaTimesheet(id: ID!, input: HojaTimesheetInput!): HojaTimesheet
+    createHojaTimesheet(input: HojaTimesheetRequest!): HojaTimesheet
+    updateHojaTimesheet(id: ID!, input: HojaTimesheetRequest!): HojaTimesheet
     deleteHojaTimesheet(id: ID!): Boolean
 
-    createRegistroTiempo(input: RegistroTiempoInput!): RegistroTiempo
-    updateRegistroTiempo(id: ID!, input: RegistroTiempoInput!): RegistroTiempo
+    createRegistroTiempo(input: RegistroTiempoRequest!): RegistroTiempo
+    updateRegistroTiempo(id: ID!, input: RegistroTiempoRequest!): RegistroTiempo
     deleteRegistroTiempo(id: ID!): Boolean
 
-    createExcepcionTiempo(input: ExcepcionTiempoInput!): ExcepcionTiempo
-    updateExcepcionTiempo(id: ID!, input: ExcepcionTiempoInput!): ExcepcionTiempo
+    createExcepcionTiempo(input: ExcepcionTiempoRequest!): ExcepcionTiempo
+    updateExcepcionTiempo(id: ID!, input: ExcepcionTiempoRequest!): ExcepcionTiempo
     deleteExcepcionTiempo(id: ID!): Boolean
 
-    createTarifaEmpleado(input: TarifaEmpleadoInput!): TarifaEmpleado
-    updateTarifaEmpleado(id: ID!, input: TarifaEmpleadoInput!): TarifaEmpleado
+    resolveExcepcionTiempo(id: ID!): ExcepcionTiempo
+
+    createTarifaEmpleado(input: TarifaEmpleadoRequest!): TarifaEmpleado
+    updateTarifaEmpleado(id: ID!, input: TarifaEmpleadoRequest!): TarifaEmpleado
     deleteTarifaEmpleado(id: ID!): Boolean
+
+    createEstadoAprobacion(input: EstadoAprobacionRequest!): EstadoAprobacion
+    updateEstadoAprobacion(id: ID!, input: EstadoAprobacionRequest!): EstadoAprobacion
+    deleteEstadoAprobacion(id: ID!): Boolean
 }

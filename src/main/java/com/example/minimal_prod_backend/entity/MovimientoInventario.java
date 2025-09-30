@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +26,7 @@ public class MovimientoInventario {
 
     @Builder.Default
     @Column(updatable = false)
-    private LocalDateTime fecha = LocalDateTime.now();
+    private OffsetDateTime  fecha = OffsetDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "bodega_origen_id")
@@ -51,7 +52,7 @@ public class MovimientoInventario {
 
     @Builder.Default
     @Column(name = "creado_en", updatable = false)
-    private LocalDateTime creadoEn = LocalDateTime.now();
+    private OffsetDateTime creadoEn = OffsetDateTime.now();
 
     @OneToMany(mappedBy = "movimiento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @ToString.Exclude

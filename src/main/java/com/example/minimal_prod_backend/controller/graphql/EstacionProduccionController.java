@@ -21,31 +21,31 @@ public class EstacionProduccionController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTACION_PRODUCCION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTACIONES_PRODUCCION_TAG', 'READ')")
     public List<EstacionProduccionResponse> estacionesProduccion() {
         return estacionProduccionService.getEstacionesProduccion();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTACION_PRODUCCION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTACIONES_PRODUCCION_TAG', 'READ')")
     public EstacionProduccionResponse estacionProduccion(@Argument Long id) {
         return estacionProduccionService.getEstacionProduccionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTACION_PRODUCCION_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTACIONES_PRODUCCION_TAG', 'CREATE')")
     public EstacionProduccionResponse createEstacionProduccion(@Argument("input") EstacionProduccionInput estacionProduccionInput) {
         return estacionProduccionService.createEstacionProduccion(estacionProduccionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTACION_PRODUCCION_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTACIONES_PRODUCCION_TAG', 'UPDATE')")
     public EstacionProduccionResponse updateEstacionProduccion(@Argument Long id, @Argument("input") EstacionProduccionInput estacionProduccionInput) {
         return estacionProduccionService.updateEstacionProduccion(id, estacionProduccionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTACION_PRODUCCION_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('ESTACIONES_PRODUCCION_TAG', 'DELETE')")
     public boolean deleteEstacionProduccion(@Argument Long id) {
         estacionProduccionService.deleteEstacionProduccion(id);
         return true;

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -43,7 +44,7 @@ public class InventarioLoteServiceImpl implements InventarioLoteService {
     public InventarioLoteResponse createInventarioLote(InventarioLoteInput input) {
         InventarioLote entity = mapper.toEntity(input);
         attachRelations(input, entity);
-        entity.setActualizadoEn(LocalDateTime.now());
+        entity.setActualizadoEn(OffsetDateTime.now());
         return mapper.toResponse(inventarioLoteRepository.save(entity));
     }
 
@@ -53,7 +54,7 @@ public class InventarioLoteServiceImpl implements InventarioLoteService {
                 .orElseThrow(() -> new ResourceNotFoundException("InventarioLote not found with id: " + id));
         mapper.updateEntityFromInput(input, entity);
         attachRelations(input, entity);
-        entity.setActualizadoEn(LocalDateTime.now());
+        entity.setActualizadoEn(OffsetDateTime.now());
         return mapper.toResponse(inventarioLoteRepository.save(entity));
     }
 

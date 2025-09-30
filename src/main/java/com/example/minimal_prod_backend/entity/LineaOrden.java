@@ -7,6 +7,7 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Getter
@@ -53,7 +54,7 @@ public class LineaOrden {
     private String observaciones;
 
     @Column(name = "creado_en", updatable = false)
-    private LocalDateTime creadoEn = LocalDateTime.now();
+    private OffsetDateTime creadoEn = OffsetDateTime.now();
 
     @Override
     public final boolean equals(Object o) {

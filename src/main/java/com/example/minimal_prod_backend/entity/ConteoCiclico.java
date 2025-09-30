@@ -6,6 +6,7 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Getter
@@ -47,7 +48,7 @@ public class ConteoCiclico {
 
     @Builder.Default
     @Column(name = "fecha")
-    private LocalDateTime fecha = LocalDateTime.now();
+    private OffsetDateTime fecha = OffsetDateTime.now();
 
     @Override
     public final boolean equals(Object o) {

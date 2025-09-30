@@ -21,31 +21,31 @@ public class UnidadConversionController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDADES_CONVERSION_TAG', 'READ')")
     public List<UnidadConversionResponse> unidadesConversion() {
         return unidadConversionService.getUnidadConversiones();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDADES_CONVERSION_TAG', 'READ')")
     public UnidadConversionResponse unidadConversion(@Argument Long id) {
         return unidadConversionService.getUnidadConversionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDADES_CONVERSION_TAG', 'CREATE')")
     public UnidadConversionResponse createUnidadConversion(@Argument("input") UnidadConversionInput unidadConversionInput) {
         return unidadConversionService.createUnidadConversion(unidadConversionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDADES_CONVERSION_TAG', 'UPDATE')")
     public UnidadConversionResponse updateUnidadConversion(@Argument Long id, @Argument("input") UnidadConversionInput unidadConversionInput) {
         return unidadConversionService.updateUnidadConversion(id, unidadConversionInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('UNIDAD_CONVERSION_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('UNIDADES_CONVERSION_TAG', 'DELETE')")
     public boolean deleteUnidadConversion(@Argument Long id) {
         unidadConversionService.deleteUnidadConversion(id);
         return true;

@@ -21,31 +21,31 @@ public class InventarioLoteController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('INVENTARIO_LOTE_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('INVENTARIOS_LOTE_TAG', 'READ')")
     public List<InventarioLoteResponse> inventarioLotes() {
         return inventarioLoteService.getInventarioLotes();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('INVENTARIO_LOTE_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('INVENTARIOS_LOTE_TAG', 'READ')")
     public InventarioLoteResponse inventarioLote(@Argument Long id) {
         return inventarioLoteService.getInventarioLoteById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('INVENTARIO_LOTE_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('INVENTARIOS_LOTE_TAG', 'CREATE')")
     public InventarioLoteResponse createInventarioLote(@Argument("input") InventarioLoteInput inventarioLoteInput) {
         return inventarioLoteService.createInventarioLote(inventarioLoteInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('INVENTARIO_LOTE_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('INVENTARIOS_LOTE_TAG', 'UPDATE')")
     public InventarioLoteResponse updateInventarioLote(@Argument Long id, @Argument("input") InventarioLoteInput inventarioLoteInput) {
         return inventarioLoteService.updateInventarioLote(id, inventarioLoteInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('INVENTARIO_LOTE_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('INVENTARIOS_LOTE_TAG', 'DELETE')")
     public boolean deleteInventarioLote(@Argument Long id) {
         inventarioLoteService.deleteInventarioLote(id);
         return true;

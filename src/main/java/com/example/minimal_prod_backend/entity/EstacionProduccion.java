@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Getter
@@ -34,7 +35,7 @@ public class EstacionProduccion {
     private Integer orden;
 
     @Column(name = "creado_en", insertable = false, updatable = false)
-    private LocalDateTime creadoEn;
+    private OffsetDateTime creadoEn;
 
     @Override
     public final boolean equals(Object o) {

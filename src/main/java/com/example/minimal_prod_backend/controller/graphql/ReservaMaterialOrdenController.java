@@ -21,31 +21,31 @@ public class ReservaMaterialOrdenController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('RESERVA_MATERIAL_ORDEN_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('RESERVAS_MATERIAL_ORDEN_TAG', 'READ')")
     public List<ReservaMaterialOrdenResponse> reservasMaterialOrden() {
         return reservaMaterialOrdenService.getReservasMaterialOrden();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('RESERVA_MATERIAL_ORDEN_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('RESERVAS_MATERIAL_ORDEN_TAG', 'READ')")
     public ReservaMaterialOrdenResponse reservaMaterialOrden(@Argument Long id) {
         return reservaMaterialOrdenService.getReservaMaterialOrdenById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('RESERVA_MATERIAL_ORDEN_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('RESERVAS_MATERIAL_ORDEN_TAG', 'CREATE')")
     public ReservaMaterialOrdenResponse createReservaMaterialOrden(@Argument("input") ReservaMaterialOrdenInput reservaMaterialOrdenInput) {
         return reservaMaterialOrdenService.createReservaMaterialOrden(reservaMaterialOrdenInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('RESERVA_MATERIAL_ORDEN_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('RESERVAS_MATERIAL_ORDEN_TAG', 'UPDATE')")
     public ReservaMaterialOrdenResponse updateReservaMaterialOrden(@Argument Long id, @Argument("input") ReservaMaterialOrdenInput reservaMaterialOrdenInput) {
         return reservaMaterialOrdenService.updateReservaMaterialOrden(id, reservaMaterialOrdenInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('RESERVA_MATERIAL_ORDEN_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('RESERVAS_MATERIAL_ORDEN_TAG', 'DELETE')")
     public boolean deleteReservaMaterialOrden(@Argument Long id) {
         reservaMaterialOrdenService.deleteReservaMaterialOrden(id);
         return true;

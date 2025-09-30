@@ -58,12 +58,12 @@ public class UserManagementStepdefs extends BaseStepdefs {
     @Given("existe un usuario con id {int} y un rol con id {int}")
     public void existeUnUsuarioConIdYUnRolConId(int userId, int roleId) {
         existeUnUsuarioConId(userId);
-        roleRepository.save(Rol.builder().id((long)roleId).name("role"+roleId).build());
+        roleRepository.save(Rol.builder().id((long)roleId).nombre("role"+roleId).build());
     }
 
     @Given("un usuario con id {int} tiene asignado el rol con id {int}")
     public void unUsuarioConIdTieneAsignadoElRolConId(int userId, int roleId) {
-        Rol role = roleRepository.findById((long)roleId).orElseGet(() -> roleRepository.save(Rol.builder().id((long)roleId).name("role"+roleId).build()));
+        Rol role = roleRepository.findById((long)roleId).orElseGet(() -> roleRepository.save(Rol.builder().id((long)roleId).nombre("role"+roleId).build()));
         Usuario usuario = userRepository.findById((long)userId).orElseGet(() -> userRepository.save(Usuario.builder().id((long)userId).username("user"+userId).password(passwordEncoder.encode("password")).email("user"+userId+"@example.com").build()));
         usuario.getRoles().add(role);
         userRepository.save(usuario);

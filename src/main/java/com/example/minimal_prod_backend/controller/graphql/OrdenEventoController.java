@@ -21,31 +21,31 @@ public class OrdenEventoController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_EVENTO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_EVENTO_TAG', 'READ')")
     public List<OrdenEventoResponse> ordenesEvento() {
         return ordenEventoService.getOrdenesEvento();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_EVENTO_TAG', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_EVENTO_TAG', 'READ')")
     public OrdenEventoResponse ordenEvento(@Argument Long id) {
         return ordenEventoService.getOrdenEventoById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_EVENTO_TAG', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_EVENTO_TAG', 'CREATE')")
     public OrdenEventoResponse createOrdenEvento(@Argument("input") OrdenEventoInput ordenEventoInput) {
         return ordenEventoService.createOrdenEvento(ordenEventoInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_EVENTO_TAG', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_EVENTO_TAG', 'UPDATE')")
     public OrdenEventoResponse updateOrdenEvento(@Argument Long id, @Argument("input") OrdenEventoInput ordenEventoInput) {
         return ordenEventoService.updateOrdenEvento(id, ordenEventoInput);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ORDEN_EVENTO_TAG', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('ORDENES_EVENTO_TAG', 'DELETE')")
     public boolean deleteOrdenEvento(@Argument Long id) {
         ordenEventoService.deleteOrdenEvento(id);
         return true;

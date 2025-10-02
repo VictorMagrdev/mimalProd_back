@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioInput;
+import com.example.minimal_prod_backend.dto.MovimientoInventarioRequest;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioResponse;
 import com.example.minimal_prod_backend.service.MovimientoInventarioService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,14 +34,14 @@ public class MovimientoInventarioController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTOS_INVENTARIO_TAG', 'CREATE')")
-    public MovimientoInventarioResponse createMovimientoInventario(@Argument("input") MovimientoInventarioInput movimientoInventarioInput) {
-        return movimientoInventarioService.createMovimientoInventario(movimientoInventarioInput);
+    public MovimientoInventarioResponse createMovimientoInventario(@Argument("input") MovimientoInventarioRequest movimientoInventarioRequest) {
+        return movimientoInventarioService.createMovimientoInventario(movimientoInventarioRequest);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('MOVIMIENTOS_INVENTARIO_TAG', 'UPDATE')")
-    public MovimientoInventarioResponse updateMovimientoInventario(@Argument Long id, @Argument("input") MovimientoInventarioInput movimientoInventarioInput) {
-        return movimientoInventarioService.updateMovimientoInventario(id, movimientoInventarioInput);
+    public MovimientoInventarioResponse updateMovimientoInventario(@Argument Long id, @Argument("input") MovimientoInventarioRequest movimientoInventarioRequest) {
+        return movimientoInventarioService.updateMovimientoInventario(id, movimientoInventarioRequest);
     }
 
 }

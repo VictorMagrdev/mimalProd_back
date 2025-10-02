@@ -1,24 +1,14 @@
 package com.example.minimal_prod_backend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class InventarioLoteResponse {
-    private Long id;
-    private Long productoId;
-    private Long loteId;
-    private Long bodegaId;
-    private BigDecimal cantidad;
-    private Long unidadId;
-    private OffsetDateTime actualizadoEn;
-}
+public record InventarioLoteResponse(
+        Long id,
+        Long productoId,
+        Long loteId,
+        Long bodegaId,
+        BigDecimal cantidad,
+        Long unidadId,
+        OffsetDateTime actualizadoEn
+) {}

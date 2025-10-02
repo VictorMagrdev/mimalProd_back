@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.OrdenProduccionInput;
+import com.example.minimal_prod_backend.dto.OrdenProduccionRequest;
 import com.example.minimal_prod_backend.dto.OrdenProduccionResponse;
 import com.example.minimal_prod_backend.service.OrdenProduccionService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,14 +34,14 @@ public class OrdenProduccionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDENES_PRODUCCION_TAG', 'CREATE')")
-    public OrdenProduccionResponse createOrdenProduccion(@Argument("input") OrdenProduccionInput ordenProduccionInput) {
-        return ordenProduccionService.createOrdenProduccion(ordenProduccionInput);
+    public OrdenProduccionResponse createOrdenProduccion(@Argument("input") OrdenProduccionRequest ordenProduccionRequest) {
+        return ordenProduccionService.createOrdenProduccion(ordenProduccionRequest);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDENES_PRODUCCION_TAG', 'UPDATE')")
-    public OrdenProduccionResponse updateOrdenProduccion(@Argument Long id, @Argument("input") OrdenProduccionInput ordenProduccionInput) {
-        return ordenProduccionService.updateOrdenProduccion(id, ordenProduccionInput);
+    public OrdenProduccionResponse updateOrdenProduccion(@Argument Long id, @Argument("input") OrdenProduccionRequest ordenProduccionRequest) {
+        return ordenProduccionService.updateOrdenProduccion(id, ordenProduccionRequest);
     }
 
     @MutationMapping

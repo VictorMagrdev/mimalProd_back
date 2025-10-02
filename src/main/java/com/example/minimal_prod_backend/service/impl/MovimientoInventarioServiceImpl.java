@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioInput;
+import com.example.minimal_prod_backend.dto.MovimientoInventarioRequest;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioResponse;
 import com.example.minimal_prod_backend.entity.Bodega;
 import com.example.minimal_prod_backend.entity.MovimientoInventario;
@@ -42,7 +42,7 @@ public class MovimientoInventarioServiceImpl implements MovimientoInventarioServ
 
     @Override
     @Transactional
-    public MovimientoInventarioResponse createMovimientoInventario(MovimientoInventarioInput input) {
+    public MovimientoInventarioResponse createMovimientoInventario(MovimientoInventarioRequest input) {
         MovimientoInventario entity = mapper.toEntity(input);
         attachRelations(input, entity);
         MovimientoInventario saved = movimientoInventarioRepository.save(entity);
@@ -51,7 +51,7 @@ public class MovimientoInventarioServiceImpl implements MovimientoInventarioServ
 
     @Override
     @Transactional
-    public MovimientoInventarioResponse updateMovimientoInventario(Long id, MovimientoInventarioInput input) {
+    public MovimientoInventarioResponse updateMovimientoInventario(Long id, MovimientoInventarioRequest input) {
         MovimientoInventario existing = movimientoInventarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("MovimientoInventario not found with id: " + id));
 
@@ -69,7 +69,7 @@ public class MovimientoInventarioServiceImpl implements MovimientoInventarioServ
     /**
      * Maneja relaciones con otras entidades (BodegaOrigen, BodegaDestino, TipoMovimiento).
      */
-    private void attachRelations(MovimientoInventarioInput dto, MovimientoInventario entity) {
+    private void attachRelations(MovimientoInventarioRequest dto, MovimientoInventario entity) {
         if (dto.bodegaOrigenId() != null) {
             Bodega bodegaOrigen = bodegaRepository.findById(dto.bodegaOrigenId())
                     .orElseThrow(() -> new ResourceNotFoundException("Bodega Origen not found with id: " + dto.bodegaOrigenId()));

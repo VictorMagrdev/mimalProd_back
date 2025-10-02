@@ -1,15 +1,6 @@
 package com.example.minimal_prod_backend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class PoliticaLoginResponse {
-    private String tag;
-    private String accion;
-}
+public record PoliticaLoginResponse(
+        String tag,
+        String accion
+) {}

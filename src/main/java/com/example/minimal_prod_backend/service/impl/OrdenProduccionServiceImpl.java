@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.OrdenProduccionInput;
+import com.example.minimal_prod_backend.dto.OrdenProduccionRequest;
 import com.example.minimal_prod_backend.dto.OrdenProduccionResponse;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -36,7 +36,7 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 
     @Override
     @Transactional
-    public OrdenProduccionResponse createOrdenProduccion(OrdenProduccionInput input) {
+    public OrdenProduccionResponse createOrdenProduccion(OrdenProduccionRequest input) {
         OrdenProduccion entity = mapper.toEntity(input);
         OrdenProduccion saved = ordenProduccionRepository.save(entity);
         return mapper.toResponse(saved);
@@ -44,7 +44,7 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 
     @Override
     @Transactional
-    public OrdenProduccionResponse updateOrdenProduccion(Long id, OrdenProduccionInput input) {
+    public OrdenProduccionResponse updateOrdenProduccion(Long id, OrdenProduccionRequest input) {
         OrdenProduccion existing = ordenProduccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + id));
 

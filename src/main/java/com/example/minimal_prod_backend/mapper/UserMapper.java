@@ -1,6 +1,5 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.RoleResponse;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Usuario;

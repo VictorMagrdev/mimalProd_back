@@ -1,23 +1,14 @@
 package com.example.minimal_prod_backend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class ConteoCiclicoResponse {
-    private Long id;
-    private Long productoId;
-    private Long bodegaId;
-    private Long loteId;
-    private BigDecimal cantidadContada;
-    private Long unidadId;
-    private OffsetDateTime fecha;
-}
+public record ConteoCiclicoResponse(
+        Long id,
+        Long productoId,
+        Long bodegaId,
+        Long loteId,
+        BigDecimal cantidadContada,
+        Long unidadId,
+        OffsetDateTime fecha
+) {}

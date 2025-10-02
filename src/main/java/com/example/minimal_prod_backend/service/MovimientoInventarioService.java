@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioInput;
+import com.example.minimal_prod_backend.dto.MovimientoInventarioRequest;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioResponse;
 
 import java.util.List;
@@ -11,8 +11,8 @@ public interface MovimientoInventarioService {
 
     MovimientoInventarioResponse getMovimientoInventarioById(Long id);
 
-    MovimientoInventarioResponse createMovimientoInventario(MovimientoInventarioInput movimientoInventarioInput);
+    MovimientoInventarioResponse createMovimientoInventario(MovimientoInventarioRequest movimientoInventarioRequest);
 
-    MovimientoInventarioResponse updateMovimientoInventario(Long id, MovimientoInventarioInput movimientoInventarioInput);
+    MovimientoInventarioResponse updateMovimientoInventario(Long id, MovimientoInventarioRequest movimientoInventarioRequest);
 
 }

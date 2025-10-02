@@ -3,7 +3,7 @@ package com.example.minimal_prod_backend.dto;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public record MovimientoInventarioInput(
+public record MovimientoInventarioRequest(
         OffsetDateTime fecha,
         Long bodegaOrigenId,
         Long bodegaDestinoId,
@@ -12,5 +12,5 @@ public record MovimientoInventarioInput(
         String observaciones,
         Long creadoPor,
         OffsetDateTime creadoEn,
-        List<MovimientoInventarioDetalleInput> detalles
+        List<MovimientoInventarioDetalleRequest> detalles
 ) {}

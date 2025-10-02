@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioInput;
+import com.example.minimal_prod_backend.dto.MovimientoInventarioRequest;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioResponse;
 import com.example.minimal_prod_backend.entity.MovimientoInventario;
 import org.mapstruct.*;
@@ -17,7 +17,7 @@ public interface MovimientoInventarioMapper {
             @Mapping(source = "tipoMovimientoId", target = "tipoMovimiento.id"),
             @Mapping(source = "creadoPor", target = "creadoPor.id")
     })
-    MovimientoInventario toEntity(MovimientoInventarioInput input);
+    MovimientoInventario toEntity(MovimientoInventarioRequest input);
 
     List<MovimientoInventarioResponse> toResponseList(List<MovimientoInventario> conteos);
 
@@ -37,5 +37,5 @@ public interface MovimientoInventarioMapper {
             @Mapping(source = "tipoMovimientoId", target = "tipoMovimiento.id"),
             @Mapping(source = "creadoPor", target = "creadoPor.id")
     })
-    void updateEntityFromInput(MovimientoInventarioInput input, @MappingTarget MovimientoInventario entity);
+    void updateEntityFromInput(MovimientoInventarioRequest input, @MappingTarget MovimientoInventario entity);
 }

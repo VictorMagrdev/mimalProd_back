@@ -9,7 +9,6 @@ public record RegistroTiempoResponse(
         OffsetDateTime inicioTz,
         OffsetDateTime finTz,
         String duracion,
-        BigDecimal duracionHoras,
         Long tipoActividadId,
         Long tipoCostoId,
         Long estadoAprobacionId,

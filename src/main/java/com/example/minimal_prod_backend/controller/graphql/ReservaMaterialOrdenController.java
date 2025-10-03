@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenInput;
+import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenRequest;
 import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenResponse;
 import com.example.minimal_prod_backend.service.ReservaMaterialOrdenService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class ReservaMaterialOrdenController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('RESERVAS_MATERIAL_ORDEN_TAG', 'CREATE')")
-    public ReservaMaterialOrdenResponse createReservaMaterialOrden(@Argument("input") ReservaMaterialOrdenInput reservaMaterialOrdenInput) {
+    public ReservaMaterialOrdenResponse createReservaMaterialOrden(@Argument("input") ReservaMaterialOrdenRequest reservaMaterialOrdenInput) {
         return reservaMaterialOrdenService.createReservaMaterialOrden(reservaMaterialOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('RESERVAS_MATERIAL_ORDEN_TAG', 'UPDATE')")
-    public ReservaMaterialOrdenResponse updateReservaMaterialOrden(@Argument Long id, @Argument("input") ReservaMaterialOrdenInput reservaMaterialOrdenInput) {
+    public ReservaMaterialOrdenResponse updateReservaMaterialOrden(@Argument Long id, @Argument("input") ReservaMaterialOrdenRequest reservaMaterialOrdenInput) {
         return reservaMaterialOrdenService.updateReservaMaterialOrden(id, reservaMaterialOrdenInput);
     }
 

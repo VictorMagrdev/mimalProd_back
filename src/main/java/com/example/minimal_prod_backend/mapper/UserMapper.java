@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
+import com.example.minimal_prod_backend.dto.RolResponse;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Usuario;
@@ -20,18 +21,16 @@ public interface UserMapper {
     UserResponse toUserResponse(Usuario usuario);
 
     @Named("mapRoles")
-    default Set<RoleResponse> mapRoles(Set<Rol> roles) {
+    default Set<RolResponse> mapRoles(Set<Rol> roles) {
         if (roles == null) return null;
         return roles.stream()
-                .map(role -> {
-                    RoleResponse r = new RoleResponse();
-                    r.setId(role.getId());
-                    r.setNombre(role.getNombre());
-                    r.setDescripcion(role.getDescripcion());
-                    return r;
-                })
+                .map(role -> new RolResponse(
+                        role.getId(),
+                        role.getNombre(),
+                        role.getDescripcion()
+                ))
                 .collect(Collectors.toSet());
     }
 
-    RoleResponse toRoleResponse(Rol rol);
+    RolResponse toRoleResponse(Rol rol);
 }

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.LineaOrdenInput;
+import com.example.minimal_prod_backend.dto.LineaOrdenRequest;
 import com.example.minimal_prod_backend.dto.LineaOrdenResponse;
 import com.example.minimal_prod_backend.entity.LineaOrden;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
@@ -45,7 +45,7 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
 
     @Override
     @Transactional
-    public LineaOrdenResponse createLineaOrden(LineaOrdenInput input) {
+    public LineaOrdenResponse createLineaOrden(LineaOrdenRequest input) {
         LineaOrden entity = mapper.toEntity(input);
         attachRelations(input, entity);
         LineaOrden saved = lineaOrdenRepository.save(entity);
@@ -54,7 +54,7 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
 
     @Override
     @Transactional
-    public LineaOrdenResponse updateLineaOrden(Long id, LineaOrdenInput input) {
+    public LineaOrdenResponse updateLineaOrden(Long id, LineaOrdenRequest input) {
         LineaOrden existing = lineaOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("LineaOrden not found with id: " + id));
 
@@ -70,19 +70,19 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
         lineaOrdenRepository.deleteById(id);
     }
 
-    private void attachRelations(LineaOrdenInput dto, LineaOrden entity) {
-        if (dto.getOrdenId() != null) {
-            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getOrdenId())
+    private void attachRelations(LineaOrdenRequest dto, LineaOrden entity) {
+        if (dto.ordenId() != null) {
+            OrdenProduccion orden = ordenProduccionRepository.findById(dto.ordenId())
                     .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found"));
             entity.setOrden(orden);
         }
-        if (dto.getProductoComponenteId() != null) {
-            Producto producto = productoRepository.findById(dto.getProductoComponenteId())
+        if (dto.productoComponenteId() != null) {
+            Producto producto = productoRepository.findById(dto.productoComponenteId())
                     .orElseThrow(() -> new ResourceNotFoundException("Producto not found"));
             entity.setProductoComponente(producto);
         }
-        if (dto.getUnidadComponenteId() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getUnidadComponenteId())
+        if (dto.unidadComponenteId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(dto.unidadComponenteId())
                     .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found"));
             entity.setUnidadComponente(unidad);
         }

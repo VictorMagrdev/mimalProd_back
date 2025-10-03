@@ -36,9 +36,6 @@ public class RegistroTiempo {
     @Column(name = "duracion", insertable = false, updatable = false)
     private String duracion;
 
-    @Column(name = "duracion_horas", insertable = false, updatable = false)
-    private Double duracionHoras;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_actividad_id")
     @ToString.Exclude

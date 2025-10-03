@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.OrdenEstacionInput;
+import com.example.minimal_prod_backend.dto.OrdenEstacionRequest;
 import com.example.minimal_prod_backend.dto.OrdenEstacionResponse;
 import com.example.minimal_prod_backend.entity.OrdenEstacion;
 import org.mapstruct.*;
@@ -14,7 +14,7 @@ public interface OrdenEstacionMapper {
             @Mapping(source = "estacionId", target = "estacion.id"),
             @Mapping(source = "estadoOrdenEstacionId", target = "estado.id")
     })
-    OrdenEstacion toEntity(OrdenEstacionInput input);
+    OrdenEstacion toEntity(OrdenEstacionRequest input);
 
     @Mappings({
             @Mapping(source = "orden.id", target = "ordenId"),
@@ -30,5 +30,5 @@ public interface OrdenEstacionMapper {
             @Mapping(source = "estacionId", target = "estacion.id"),
             @Mapping(source = "estadoOrdenEstacionId", target = "estado.id")
     })
-    void updateEntityFromInput(OrdenEstacionInput input, @MappingTarget OrdenEstacion entity);
+    void updateEntityFromInput(OrdenEstacionRequest input, @MappingTarget OrdenEstacion entity);
 }

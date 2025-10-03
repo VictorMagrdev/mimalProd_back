@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.LineaOrdenInput;
+import com.example.minimal_prod_backend.dto.LineaOrdenRequest;
 import com.example.minimal_prod_backend.dto.LineaOrdenResponse;
 import com.example.minimal_prod_backend.entity.LineaOrden;
 import org.mapstruct.*;
@@ -18,7 +18,7 @@ public interface LineaOrdenMapper {
             @Mapping(source = "productoComponenteId", target = "productoComponente.id"),
             @Mapping(source = "unidadComponenteId", target = "unidadComponente.id")
     })
-    LineaOrden toEntity(LineaOrdenInput input);
+    LineaOrden toEntity(LineaOrdenRequest input);
 
     List<LineaOrdenResponse> toResponseList(List<LineaOrden> conteos);
 
@@ -38,5 +38,5 @@ public interface LineaOrdenMapper {
             @Mapping(source = "productoComponenteId", target = "productoComponente.id"),
             @Mapping(source = "unidadComponenteId", target = "unidadComponente.id")
     })
-    void updateEntityFromInput(LineaOrdenInput input, @MappingTarget LineaOrden entity);
+    void updateEntityFromInput(LineaOrdenRequest input, @MappingTarget LineaOrden entity);
 }

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.UnidadMedidaTipoInput;
+import com.example.minimal_prod_backend.dto.UnidadMedidaTipoRequest;
 import com.example.minimal_prod_backend.dto.UnidadMedidaTipoResponse;
 import com.example.minimal_prod_backend.entity.UnidadMedidaTipo;
 import org.mapstruct.*;
@@ -13,7 +13,7 @@ public interface UnidadMedidaTipoMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
     })
-    UnidadMedidaTipo toEntity(UnidadMedidaTipoInput input);
+    UnidadMedidaTipo toEntity(UnidadMedidaTipoRequest input);
 
     List<UnidadMedidaTipoResponse> toResponseList(List<UnidadMedidaTipo> conteos);
 
@@ -23,5 +23,5 @@ public interface UnidadMedidaTipoMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
     })
-    void updateEntityFromInput(UnidadMedidaTipoInput input, @MappingTarget UnidadMedidaTipo entity);
+    void updateEntityFromInput(UnidadMedidaTipoRequest input, @MappingTarget UnidadMedidaTipo entity);
 }

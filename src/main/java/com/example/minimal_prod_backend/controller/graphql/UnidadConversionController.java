@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.UnidadConversionInput;
+import com.example.minimal_prod_backend.dto.UnidadConversionRequest;
 import com.example.minimal_prod_backend.dto.UnidadConversionResponse;
 import com.example.minimal_prod_backend.service.UnidadConversionService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class UnidadConversionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDADES_CONVERSION_TAG', 'CREATE')")
-    public UnidadConversionResponse createUnidadConversion(@Argument("input") UnidadConversionInput unidadConversionInput) {
+    public UnidadConversionResponse createUnidadConversion(@Argument("input") UnidadConversionRequest unidadConversionInput) {
         return unidadConversionService.createUnidadConversion(unidadConversionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDADES_CONVERSION_TAG', 'UPDATE')")
-    public UnidadConversionResponse updateUnidadConversion(@Argument Long id, @Argument("input") UnidadConversionInput unidadConversionInput) {
+    public UnidadConversionResponse updateUnidadConversion(@Argument Long id, @Argument("input") UnidadConversionRequest unidadConversionInput) {
         return unidadConversionService.updateUnidadConversion(id, unidadConversionInput);
     }
 

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.EstacionProduccionInput;
+import com.example.minimal_prod_backend.dto.EstacionProduccionRequest;
 import com.example.minimal_prod_backend.dto.EstacionProduccionResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface EstacionProduccionService {
 
     EstacionProduccionResponse getEstacionProduccionById(Long id);
 
-    EstacionProduccionResponse createEstacionProduccion(EstacionProduccionInput estacionProduccionInput);
+    EstacionProduccionResponse createEstacionProduccion(EstacionProduccionRequest estacionProduccionInput);
 
-    EstacionProduccionResponse updateEstacionProduccion(Long id, EstacionProduccionInput estacionProduccionInput);
+    EstacionProduccionResponse updateEstacionProduccion(Long id, EstacionProduccionRequest estacionProduccionInput);
 
     void deleteEstacionProduccion(Long id);
 }

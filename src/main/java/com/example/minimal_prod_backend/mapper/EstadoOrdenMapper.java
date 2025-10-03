@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.EstadoOrdenInput;
+import com.example.minimal_prod_backend.dto.EstadoOrdenRequest;
 import com.example.minimal_prod_backend.dto.EstadoOrdenResponse;
 import com.example.minimal_prod_backend.entity.EstadoOrden;
 import org.mapstruct.*;
@@ -14,7 +14,7 @@ public interface EstadoOrdenMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
-    EstadoOrden toEntity(EstadoOrdenInput input);
+    EstadoOrden toEntity(EstadoOrdenRequest input);
 
     List<EstadoOrdenResponse> toResponseList(List<EstadoOrden> conteos);
 
@@ -25,5 +25,5 @@ public interface EstadoOrdenMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
-    void updateEntityFromInput(EstadoOrdenInput input, @MappingTarget EstadoOrden entity);
+    void updateEntityFromInput(EstadoOrdenRequest input, @MappingTarget EstadoOrden entity);
 }

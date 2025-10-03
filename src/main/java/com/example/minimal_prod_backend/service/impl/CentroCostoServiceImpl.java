@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.CentroCostoInput;
+import com.example.minimal_prod_backend.dto.CentroCostoRequest;
 import com.example.minimal_prod_backend.dto.CentroCostoResponse;
 import com.example.minimal_prod_backend.entity.CentroCosto;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -35,18 +35,18 @@ public class CentroCostoServiceImpl implements CentroCostoService {
     }
 
     @Override
-    public CentroCostoResponse createCentroDeCosto(CentroCostoInput centroCostoInput) {
+    public CentroCostoResponse createCentroDeCosto(CentroCostoRequest centroCostoInput) {
         CentroCosto centroCosto = centroCostoMapper.toEntity(centroCostoInput);
         return centroCostoMapper.toResponse(centroCostoRepository.save(centroCosto));
     }
 
     @Override
-    public CentroCostoResponse updateCentroDeCosto(Long id, CentroCostoInput centroCostoInput) {
+    public CentroCostoResponse updateCentroDeCosto(Long id, CentroCostoRequest centroCostoInput) {
         CentroCosto existingCentroCosto = centroCostoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("CentroCosto not found with id: " + id));
 
-        existingCentroCosto.setCodigo(centroCostoInput.getCodigo());
-        existingCentroCosto.setNombre(centroCostoInput.getNombre());
+        existingCentroCosto.setCodigo(centroCostoInput.codigo());
+        existingCentroCosto.setNombre(centroCostoInput.nombre());
 
         return centroCostoMapper.toResponse(centroCostoRepository.save(existingCentroCosto));
     }

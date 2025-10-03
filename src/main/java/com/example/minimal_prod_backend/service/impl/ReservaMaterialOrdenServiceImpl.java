@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenInput;
+import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenRequest;
 import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenResponse;
 import com.example.minimal_prod_backend.entity.ReservaMaterialOrden;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -32,13 +32,13 @@ public class ReservaMaterialOrdenServiceImpl implements ReservaMaterialOrdenServ
     }
 
     @Override
-    public ReservaMaterialOrdenResponse createReservaMaterialOrden(ReservaMaterialOrdenInput input) {
+    public ReservaMaterialOrdenResponse createReservaMaterialOrden(ReservaMaterialOrdenRequest input) {
         ReservaMaterialOrden reserva = mapper.toEntity(input);
         return mapper.toResponse(reservaMaterialOrdenRepository.save(reserva));
     }
 
     @Override
-    public ReservaMaterialOrdenResponse updateReservaMaterialOrden(Long id, ReservaMaterialOrdenInput input) {
+    public ReservaMaterialOrdenResponse updateReservaMaterialOrden(Long id, ReservaMaterialOrdenRequest input) {
         ReservaMaterialOrden reserva = reservaMaterialOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ReservaMaterialOrden not found with id: " + id));
         mapper.updateEntityFromInput(input, reserva);

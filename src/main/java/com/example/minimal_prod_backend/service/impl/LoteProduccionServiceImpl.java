@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.LoteProduccionInput;
+import com.example.minimal_prod_backend.dto.LoteProduccionRequest;
 import com.example.minimal_prod_backend.dto.LoteProduccionResponse;
 import com.example.minimal_prod_backend.entity.LoteProduccion;
 import com.example.minimal_prod_backend.entity.Producto;
@@ -42,7 +42,7 @@ public class LoteProduccionServiceImpl implements LoteProduccionService {
 
     @Override
     @Transactional
-    public LoteProduccionResponse createLoteProduccion(LoteProduccionInput input) {
+    public LoteProduccionResponse createLoteProduccion(LoteProduccionRequest input) {
         LoteProduccion entity = mapper.toEntity(input);
         attachRelations(input, entity);
         return mapper.toResponse(loteProduccionRepository.save(entity));
@@ -50,7 +50,7 @@ public class LoteProduccionServiceImpl implements LoteProduccionService {
 
     @Override
     @Transactional
-    public LoteProduccionResponse updateLoteProduccion(Long id, LoteProduccionInput input) {
+    public LoteProduccionResponse updateLoteProduccion(Long id, LoteProduccionRequest input) {
         LoteProduccion entity = loteProduccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + id));
         mapper.updateEntityFromInput(input, entity);
@@ -63,10 +63,10 @@ public class LoteProduccionServiceImpl implements LoteProduccionService {
         loteProduccionRepository.deleteById(id);
     }
 
-    private void attachRelations(LoteProduccionInput dto, LoteProduccion entity) {
-        if (dto.getProductoId() != null) {
-            Producto producto = productoRepository.findById(dto.getProductoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getProductoId()));
+    private void attachRelations(LoteProduccionRequest dto, LoteProduccion entity) {
+        if (dto.productoId() != null) {
+            Producto producto = productoRepository.findById(dto.productoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.productoId()));
             entity.setProducto(producto);
         } else {
             entity.setProducto(null);

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.CostoOrdenInput;
+import com.example.minimal_prod_backend.dto.CostoOrdenRequest;
 import com.example.minimal_prod_backend.dto.CostoOrdenResponse;
 import com.example.minimal_prod_backend.service.CostoOrdenService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class CostoOrdenController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTOS_ORDEN_TAG', 'CREATE')")
-    public CostoOrdenResponse createCostoOrden(@Argument("input") CostoOrdenInput costoOrdenInput) {
+    public CostoOrdenResponse createCostoOrden(@Argument("input") CostoOrdenRequest costoOrdenInput) {
         return costoOrdenService.createCostoOrden(costoOrdenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('COSTOS_ORDEN_TAG', 'UPDATE')")
-    public CostoOrdenResponse updateCostoOrden(@Argument Long id, @Argument("input") CostoOrdenInput costoOrdenInput) {
+    public CostoOrdenResponse updateCostoOrden(@Argument Long id, @Argument("input") CostoOrdenRequest costoOrdenInput) {
         return costoOrdenService.updateCostoOrden(id, costoOrdenInput);
     }
 

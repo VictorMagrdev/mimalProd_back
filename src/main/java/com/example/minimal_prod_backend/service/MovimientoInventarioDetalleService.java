@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleInput;
+import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleRequest;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface MovimientoInventarioDetalleService {
 
     MovimientoInventarioDetalleResponse getMovimientoInventarioDetalleById(Long id);
 
-    MovimientoInventarioDetalleResponse createMovimientoInventarioDetalle(MovimientoInventarioDetalleInput movimientoInventarioDetalleInput);
+    MovimientoInventarioDetalleResponse createMovimientoInventarioDetalle(MovimientoInventarioDetalleRequest movimientoInventarioDetalleInput);
 
-    MovimientoInventarioDetalleResponse updateMovimientoInventarioDetalle(Long id, MovimientoInventarioDetalleInput movimientoInventarioDetalleInput);
+    MovimientoInventarioDetalleResponse updateMovimientoInventarioDetalle(Long id, MovimientoInventarioDetalleRequest movimientoInventarioDetalleInput);
 
     void deleteMovimientoInventarioDetalle(Long id);
 }

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.PoliticaInput;
+import com.example.minimal_prod_backend.dto.PoliticaRequest;
 import com.example.minimal_prod_backend.dto.PoliticaResponse;
 import com.example.minimal_prod_backend.entity.Politica;
 import org.mapstruct.*;
@@ -14,7 +14,7 @@ public interface PoliticaMapper {
             @Mapping(source = "tagId", target = "tag.id"),
             @Mapping(source = "permisoId", target = "permiso.id")
     })
-    Politica toEntity(PoliticaInput input);
+    Politica toEntity(PoliticaRequest input);
 
     @Mappings({
             @Mapping(source = "rol.id", target = "rolId"),
@@ -30,5 +30,5 @@ public interface PoliticaMapper {
             @Mapping(source = "tagId", target = "tag.id"),
             @Mapping(source = "permisoId", target = "permiso.id")
     })
-    void updateEntityFromInput(PoliticaInput input, @MappingTarget Politica entity);
+    void updateEntityFromInput(PoliticaRequest input, @MappingTarget Politica entity);
 }

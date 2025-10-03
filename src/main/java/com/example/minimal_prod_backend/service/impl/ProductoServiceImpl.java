@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.ProductoInput;
+import com.example.minimal_prod_backend.dto.ProductoRequest;
 import com.example.minimal_prod_backend.dto.ProductoResponse;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
@@ -39,12 +39,12 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional
-    public ProductoResponse createProducto(ProductoInput input) {
+    public ProductoResponse createProducto(ProductoRequest input) {
         Producto entity = mapper.toEntity(input);
 
-        if (input.getUnidadBaseId() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(input.getUnidadBaseId())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getUnidadBaseId()));
+        if (input.unidadBaseId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(input.unidadBaseId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.unidadBaseId()));
             entity.setUnidadBase(unidad);
         }
 
@@ -53,15 +53,15 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional
-    public ProductoResponse updateProducto(Long id, ProductoInput input) {
+    public ProductoResponse updateProducto(Long id, ProductoRequest input) {
         Producto entity = productoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + id));
 
         mapper.updateEntityFromInput(input, entity);
 
-        if (input.getUnidadBaseId() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(input.getUnidadBaseId())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.getUnidadBaseId()));
+        if (input.unidadBaseId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(input.unidadBaseId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + input.unidadBaseId()));
             entity.setUnidadBase(unidad);
         } else {
             entity.setUnidadBase(null);

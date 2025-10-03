@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.TipoProductoInput;
+import com.example.minimal_prod_backend.dto.TipoProductoRequest;
 import com.example.minimal_prod_backend.dto.TipoProductoResponse;
 import com.example.minimal_prod_backend.entity.TipoProducto;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -35,13 +35,13 @@ public class TipoProductoServiceImpl implements TipoProductoService {
     }
 
     @Override
-    public TipoProductoResponse createTipoProducto(TipoProductoInput tipoProductoInput) {
+    public TipoProductoResponse createTipoProducto(TipoProductoRequest tipoProductoInput) {
         TipoProducto tipoProducto = tipoProductoMapper.toEntity(tipoProductoInput);
         return tipoProductoMapper.toResponse(tipoProductoRepository.save(tipoProducto));
     }
 
     @Override
-    public TipoProductoResponse updateTipoProducto(Long id, TipoProductoInput tipoProductoInput) {
+    public TipoProductoResponse updateTipoProducto(Long id, TipoProductoRequest tipoProductoInput) {
         TipoProducto existingTipoProducto = tipoProductoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("TipoProducto not found with id: " + id));
 

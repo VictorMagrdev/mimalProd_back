@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.UnidadMedidaInput;
+import com.example.minimal_prod_backend.dto.UnidadMedidaRequest;
 import com.example.minimal_prod_backend.dto.UnidadMedidaResponse;
 import com.example.minimal_prod_backend.service.UnidadMedidaService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class UnidadMedidaController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDADES_MEDIDA_TAG', 'CREATE')")
-    public UnidadMedidaResponse createUnidadMedida(@Argument("input") UnidadMedidaInput unidadMedidaInput) {
+    public UnidadMedidaResponse createUnidadMedida(@Argument("input") UnidadMedidaRequest unidadMedidaInput) {
         return unidadMedidaService.createUnidadMedida(unidadMedidaInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('UNIDADES_MEDIDA_TAG', 'UPDATE')")
-    public UnidadMedidaResponse updateUnidadMedida(@Argument Long id, @Argument("input") UnidadMedidaInput unidadMedidaInput) {
+    public UnidadMedidaResponse updateUnidadMedida(@Argument Long id, @Argument("input") UnidadMedidaRequest unidadMedidaInput) {
         return unidadMedidaService.updateUnidadMedida(id, unidadMedidaInput);
     }
 

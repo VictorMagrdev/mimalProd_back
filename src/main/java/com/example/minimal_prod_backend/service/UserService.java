@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
+import com.example.minimal_prod_backend.dto.RolResponse;
 import com.example.minimal_prod_backend.dto.UserCreateRequest;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.dto.UserUpdateRequest;
@@ -22,5 +23,5 @@ public interface UserService {
 
     void deactivateUser(Long id);
 
-    Set<RoleResponse> getUserRoles(Long userId);
+    Set<RolResponse> getUserRoles(Long userId);
 }

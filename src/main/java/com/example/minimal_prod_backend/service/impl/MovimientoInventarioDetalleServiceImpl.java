@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleInput;
+import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleRequest;
 import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -39,14 +39,14 @@ public class MovimientoInventarioDetalleServiceImpl implements MovimientoInventa
     }
 
     @Override
-    public MovimientoInventarioDetalleResponse createMovimientoInventarioDetalle(MovimientoInventarioDetalleInput input) {
+    public MovimientoInventarioDetalleResponse createMovimientoInventarioDetalle(MovimientoInventarioDetalleRequest input) {
         MovimientoInventarioDetalle entity = mapper.toEntity(input);
         attachRelations(input, entity);
         return mapper.toResponse(movimientoInventarioDetalleRepository.save(entity));
     }
 
     @Override
-    public MovimientoInventarioDetalleResponse updateMovimientoInventarioDetalle(Long id, MovimientoInventarioDetalleInput input) {
+    public MovimientoInventarioDetalleResponse updateMovimientoInventarioDetalle(Long id, MovimientoInventarioDetalleRequest input) {
         MovimientoInventarioDetalle entity = movimientoInventarioDetalleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("MovimientoInventarioDetalle not found with id: " + id));
         mapper.updateEntityFromInput(input, entity);
@@ -59,28 +59,28 @@ public class MovimientoInventarioDetalleServiceImpl implements MovimientoInventa
         movimientoInventarioDetalleRepository.deleteById(id);
     }
 
-    private void attachRelations(MovimientoInventarioDetalleInput dto, MovimientoInventarioDetalle entity) {
-        if (dto.getMovimientoId() != null) {
-            MovimientoInventario movimiento = movimientoInventarioRepository.findById(dto.getMovimientoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("MovimientoInventario not found with id: " + dto.getMovimientoId()));
+    private void attachRelations(MovimientoInventarioDetalleRequest dto, MovimientoInventarioDetalle entity) {
+        if (dto.movimientoId() != null) {
+            MovimientoInventario movimiento = movimientoInventarioRepository.findById(dto.movimientoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("MovimientoInventario not found with id: " + dto.movimientoId()));
             entity.setMovimiento(movimiento);
         }
 
-        if (dto.getProductoId() != null) {
-            Producto producto = productoRepository.findById(dto.getProductoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getProductoId()));
+        if (dto.productoId() != null) {
+            Producto producto = productoRepository.findById(dto.productoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.productoId()));
             entity.setProducto(producto);
         }
 
-        if (dto.getLoteId() != null) {
-            LoteProduccion lote = loteProduccionRepository.findById(dto.getLoteId())
-                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.getLoteId()));
+        if (dto.loteId() != null) {
+            LoteProduccion lote = loteProduccionRepository.findById(dto.loteId())
+                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.loteId()));
             entity.setLote(lote);
         }
 
-        if (dto.getUnidadId() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getUnidadId())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.getUnidadId()));
+        if (dto.unidadId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(dto.unidadId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.unidadId()));
             entity.setUnidad(unidad);
         }
     }

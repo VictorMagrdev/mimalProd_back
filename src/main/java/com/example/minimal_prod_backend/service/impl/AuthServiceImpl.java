@@ -41,10 +41,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional(readOnly = true)
     public LoginResponse login(LoginRequest rq) {
-        Usuario usuario = userRepository.findByUsername(rq.getUsername())
+        Usuario usuario = userRepository.findByUsername(rq.username())
                 .orElseThrow(() -> new InvalidCredentialsException("Invalid username or password"));
 
-        if (!passwordEncoder.matches(rq.getPassword(), usuario.getPassword())) {
+        if (!passwordEncoder.matches(rq.password(), usuario.getPassword())) {
             throw new InvalidCredentialsException("Invalid username or password");
         }
 

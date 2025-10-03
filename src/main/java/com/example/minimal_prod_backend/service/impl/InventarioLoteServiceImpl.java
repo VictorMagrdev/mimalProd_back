@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.InventarioLoteInput;
+import com.example.minimal_prod_backend.dto.InventarioLoteRequest;
 import com.example.minimal_prod_backend.dto.InventarioLoteResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -10,7 +10,6 @@ import com.example.minimal_prod_backend.service.InventarioLoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class InventarioLoteServiceImpl implements InventarioLoteService {
     }
 
     @Override
-    public InventarioLoteResponse createInventarioLote(InventarioLoteInput input) {
+    public InventarioLoteResponse createInventarioLote(InventarioLoteRequest input) {
         InventarioLote entity = mapper.toEntity(input);
         attachRelations(input, entity);
         entity.setActualizadoEn(OffsetDateTime.now());
@@ -49,7 +48,7 @@ public class InventarioLoteServiceImpl implements InventarioLoteService {
     }
 
     @Override
-    public InventarioLoteResponse updateInventarioLote(Long id, InventarioLoteInput input) {
+    public InventarioLoteResponse updateInventarioLote(Long id, InventarioLoteRequest input) {
         InventarioLote entity = inventarioLoteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("InventarioLote not found with id: " + id));
         mapper.updateEntityFromInput(input, entity);
@@ -66,28 +65,28 @@ public class InventarioLoteServiceImpl implements InventarioLoteService {
     /**
      * Resolver relaciones de IDs a entidades persistidas.
      */
-    private void attachRelations(InventarioLoteInput dto, InventarioLote entity) {
-        if (dto.getProductoId() != null) {
-            Producto producto = productoRepository.findById(dto.getProductoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getProductoId()));
+    private void attachRelations(InventarioLoteRequest dto, InventarioLote entity) {
+        if (dto.productoId() != null) {
+            Producto producto = productoRepository.findById(dto.productoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.productoId()));
             entity.setProducto(producto);
         }
 
-        if (dto.getLoteId() != null) {
-            LoteProduccion lote = loteProduccionRepository.findById(dto.getLoteId())
-                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.getLoteId()));
+        if (dto.loteId() != null) {
+            LoteProduccion lote = loteProduccionRepository.findById(dto.loteId())
+                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.loteId()));
             entity.setLote(lote);
         }
 
-        if (dto.getBodegaId() != null) {
-            Bodega bodega = bodegaRepository.findById(dto.getBodegaId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + dto.getBodegaId()));
+        if (dto.bodegaId() != null) {
+            Bodega bodega = bodegaRepository.findById(dto.bodegaId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + dto.bodegaId()));
             entity.setBodega(bodega);
         }
 
-        if (dto.getUnidadId() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getUnidadId())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.getUnidadId()));
+        if (dto.unidadId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(dto.unidadId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.unidadId()));
             entity.setUnidad(unidad);
         }
     }

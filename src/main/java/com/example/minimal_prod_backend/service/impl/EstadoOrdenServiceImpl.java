@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.EstadoOrdenInput;
+import com.example.minimal_prod_backend.dto.EstadoOrdenRequest;
 import com.example.minimal_prod_backend.dto.EstadoOrdenResponse;
 import com.example.minimal_prod_backend.entity.EstadoOrden;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -32,13 +32,13 @@ public class EstadoOrdenServiceImpl implements EstadoOrdenService {
     }
 
     @Override
-    public EstadoOrdenResponse createEstadoOrden(EstadoOrdenInput estadoOrdenInput) {
+    public EstadoOrdenResponse createEstadoOrden(EstadoOrdenRequest estadoOrdenInput) {
         EstadoOrden estadoOrden = estadoOrdenMapper.toEntity(estadoOrdenInput);
         return estadoOrdenMapper.toResponse(estadoOrdenRepository.save(estadoOrden));
     }
 
     @Override
-    public EstadoOrdenResponse updateEstadoOrden(Long id, EstadoOrdenInput estadoOrdenInput) {
+    public EstadoOrdenResponse updateEstadoOrden(Long id, EstadoOrdenRequest estadoOrdenInput) {
         EstadoOrden existingEstadoOrden = estadoOrdenRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("EstadoOrden not found with id: " + id));
         estadoOrdenMapper.updateEntityFromInput(estadoOrdenInput, existingEstadoOrden);

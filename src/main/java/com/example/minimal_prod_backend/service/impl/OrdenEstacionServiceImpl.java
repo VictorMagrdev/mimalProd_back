@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.OrdenEstacionInput;
+import com.example.minimal_prod_backend.dto.OrdenEstacionRequest;
 import com.example.minimal_prod_backend.dto.OrdenEstacionResponse;
 import com.example.minimal_prod_backend.entity.EstacionProduccion;
 import com.example.minimal_prod_backend.entity.OrdenEstacion;
@@ -45,7 +45,7 @@ public class OrdenEstacionServiceImpl implements OrdenEstacionService {
 
     @Override
     @Transactional
-    public OrdenEstacionResponse createOrdenEstacion(OrdenEstacionInput input) {
+    public OrdenEstacionResponse createOrdenEstacion(OrdenEstacionRequest input) {
         OrdenEstacion entity = mapper.toEntity(input);
         attachRelations(input, entity);
         return mapper.toResponse(ordenEstacionRepository.save(entity));
@@ -53,7 +53,7 @@ public class OrdenEstacionServiceImpl implements OrdenEstacionService {
 
     @Override
     @Transactional
-    public OrdenEstacionResponse updateOrdenEstacion(Long id, OrdenEstacionInput input) {
+    public OrdenEstacionResponse updateOrdenEstacion(Long id, OrdenEstacionRequest input) {
         OrdenEstacion entity = ordenEstacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenEstacion not found with id: " + id));
         mapper.updateEntityFromInput(input, entity);
@@ -66,18 +66,18 @@ public class OrdenEstacionServiceImpl implements OrdenEstacionService {
         ordenEstacionRepository.deleteById(id);
     }
 
-    private void attachRelations(OrdenEstacionInput dto, OrdenEstacion entity) {
-        if (dto.getOrdenId() != null) {
-            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getOrdenId())
-                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.getOrdenId()));
+    private void attachRelations(OrdenEstacionRequest dto, OrdenEstacion entity) {
+        if (dto.ordenId() != null) {
+            OrdenProduccion orden = ordenProduccionRepository.findById(dto.ordenId())
+                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.ordenId()));
             entity.setOrden(orden);
         } else {
             entity.setOrden(null);
         }
 
-        if (dto.getEstacionId() != null) {
-            EstacionProduccion estacion = estacionProduccionRepository.findById(dto.getEstacionId())
-                    .orElseThrow(() -> new ResourceNotFoundException("EstacionProduccion not found with id: " + dto.getEstacionId()));
+        if (dto.estacionId() != null) {
+            EstacionProduccion estacion = estacionProduccionRepository.findById(dto.estacionId())
+                    .orElseThrow(() -> new ResourceNotFoundException("EstacionProduccion not found with id: " + dto.estacionId()));
             entity.setEstacion(estacion);
         } else {
             entity.setEstacion(null);

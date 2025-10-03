@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.UnidadMedidaInput;
+import com.example.minimal_prod_backend.dto.UnidadMedidaRequest;
 import com.example.minimal_prod_backend.dto.UnidadMedidaResponse;
 import com.example.minimal_prod_backend.entity.UnidadMedida;
 import com.example.minimal_prod_backend.entity.UnidadMedidaTipo;
@@ -39,7 +39,7 @@ public class UnidadMedidaServiceImpl implements UnidadMedidaService {
 
     @Override
     @Transactional
-    public UnidadMedidaResponse createUnidadMedida(UnidadMedidaInput unidadMedidaInput) {
+    public UnidadMedidaResponse createUnidadMedida(UnidadMedidaRequest unidadMedidaInput) {
         UnidadMedida unidadMedida = mapper.toEntity(unidadMedidaInput);
         attachTipo(unidadMedidaInput, unidadMedida);
         return mapper.toResponse(unidadMedidaRepository.save(unidadMedida));
@@ -47,7 +47,7 @@ public class UnidadMedidaServiceImpl implements UnidadMedidaService {
 
     @Override
     @Transactional
-    public UnidadMedidaResponse updateUnidadMedida(Long id, UnidadMedidaInput unidadMedidaInput) {
+    public UnidadMedidaResponse updateUnidadMedida(Long id, UnidadMedidaRequest unidadMedidaInput) {
         UnidadMedida existingUnidadMedida = unidadMedidaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + id));
         mapper.updateEntityFromInput(unidadMedidaInput, existingUnidadMedida);
@@ -60,10 +60,10 @@ public class UnidadMedidaServiceImpl implements UnidadMedidaService {
         unidadMedidaRepository.deleteById(id);
     }
 
-    private void attachTipo(UnidadMedidaInput dto, UnidadMedida entity) {
-        if (dto.getUnidadMedidaTipoId() != null) {
-            UnidadMedidaTipo tipo = unidadMedidaTipoRepository.findById(dto.getUnidadMedidaTipoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedidaTipo not found with id: " + dto.getUnidadMedidaTipoId()));
+    private void attachTipo(UnidadMedidaRequest dto, UnidadMedida entity) {
+        if (dto.unidadMedidaTipoId() != null) {
+            UnidadMedidaTipo tipo = unidadMedidaTipoRepository.findById(dto.unidadMedidaTipoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedidaTipo not found with id: " + dto.unidadMedidaTipoId()));
             entity.setTipo(tipo);
         }
     }

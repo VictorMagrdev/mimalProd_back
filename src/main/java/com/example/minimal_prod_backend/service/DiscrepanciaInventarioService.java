@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioInput;
+import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioRequest;
 import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface DiscrepanciaInventarioService {
 
     DiscrepanciaInventarioResponse getDiscrepanciaInventarioById(Long id);
 
-    DiscrepanciaInventarioResponse createDiscrepanciaInventario(DiscrepanciaInventarioInput discrepanciaInventarioInput);
+    DiscrepanciaInventarioResponse createDiscrepanciaInventario(DiscrepanciaInventarioRequest discrepanciaInventarioInput);
 
-    DiscrepanciaInventarioResponse updateDiscrepanciaInventario(Long id, DiscrepanciaInventarioInput discrepanciaInventarioInput);
+    DiscrepanciaInventarioResponse updateDiscrepanciaInventario(Long id, DiscrepanciaInventarioRequest discrepanciaInventarioInput);
 
     void deleteDiscrepanciaInventario(Long id);
 }

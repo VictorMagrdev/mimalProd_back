@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
+import com.example.minimal_prod_backend.dto.ConteoCiclicoRequest;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -38,7 +38,7 @@ public class ConteoCiclicoServiceImpl implements ConteoCiclicoService {
     }
 
     @Override
-    public ConteoCiclicoResponse createConteoCiclico(ConteoCiclicoInput input) {
+    public ConteoCiclicoResponse createConteoCiclico(ConteoCiclicoRequest input) {
         ConteoCiclico entity = mapper.toEntity(input);
 
         attachRelations(input, entity);
@@ -49,7 +49,7 @@ public class ConteoCiclicoServiceImpl implements ConteoCiclicoService {
     }
 
     @Override
-    public ConteoCiclicoResponse updateConteoCiclico(Long id, ConteoCiclicoInput input) {
+    public ConteoCiclicoResponse updateConteoCiclico(Long id, ConteoCiclicoRequest input) {
         ConteoCiclico existing = conteoCiclicoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ConteoCiclico not found with id: " + id));
 
@@ -71,28 +71,28 @@ public class ConteoCiclicoServiceImpl implements ConteoCiclicoService {
         return true;
     }
 
-    private void attachRelations(ConteoCiclicoInput dto, ConteoCiclico entity) {
-        if (dto.getProductoId() != null) {
-            Producto producto = productoRepository.findById(dto.getProductoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.getProductoId()));
+    private void attachRelations(ConteoCiclicoRequest dto, ConteoCiclico entity) {
+        if (dto.productoId() != null) {
+            Producto producto = productoRepository.findById(dto.productoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.productoId()));
             entity.setProducto(producto);
         }
 
-        if (dto.getBodegaId() != null) {
-            Bodega bodega = bodegaRepository.findById(dto.getBodegaId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + dto.getBodegaId()));
+        if (dto.bodegaId() != null) {
+            Bodega bodega = bodegaRepository.findById(dto.bodegaId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + dto.bodegaId()));
             entity.setBodega(bodega);
         }
 
-        if (dto.getLoteId() != null) {
-            LoteProduccion lote = loteProduccionRepository.findById(dto.getLoteId())
-                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.getLoteId()));
+        if (dto.loteId() != null) {
+            LoteProduccion lote = loteProduccionRepository.findById(dto.loteId())
+                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.loteId()));
             entity.setLote(lote);
         }
 
-        if (dto.getUnidadId() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.getUnidadId())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.getUnidadId()));
+        if (dto.unidadId() != null) {
+            UnidadMedida unidad = unidadMedidaRepository.findById(dto.unidadId())
+                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.unidadId()));
             entity.setUnidad(unidad);
         }
     }

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller;
 
-import com.example.minimal_prod_backend.dto.RolInput;
+import com.example.minimal_prod_backend.dto.RolRequest;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.service.RoleService;
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class RoleController {
 
     @PostMapping
     @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'CREATE')")
-    public ResponseEntity<Rol> createRole(@Valid @RequestBody RolInput request) {
+    public ResponseEntity<Rol> createRole(@Valid @RequestBody RolRequest request) {
         return new ResponseEntity<>(roleService.createRole(request), HttpStatus.CREATED);
     }
 
@@ -37,7 +37,7 @@ public class RoleController {
 
     @PutMapping("/{id}")
     @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'UPDATE')")
-    public Rol updateRole(@PathVariable Long id, @Valid @RequestBody RolInput request) {
+    public Rol updateRole(@PathVariable Long id, @Valid @RequestBody RolRequest request) {
         return roleService.updateRole(id, request);
     }
 

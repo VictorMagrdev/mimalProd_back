@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.CostoOrdenInput;
+import com.example.minimal_prod_backend.dto.CostoOrdenRequest;
 import com.example.minimal_prod_backend.dto.CostoOrdenResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface CostoOrdenService {
 
     CostoOrdenResponse getCostoOrdenById(Long id);
 
-    CostoOrdenResponse createCostoOrden(CostoOrdenInput costoOrdenInput);
+    CostoOrdenResponse createCostoOrden(CostoOrdenRequest costoOrdenInput);
 
-    CostoOrdenResponse updateCostoOrden(Long id, CostoOrdenInput costoOrdenInput);
+    CostoOrdenResponse updateCostoOrden(Long id, CostoOrdenRequest costoOrdenInput);
 
     void deleteCostoOrden(Long id);
 }

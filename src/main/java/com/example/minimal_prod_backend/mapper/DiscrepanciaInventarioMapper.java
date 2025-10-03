@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioInput;
+import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioRequest;
 import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioResponse;
 import com.example.minimal_prod_backend.entity.DiscrepanciaInventario;
 import org.mapstruct.*;
@@ -14,7 +14,7 @@ public interface DiscrepanciaInventarioMapper {
             @Mapping(target = "conteo.id", source = "conteoId"),
             @Mapping(target = "id", ignore = true)
     })
-    DiscrepanciaInventario toEntity(DiscrepanciaInventarioInput input);
+    DiscrepanciaInventario toEntity(DiscrepanciaInventarioRequest input);
 
     List<DiscrepanciaInventarioResponse> toResponseList(List<DiscrepanciaInventario> conteos);
 
@@ -28,5 +28,5 @@ public interface DiscrepanciaInventarioMapper {
             @Mapping(target = "conteo.id", source = "conteoId"),
             @Mapping(target = "id", ignore = true)
     })
-    void updateEntityFromInput(DiscrepanciaInventarioInput input, @MappingTarget DiscrepanciaInventario entity);
+    void updateEntityFromInput(DiscrepanciaInventarioRequest input, @MappingTarget DiscrepanciaInventario entity);
 }

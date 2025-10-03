@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.OrdenEstacionInput;
+import com.example.minimal_prod_backend.dto.OrdenEstacionRequest;
 import com.example.minimal_prod_backend.dto.OrdenEstacionResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface OrdenEstacionService {
 
     OrdenEstacionResponse getOrdenEstacionById(Long id);
 
-    OrdenEstacionResponse createOrdenEstacion(OrdenEstacionInput ordenEstacionInput);
+    OrdenEstacionResponse createOrdenEstacion(OrdenEstacionRequest ordenEstacionInput);
 
-    OrdenEstacionResponse updateOrdenEstacion(Long id, OrdenEstacionInput ordenEstacionInput);
+    OrdenEstacionResponse updateOrdenEstacion(Long id, OrdenEstacionRequest ordenEstacionInput);
 
     void deleteOrdenEstacion(Long id);
 }

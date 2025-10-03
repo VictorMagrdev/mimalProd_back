@@ -3,7 +3,10 @@ package com.example.minimal_prod_backend.mapper;
 import com.example.minimal_prod_backend.dto.TipoBodegaRequest;
 import com.example.minimal_prod_backend.dto.TipoBodegaResponse;
 import com.example.minimal_prod_backend.entity.TipoBodega;
-import org.mapstruct.*;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.CostoOrdenInput;
+import com.example.minimal_prod_backend.dto.CostoOrdenRequest;
 import com.example.minimal_prod_backend.dto.CostoOrdenResponse;
 import com.example.minimal_prod_backend.entity.CostoOrden;
 import org.mapstruct.*;
@@ -16,7 +16,7 @@ public interface CostoOrdenMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "registradoEn", ignore = true)
     })
-    CostoOrden toEntity(CostoOrdenInput input);
+    CostoOrden toEntity(CostoOrdenRequest input);
 
     List<CostoOrdenResponse> toResponseList(List<CostoOrden> conteos);
 
@@ -34,5 +34,5 @@ public interface CostoOrdenMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "registradoEn", ignore = true)
     })
-    void updateEntityFromInput(CostoOrdenInput input, @MappingTarget CostoOrden entity);
+    void updateEntityFromInput(CostoOrdenRequest input, @MappingTarget CostoOrden entity);
 }

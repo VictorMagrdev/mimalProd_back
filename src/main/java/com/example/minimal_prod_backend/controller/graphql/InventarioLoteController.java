@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.InventarioLoteInput;
+import com.example.minimal_prod_backend.dto.InventarioLoteRequest;
 import com.example.minimal_prod_backend.dto.InventarioLoteResponse;
 import com.example.minimal_prod_backend.service.InventarioLoteService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class InventarioLoteController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('INVENTARIOS_LOTE_TAG', 'CREATE')")
-    public InventarioLoteResponse createInventarioLote(@Argument("input") InventarioLoteInput inventarioLoteInput) {
+    public InventarioLoteResponse createInventarioLote(@Argument("input") InventarioLoteRequest inventarioLoteInput) {
         return inventarioLoteService.createInventarioLote(inventarioLoteInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('INVENTARIOS_LOTE_TAG', 'UPDATE')")
-    public InventarioLoteResponse updateInventarioLote(@Argument Long id, @Argument("input") InventarioLoteInput inventarioLoteInput) {
+    public InventarioLoteResponse updateInventarioLote(@Argument Long id, @Argument("input") InventarioLoteRequest inventarioLoteInput) {
         return inventarioLoteService.updateInventarioLote(id, inventarioLoteInput);
     }
 

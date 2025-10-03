@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenInput;
+import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenRequest;
 import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenResponse;
 import com.example.minimal_prod_backend.entity.ReservaMaterialOrden;
 import org.mapstruct.*;
@@ -18,7 +18,7 @@ public interface ReservaMaterialOrdenMapper {
             @Mapping(source = "unidadId", target = "unidad.id"),
             @Mapping(source = "fechaReserva", target = "fechaReserva")
     })
-    ReservaMaterialOrden toEntity(ReservaMaterialOrdenInput input);
+    ReservaMaterialOrden toEntity(ReservaMaterialOrdenRequest input);
 
     List<ReservaMaterialOrdenResponse> toResponseList(List<ReservaMaterialOrden> conteos);
 
@@ -39,5 +39,5 @@ public interface ReservaMaterialOrdenMapper {
             @Mapping(source = "unidadId", target = "unidad.id"),
             @Mapping(source = "fechaReserva", target = "fechaReserva")
     })
-    void updateEntityFromInput(ReservaMaterialOrdenInput input, @MappingTarget ReservaMaterialOrden entity);
+    void updateEntityFromInput(ReservaMaterialOrdenRequest input, @MappingTarget ReservaMaterialOrden entity);
 }

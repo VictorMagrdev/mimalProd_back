@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.PuntoReordenInput;
+import com.example.minimal_prod_backend.dto.PuntoReordenRequest;
 import com.example.minimal_prod_backend.dto.PuntoReordenResponse;
 import com.example.minimal_prod_backend.entity.PuntoReorden;
 import org.mapstruct.*;
@@ -15,7 +15,7 @@ public interface PuntoReordenMapper {
             @Mapping(source = "productoId", target = "producto.id"),
             @Mapping(source = "unidadId", target = "unidad.id")
     })
-    PuntoReorden toEntity(PuntoReordenInput input);
+    PuntoReorden toEntity(PuntoReordenRequest input);
 
     List<PuntoReordenResponse> toResponseList(List<PuntoReorden> conteos);
 
@@ -31,5 +31,5 @@ public interface PuntoReordenMapper {
             @Mapping(source = "productoId", target = "producto.id"),
             @Mapping(source = "unidadId", target = "unidad.id")
     })
-    void updateEntityFromInput(PuntoReordenInput input, @MappingTarget PuntoReorden entity);
+    void updateEntityFromInput(PuntoReordenRequest input, @MappingTarget PuntoReorden entity);
 }

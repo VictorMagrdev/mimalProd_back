@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.LoteProduccionInput;
+import com.example.minimal_prod_backend.dto.LoteProduccionRequest;
 import com.example.minimal_prod_backend.dto.LoteProduccionResponse;
 import com.example.minimal_prod_backend.service.LoteProduccionService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class LoteProduccionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTES_PRODUCCION_TAG', 'CREATE')")
-    public LoteProduccionResponse createLoteProduccion(@Argument("input") LoteProduccionInput loteProduccionInput) {
+    public LoteProduccionResponse createLoteProduccion(@Argument("input") LoteProduccionRequest loteProduccionInput) {
         return loteProduccionService.createLoteProduccion(loteProduccionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LOTES_PRODUCCION_TAG', 'UPDATE')")
-    public LoteProduccionResponse updateLoteProduccion(@Argument Long id, @Argument("input") LoteProduccionInput loteProduccionInput) {
+    public LoteProduccionResponse updateLoteProduccion(@Argument Long id, @Argument("input") LoteProduccionRequest loteProduccionInput) {
         return loteProduccionService.updateLoteProduccion(id, loteProduccionInput);
     }
 

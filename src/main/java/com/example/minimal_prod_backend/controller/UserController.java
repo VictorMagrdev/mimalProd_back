@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.controller;
 
+import com.example.minimal_prod_backend.dto.RolResponse;
 import com.example.minimal_prod_backend.dto.UserCreateRequest;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.dto.UserUpdateRequest;
@@ -60,7 +61,7 @@ public class UserController {
 
     @GetMapping("/{userId}/roles")
     @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'READ')")
-    public Set<RoleResponse> getUserRoles(@PathVariable Long userId) {
+    public Set<RolResponse> getUserRoles(@PathVariable Long userId) {
         return userService.getUserRoles(userId);
     }
 

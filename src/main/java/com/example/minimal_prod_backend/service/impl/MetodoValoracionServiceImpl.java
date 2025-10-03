@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.MetodoValoracionInput;
+import com.example.minimal_prod_backend.dto.MetodoValoracionRequest;
 import com.example.minimal_prod_backend.entity.MetodoValoracion;
 import com.example.minimal_prod_backend.repository.MetodoValoracionRepository;
 import com.example.minimal_prod_backend.service.MetodoValoracionService;
@@ -26,21 +26,21 @@ public class MetodoValoracionServiceImpl implements MetodoValoracionService {
     }
 
     @Override
-    public MetodoValoracion save(MetodoValoracionInput input) {
+    public MetodoValoracion save(MetodoValoracionRequest input) {
         MetodoValoracion metodoValoracion = new MetodoValoracion();
-        metodoValoracion.setCodigo(input.getCodigo());
-        metodoValoracion.setNombre(input.getNombre());
-        metodoValoracion.setDescripcion(input.getDescripcion());
+        metodoValoracion.setCodigo(input.codigo());
+        metodoValoracion.setNombre(input.nombre());
+        metodoValoracion.setDescripcion(input.descripcion());
         return metodoValoracionRepository.save(metodoValoracion);
     }
 
     @Override
-    public MetodoValoracion update(Long id, MetodoValoracionInput input) {
+    public MetodoValoracion update(Long id, MetodoValoracionRequest input) {
         MetodoValoracion metodoValoracion = metodoValoracionRepository.findById(id).orElse(null);
         if (metodoValoracion != null) {
-            metodoValoracion.setCodigo(input.getCodigo());
-            metodoValoracion.setNombre(input.getNombre());
-            metodoValoracion.setDescripcion(input.getDescripcion());
+            metodoValoracion.setCodigo(input.codigo());
+            metodoValoracion.setNombre(input.nombre());
+            metodoValoracion.setDescripcion(input.descripcion());
             return metodoValoracionRepository.save(metodoValoracion);
         }
         return null;

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.TipoProductoInput;
+import com.example.minimal_prod_backend.dto.TipoProductoRequest;
 import com.example.minimal_prod_backend.dto.TipoProductoResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface TipoProductoService {
 
     TipoProductoResponse getTipoProductoById(Long id);
 
-    TipoProductoResponse createTipoProducto(TipoProductoInput tipoProductoInput);
+    TipoProductoResponse createTipoProducto(TipoProductoRequest tipoProductoInput);
 
-    TipoProductoResponse updateTipoProducto(Long id, TipoProductoInput tipoProductoInput);
+    TipoProductoResponse updateTipoProducto(Long id, TipoProductoRequest tipoProductoInput);
 
     void deleteTipoProducto(Long id);
 }

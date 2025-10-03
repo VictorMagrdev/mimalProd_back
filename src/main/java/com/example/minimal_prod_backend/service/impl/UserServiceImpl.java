@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
+import com.example.minimal_prod_backend.dto.RolResponse;
 import com.example.minimal_prod_backend.dto.UserCreateRequest;
 import com.example.minimal_prod_backend.dto.UserResponse;
 import com.example.minimal_prod_backend.dto.UserUpdateRequest;
@@ -43,20 +44,20 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponse createUser(UserCreateRequest request) {
-        userRepository.findByUsername(request.getUsername())
+        userRepository.findByUsername(request.username())
                 .ifPresent(u -> {
-                    throw new UsernameAlreadyExistsException("Username already exists: " + request.getUsername());
+                    throw new UsernameAlreadyExistsException("Username already exists: " + request.username());
                 });
 
         Usuario usuario = new Usuario();
-        usuario.setUsername(request.getUsername());
-        usuario.setEmail(request.getEmail());
-        usuario.setPassword(passwordEncoder.encode(request.getPassword()));
+        usuario.setUsername(request.username());
+        usuario.setEmail(request.email());
+        usuario.setPassword(passwordEncoder.encode(request.password()));
         usuario.setActivo(true);
         usuario.setRoles(new HashSet<>());
 
-        if (request.getRoleIds() != null && !request.getRoleIds().isEmpty()) {
-            List<Rol> roles = roleRepository.findAllById(request.getRoleIds());
+        if (request.roleIds() != null && !request.roleIds().isEmpty()) {
+            List<Rol> roles = roleRepository.findAllById(request.roleIds());
             usuario.getRoles().addAll(roles);
         }
 
@@ -87,11 +88,11 @@ public class UserServiceImpl implements UserService {
         Usuario usuario = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
-        if (request.getEmail() != null) usuario.setEmail(request.getEmail());
-        if (request.getActivo() != null) usuario.setActivo(request.getActivo());
+        if (request.email() != null) usuario.setEmail(request.email());
+        if (request.activo() != null) usuario.setActivo(request.activo());
 
-        if (request.getRoleIds() != null) {
-            List<Rol> roles = roleRepository.findAllById(request.getRoleIds());
+        if (request.roleIds() != null) {
+            List<Rol> roles = roleRepository.findAllById(request.roleIds());
             usuario.setRoles(new HashSet<>(roles));
         }
 
@@ -132,7 +133,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Set<RoleResponse> getUserRoles(Long userId) {
+    public Set<RolResponse> getUserRoles(Long userId) {
         Usuario usuario = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
         return usuario.getRoles()

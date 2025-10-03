@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
+import com.example.minimal_prod_backend.dto.ConteoCiclicoRequest;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface ConteoCiclicoService {
 
     ConteoCiclicoResponse getConteoCiclicoById(Long id);
 
-    ConteoCiclicoResponse createConteoCiclico(ConteoCiclicoInput input);
+    ConteoCiclicoResponse createConteoCiclico(ConteoCiclicoRequest input);
 
-    ConteoCiclicoResponse updateConteoCiclico(Long id, ConteoCiclicoInput input);
+    ConteoCiclicoResponse updateConteoCiclico(Long id, ConteoCiclicoRequest input);
 
     boolean deleteConteoCiclico(Long id);
 }

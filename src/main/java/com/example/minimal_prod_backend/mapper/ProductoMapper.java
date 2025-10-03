@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.ProductoInput;
+import com.example.minimal_prod_backend.dto.ProductoRequest;
 import com.example.minimal_prod_backend.dto.ProductoResponse;
 import com.example.minimal_prod_backend.entity.Producto;
 import org.mapstruct.*;
@@ -16,7 +16,7 @@ public interface ProductoMapper {
             @Mapping(source = "tipoId", target = "tipo.id"),
             @Mapping(source = "unidadBaseId", target = "unidadBase.id")
     })
-    Producto toEntity(ProductoInput input);
+    Producto toEntity(ProductoRequest input);
 
     List<ProductoResponse> toResponseList(List<Producto> conteos);
 
@@ -34,5 +34,5 @@ public interface ProductoMapper {
             @Mapping(source = "tipoId", target = "tipo.id"),
             @Mapping(source = "unidadBaseId", target = "unidadBase.id")
     })
-    void updateEntityFromInput(ProductoInput input, @MappingTarget Producto entity);
+    void updateEntityFromInput(ProductoRequest input, @MappingTarget Producto entity);
 }

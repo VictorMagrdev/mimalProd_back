@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
+import com.example.minimal_prod_backend.dto.ConteoCiclicoRequest;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
 import com.example.minimal_prod_backend.entity.ConteoCiclico;
 import org.mapstruct.*;
@@ -18,7 +18,7 @@ public interface ConteoCiclicoMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "fecha", source = "fecha")
     })
-    ConteoCiclico toEntity(ConteoCiclicoInput input);
+    ConteoCiclico toEntity(ConteoCiclicoRequest input);
 
     @Mappings({
             @Mapping(target = "productoId", source = "producto.id"),
@@ -40,5 +40,5 @@ public interface ConteoCiclicoMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "fecha", source = "fecha")
     })
-    void updateEntityFromInput(ConteoCiclicoInput input, @MappingTarget ConteoCiclico entity);
+    void updateEntityFromInput(ConteoCiclicoRequest input, @MappingTarget ConteoCiclico entity);
 }

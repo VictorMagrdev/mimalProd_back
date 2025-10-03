@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.TipoProductoInput;
+import com.example.minimal_prod_backend.dto.TipoProductoRequest;
 import com.example.minimal_prod_backend.dto.TipoProductoResponse;
 import com.example.minimal_prod_backend.service.TipoProductoService;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +28,12 @@ public class TipoProductoController {
     }
 
     @MutationMapping
-    public TipoProductoResponse createTipoProducto(@Argument TipoProductoInput input) {
+    public TipoProductoResponse createTipoProducto(@Argument TipoProductoRequest input) {
         return tipoProductoService.createTipoProducto(input);
     }
 
     @MutationMapping
-    public TipoProductoResponse updateTipoProducto(@Argument Long id, @Argument TipoProductoInput input) {
+    public TipoProductoResponse updateTipoProducto(@Argument Long id, @Argument TipoProductoRequest input) {
         return tipoProductoService.updateTipoProducto(id, input);
     }
 

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.UnidadMedidaTipoInput;
+import com.example.minimal_prod_backend.dto.UnidadMedidaTipoRequest;
 import com.example.minimal_prod_backend.dto.UnidadMedidaTipoResponse;
 import com.example.minimal_prod_backend.entity.UnidadMedidaTipo;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
@@ -32,13 +32,13 @@ public class UnidadMedidaTipoServiceImpl implements UnidadMedidaTipoService {
     }
 
     @Override
-    public UnidadMedidaTipoResponse createUnidadMedidaTipo(UnidadMedidaTipoInput unidadMedidaTipoInput) {
+    public UnidadMedidaTipoResponse createUnidadMedidaTipo(UnidadMedidaTipoRequest unidadMedidaTipoInput) {
         UnidadMedidaTipo unidadMedidaTipo = mapper.toEntity(unidadMedidaTipoInput);
         return mapper.toResponse(unidadMedidaTipoRepository.save(unidadMedidaTipo));
     }
 
     @Override
-    public UnidadMedidaTipoResponse updateUnidadMedidaTipo(Long id, UnidadMedidaTipoInput unidadMedidaTipoInput) {
+    public UnidadMedidaTipoResponse updateUnidadMedidaTipo(Long id, UnidadMedidaTipoRequest unidadMedidaTipoInput) {
         UnidadMedidaTipo existingUnidadMedidaTipo = unidadMedidaTipoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UnidadMedidaTipo not found with id: " + id));
         mapper.updateEntityFromInput(unidadMedidaTipoInput, existingUnidadMedidaTipo);

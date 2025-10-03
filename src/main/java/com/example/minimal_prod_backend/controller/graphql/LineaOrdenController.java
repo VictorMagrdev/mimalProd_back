@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.LineaOrdenInput;
+import com.example.minimal_prod_backend.dto.LineaOrdenRequest;
+import com.example.minimal_prod_backend.dto.LineaOrdenRequest;
 import com.example.minimal_prod_backend.dto.LineaOrdenResponse;
 import com.example.minimal_prod_backend.service.LineaOrdenService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,14 +35,14 @@ public class LineaOrdenController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEAS_ORDEN_TAG', 'CREATE')")
-    public LineaOrdenResponse createLineaOrden(@Argument("input") LineaOrdenInput lineaOrdenInput) {
-        return lineaOrdenService.createLineaOrden(lineaOrdenInput);
+    public LineaOrdenResponse createLineaOrden(@Argument("input") LineaOrdenRequest LineaOrdenRequest) {
+        return lineaOrdenService.createLineaOrden(LineaOrdenRequest);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('LINEAS_ORDEN_TAG', 'UPDATE')")
-    public LineaOrdenResponse updateLineaOrden(@Argument Long id, @Argument("input") LineaOrdenInput lineaOrdenInput) {
-        return lineaOrdenService.updateLineaOrden(id, lineaOrdenInput);
+    public LineaOrdenResponse updateLineaOrden(@Argument Long id, @Argument("input") LineaOrdenRequest LineaOrdenRequest) {
+        return lineaOrdenService.updateLineaOrden(id, LineaOrdenRequest);
     }
 
     @MutationMapping

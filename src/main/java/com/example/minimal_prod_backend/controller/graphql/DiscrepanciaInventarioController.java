@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioInput;
+import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioRequest;
 import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioResponse;
 import com.example.minimal_prod_backend.service.DiscrepanciaInventarioService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class DiscrepanciaInventarioController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIAS_INVENTARIO_TAG', 'CREATE')")
-    public DiscrepanciaInventarioResponse createDiscrepanciaInventario(@Argument("input") DiscrepanciaInventarioInput discrepanciaInventarioInput) {
+    public DiscrepanciaInventarioResponse createDiscrepanciaInventario(@Argument("input") DiscrepanciaInventarioRequest discrepanciaInventarioInput) {
         return discrepanciaInventarioService.createDiscrepanciaInventario(discrepanciaInventarioInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('DISCREPANCIAS_INVENTARIO_TAG', 'UPDATE')")
-    public DiscrepanciaInventarioResponse updateDiscrepanciaInventario(@Argument Long id, @Argument("input") DiscrepanciaInventarioInput discrepanciaInventarioInput) {
+    public DiscrepanciaInventarioResponse updateDiscrepanciaInventario(@Argument Long id, @Argument("input") DiscrepanciaInventarioRequest discrepanciaInventarioInput) {
         return discrepanciaInventarioService.updateDiscrepanciaInventario(id, discrepanciaInventarioInput);
     }
 

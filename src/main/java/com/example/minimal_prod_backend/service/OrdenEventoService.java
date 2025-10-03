@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.OrdenEventoInput;
+import com.example.minimal_prod_backend.dto.OrdenEventoRequest;
 import com.example.minimal_prod_backend.dto.OrdenEventoResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface OrdenEventoService {
 
     OrdenEventoResponse getOrdenEventoById(Long id);
 
-    OrdenEventoResponse createOrdenEvento(OrdenEventoInput ordenEventoInput);
+    OrdenEventoResponse createOrdenEvento(OrdenEventoRequest ordenEventoInput);
 
-    OrdenEventoResponse updateOrdenEvento(Long id, OrdenEventoInput ordenEventoInput);
+    OrdenEventoResponse updateOrdenEvento(Long id, OrdenEventoRequest ordenEventoInput);
 
     void deleteOrdenEvento(Long id);
 }

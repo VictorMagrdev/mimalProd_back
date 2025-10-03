@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.UnidadConversionInput;
+import com.example.minimal_prod_backend.dto.UnidadConversionRequest;
 import com.example.minimal_prod_backend.dto.UnidadConversionResponse;
 import com.example.minimal_prod_backend.entity.UnidadConversion;
 import org.mapstruct.*;
@@ -15,7 +15,7 @@ public interface UnidadConversionMapper {
             @Mapping(source = "origenId", target = "origen.id"),
             @Mapping(source = "destinoId", target = "destino.id")
     })
-    UnidadConversion toEntity(UnidadConversionInput input);
+    UnidadConversion toEntity(UnidadConversionRequest input);
 
     List<UnidadConversionResponse> toResponseList(List<UnidadConversion> conteos);
 
@@ -31,5 +31,5 @@ public interface UnidadConversionMapper {
             @Mapping(source = "origenId", target = "origen.id"),
             @Mapping(source = "destinoId", target = "destino.id")
     })
-    void updateEntityFromInput(UnidadConversionInput input, @MappingTarget UnidadConversion entity);
+    void updateEntityFromInput(UnidadConversionRequest input, @MappingTarget UnidadConversion entity);
 }

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenInput;
+import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenRequest;
 import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface ReservaMaterialOrdenService {
 
     ReservaMaterialOrdenResponse getReservaMaterialOrdenById(Long id);
 
-    ReservaMaterialOrdenResponse createReservaMaterialOrden(ReservaMaterialOrdenInput reservaMaterialOrdenInput);
+    ReservaMaterialOrdenResponse createReservaMaterialOrden(ReservaMaterialOrdenRequest reservaMaterialOrdenInput);
 
-    ReservaMaterialOrdenResponse updateReservaMaterialOrden(Long id, ReservaMaterialOrdenInput reservaMaterialOrdenInput);
+    ReservaMaterialOrdenResponse updateReservaMaterialOrden(Long id, ReservaMaterialOrdenRequest reservaMaterialOrdenInput);
 
     void deleteReservaMaterialOrden(Long id);
 }

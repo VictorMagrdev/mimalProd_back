@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.BodegaInput;
+import com.example.minimal_prod_backend.dto.BodegaRequest;
 import com.example.minimal_prod_backend.dto.BodegaResponse;
 import com.example.minimal_prod_backend.entity.Bodega;
 import org.mapstruct.*;
@@ -13,7 +13,7 @@ public interface BodegaMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
-    Bodega toEntity(BodegaInput input);
+    Bodega toEntity(BodegaRequest input);
 
     @Mappings({
             @Mapping(target = "tipoBodegaId", source = "tipo.id")
@@ -26,5 +26,5 @@ public interface BodegaMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
-    void updateEntityFromInput(BodegaInput input, @MappingTarget Bodega entity);
+    void updateEntityFromInput(BodegaRequest input, @MappingTarget Bodega entity);
 }

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.EstacionProduccionInput;
+import com.example.minimal_prod_backend.dto.EstacionProduccionRequest;
 import com.example.minimal_prod_backend.dto.EstacionProduccionResponse;
 import com.example.minimal_prod_backend.service.EstacionProduccionService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class EstacionProduccionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTACIONES_PRODUCCION_TAG', 'CREATE')")
-    public EstacionProduccionResponse createEstacionProduccion(@Argument("input") EstacionProduccionInput estacionProduccionInput) {
+    public EstacionProduccionResponse createEstacionProduccion(@Argument("input") EstacionProduccionRequest estacionProduccionInput) {
         return estacionProduccionService.createEstacionProduccion(estacionProduccionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ESTACIONES_PRODUCCION_TAG', 'UPDATE')")
-    public EstacionProduccionResponse updateEstacionProduccion(@Argument Long id, @Argument("input") EstacionProduccionInput estacionProduccionInput) {
+    public EstacionProduccionResponse updateEstacionProduccion(@Argument Long id, @Argument("input") EstacionProduccionRequest estacionProduccionInput) {
         return estacionProduccionService.updateEstacionProduccion(id, estacionProduccionInput);
     }
 

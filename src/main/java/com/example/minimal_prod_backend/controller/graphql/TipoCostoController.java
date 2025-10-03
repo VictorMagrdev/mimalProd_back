@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.TipoCostoInput;
+import com.example.minimal_prod_backend.dto.TipoCostoRequest;
 import com.example.minimal_prod_backend.dto.TipoCostoResponse;
 import com.example.minimal_prod_backend.service.TipoCostoService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class TipoCostoController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPOS_COSTO_TAG', 'CREATE')")
-    public TipoCostoResponse createTipoCosto(@Argument("input") TipoCostoInput tipoCostoInput) {
+    public TipoCostoResponse createTipoCosto(@Argument("input") TipoCostoRequest tipoCostoInput) {
         return tipoCostoService.createTipoCosto(tipoCostoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('TIPOS_COSTO_TAG', 'UPDATE')")
-    public TipoCostoResponse updateTipoCosto(@Argument Long id, @Argument("input") TipoCostoInput tipoCostoInput) {
+    public TipoCostoResponse updateTipoCosto(@Argument Long id, @Argument("input") TipoCostoRequest tipoCostoInput) {
         return tipoCostoService.updateTipoCosto(id, tipoCostoInput);
     }
 

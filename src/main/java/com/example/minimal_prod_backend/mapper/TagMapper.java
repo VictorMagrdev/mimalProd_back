@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.TagInput;
+import com.example.minimal_prod_backend.dto.TagRequest;
 import com.example.minimal_prod_backend.dto.TagResponse;
 import com.example.minimal_prod_backend.entity.Tag;
 import org.mapstruct.*;
@@ -12,7 +12,7 @@ public interface TagMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(source = "ownerRoleId", target = "ownerRole.id")
     })
-    Tag toEntity(TagInput input);
+    Tag toEntity(TagRequest input);
 
     @Mappings({
             @Mapping(source = "ownerRole.id", target = "ownerRoleId")
@@ -24,5 +24,5 @@ public interface TagMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(source = "ownerRoleId", target = "ownerRole.id")
     })
-    void updateEntityFromInput(TagInput input, @MappingTarget Tag entity);
+    void updateEntityFromInput(TagRequest input, @MappingTarget Tag entity);
 }

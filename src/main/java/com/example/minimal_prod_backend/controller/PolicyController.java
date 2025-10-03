@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller;
 
-import com.example.minimal_prod_backend.dto.PoliticaInput;
+import com.example.minimal_prod_backend.dto.PoliticaRequest;
 import com.example.minimal_prod_backend.entity.Politica;
 import com.example.minimal_prod_backend.service.PolicyService;
 import jakarta.validation.Valid;
@@ -27,7 +27,7 @@ public class PolicyController {
 
     @PostMapping
     @PreAuthorize("@customSecurity.hasPermission('TAG_POLICIES', 'CREATE')")
-    public ResponseEntity<Politica> createPolicy(@Valid @RequestBody PoliticaInput request) {
+    public ResponseEntity<Politica> createPolicy(@Valid @RequestBody PoliticaRequest request) {
         return new ResponseEntity<>(policyService.createPolicy(request), HttpStatus.CREATED);
     }
 

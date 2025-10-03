@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.BodegaInput;
+import com.example.minimal_prod_backend.dto.BodegaRequest;
 import com.example.minimal_prod_backend.dto.BodegaResponse;
 import com.example.minimal_prod_backend.entity.Bodega;
 import com.example.minimal_prod_backend.entity.TipoBodega;
@@ -39,12 +39,12 @@ public class BodegaServiceImpl implements BodegaService {
     }
 
     @Override
-    public BodegaResponse createBodega(BodegaInput bodegaInput) {
+    public BodegaResponse createBodega(BodegaRequest bodegaInput) {
         Bodega bodega = bodegaMapper.toEntity(bodegaInput);
 
-        if (bodegaInput.getTipoBodegaId() != null) {
-            TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.getTipoBodegaId())
-                    .orElseThrow(() -> new ResourceNotFoundException("TipoBodega not found with id: " + bodegaInput.getTipoBodegaId()));
+        if (bodegaInput.tipoBodegaId() != null) {
+            TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.tipoBodegaId())
+                    .orElseThrow(() -> new ResourceNotFoundException("TipoBodega not found with id: " + bodegaInput.tipoBodegaId()));
             bodega.setTipo(tipo);
         }
 
@@ -52,17 +52,17 @@ public class BodegaServiceImpl implements BodegaService {
     }
 
     @Override
-    public BodegaResponse updateBodega(Long id, BodegaInput bodegaInput) {
+    public BodegaResponse updateBodega(Long id, BodegaRequest bodegaInput) {
         Bodega existingBodega = bodegaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + id));
 
-        existingBodega.setCodigo(bodegaInput.getCodigo());
-        existingBodega.setNombre(bodegaInput.getNombre());
-        existingBodega.setDescripcion(bodegaInput.getDescripcion());
+        existingBodega.setCodigo(bodegaInput.codigo());
+        existingBodega.setNombre(bodegaInput.nombre());
+        existingBodega.setDescripcion(bodegaInput.descripcion());
 
-        if (bodegaInput.getTipoBodegaId() != null) {
-            TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.getTipoBodegaId())
-                    .orElseThrow(() -> new ResourceNotFoundException("TipoBodega not found with id: " + bodegaInput.getTipoBodegaId()));
+        if (bodegaInput.tipoBodegaId() != null) {
+            TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.tipoBodegaId())
+                    .orElseThrow(() -> new ResourceNotFoundException("TipoBodega not found with id: " + bodegaInput.tipoBodegaId()));
             existingBodega.setTipo(tipo);
         }
 

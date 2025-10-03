@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.OrdenEventoInput;
+import com.example.minimal_prod_backend.dto.OrdenEventoRequest;
 import com.example.minimal_prod_backend.dto.OrdenEventoResponse;
 import com.example.minimal_prod_backend.entity.OrdenEvento;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
@@ -42,7 +42,7 @@ public class OrdenEventoServiceImpl implements OrdenEventoService {
 
     @Override
     @Transactional
-    public OrdenEventoResponse createOrdenEvento(OrdenEventoInput input) {
+    public OrdenEventoResponse createOrdenEvento(OrdenEventoRequest input) {
         OrdenEvento entity = mapper.toEntity(input);
         attachRelations(input, entity);
         return mapper.toResponse(ordenEventoRepository.save(entity));
@@ -50,7 +50,7 @@ public class OrdenEventoServiceImpl implements OrdenEventoService {
 
     @Override
     @Transactional
-    public OrdenEventoResponse updateOrdenEvento(Long id, OrdenEventoInput input) {
+    public OrdenEventoResponse updateOrdenEvento(Long id, OrdenEventoRequest input) {
         OrdenEvento entity = ordenEventoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenEvento not found with id: " + id));
         mapper.updateEntityFromInput(input, entity);
@@ -63,10 +63,10 @@ public class OrdenEventoServiceImpl implements OrdenEventoService {
         ordenEventoRepository.deleteById(id);
     }
 
-    private void attachRelations(OrdenEventoInput dto, OrdenEvento entity) {
-        if (dto.getOrdenId() != null) {
-            OrdenProduccion orden = ordenProduccionRepository.findById(dto.getOrdenId())
-                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.getOrdenId()));
+    private void attachRelations(OrdenEventoRequest dto, OrdenEvento entity) {
+        if (dto.ordenId() != null) {
+            OrdenProduccion orden = ordenProduccionRepository.findById(dto.ordenId())
+                    .orElseThrow(() -> new ResourceNotFoundException("OrdenProduccion not found with id: " + dto.ordenId()));
             entity.setOrden(orden);
         } else {
             entity.setOrden(null);

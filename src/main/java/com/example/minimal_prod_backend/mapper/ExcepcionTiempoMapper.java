@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 public interface ExcepcionTiempoMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "usuario", ignore = true) // The service will handle setting the user
+    @Mapping(target = "usuario", ignore = true)
     @Mapping(target = "creadoEn", ignore = true)
     @Mapping(target = "resuelto", ignore = true)
     ExcepcionTiempo toEntity(ExcepcionTiempoRequest request);

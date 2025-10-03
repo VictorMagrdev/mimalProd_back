@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.BodegaInput;
+import com.example.minimal_prod_backend.dto.BodegaRequest;
 import com.example.minimal_prod_backend.dto.BodegaResponse;
 import com.example.minimal_prod_backend.service.BodegaService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class BodegaController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('BODEGAS_TAG', 'CREATE')")
-    public BodegaResponse createBodega(@Argument("input") BodegaInput bodegaInput) {
+    public BodegaResponse createBodega(@Argument("input") BodegaRequest bodegaInput) {
         return bodegaService.createBodega(bodegaInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('BODEGAS_TAG', 'UPDATE')")
-    public BodegaResponse updateBodega(@Argument Long id, @Argument("input") BodegaInput bodegaInput) {
+    public BodegaResponse updateBodega(@Argument Long id, @Argument("input") BodegaRequest bodegaInput) {
         return bodegaService.updateBodega(id, bodegaInput);
     }
 

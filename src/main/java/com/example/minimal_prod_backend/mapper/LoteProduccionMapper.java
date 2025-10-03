@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.LoteProduccionInput;
+import com.example.minimal_prod_backend.dto.LoteProduccionRequest;
 import com.example.minimal_prod_backend.dto.LoteProduccionResponse;
 import com.example.minimal_prod_backend.entity.LoteProduccion;
 import org.mapstruct.*;
@@ -12,7 +12,7 @@ public interface LoteProduccionMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(source = "productoId", target = "producto.id")
     })
-    LoteProduccion toEntity(LoteProduccionInput input);
+    LoteProduccion toEntity(LoteProduccionRequest input);
 
     @Mappings({
             @Mapping(source = "producto.id", target = "productoId")
@@ -24,5 +24,5 @@ public interface LoteProduccionMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(source = "productoId", target = "producto.id")
     })
-    void updateEntityFromInput(LoteProduccionInput input, @MappingTarget LoteProduccion entity);
+    void updateEntityFromInput(LoteProduccionRequest input, @MappingTarget LoteProduccion entity);
 }

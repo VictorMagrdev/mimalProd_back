@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.ConteoCiclicoInput;
+import com.example.minimal_prod_backend.dto.ConteoCiclicoRequest;
 import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
 import com.example.minimal_prod_backend.service.ConteoCiclicoService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class ConteoCiclicoController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('CONTEOS_CICLICO_TAG', 'CREATE')")
-    public ConteoCiclicoResponse createConteoCiclico(@Argument("input") ConteoCiclicoInput conteoCiclicoInput) {
+    public ConteoCiclicoResponse createConteoCiclico(@Argument("input") ConteoCiclicoRequest conteoCiclicoInput) {
         return conteoCiclicoService.createConteoCiclico(conteoCiclicoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('CONTEOS_CICLICO_TAG', 'UPDATE')")
-    public ConteoCiclicoResponse updateConteoCiclico(@Argument Long id, @Argument("input") ConteoCiclicoInput conteoCiclicoInput) {
+    public ConteoCiclicoResponse updateConteoCiclico(@Argument Long id, @Argument("input") ConteoCiclicoRequest conteoCiclicoInput) {
         return conteoCiclicoService.updateConteoCiclico(id, conteoCiclicoInput);
     }
 

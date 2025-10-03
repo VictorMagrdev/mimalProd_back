@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioInput;
+import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioRequest;
 import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioResponse;
 import com.example.minimal_prod_backend.entity.ConteoCiclico;
 import com.example.minimal_prod_backend.entity.DiscrepanciaInventario;
@@ -35,12 +35,12 @@ public class DiscrepanciaInventarioServiceImpl implements DiscrepanciaInventario
     }
 
     @Override
-    public DiscrepanciaInventarioResponse createDiscrepanciaInventario(DiscrepanciaInventarioInput dto) {
+    public DiscrepanciaInventarioResponse createDiscrepanciaInventario(DiscrepanciaInventarioRequest dto) {
         DiscrepanciaInventario entity = discrepanciaInventarioMapper.toEntity(dto);
 
-        if (dto.getConteoId() != null) {
-            ConteoCiclico conteo = conteoCiclicoRepository.findById(dto.getConteoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("ConteoCiclico not found with id: " + dto.getConteoId()));
+        if (dto.conteoId() != null) {
+            ConteoCiclico conteo = conteoCiclicoRepository.findById(dto.conteoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("ConteoCiclico not found with id: " + dto.conteoId()));
             entity.setConteo(conteo);
         }
 
@@ -48,15 +48,15 @@ public class DiscrepanciaInventarioServiceImpl implements DiscrepanciaInventario
     }
 
     @Override
-    public DiscrepanciaInventarioResponse updateDiscrepanciaInventario(Long id, DiscrepanciaInventarioInput dto) {
+    public DiscrepanciaInventarioResponse updateDiscrepanciaInventario(Long id, DiscrepanciaInventarioRequest dto) {
         DiscrepanciaInventario existing = discrepanciaInventarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("DiscrepanciaInventario not found with id: " + id));
 
         discrepanciaInventarioMapper.updateEntityFromInput(dto, existing);
 
-        if (dto.getConteoId() != null) {
-            ConteoCiclico conteo = conteoCiclicoRepository.findById(dto.getConteoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("ConteoCiclico not found with id: " + dto.getConteoId()));
+        if (dto.conteoId() != null) {
+            ConteoCiclico conteo = conteoCiclicoRepository.findById(dto.conteoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("ConteoCiclico not found with id: " + dto.conteoId()));
             existing.setConteo(conteo);
         }
 

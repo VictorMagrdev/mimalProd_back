@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.OrdenEventoInput;
+import com.example.minimal_prod_backend.dto.OrdenEventoRequest;
 import com.example.minimal_prod_backend.dto.OrdenEventoResponse;
 import com.example.minimal_prod_backend.service.OrdenEventoService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class OrdenEventoController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDENES_EVENTO_TAG', 'CREATE')")
-    public OrdenEventoResponse createOrdenEvento(@Argument("input") OrdenEventoInput ordenEventoInput) {
+    public OrdenEventoResponse createOrdenEvento(@Argument("input") OrdenEventoRequest ordenEventoInput) {
         return ordenEventoService.createOrdenEvento(ordenEventoInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDENES_EVENTO_TAG', 'UPDATE')")
-    public OrdenEventoResponse updateOrdenEvento(@Argument Long id, @Argument("input") OrdenEventoInput ordenEventoInput) {
+    public OrdenEventoResponse updateOrdenEvento(@Argument Long id, @Argument("input") OrdenEventoRequest ordenEventoInput) {
         return ordenEventoService.updateOrdenEvento(id, ordenEventoInput);
     }
 

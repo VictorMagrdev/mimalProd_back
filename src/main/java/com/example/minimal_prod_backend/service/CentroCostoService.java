@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.CentroCostoInput;
+import com.example.minimal_prod_backend.dto.CentroCostoRequest;
 import com.example.minimal_prod_backend.dto.CentroCostoResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface CentroCostoService {
 
     CentroCostoResponse getCentroDeCostoById(Long id);
 
-    CentroCostoResponse createCentroDeCosto(CentroCostoInput centroCostoInput);
+    CentroCostoResponse createCentroDeCosto(CentroCostoRequest centroCostoInput);
 
-    CentroCostoResponse updateCentroDeCosto(Long id, CentroCostoInput centroCostoInput);
+    CentroCostoResponse updateCentroDeCosto(Long id, CentroCostoRequest centroCostoInput);
 
     void deleteCentroDeCosto(Long id);
 }

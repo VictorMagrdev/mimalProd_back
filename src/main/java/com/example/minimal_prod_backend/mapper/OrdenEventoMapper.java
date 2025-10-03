@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.OrdenEventoInput;
+import com.example.minimal_prod_backend.dto.OrdenEventoRequest;
 import com.example.minimal_prod_backend.dto.OrdenEventoResponse;
 import com.example.minimal_prod_backend.entity.OrdenEvento;
 import org.mapstruct.*;
@@ -12,7 +12,7 @@ public interface OrdenEventoMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(source = "ordenId", target = "orden.id")
     })
-    OrdenEvento toEntity(OrdenEventoInput input);
+    OrdenEvento toEntity(OrdenEventoRequest input);
 
     @Mappings({
             @Mapping(source = "orden.id", target = "ordenId")
@@ -24,5 +24,5 @@ public interface OrdenEventoMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(source = "ordenId", target = "orden.id")
     })
-    void updateEntityFromInput(OrdenEventoInput input, @MappingTarget OrdenEvento entity);
+    void updateEntityFromInput(OrdenEventoRequest input, @MappingTarget OrdenEvento entity);
 }

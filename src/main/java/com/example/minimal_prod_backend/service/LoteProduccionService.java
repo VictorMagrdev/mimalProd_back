@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.LoteProduccionInput;
+import com.example.minimal_prod_backend.dto.LoteProduccionRequest;
 import com.example.minimal_prod_backend.dto.LoteProduccionResponse;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public interface LoteProduccionService {
 
     LoteProduccionResponse getLoteProduccionById(Long id);
 
-    LoteProduccionResponse createLoteProduccion(LoteProduccionInput loteProduccionInput);
+    LoteProduccionResponse createLoteProduccion(LoteProduccionRequest loteProduccionInput);
 
-    LoteProduccionResponse updateLoteProduccion(Long id, LoteProduccionInput loteProduccionInput);
+    LoteProduccionResponse updateLoteProduccion(Long id, LoteProduccionRequest loteProduccionInput);
 
     void deleteLoteProduccion(Long id);
 }

@@ -20,7 +20,7 @@ CREATE TABLE usuarios (
   nombre VARCHAR(150) NOT NULL,
   apellidos VARCHAR(150) NOT NULL,
   centro_costo_id INT REFERENCES centros_costo(id),
-  capacidad_horas_dia NUMERIC(5,2) DEFAULT 8.0,
+  capacidad_horas_dia INTERVAL DEFAULT '8 hours',
   activo BOOLEAN DEFAULT TRUE,
   creado_en TIMESTAMPTZ DEFAULT now(),
   actualizado_en TIMESTAMPTZ DEFAULT now()
@@ -55,10 +55,10 @@ CREATE TABLE politicas (
 );
 
 CREATE TABLE estados_orden (  
-  id BIGSERIAL PRIMARY KEY,  
-  codigo VARCHAR(50) UNIQUE NOT NULL,  
-  nombre VARCHAR(100) NOT NULL,  
-  descripcion VARCHAR(150),  
+  id BIGSERIAL PRIMARY KEY,
+  codigo VARCHAR(50) UNIQUE NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion VARCHAR(150),
   activo BOOLEAN DEFAULT true,  
   creado_en TIMESTAMPTZ DEFAULT now()  
 );  
@@ -363,7 +363,7 @@ CREATE TABLE asignaciones (
   usuario_id BIGINT REFERENCES usuarios(id) ON DELETE CASCADE,
   inicio_planificado TIMESTAMPTZ NOT NULL,
   fin_planificado TIMESTAMPTZ NOT NULL,
-  horas_planificadas NUMERIC(6,2),
+  horas_planificadas INTERVAL,
   asignado_por BIGINT REFERENCES usuarios(id),
   estado_asignacion_id BIGINT REFERENCES estados_asignacion(id) NOT NULL,
   funcion_tarea BIGINT REFERENCES funciones_tarea(id) NOT NULL,
@@ -388,7 +388,6 @@ CREATE TABLE registros_tiempo (
   inicio_tz TIMESTAMPTZ NOT NULL,
   fin_tz TIMESTAMPTZ NOT NULL,
   duracion INTERVAL GENERATED ALWAYS AS (fin_tz - inicio_tz) STORED,
-  duracion_horas NUMERIC(8,3) GENERATED ALWAYS AS (EXTRACT(EPOCH FROM (fin_tz - inicio_tz))/3600) STORED,
   tipo_actividad_id BIGINT REFERENCES tipos_actividad(id),
   tipo_costo_id BIGINT REFERENCES tipos_costo(id),
   estado_aprobacion_id BIGINT NOT NULL REFERENCES estados_aprobacion(id),

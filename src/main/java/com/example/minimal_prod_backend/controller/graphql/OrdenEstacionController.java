@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.OrdenEstacionInput;
+import com.example.minimal_prod_backend.dto.OrdenEstacionRequest;
 import com.example.minimal_prod_backend.dto.OrdenEstacionResponse;
 import com.example.minimal_prod_backend.service.OrdenEstacionService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class OrdenEstacionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDENES_ESTACION_TAG', 'CREATE')")
-    public OrdenEstacionResponse createOrdenEstacion(@Argument("input") OrdenEstacionInput ordenEstacionInput) {
+    public OrdenEstacionResponse createOrdenEstacion(@Argument("input") OrdenEstacionRequest ordenEstacionInput) {
         return ordenEstacionService.createOrdenEstacion(ordenEstacionInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('ORDENES_ESTACION_TAG', 'UPDATE')")
-    public OrdenEstacionResponse updateOrdenEstacion(@Argument Long id, @Argument("input") OrdenEstacionInput ordenEstacionInput) {
+    public OrdenEstacionResponse updateOrdenEstacion(@Argument Long id, @Argument("input") OrdenEstacionRequest ordenEstacionInput) {
         return ordenEstacionService.updateOrdenEstacion(id, ordenEstacionInput);
     }
 

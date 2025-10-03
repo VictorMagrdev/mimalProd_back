@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.PuntoReordenInput;
+import com.example.minimal_prod_backend.dto.PuntoReordenRequest;
 import com.example.minimal_prod_backend.dto.PuntoReordenResponse;
 import com.example.minimal_prod_backend.service.PuntoReordenService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -34,13 +34,13 @@ public class PuntoReordenController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('PUNTOS_REORDEN_TAG', 'CREATE')")
-    public PuntoReordenResponse createPuntoReorden(@Argument("input") PuntoReordenInput puntoReordenInput) {
+    public PuntoReordenResponse createPuntoReorden(@Argument("input") PuntoReordenRequest puntoReordenInput) {
         return puntoReordenService.createPuntoReorden(puntoReordenInput);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('PUNTOS_REORDEN_TAG', 'UPDATE')")
-    public PuntoReordenResponse updatePuntoReorden(@Argument Long id, @Argument("input") PuntoReordenInput puntoReordenInput) {
+    public PuntoReordenResponse updatePuntoReorden(@Argument Long id, @Argument("input") PuntoReordenRequest puntoReordenInput) {
         return puntoReordenService.updatePuntoReorden(id, puntoReordenInput);
     }
 

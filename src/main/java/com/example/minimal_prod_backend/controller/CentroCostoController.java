@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller;
 
-import com.example.minimal_prod_backend.dto.CentroCostoInput;
+import com.example.minimal_prod_backend.dto.CentroCostoRequest;
 import com.example.minimal_prod_backend.dto.CentroCostoResponse;
 import com.example.minimal_prod_backend.service.CentroCostoService;
 import lombok.RequiredArgsConstructor;
@@ -32,13 +32,13 @@ public class CentroCostoController {
 
     @PostMapping
     @PreAuthorize("@customSecurity.hasPermission('CENTRO_COSTO_GENERAL', 'WRITE')")
-    public ResponseEntity<CentroCostoResponse> createCentroDeCosto(@RequestBody CentroCostoInput centroCostoInput) {
+    public ResponseEntity<CentroCostoResponse> createCentroDeCosto(@RequestBody CentroCostoRequest centroCostoInput) {
         return new ResponseEntity<>(centroCostoService.createCentroDeCosto(centroCostoInput), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("@customSecurity.hasPermission('CENTRO_COSTO_GENERAL', 'WRITE')")
-    public ResponseEntity<CentroCostoResponse> updateCentroDeCosto(@PathVariable Long id, @RequestBody CentroCostoInput centroCostoInput) {
+    public ResponseEntity<CentroCostoResponse> updateCentroDeCosto(@PathVariable Long id, @RequestBody CentroCostoRequest centroCostoInput) {
         return ResponseEntity.ok(centroCostoService.updateCentroDeCosto(id, centroCostoInput));
     }
 

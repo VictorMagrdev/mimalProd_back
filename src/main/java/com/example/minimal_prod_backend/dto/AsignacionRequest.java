@@ -12,4 +12,5 @@ public record AsignacionRequest(
         Long asignadoPor,
         Long estadoAsignacionId,
         Long funcionTareaId
-) {}
+) {
+}

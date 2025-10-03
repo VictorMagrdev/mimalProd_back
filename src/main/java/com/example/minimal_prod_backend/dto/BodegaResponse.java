@@ -9,4 +9,5 @@ public record BodegaResponse(
         String descripcion,
         Long tipoBodegaId,
         OffsetDateTime creadoEn
-) {}
+) {
+}

@@ -14,4 +14,5 @@ public record UserCreateRequest(
         Double capacidadHorasDia,
         Boolean activo,
         Set<Long> roleIds
-) {}
+) {
+}

@@ -5,4 +5,5 @@ public record RutaProduccionRequest(
         String version,
         String nombre,
         Boolean activo
-) {}
+) {
+}

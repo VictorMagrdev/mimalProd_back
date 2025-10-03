@@ -9,4 +9,5 @@ public record RutaProduccionResponse(
         String nombre,
         Boolean activo,
         OffsetDateTime creadoEn
-) {}
+) {
+}

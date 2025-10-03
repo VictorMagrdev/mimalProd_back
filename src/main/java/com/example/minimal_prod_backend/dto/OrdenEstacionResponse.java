@@ -12,4 +12,5 @@ public record OrdenEstacionResponse(
         OffsetDateTime finReal,
         Long estadoOrdenEstacionId,
         String observaciones
-) {}
+) {
+}

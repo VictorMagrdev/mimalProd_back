@@ -17,4 +17,5 @@ public record UserResponse(
         OffsetDateTime creadoEn,
         OffsetDateTime actualizadoEn,
         Set<RolResponse> roles
-) {}
+) {
+}

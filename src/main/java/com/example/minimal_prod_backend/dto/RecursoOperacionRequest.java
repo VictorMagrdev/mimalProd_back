@@ -9,4 +9,5 @@ public record RecursoOperacionRequest(
         Duration horasPlanificadas,
         Duration horasReales,
         Long asignadoPor
-) {}
+) {
+}

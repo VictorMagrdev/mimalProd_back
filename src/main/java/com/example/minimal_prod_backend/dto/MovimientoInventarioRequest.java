@@ -13,4 +13,5 @@ public record MovimientoInventarioRequest(
         Long creadoPor,
         OffsetDateTime creadoEn,
         List<MovimientoInventarioDetalleRequest> detalles
-) {}
+) {
+}

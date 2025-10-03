@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -36,13 +35,13 @@ public class OrdenEstacion {
     private OffsetDateTime inicioPlanificado;
 
     @Column(name = "fin_planificado")
-    private OffsetDateTime  finPlanificado;
+    private OffsetDateTime finPlanificado;
 
     @Column(name = "inicio_real")
-    private OffsetDateTime  inicioReal;
+    private OffsetDateTime inicioReal;
 
     @Column(name = "fin_real")
-    private OffsetDateTime  finReal;
+    private OffsetDateTime finReal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_orden_estacion_id")

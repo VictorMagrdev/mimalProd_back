@@ -9,4 +9,5 @@ public record TarifaEmpleadoRequest(
         String moneda,
         LocalDate vigenteDesde,
         LocalDate vigenteHasta
-) {}
+) {
+}

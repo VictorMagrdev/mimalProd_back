@@ -5,4 +5,5 @@ public record TipoProductoResponse(
         String codigo,
         String nombre,
         String descripcion
-) {}
+) {
+}

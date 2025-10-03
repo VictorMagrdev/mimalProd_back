@@ -9,4 +9,5 @@ public record ProductoRequest(
         Long tipoId,
         Long unidadBaseId,
         BigDecimal costoBase
-) {}
+) {
+}

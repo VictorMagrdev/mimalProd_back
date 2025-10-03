@@ -1,7 +1,6 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
 import com.example.minimal_prod_backend.dto.LineaOrdenRequest;
-import com.example.minimal_prod_backend.dto.LineaOrdenRequest;
 import com.example.minimal_prod_backend.dto.LineaOrdenResponse;
 import com.example.minimal_prod_backend.service.LineaOrdenService;
 import org.springframework.graphql.data.method.annotation.Argument;

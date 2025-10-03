@@ -9,4 +9,5 @@ public record MovimientoInventarioDetalleRequest(
         BigDecimal cantidad,
         Long unidadId,
         BigDecimal costoUnitario
-) {}
+) {
+}

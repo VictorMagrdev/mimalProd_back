@@ -4,4 +4,5 @@ public record EstadoOrdenEstacionResponse(
         Long id,
         String nombre,
         String descripcion
-) {}
+) {
+}

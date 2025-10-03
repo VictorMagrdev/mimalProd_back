@@ -12,4 +12,5 @@ public record TarifaEmpleadoResponse(
         LocalDate vigenteDesde,
         LocalDate vigenteHasta,
         OffsetDateTime creadoEn
-) {}
+) {
+}

@@ -8,4 +8,5 @@ public record TipoBodegaResponse(
         String nombre,
         String descripcion,
         OffsetDateTime creadoEn
-) {}
+) {
+}

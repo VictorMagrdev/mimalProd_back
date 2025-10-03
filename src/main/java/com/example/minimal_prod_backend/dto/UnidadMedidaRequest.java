@@ -7,4 +7,5 @@ public record UnidadMedidaRequest(
         Long unidadMedidaTipoId,
         Boolean activa,
         Boolean base
-) {}
+) {
+}

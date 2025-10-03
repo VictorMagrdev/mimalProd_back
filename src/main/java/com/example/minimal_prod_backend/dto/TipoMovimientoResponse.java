@@ -1,6 +1,5 @@
 package com.example.minimal_prod_backend.dto;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 public record TipoMovimientoResponse(
@@ -10,4 +9,5 @@ public record TipoMovimientoResponse(
         String descripcion,
         Boolean afectaWip,
         OffsetDateTime creadoEn
-) {}
+) {
+}

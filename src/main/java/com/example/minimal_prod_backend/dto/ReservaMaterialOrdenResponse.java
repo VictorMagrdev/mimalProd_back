@@ -11,4 +11,5 @@ public record ReservaMaterialOrdenResponse(
         BigDecimal cantidadReservada,
         Long unidadId,
         OffsetDateTime fechaReserva
-) {}
+) {
+}

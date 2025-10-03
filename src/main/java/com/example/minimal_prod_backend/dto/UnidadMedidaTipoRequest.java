@@ -4,4 +4,5 @@ public record UnidadMedidaTipoRequest(
         String codigo,
         String nombre,
         String descripcion
-) {}
+) {
+}

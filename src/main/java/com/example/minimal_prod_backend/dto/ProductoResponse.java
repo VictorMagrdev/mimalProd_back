@@ -12,4 +12,5 @@ public record ProductoResponse(
         Long unidadBaseId,
         BigDecimal costoBase,
         OffsetDateTime creadoEn
-) {}
+) {
+}

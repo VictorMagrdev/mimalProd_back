@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ public class MovimientoInventario {
 
     @Builder.Default
     @Column(updatable = false)
-    private OffsetDateTime  fecha = OffsetDateTime.now();
+    private OffsetDateTime fecha = OffsetDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "bodega_origen_id")

@@ -4,4 +4,5 @@ public record TipoProductoRequest(
         String codigo,
         String nombre,
         String descripcion
-) {}
+) {
+}

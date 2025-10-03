@@ -4,4 +4,5 @@ public record PermisoResponse(
         Long id,
         String accion,
         String descripcion
-) {}
+) {
+}

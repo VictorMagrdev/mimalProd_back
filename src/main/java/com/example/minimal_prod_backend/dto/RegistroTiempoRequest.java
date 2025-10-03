@@ -10,4 +10,5 @@ public record RegistroTiempoRequest(
         Long tipoCostoId,
         Long estadoAprobacionId,
         Long hojaTimesheetId
-) {}
+) {
+}

@@ -16,4 +16,5 @@ public record OrdenProduccionRequest(
         BigDecimal cantidadProducida,
         Long creadoPor,
         String observaciones
-) {}
+) {
+}

@@ -11,4 +11,5 @@ public record LineaOrdenRequest(
         BigDecimal cantidadUsada,
         BigDecimal costoUnitario,
         String observaciones
-) {}
+) {
+}

@@ -7,8 +7,11 @@ import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "operaciones_orden")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OperacionOrden {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

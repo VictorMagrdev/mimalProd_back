@@ -11,4 +11,5 @@ public record MovimientoInventarioDetalleResponse(
         Long unidadId,
         BigDecimal costoUnitario,
         BigDecimal costoTotal
-) {}
+) {
+}

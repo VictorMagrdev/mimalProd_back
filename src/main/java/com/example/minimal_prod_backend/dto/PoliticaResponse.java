@@ -5,4 +5,5 @@ public record PoliticaResponse(
         Long rolId,
         Long tagId,
         Long permisoId
-) {}
+) {
+}

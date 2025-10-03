@@ -11,4 +11,5 @@ public record UnidadMedidaResponse(
         Boolean activa,
         Boolean base,
         OffsetDateTime creadoEn
-) {}
+) {
+}

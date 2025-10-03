@@ -15,4 +15,5 @@ public record LineaOrdenResponse(
         BigDecimal costoTotal,
         String observaciones,
         OffsetDateTime creadoEn
-) {}
+) {
+}

@@ -4,4 +4,5 @@ public record PoliticaRequest(
         Long rolId,
         Long tagId,
         Long permisoId
-) {}
+) {
+}

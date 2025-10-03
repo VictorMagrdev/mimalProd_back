@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.dto;
 
-import java.time.OffsetDateTime;
 import java.time.Duration;
+import java.time.OffsetDateTime;
 
 public record RecursoOperacionResponse(
         Long id,
@@ -12,4 +12,5 @@ public record RecursoOperacionResponse(
         Duration horasReales,
         Long asignadoPor,
         OffsetDateTime creadoEn
-) {}
+) {
+}

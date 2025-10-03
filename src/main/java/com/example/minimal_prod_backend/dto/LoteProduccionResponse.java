@@ -9,4 +9,5 @@ public record LoteProduccionResponse(
         OffsetDateTime fabricadoEn,
         OffsetDateTime venceEn,
         OffsetDateTime creadoEn
-) {}
+) {
+}

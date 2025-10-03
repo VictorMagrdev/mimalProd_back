@@ -7,4 +7,5 @@ public record PuntoReordenRequest(
         BigDecimal stockMinimo,
         BigDecimal stockSeguridad,
         Long unidadId
-) {}
+) {
+}

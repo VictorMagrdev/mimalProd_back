@@ -4,4 +4,5 @@ public record MetodoValoracionRequest(
         String codigo,
         String nombre,
         String descripcion
-) {}
+) {
+}

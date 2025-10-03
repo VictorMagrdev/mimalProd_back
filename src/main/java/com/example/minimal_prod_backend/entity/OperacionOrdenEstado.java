@@ -5,8 +5,11 @@ import lombok.*;
 
 @Entity
 @Table(name = "operaciones_orden_estados")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OperacionOrdenEstado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

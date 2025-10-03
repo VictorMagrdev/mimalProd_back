@@ -14,4 +14,5 @@ public record AsignacionResponse(
         Long estadoAsignacionId,
         Long funcionTareaId,
         OffsetDateTime creadoEn
-) {}
+) {
+}

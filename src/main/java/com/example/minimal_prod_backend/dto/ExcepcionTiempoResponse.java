@@ -9,4 +9,5 @@ public record ExcepcionTiempoResponse(
         String detalles,
         OffsetDateTime creadoEn,
         Boolean resuelto
-) {}
+) {
+}

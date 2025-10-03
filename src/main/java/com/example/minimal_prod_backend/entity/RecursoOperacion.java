@@ -8,8 +8,11 @@ import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "recursos_operacion")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class RecursoOperacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

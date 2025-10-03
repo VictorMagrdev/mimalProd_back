@@ -8,4 +8,5 @@ public record OrdenEventoResponse(
         String evento,
         String descripcion,
         OffsetDateTime fecha
-) {}
+) {
+}

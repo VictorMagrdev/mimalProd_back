@@ -9,4 +9,5 @@ public record OrdenTrabajoRequest(
         OffsetDateTime inicioPlanificado,
         OffsetDateTime finPlanificado,
         Integer estadoId
-) {}
+) {
+}

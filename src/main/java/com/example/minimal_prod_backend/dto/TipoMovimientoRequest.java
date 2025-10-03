@@ -9,4 +9,5 @@ public record TipoMovimientoRequest(
         Boolean afectaWip,
         OffsetDateTime creadoEn
 
-) {}
+) {
+}

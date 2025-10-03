@@ -12,4 +12,5 @@ public record HojaTimesheetResponse(
         Long aprobadoPor,
         OffsetDateTime aprobadoEn,
         OffsetDateTime creadoEn
-) {}
+) {
+}

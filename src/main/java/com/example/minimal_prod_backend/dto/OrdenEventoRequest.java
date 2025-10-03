@@ -7,4 +7,5 @@ public record OrdenEventoRequest(
         String evento,
         String descripcion,
         OffsetDateTime fecha
-) {}
+) {
+}

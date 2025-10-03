@@ -6,4 +6,5 @@ public record UnidadConversionRequest(
         Long origenId,
         Long destinoId,
         BigDecimal factor
-) {}
+) {
+}

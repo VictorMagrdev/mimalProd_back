@@ -9,4 +9,5 @@ public record EstacionProduccionResponse(
         String descripcion,
         Integer orden,
         OffsetDateTime creadoEn
-) {}
+) {
+}

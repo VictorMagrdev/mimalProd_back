@@ -8,4 +8,5 @@ public record InventarioLoteRequest(
         Long bodegaId,
         BigDecimal cantidad,
         Long unidadId
-) {}
+) {
+}

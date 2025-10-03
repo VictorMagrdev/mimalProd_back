@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -37,7 +36,7 @@ public class TipoMovimiento {
 
     @Column(name = "creado_en", updatable = false)
     @Builder.Default
-    private OffsetDateTime  creadoEn = OffsetDateTime.now();
+    private OffsetDateTime creadoEn = OffsetDateTime.now();
 
     @Override
     public final boolean equals(Object o) {

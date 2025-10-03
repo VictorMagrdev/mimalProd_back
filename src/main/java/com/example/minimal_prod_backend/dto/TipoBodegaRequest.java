@@ -7,4 +7,5 @@ public record TipoBodegaRequest(
         String nombre,
         String descripcion,
         OffsetDateTime creadoEn
-) {}
+) {
+}

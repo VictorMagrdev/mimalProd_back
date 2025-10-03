@@ -11,4 +11,5 @@ public record UserUpdateRequest(
         Double capacidadHorasDia,
         Boolean activo,
         Set<Long> roleIds
-) {}
+) {
+}

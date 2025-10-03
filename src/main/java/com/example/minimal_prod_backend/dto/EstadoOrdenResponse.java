@@ -9,4 +9,5 @@ public record EstadoOrdenResponse(
         String descripcion,
         Boolean activo,
         OffsetDateTime creadoEn
-) {}
+) {
+}

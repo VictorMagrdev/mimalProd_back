@@ -7,4 +7,5 @@ public record UnidadConversionResponse(
         Long origenId,
         Long destinoId,
         BigDecimal factor
-) {}
+) {
+}

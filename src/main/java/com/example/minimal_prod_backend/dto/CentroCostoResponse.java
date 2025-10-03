@@ -4,4 +4,5 @@ public record CentroCostoResponse(
         Long id,
         String codigo,
         String nombre
-) {}
+) {
+}

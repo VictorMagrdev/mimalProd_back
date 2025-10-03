@@ -7,8 +7,11 @@ import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "rutas_produccion")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class RutaProduccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

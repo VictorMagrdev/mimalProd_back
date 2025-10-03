@@ -10,4 +10,5 @@ public record ConteoCiclicoRequest(
         BigDecimal cantidadContada,
         Long unidadId,
         OffsetDateTime fecha
-) {}
+) {
+}

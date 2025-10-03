@@ -14,4 +14,5 @@ public record OperacionOrdenResponse(
         OffsetDateTime finReal,
         Long estadoId,
         String observaciones
-) {}
+) {
+}

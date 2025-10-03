@@ -11,4 +11,5 @@ public record ConteoCiclicoResponse(
         BigDecimal cantidadContada,
         Long unidadId,
         OffsetDateTime fecha
-) {}
+) {
+}

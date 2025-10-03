@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.dto;
 
-import java.time.OffsetDateTime;
 import java.time.Duration;
+import java.time.OffsetDateTime;
 
 public record OperacionRutaResponse(
         Long id,
@@ -13,4 +13,5 @@ public record OperacionRutaResponse(
         Duration tiempoEjecucion,
         Duration tiempoCola,
         OffsetDateTime creadoEn
-) {}
+) {
+}

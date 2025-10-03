@@ -8,4 +8,5 @@ public record CostoOrdenRequest(
         String descripcion,
         BigDecimal monto,
         String moneda
-) {}
+) {
+}

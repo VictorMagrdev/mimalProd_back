@@ -19,4 +19,5 @@ public record OrdenProduccionResponse(
         String observaciones,
         OffsetDateTime creadoEn,
         OffsetDateTime actualizadoEn
-) {}
+) {
+}

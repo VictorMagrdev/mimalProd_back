@@ -8,4 +8,5 @@ public record PuntoReordenResponse(
         BigDecimal stockMinimo,
         BigDecimal stockSeguridad,
         Long unidadId
-) {}
+) {
+}

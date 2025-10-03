@@ -8,4 +8,5 @@ public record UnidadMedidaTipoResponse(
         String nombre,
         String descripcion,
         OffsetDateTime creadoEn
-) {}
+) {
+}

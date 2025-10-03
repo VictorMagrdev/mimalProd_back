@@ -5,4 +5,5 @@ public record MetodoValoracionResponse(
         String codigo,
         String nombre,
         String descripcion
-) {}
+) {
+}

@@ -1,6 +1,5 @@
 package com.example.minimal_prod_backend.dto;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public record RegistroTiempoResponse(
@@ -15,4 +14,5 @@ public record RegistroTiempoResponse(
         Long hojaTimesheetId,
         OffsetDateTime creadoEn,
         OffsetDateTime actualizadoEn
-) {}
+) {
+}

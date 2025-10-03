@@ -7,4 +7,5 @@ public record LoteProduccionRequest(
         Long productoId,
         OffsetDateTime fabricadoEn,
         OffsetDateTime venceEn
-) {}
+) {
+}

@@ -9,4 +9,5 @@ public record TipoCostoResponse(
         String descripcion,
         Boolean activo,
         OffsetDateTime creadoEn
-) {}
+) {
+}

@@ -5,4 +5,5 @@ public record BodegaRequest(
         String nombre,
         String descripcion,
         Long tipoBodegaId
-) {}
+) {
+}

@@ -11,4 +11,5 @@ public record InventarioLoteResponse(
         BigDecimal cantidad,
         Long unidadId,
         OffsetDateTime actualizadoEn
-) {}
+) {
+}

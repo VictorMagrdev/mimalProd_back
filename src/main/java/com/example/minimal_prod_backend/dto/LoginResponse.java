@@ -7,4 +7,5 @@ public record LoginResponse(
         String username,
         List<String> roles,
         List<PoliticaLoginResponse> politicas
-) {}
+) {
+}

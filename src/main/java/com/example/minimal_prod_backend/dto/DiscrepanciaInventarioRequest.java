@@ -6,4 +6,5 @@ public record DiscrepanciaInventarioRequest(
         Long conteoId,
         BigDecimal cantidadSistema,
         Boolean resuelto
-) {}
+) {
+}

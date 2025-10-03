@@ -5,4 +5,5 @@ public record EstadoOrdenRequest(
         String nombre,
         String descripcion,
         Boolean activo
-) {}
+) {
+}

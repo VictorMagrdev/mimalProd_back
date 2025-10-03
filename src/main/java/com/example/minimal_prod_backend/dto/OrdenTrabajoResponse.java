@@ -11,4 +11,5 @@ public record OrdenTrabajoResponse(
         OffsetDateTime finPlanificado,
         Integer estadoId,
         OffsetDateTime creadoEn
-) {}
+) {
+}

@@ -4,4 +4,5 @@ public record ExcepcionTiempoRequest(
         Long usuarioId,
         String periodo,
         String detalles
-) {}
+) {
+}

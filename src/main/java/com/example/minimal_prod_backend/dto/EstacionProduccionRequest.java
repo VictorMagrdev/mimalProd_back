@@ -5,4 +5,5 @@ public record EstacionProduccionRequest(
         String nombre,
         String descripcion,
         Integer orden
-) {}
+) {
+}

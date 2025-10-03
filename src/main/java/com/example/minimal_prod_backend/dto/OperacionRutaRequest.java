@@ -10,4 +10,5 @@ public record OperacionRutaRequest(
         Duration tiempoSetup,
         Duration tiempoEjecucion,
         Duration tiempoCola
-) {}
+) {
+}

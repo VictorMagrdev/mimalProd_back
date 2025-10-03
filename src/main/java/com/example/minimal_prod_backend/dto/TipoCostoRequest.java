@@ -8,4 +8,5 @@ public record TipoCostoRequest(
         String descripcion,
         Boolean activo,
         OffsetDateTime creadoEn
-) {}
+) {
+}

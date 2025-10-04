@@ -16,7 +16,6 @@ public interface RegistroTiempoMapper {
     @Mapping(target = "estadoAprobacion", ignore = true)
     @Mapping(target = "hojaTimesheet", ignore = true)
     @Mapping(target = "duracion", ignore = true)
-    @Mapping(target = "duracionHoras", ignore = true)
     @Mapping(target = "creadoEn", ignore = true)
     @Mapping(target = "actualizadoEn", ignore = true)
     RegistroTiempo toEntity(RegistroTiempoRequest request);

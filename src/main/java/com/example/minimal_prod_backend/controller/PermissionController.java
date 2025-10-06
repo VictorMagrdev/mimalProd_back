@@ -22,7 +22,7 @@ public class PermissionController {
     }
 
     @GetMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('PERMISOS_TAG', 'READ')")
     public List<Permiso> getAllPermissions() {
         return permissionService.getAllPermissions();
     }

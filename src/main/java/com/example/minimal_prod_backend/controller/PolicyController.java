@@ -20,20 +20,20 @@ public class PolicyController {
     private final PolicyService policyService;
 
     @GetMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_POLICIES', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('POLITICAS_TAG', 'READ')")
     public List<Politica> getAllPolicies() {
         return policyService.getAllPolicies();
     }
 
     @PostMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_POLICIES', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('POLITICAS_TAG', 'CREATE')")
     public ResponseEntity<Politica> createPolicy(@Valid @RequestBody PoliticaRequest request) {
         return new ResponseEntity<>(policyService.createPolicy(request), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("@customSecurity.hasPermission('TAG_POLICIES', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('POLITICAS_TAG', 'DELETE')")
     public void deletePolicy(@PathVariable Long id) {
         policyService.deletePolicy(id);
     }

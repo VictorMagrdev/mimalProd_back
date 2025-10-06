@@ -28,53 +28,53 @@ public class UserController {
     }
 
     @PostMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('USUARIOS_TAG', 'CREATE')")
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreateRequest request) {
         UserResponse createdUser = userService.createUser(request);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('USUARIOS_TAG', 'READ')")
     public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('USUARIOS_TAG', 'READ')")
     public UserResponse getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('USUARIOS_TAG', 'UPDATE')")
     public UserResponse updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest request) {
         return userService.updateUser(id, request);
     }
 
     @PostMapping("/{userId}/roles")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('USUARIOS_TAG', 'UPDATE')")
     public void assignRoleToUser(@PathVariable Long userId, @RequestBody Map<String, Long> payload) {
         userService.assignRoleToUser(userId, payload.get("roleId"));
     }
 
     @GetMapping("/{userId}/roles")
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('USUARIOS_TAG', 'READ')")
     public Set<RolResponse> getUserRoles(@PathVariable Long userId) {
         return userService.getUserRoles(userId);
     }
 
     @DeleteMapping("/{userId}/roles/{roleId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('USUARIOS_TAG', 'UPDATE')")
     public void removeRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId) {
         userService.removeRoleFromUser(userId, roleId);
     }
 
     @PostMapping("/{id}/deactivate")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("@customSecurity.hasPermission('TAG_USERS', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('USUARIOS_TAG', 'UPDATE')")
     public ResponseEntity<String> deactivateUser(@PathVariable Long id) {
         userService.deactivateUser(id);
         return ResponseEntity.ok("Usuario desactivado");

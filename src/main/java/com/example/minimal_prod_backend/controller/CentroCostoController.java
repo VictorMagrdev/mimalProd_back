@@ -19,31 +19,31 @@ public class CentroCostoController {
     private final CentroCostoService centroCostoService;
 
     @GetMapping
-    @PreAuthorize("@customSecurity.hasPermission('CENTRO_COSTO_GENERAL', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('CENTROS_COSTO_TAG', 'READ')")
     public ResponseEntity<List<CentroCostoResponse>> getCentrosDeCosto() {
         return ResponseEntity.ok(centroCostoService.getCentrosDeCosto());
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("@customSecurity.hasPermission('CENTRO_COSTO_GENERAL', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('CENTROS_COSTO_TAG', 'READ')")
     public ResponseEntity<CentroCostoResponse> getCentroDeCostoById(@PathVariable Long id) {
         return ResponseEntity.ok(centroCostoService.getCentroDeCostoById(id));
     }
 
     @PostMapping
-    @PreAuthorize("@customSecurity.hasPermission('CENTRO_COSTO_GENERAL', 'WRITE')")
+    @PreAuthorize("@customSecurity.hasPermission('CENTROS_COSTO_TAG', 'WRITE')")
     public ResponseEntity<CentroCostoResponse> createCentroDeCosto(@RequestBody CentroCostoRequest centroCostoInput) {
         return new ResponseEntity<>(centroCostoService.createCentroDeCosto(centroCostoInput), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("@customSecurity.hasPermission('CENTRO_COSTO_GENERAL', 'WRITE')")
+    @PreAuthorize("@customSecurity.hasPermission('CENTROS_COSTO_TAG', 'WRITE')")
     public ResponseEntity<CentroCostoResponse> updateCentroDeCosto(@PathVariable Long id, @RequestBody CentroCostoRequest centroCostoInput) {
         return ResponseEntity.ok(centroCostoService.updateCentroDeCosto(id, centroCostoInput));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("@customSecurity.hasPermission('CENTRO_COSTO_GENERAL', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('CENTROS_COSTO_TAG', 'DELETE')")
     public ResponseEntity<Void> deleteCentroDeCosto(@PathVariable Long id) {
         centroCostoService.deleteCentroDeCosto(id);
         return ResponseEntity.noContent().build();

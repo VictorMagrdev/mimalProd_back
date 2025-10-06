@@ -24,26 +24,26 @@ public class RoleController {
     }
 
     @PostMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'CREATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ROLES_TAG', 'CREATE')")
     public ResponseEntity<Rol> createRole(@Valid @RequestBody RolRequest request) {
         return new ResponseEntity<>(roleService.createRole(request), HttpStatus.CREATED);
     }
 
     @GetMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('ROLES_TAG', 'READ')")
     public List<Rol> getAllRoles() {
         return roleService.getAllRoles();
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'UPDATE')")
+    @PreAuthorize("@customSecurity.hasPermission('ROLES_TAG', 'UPDATE')")
     public Rol updateRole(@PathVariable Long id, @Valid @RequestBody RolRequest request) {
         return roleService.updateRole(id, request);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("@customSecurity.hasPermission('TAG_ROLES', 'DELETE')")
+    @PreAuthorize("@customSecurity.hasPermission('ROLES_TAG', 'DELETE')")
     public void deleteRole(@PathVariable Long id) {
         roleService.deleteRole(id);
     }

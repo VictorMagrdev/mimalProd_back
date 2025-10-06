@@ -21,7 +21,7 @@ public class TagController {
     }
 
     @GetMapping
-    @PreAuthorize("@customSecurity.hasPermission('TAG_GENERAL', 'READ')")
+    @PreAuthorize("@customSecurity.hasPermission('TAGS_TAG', 'READ')")
     public List<Tag> list() {
         return tagService.getAllTags();
     }

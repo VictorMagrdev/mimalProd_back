@@ -42,6 +42,7 @@ public class GraphQLConfig {
     public RuntimeWiringConfigurer runtimeWiringConfigurer() {
         return builder -> builder
                 .scalar(dateTimeScalar())
+                .scalar(dateScalar())
                 .scalar(numericScalar())
                 .scalar(intervalScalar());
     }
@@ -84,7 +85,43 @@ public class GraphQLConfig {
                 })
                 .build();
     }
+    @Bean
+    public GraphQLScalarType dateScalar() {
+        return GraphQLScalarType.newScalar()
+                .name("Date")
+                .description("Custom scalar for Date")
+                .coercing(new Coercing<java.time.LocalDate, String>() {
+                    @Override
+                    public String serialize(@NonNull Object dataFetcherResult,
+                                            @NonNull GraphQLContext context,
+                                            @NonNull Locale locale) {
+                        if (!(dataFetcherResult instanceof java.time.LocalDate))
+                            throw new CoercingSerializeException("Expected a LocalDate object.");
+                        return ((java.time.LocalDate) dataFetcherResult).format(DateTimeFormatter.ISO_LOCAL_DATE);
+                    }
 
+                    @Override
+                    public java.time.LocalDate parseValue(@NonNull Object input,
+                                                          @NonNull GraphQLContext context,
+                                                          @NonNull Locale locale) {
+                        if (!(input instanceof String))
+                            throw new CoercingParseValueException("Expected a String.");
+                        return parseOrThrow(input, v -> java.time.LocalDate.parse((String) v), "LocalDate");
+                    }
+
+                    @Override
+                    public java.time.LocalDate parseLiteral(@NonNull Value<?> input,
+                                                            @NonNull CoercedVariables variables,
+                                                            @NonNull GraphQLContext context,
+                                                            @NonNull Locale locale) {
+                        if (!(input instanceof StringValue))
+                            throw new CoercingParseLiteralException("Expected a StringValue.");
+                        String value = ((StringValue) input).getValue();
+                        return parseOrThrow(value, v -> java.time.LocalDate.parse((String) v), "LocalDate");
+                    }
+                })
+                .build();
+    }
     @Bean
     public GraphQLScalarType numericScalar() {
         return GraphQLScalarType.newScalar()

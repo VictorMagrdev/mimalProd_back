@@ -1,8 +1,10 @@
 package com.example.minimal_prod_backend.entity;
 
+import io.hypersistence.utils.hibernate.type.interval.PostgreSQLIntervalType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Duration;
@@ -48,6 +50,7 @@ public class Usuario {
     private CentroCosto centroCosto;
 
     @Builder.Default
+    @Type(PostgreSQLIntervalType.class)
     @Column(name = "capacidad_horas_dia", columnDefinition = "interval")
     private Duration capacidadHorasDia = Duration.ofHours(8);
 

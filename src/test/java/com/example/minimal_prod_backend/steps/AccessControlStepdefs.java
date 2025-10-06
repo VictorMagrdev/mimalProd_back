@@ -16,7 +16,7 @@ public class AccessControlStepdefs extends BaseStepdefs {
 
     @Given("un usuario {string} tiene el rol {string}")
     public void unUsuarioTieneElRol(String username, String roleName) {
-        Rol role = roleRepository.findByName(roleName).orElseGet(() -> roleRepository.save(Rol.builder().nombre(roleName).build()));
+        Rol role = roleRepository.findByNombre(roleName).orElseGet(() -> roleRepository.save(Rol.builder().nombre(roleName).build()));
         Usuario usuario = Usuario.builder()
                 .username(username)
                 .password(passwordEncoder.encode("password"))
@@ -28,7 +28,7 @@ public class AccessControlStepdefs extends BaseStepdefs {
 
     @Given("el rol {string} tiene permiso para {string} en {string}")
     public void elRolTienePermisoParaEn(String roleName, String action, String tagName) {
-        Rol role = roleRepository.findByName(roleName).orElseThrow();
+        Rol role = roleRepository.findByNombre(roleName).orElseThrow();
         Tag tag = tagRepository.findByNombre(tagName).orElseGet(() -> tagRepository.save(Tag.builder().nombre(tagName).build()));
         Permiso permiso = permissionRepository.findByAccion(action).orElseGet(() -> permissionRepository.save(Permiso.builder().accion(action).build()));
 
@@ -69,7 +69,7 @@ public class AccessControlStepdefs extends BaseStepdefs {
 
     @And("el rol {string} pierde el permiso para {string} en {string}")
     public void elRolPierdeElPermisoParaEn(String roleName, String action, String tagName) {
-        Rol role = roleRepository.findByName(roleName).orElseThrow();
+        Rol role = roleRepository.findByNombre(roleName).orElseThrow();
         Tag tag = tagRepository.findByNombre(tagName).orElseThrow();
         Permiso permiso = permissionRepository.findByAccion(action).orElseThrow();
         policyRepository.findByRolAndTagAndPermiso(role, tag, permiso).ifPresent(policyRepository::delete);

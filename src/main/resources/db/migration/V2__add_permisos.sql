@@ -59,24 +59,18 @@ INSERT INTO tags (nombre, descripcion) VALUES
 ('EXCEPCIONES_TIEMPO_TAG', 'Etiqueta para excepciones_tiempo'),
 ('TARIFAS_EMPLEADO_TAG', 'Etiqueta para tarifas_empleado');
 
--- 4. Insertar Centro de Costo por defecto
 INSERT INTO centros_costo (codigo, nombre) VALUES
 ('ADMIN', 'Centro de Costo Administrativo');
 
--- 5. Insertar Usuario Administrador - CORREGIDO
--- Contraseña: 'admin123' (bcrypt hash)
 INSERT INTO usuarios (username, email, password, telefono, codigo_empleado, nombre, apellidos, centro_costo_id, activo) VALUES
-('admin', 'admin@example.com', '$2a$10$YFAsX6jOME7VCexvNKkgEuiykKj821bfIwIDen1MeEYFAg5xIc8jG', '123456789', 'ADMIN001', 'Administrador', 'Del Sistema', (SELECT id FROM centros_costo WHERE codigo = 'ADMIN'), true);
+('admin', 'admin@example.com', '$2a$10$NdzsMp8e0Syek06aG80yvO/8RkSH7zwSrODsv7ICFklnbJLH8HNmG', '123456789', 'ADMIN001', 'Administrador', 'Del Sistema', (SELECT id FROM centros_costo WHERE codigo = 'ADMIN'), true);
 
--- 6. Asignar Rol de Administrador al Usuario 'admin' - CORREGIDO
 INSERT INTO usuario_roles (usuario_id, rol_id)
 VALUES (
     (SELECT id FROM usuarios WHERE username = 'admin'),
     (SELECT id FROM roles WHERE nombre = 'ROLE_ADMIN')
 );
 
--- 7. Crear Políticas de Acceso para el Rol de Administrador - CORREGIDO
--- Política para todos los tags con todos los permisos
 INSERT INTO politicas (rol_id, tag_id, permiso_id)
 SELECT
     r.id,

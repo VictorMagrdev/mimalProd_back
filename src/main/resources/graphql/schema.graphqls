@@ -176,6 +176,7 @@ type OrdenProduccion {
     costos: [CostoOrden]
 }
 
+
 input OrdenProduccionRequest {
     numero_orden: String!
     cantidad: Numeric
@@ -372,6 +373,7 @@ type EstacionProduccion {
     orden: Int
     creado_en: DateTime
 }
+
 
 input EstacionProduccionRequest {
     codigo: String!
@@ -718,17 +720,7 @@ type RecursoOperacion {
 }
 
 # Tipos de referencia basados en tus otras tablas
-type EstacionProduccion {
-    id: ID!
-    nombre: String!
-    codigo: String!
-    descripcion: String
-    lineaProduccionId: ID
-    capacidad: Int
-    activo: Boolean!
-    creadoEn: String!
-    actualizadoEn: String!
-}
+
 
 type Usuario {
     id: ID!
@@ -742,47 +734,9 @@ type Usuario {
     actualizadoEn: String!
 }
 
-type FuncionTarea {
-    id: ID!
-    nombre: String!
-    descripcion: String
-    codigo: String!
-    categoria: String
-    nivelHabilidad: String
-    activo: Boolean!
-    creadoEn: String!
-    actualizadoEn: String!
-}
 
-type Producto {
-    id: ID!
-    codigo: String!
-    nombre: String!
-    descripcion: String
-    categoria: String
-    unidadMedida: String
-    costoStandard: Float
-    precioVenta: Float
-    activo: Boolean!
-    creadoEn: String!
-    actualizadoEn: String!
-}
 
-type OrdenProduccion {
-    id: ID!
-    numeroOrden: String!
-    productoId: ID!
-    cantidad: Int!
-    fechaInicioPlanificada: String!
-    fechaFinPlanificada: String!
-    fechaInicioReal: String
-    fechaFinReal: String
-    estado: String!
-    prioridad: String!
-    observaciones: String
-    creadoEn: String!
-    actualizadoEn: String!
-}
+
 
 # Inputs
 input RutaProduccionInput {

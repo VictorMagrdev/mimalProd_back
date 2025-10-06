@@ -18,7 +18,7 @@ public interface PolicyRepository extends JpaRepository<Politica, Long> {
             String permisoAccion
     );
 
-    @EntityGraph(attributePaths = {"tag", "permission"})
+    @EntityGraph(attributePaths = {"tag", "permiso"})
     List<Politica> findByRolIn(Collection<Rol> roles);
 
     Optional<Politica> findByRolAndTagAndPermiso(Rol role, Tag tag, Permiso permiso);

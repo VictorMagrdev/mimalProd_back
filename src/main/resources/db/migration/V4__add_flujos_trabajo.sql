@@ -22,8 +22,8 @@ CREATE TABLE operaciones_ruta (
 CREATE TABLE operaciones_orden_estados(
     id BIGSERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    descripcion VARCHAR(150),
-)
+    descripcion VARCHAR(150)
+);
 
 CREATE TABLE operaciones_orden (
   id BIGSERIAL PRIMARY KEY,
@@ -49,3 +49,30 @@ CREATE TABLE recursos_operacion (
   asignado_por BIGINT REFERENCES usuarios(id),
   creado_en TIMESTAMPTZ DEFAULT now()
 );
+
+-- Insertar Tags para las nuevas tablas
+INSERT INTO tags (nombre, descripcion) VALUES
+('RUTAS_PRODUCCION_TAG', 'Etiqueta para rutas_produccion'),
+('OPERACIONES_RUTA_TAG', 'Etiqueta para operaciones_ruta'),
+('OPERACIONES_ORDEN_ESTADOS_TAG', 'Etiqueta para operaciones_orden_estados'),
+('OPERACIONES_ORDEN_TAG', 'Etiqueta para operaciones_orden'),
+('RECURSOS_OPERACION_TAG', 'Etiqueta para recursos_operacion');
+
+-- Crear Políticas de Acceso para el Rol de Administrador en las nuevas tablas
+INSERT INTO politicas (rol_id, tag_id, permiso_id)
+SELECT
+    r.id,
+    t.id,
+    p.id
+FROM roles r
+CROSS JOIN tags t
+CROSS JOIN permisos p
+WHERE r.nombre = 'ROLE_ADMIN'
+AND t.nombre IN (
+    'RUTAS_PRODUCCION_TAG',
+    'OPERACIONES_RUTA_TAG',
+    'OPERACIONES_ORDEN_ESTADOS_TAG',
+    'OPERACIONES_ORDEN_TAG',
+    'RECURSOS_OPERACION_TAG'
+)
+AND p.accion IN ('CREATE','READ','UPDATE','DELETE');

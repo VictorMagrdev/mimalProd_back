@@ -5,7 +5,7 @@ CREATE TABLE roles (
 );  
   
 CREATE TABLE centros_costo (
-  id SERIAL PRIMARY KEY,
+  id BIGSERIAL PRIMARY KEY,
   codigo VARCHAR(50) ,
   nombre VARCHAR(100) NOT NULL
 );
@@ -19,12 +19,11 @@ CREATE TABLE usuarios (
   codigo_empleado VARCHAR(150) UNIQUE,
   nombre VARCHAR(150) NOT NULL,
   apellidos VARCHAR(150) NOT NULL,
-  centro_costo_id INT REFERENCES centros_costo(id),
+  centro_costo_id BIGINT REFERENCES centros_costo(id),
   capacidad_horas_dia INTERVAL DEFAULT '8 hours',
   activo BOOLEAN DEFAULT TRUE,
   creado_en TIMESTAMPTZ DEFAULT now(),
   actualizado_en TIMESTAMPTZ DEFAULT now()
-    
 );  
   
 CREATE TABLE usuario_roles (  
@@ -36,9 +35,8 @@ CREATE TABLE usuario_roles (
 CREATE TABLE tags (  
   id BIGSERIAL PRIMARY KEY,  
   nombre VARCHAR(150) UNIQUE NOT NULL,  
-  descripcion VARCHAR(150),  
-  owner_rol_id BIGINT REFERENCES roles(id)  
-);   
+  descripcion VARCHAR(150)
+);
   
 CREATE TABLE permisos (  
   id BIGSERIAL PRIMARY KEY,  
@@ -248,7 +246,7 @@ CREATE TABLE reservas_material_orden (
   cantidad_reservada NUMERIC(18,6),  
   unidad_id BIGINT REFERENCES unidades_medida(id),  
   fecha_reserva TIMESTAMPTZ DEFAULT now()  
-);  
+);
   
 CREATE TABLE estaciones_produccion (  
   id BIGSERIAL PRIMARY KEY,  
@@ -329,13 +327,13 @@ CREATE TABLE tipos_actividad(
 );
 
 CREATE TABLE estados_orden_trabajo ( 
-	id SERIAL PRIMARY KEY,
+	id BIGSERIAL PRIMARY KEY,
 	nombre VARCHAR(100) UNIQUE NOT NULL,
 	descripcion VARCHAR(100) 
  );
  
  CREATE TABLE tipos_orden_trabajo ( 
-	id SERIAL PRIMARY KEY,
+	id BIGSERIAL PRIMARY KEY,
 	nombre VARCHAR(100) UNIQUE NOT NULL,
 	descripcion VARCHAR(100) 
  );
@@ -343,16 +341,16 @@ CREATE TABLE estados_orden_trabajo (
 CREATE TABLE ordenes_trabajo (
   id BIGSERIAL PRIMARY KEY,
   referencia VARCHAR(150),
-  tipo_id INT REFERENCES tipos_orden_trabajo(id),
+  tipo_id BIGINT REFERENCES tipos_orden_trabajo(id),
   descripcion VARCHAR(150),
   inicio_planificado TIMESTAMPTZ,
   fin_planificado TIMESTAMPTZ,
-  estado_id INT REFERENCES estados_orden_trabajo(id),
+  estado_id BIGINT REFERENCES estados_orden_trabajo(id),
   creado_en TIMESTAMPTZ DEFAULT now()
 );
 
 CREATE TABLE funciones_tarea ( 
-id SERIAL PRIMARY KEY, 
+id BIGSERIAL PRIMARY KEY, 
 nombre VARCHAR(100) UNIQUE NOT NULL, 
 descripcion VARCHAR(150) 
 );
@@ -410,7 +408,7 @@ CREATE TABLE tarifas_empleado (
   id BIGSERIAL PRIMARY KEY,
   usuario_id BIGINT REFERENCES usuarios(id),
   tarifa NUMERIC(12,2) NOT NULL,
-  moneda CHAR(3) DEFAULT 'COP',
+  moneda VARCHAR(3) DEFAULT 'COP',
   vigente_desde DATE NOT NULL,
   vigente_hasta DATE,
   creado_en TIMESTAMPTZ DEFAULT now()

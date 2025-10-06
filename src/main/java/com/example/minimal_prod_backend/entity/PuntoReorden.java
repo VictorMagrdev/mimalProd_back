@@ -26,11 +26,11 @@ public class PuntoReorden {
     @ToString.Exclude
     private Producto producto;
 
-    @Column(name = "stock_minimo", precision = 18, scale = 6, nullable = false)
+    @Column(name = "stock_minimo", precision = 18, nullable = false)
     private BigDecimal stockMinimo;
 
     @Builder.Default
-    @Column(name = "stock_seguridad", precision = 18, scale = 6)
+    @Column(name = "stock_seguridad", precision = 18)
     private BigDecimal stockSeguridad = BigDecimal.ZERO;
 
     @ManyToOne(fetch = FetchType.LAZY)

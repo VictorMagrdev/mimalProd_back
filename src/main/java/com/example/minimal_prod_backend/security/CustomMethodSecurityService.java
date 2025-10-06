@@ -51,6 +51,6 @@ public class CustomMethodSecurityService {
             return false;
         }
 
-        return policyRepository.existsByRole_IdInAndTag_NameIgnoreCaseAndPermission_Action(roleIds, tagName, permission);
+        return policyRepository.existsByRol_IdInAndTag_NombreIgnoreCaseAndPermiso_Accion(roleIds, tagName, permission);
     }
 }

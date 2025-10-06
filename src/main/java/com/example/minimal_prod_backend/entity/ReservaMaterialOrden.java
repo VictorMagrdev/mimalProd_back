@@ -37,7 +37,7 @@ public class ReservaMaterialOrden {
     @ToString.Exclude
     private LoteProduccion lote;
 
-    @Column(name = "cantidad_reservada", precision = 18, scale = 6)
+    @Column(name = "cantidad_reservada", precision = 18)
     private BigDecimal cantidadReservada;
 
     @ManyToOne(fetch = FetchType.LAZY)

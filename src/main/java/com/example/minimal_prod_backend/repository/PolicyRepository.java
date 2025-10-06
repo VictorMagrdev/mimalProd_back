@@ -12,14 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PolicyRepository extends JpaRepository<Politica, Long> {
-    boolean existsByRole_IdInAndTag_NameIgnoreCaseAndPermission_Action(
+    boolean existsByRol_IdInAndTag_NombreIgnoreCaseAndPermiso_Accion(
             List<Long> roleIds,
-            String tagName,
-            String permissionAction
+            String tagNombre,
+            String permisoAccion
     );
 
     @EntityGraph(attributePaths = {"tag", "permission"})
-    List<Politica> findByRoleIn(Collection<Rol> roles);
+    List<Politica> findByRolIn(Collection<Rol> roles);
 
-    Optional<Politica> findByRoleAndTagAndPermission(Rol role, Tag tag, Permiso permiso);
+    Optional<Politica> findByRolAndTagAndPermiso(Rol role, Tag tag, Permiso permiso);
 }

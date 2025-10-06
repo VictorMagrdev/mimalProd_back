@@ -1,7 +1,5 @@
 -- Índices para la sección de Usuarios y Permisos
 CREATE INDEX idx_usuarios_centro_costo_id ON usuarios(centro_costo_id);
-CREATE INDEX idx_tags_owner_rol_id ON tags(owner_rol_id);
-CREATE INDEX idx_policy_conditions_politica_id ON policy_conditions(politica_id);
 
 -- Índices para la sección de Productos y Unidades
 CREATE INDEX idx_unidades_medida_tipo_id ON unidades_medida(unidad_medida_tipo_id);

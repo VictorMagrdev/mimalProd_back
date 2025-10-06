@@ -28,10 +28,10 @@ public class RecursoOperacion {
     @Column(name = "funcion_tarea_id")
     private Long funcionTareaId;
 
-    @Column(name = "horas_planificadas")
+    @Column(name = "horas_planificadas", columnDefinition = "INTERVAL")
     private Duration horasPlanificadas;
 
-    @Column(name = "horas_reales")
+    @Column(name = "horas_reales", columnDefinition = "INTERVAL")
     private Duration horasReales;
 
     @Column(name = "asignado_por")

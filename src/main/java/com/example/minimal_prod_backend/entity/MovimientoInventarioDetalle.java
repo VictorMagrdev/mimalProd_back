@@ -36,7 +36,7 @@ public class MovimientoInventarioDetalle {
     @ToString.Exclude
     private LoteProduccion lote;
 
-    @Column(nullable = false, precision = 18, scale = 6)
+    @Column(nullable = false, precision = 18)
     @Builder.Default
     private BigDecimal cantidad = BigDecimal.ZERO;
 
@@ -45,11 +45,11 @@ public class MovimientoInventarioDetalle {
     @ToString.Exclude
     private UnidadMedida unidad;
 
-    @Column(name = "costo_unitario", precision = 18, scale = 6)
+    @Column(name = "costo_unitario", precision = 18)
     @Builder.Default
     private BigDecimal costoUnitario = BigDecimal.ZERO;
 
-    @Column(name = "costo_total", precision = 18, scale = 6, insertable = false, updatable = false)
+    @Column(name = "costo_total", precision = 18,insertable = false, updatable = false)
     private BigDecimal costoTotal;
 
     @Override

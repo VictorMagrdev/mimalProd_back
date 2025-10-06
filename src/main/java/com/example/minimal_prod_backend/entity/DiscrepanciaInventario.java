@@ -26,7 +26,7 @@ public class DiscrepanciaInventario {
     @ToString.Exclude
     private ConteoCiclico conteo;
 
-    @Column(name = "cantidad_sistema", precision = 18, scale = 6, nullable = false)
+    @Column(name = "cantidad_sistema", precision = 18, nullable = false)
     private BigDecimal cantidadSistema;
 
     @Column(nullable = false)

@@ -1,5 +1,6 @@
 package com.example.minimal_prod_backend.dto;
 
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public record UserResponse(
         String nombre,
         String apellidos,
         Long centroCostoId,
-        Double capacidadHorasDia,
+        Duration capacidadHorasDia,
         Boolean activo,
         OffsetDateTime creadoEn,
         OffsetDateTime actualizadoEn,

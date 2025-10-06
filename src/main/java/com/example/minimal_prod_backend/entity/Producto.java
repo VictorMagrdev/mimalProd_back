@@ -41,7 +41,7 @@ public class Producto {
     @ToString.Exclude
     private UnidadMedida unidadBase;
 
-    @Column(name = "costo_base", precision = 18, scale = 4)
+    @Column(name = "costo_base", precision = 18)
     private BigDecimal costoBase = BigDecimal.ZERO;
 
     @CreationTimestamp

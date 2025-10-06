@@ -31,13 +31,13 @@ public class OperacionRuta {
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(name = "tiempo_setup")
+    @Column(name = "tiempo_setup", columnDefinition = "interval")
     private Duration tiempoSetup = Duration.ZERO;
 
-    @Column(name = "tiempo_ejecucion")
+    @Column(name = "tiempo_ejecucion", columnDefinition = "interval")
     private Duration tiempoEjecucion = Duration.ZERO;
 
-    @Column(name = "tiempo_cola")
+    @Column(name = "tiempo_cola", columnDefinition = "interval")
     private Duration tiempoCola = Duration.ZERO;
 
     @Column(name = "creado_en", updatable = false, insertable = false)

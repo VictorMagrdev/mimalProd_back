@@ -45,7 +45,7 @@ public class InventarioLote {
     @ToString.Exclude
     private Bodega bodega;
 
-    @Column(nullable = false, precision = 18, scale = 6)
+    @Column(nullable = false, precision = 18)
     @Builder.Default
     private BigDecimal cantidad = BigDecimal.ZERO;
 

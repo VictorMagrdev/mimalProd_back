@@ -33,7 +33,7 @@ public class UnidadConversion {
     @JoinColumn(name = "destino_id", nullable = false)
     private UnidadMedida destino;
 
-    @Column(nullable = false, precision = 18, scale = 8)
+    @Column(nullable = false, precision = 18)
     private BigDecimal factor;
 
     @Override

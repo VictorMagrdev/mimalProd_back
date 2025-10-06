@@ -26,7 +26,7 @@ public class TarifaEmpleado {
     @ToString.Exclude
     private Usuario usuario;
 
-    @Column(name = "tarifa", nullable = false, precision = 12, scale = 2)
+    @Column(name = "tarifa", nullable = false, precision = 12)
     private BigDecimal tarifa;
 
     @Column(name = "moneda", length = 3, nullable = false)

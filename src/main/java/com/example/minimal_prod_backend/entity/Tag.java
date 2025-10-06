@@ -20,7 +20,4 @@ public class Tag {
 
     private String descripcion;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_role_id")
-    private Rol ownerRole;
 }

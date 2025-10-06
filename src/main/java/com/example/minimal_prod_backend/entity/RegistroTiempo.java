@@ -6,6 +6,7 @@ import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Duration;
 import java.time.OffsetDateTime;
 
 @Getter
@@ -33,8 +34,8 @@ public class RegistroTiempo {
     @Column(name = "fin_tz", nullable = false)
     private OffsetDateTime finTz;
 
-    @Column(name = "duracion", insertable = false, updatable = false)
-    private String duracion;
+    @Column(name = "duracion", insertable = false, updatable = false, columnDefinition = "INTERVAL")
+    private Duration duracion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_actividad_id")
@@ -63,4 +64,12 @@ public class RegistroTiempo {
     @UpdateTimestamp
     @Column(name = "actualizado_en")
     private OffsetDateTime actualizadoEn;
+
+    // Método helper para calcular la duración manualmente si es necesario
+    public Duration calcularDuracion() {
+        if (inicioTz != null && finTz != null) {
+            return Duration.between(inicioTz, finTz);
+        }
+        return Duration.ZERO;
+    }
 }

@@ -10,19 +10,16 @@ public interface TagMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "ownerRoleId", target = "ownerRole.id")
     })
     Tag toEntity(TagRequest input);
 
     @Mappings({
-            @Mapping(source = "ownerRole.id", target = "ownerRoleId")
     })
     TagResponse toResponse(Tag entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "ownerRoleId", target = "ownerRole.id")
     })
     void updateEntityFromInput(TagRequest input, @MappingTarget Tag entity);
 }

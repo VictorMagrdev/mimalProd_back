@@ -28,7 +28,7 @@ public class OrdenProduccion {
     @Column(name = "numero_orden", unique = true, nullable = false, length = 100)
     private String numeroOrden;
 
-    @Column(nullable = false, precision = 18, scale = 6)
+    @Column(nullable = false, precision = 18)
     private BigDecimal cantidad = BigDecimal.ZERO;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -53,10 +53,10 @@ public class OrdenProduccion {
     @Column(name = "fin_real")
     private OffsetDateTime finReal;
 
-    @Column(name = "cantidad_desperdicio", precision = 18, scale = 6)
+    @Column(name = "cantidad_desperdicio", precision = 18)
     private BigDecimal cantidadDesperdicio = BigDecimal.ZERO;
 
-    @Column(name = "cantidad_producida", precision = 18, scale = 6)
+    @Column(name = "cantidad_producida", precision = 18)
     private BigDecimal cantidadProducida = BigDecimal.ZERO;
 
     @ManyToOne(fetch = FetchType.LAZY)

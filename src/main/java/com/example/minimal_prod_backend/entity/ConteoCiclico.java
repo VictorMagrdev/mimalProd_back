@@ -37,7 +37,7 @@ public class ConteoCiclico {
     @ToString.Exclude
     private LoteProduccion lote;
 
-    @Column(name = "cantidad_contada", precision = 18, scale = 6, nullable = false)
+    @Column(name = "cantidad_contada", precision = 18,  nullable = false)
     private BigDecimal cantidadContada;
 
     @ManyToOne(fetch = FetchType.LAZY)

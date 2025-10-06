@@ -656,6 +656,185 @@ input TarifaEmpleadoRequest {
     vigente_hasta: Date
 }
 
+type RutaProduccion {
+    id: ID!
+    productoId: ID!
+    version: String
+    nombre: String!
+    activo: Boolean!
+    creadoEn: String!
+    operaciones: [OperacionRuta!]!
+}
+
+type OperacionRuta {
+    id: ID!
+    rutaId: ID!
+    estacionId: ID!
+    secuencia: Int!
+    nombre: String!
+    tiempoSetup: String
+    tiempoEjecucion: String
+    tiempoCola: String
+    creadoEn: String!
+    estacion: EstacionProduccion
+}
+
+type OperacionOrdenEstado {
+    id: ID!
+    nombre: String!
+    descripcion: String
+}
+
+type OperacionOrden {
+    id: ID!
+    ordenId: ID!
+    operacionRutaId: ID!
+    estacionId: ID!
+    secuencia: Int!
+    inicioPlanificado: String
+    finPlanificado: String
+    inicioReal: String
+    finReal: String
+    estadoId: ID!
+    observaciones: String
+    operacionRuta: OperacionRuta
+    estacion: EstacionProduccion
+    estado: OperacionOrdenEstado
+    recursos: [RecursoOperacion!]!
+}
+
+type RecursoOperacion {
+    id: ID!
+    operacionOrdenId: ID!
+    usuarioId: ID!
+    funcionTareaId: ID!
+    horasPlanificadas: String
+    horasReales: String
+    asignadoPor: ID!
+    creadoEn: String!
+    usuario: Usuario
+    funcionTarea: FuncionTarea
+    asignadoPorUsuario: Usuario
+}
+
+# Tipos de referencia basados en tus otras tablas
+type EstacionProduccion {
+    id: ID!
+    nombre: String!
+    codigo: String!
+    descripcion: String
+    lineaProduccionId: ID
+    capacidad: Int
+    activo: Boolean!
+    creadoEn: String!
+    actualizadoEn: String!
+}
+
+type Usuario {
+    id: ID!
+    nombre: String!
+    email: String!
+    usuario: String!
+    rol: String!
+    departamento: String
+    activo: Boolean!
+    creadoEn: String!
+    actualizadoEn: String!
+}
+
+type FuncionTarea {
+    id: ID!
+    nombre: String!
+    descripcion: String
+    codigo: String!
+    categoria: String
+    nivelHabilidad: String
+    activo: Boolean!
+    creadoEn: String!
+    actualizadoEn: String!
+}
+
+type Producto {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    categoria: String
+    unidadMedida: String
+    costoStandard: Float
+    precioVenta: Float
+    activo: Boolean!
+    creadoEn: String!
+    actualizadoEn: String!
+}
+
+type OrdenProduccion {
+    id: ID!
+    numeroOrden: String!
+    productoId: ID!
+    cantidad: Int!
+    fechaInicioPlanificada: String!
+    fechaFinPlanificada: String!
+    fechaInicioReal: String
+    fechaFinReal: String
+    estado: String!
+    prioridad: String!
+    observaciones: String
+    creadoEn: String!
+    actualizadoEn: String!
+}
+
+# Inputs
+input RutaProduccionInput {
+    productoId: ID!
+    version: String
+    nombre: String!
+    activo: Boolean
+}
+
+input OperacionRutaInput {
+    rutaId: ID!
+    estacionId: ID!
+    secuencia: Int!
+    nombre: String!
+    tiempoSetup: String
+    tiempoEjecucion: String
+    tiempoCola: String
+}
+
+input EstadoOperacionOrdenInput {
+    nombre: String!
+    descripcion: String
+}
+
+input OperacionOrdenInput {
+    ordenId: ID!
+    operacionRutaId: ID!
+    estacionId: ID!
+    secuencia: Int!
+    inicioPlanificado: String
+    finPlanificado: String
+    inicioReal: String
+    finReal: String
+    estadoId: ID!
+    observaciones: String
+}
+
+input RecursoOperacionInput {
+    operacionOrdenId: ID!
+    usuarioId: ID!
+    funcionTareaId: ID!
+    horasPlanificadas: String
+    horasReales: String
+    asignadoPor: ID!
+}
+
+input SecuenciaInput {
+    operacionId: ID!
+    nuevaSecuencia: Int!
+}
+
+
 type Query {
     tiposBodega: [TipoBodega]
     bodegas: [Bodega]
@@ -695,6 +874,27 @@ type Query {
     productos: [Producto]
     lotesProduccion: [LoteProduccion]
     ordenesProduccion: [OrdenProduccion]
+    rutasProduccion(activo: Boolean): [RutaProduccion!]!
+    rutaProduccion(id: ID!): RutaProduccion
+    rutasPorProducto(productoId: ID!): [RutaProduccion!]!
+
+    # Operaciones de ruta
+    operacionesRuta(rutaId: ID!): [OperacionRuta!]!
+    operacionRuta(id: ID!): OperacionRuta
+
+    # Estados de operación de orden
+    estadosOperacionOrden: [OperacionOrdenEstado!]!
+    estadoOperacionOrden(id: ID!): OperacionOrdenEstado
+
+    # Operaciones de orden
+    operacionesOrden(ordenId: ID!): [OperacionOrden!]!
+    operacionOrden(id: ID!): OperacionOrden
+    operacionesPorEstacion(estacionId: ID!, estadoId: ID): [OperacionOrden!]!
+
+    # Recursos de operación
+    recursosOperacion(operacionOrdenId: ID!): [RecursoOperacion!]!
+    recursoOperacion(id: ID!): RecursoOperacion
+    recursosPorUsuario(usuarioId: ID!): [RecursoOperacion!]!
 }
 
 
@@ -800,4 +1000,25 @@ type Mutation {
     createEstadoAprobacion(input: EstadoAprobacionRequest!): EstadoAprobacion
     updateEstadoAprobacion(id: ID!, input: EstadoAprobacionRequest!): EstadoAprobacion
     deleteEstadoAprobacion(id: ID!): Boolean
+
+    crearRutaProduccion(input: RutaProduccionInput!): RutaProduccion!
+    actualizarRutaProduccion(id: ID!, input: RutaProduccionInput!): RutaProduccion!
+    desactivarRutaProduccion(id: ID!): RutaProduccion!
+    activarRutaProduccion(id: ID!): RutaProduccion!
+
+    crearOperacionRuta(input: OperacionRutaInput!): OperacionRuta!
+    actualizarOperacionRuta(id: ID!, input: OperacionRutaInput!): OperacionRuta!
+    eliminarOperacionRuta(id: ID!): Boolean!
+
+    crearEstadoOperacionOrden(input: EstadoOperacionOrdenInput!): OperacionOrdenEstado!
+    actualizarEstadoOperacionOrden(id: ID!, input: EstadoOperacionOrdenInput!): OperacionOrdenEstado!
+    eliminarEstadoOperacionOrden(id: ID!): Boolean!
+
+    crearOperacionOrden(input: OperacionOrdenInput!): OperacionOrden!
+    actualizarOperacionOrden(id: ID!, input: OperacionOrdenInput!): OperacionOrden!
+    eliminarOperacionOrden(id: ID!): Boolean!
+
+    asignarRecursoOperacion(input: RecursoOperacionInput!): RecursoOperacion!
+    actualizarRecursoOperacion(id: ID!, input: RecursoOperacionInput!): RecursoOperacion!
+    eliminarRecursoOperacion(id: ID!): Boolean!
 }

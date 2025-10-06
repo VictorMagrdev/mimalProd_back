@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,8 +48,8 @@ public class Usuario {
     private CentroCosto centroCosto;
 
     @Builder.Default
-    @Column(name = "capacidad_horas_dia", precision = 5, scale = 2)
-    private Double capacidadHorasDia = 8.0;
+    @Column(name = "capacidad_horas_dia", columnDefinition = "interval")
+    private Duration capacidadHorasDia = Duration.ofHours(8);
 
     @Builder.Default
     private Boolean activo = true;
@@ -62,9 +63,9 @@ public class Usuario {
     private OffsetDateTime actualizadoEn;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "usuario_roles",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"))
     @Builder.Default
     private Set<Rol> roles = new HashSet<>();
 }

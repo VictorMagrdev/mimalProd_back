@@ -38,11 +38,7 @@ public class TagServiceImpl implements TagService {
                 .nombre(r.nombre())
                 .descripcion(r.descripcion())
                 .build();
-        if (r.ownerRoleId() != null) {
-            Rol owner = roleRepository.findById(r.ownerRoleId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + r.ownerRoleId()));
-            t.setOwnerRole(owner);
-        }
+
         return tagRepository.save(t);
     }
 }

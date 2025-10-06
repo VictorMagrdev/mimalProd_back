@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -38,8 +38,8 @@ public class Asignacion {
     @Column(name = "fin_planificado", nullable = false)
     private OffsetDateTime finPlanificado;
 
-    @Column(name = "horas_planificadas", precision = 6, scale = 2)
-    private BigDecimal horasPlanificadas;
+    @Column(name = "horas_planificadas", columnDefinition = "interval")
+    private Duration horasPlanificadas;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "asignado_por")

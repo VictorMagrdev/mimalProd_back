@@ -24,7 +24,7 @@ public class ExcepcionTiempo {
     @ToString.Exclude
     private Usuario usuario;
 
-    @Column(name = "periodo")
+    @Column(name = "periodo", columnDefinition = "tstzrange")
     private String periodo;
 
     @Column(name = "detalles", length = 150)

@@ -56,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
         var roleNames = roles.stream().map(Rol::getNombre).collect(Collectors.toList());
         String token = jwtUtil.generateToken(usuario.getUsername(), roleNames);
 
-        List<Politica> policies = policyRepository.findByRoleIn(roles);
+        List<Politica> policies = policyRepository.findByRolIn(roles);
 
         List<PoliticaLoginResponse> policyResponses = policies.stream()
                 .map(p -> new PoliticaLoginResponse(

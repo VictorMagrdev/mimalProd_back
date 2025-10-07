@@ -12,8 +12,8 @@ public interface UnidadConversionMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "origenId", target = "origen.id"),
-            @Mapping(source = "destinoId", target = "destino.id")
+            @Mapping(target = "origen", ignore = true),
+            @Mapping(target = "destino", ignore = true)
     })
     UnidadConversion toEntity(UnidadConversionRequest input);
 
@@ -28,8 +28,8 @@ public interface UnidadConversionMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "origenId", target = "origen.id"),
-            @Mapping(source = "destinoId", target = "destino.id")
+            @Mapping(target = "origen", ignore = true),
+            @Mapping(target = "destino", ignore = true)
     })
     void updateEntityFromInput(UnidadConversionRequest input, @MappingTarget UnidadConversion entity);
 }

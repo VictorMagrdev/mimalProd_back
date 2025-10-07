@@ -9,20 +9,20 @@ import org.mapstruct.*;
 public interface BodegaMapper {
 
     @Mappings({
-            @Mapping(target = "tipo.id", source = "tipoBodegaId"),
+            @Mapping(target = "tipo", ignore = true),
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
     Bodega toEntity(BodegaRequest input);
 
     @Mappings({
-            @Mapping(target = "tipoBodegaId", source = "tipo.id")
+            @Mapping(source = "tipo.id", target = "tipoBodegaId")
     })
     BodegaResponse toResponse(Bodega bodega);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
-            @Mapping(target = "tipo.id", source = "tipoBodegaId"),
+            @Mapping(target = "tipo", ignore = true),
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })

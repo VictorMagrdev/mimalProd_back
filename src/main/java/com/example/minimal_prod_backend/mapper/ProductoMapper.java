@@ -12,13 +12,13 @@ public interface ProductoMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "metodoValoracionId", target = "metodoValoracion.id"),
-            @Mapping(source = "tipoId", target = "tipo.id"),
-            @Mapping(source = "unidadBaseId", target = "unidadBase.id")
+            @Mapping(target = "metodoValoracion", ignore = true),
+            @Mapping(target = "tipo", ignore = true),
+            @Mapping(target = "unidadBase", ignore = true)
     })
     Producto toEntity(ProductoRequest input);
 
-    List<ProductoResponse> toResponseList(List<Producto> conteos);
+    List<ProductoResponse> toResponseList(List<Producto> productos);
 
     @Mappings({
             @Mapping(source = "metodoValoracion.id", target = "metodoValoracionId"),
@@ -30,9 +30,9 @@ public interface ProductoMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "metodoValoracionId", target = "metodoValoracion.id"),
-            @Mapping(source = "tipoId", target = "tipo.id"),
-            @Mapping(source = "unidadBaseId", target = "unidadBase.id")
+            @Mapping(target = "metodoValoracion", ignore = true),
+            @Mapping(target = "tipo", ignore = true),
+            @Mapping(target = "unidadBase", ignore = true)
     })
     void updateEntityFromInput(ProductoRequest input, @MappingTarget Producto entity);
 }

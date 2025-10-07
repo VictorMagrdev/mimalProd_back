@@ -10,7 +10,7 @@ public interface LoteProduccionMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "productoId", target = "producto.id")
+            @Mapping(target = "producto", ignore = true)
     })
     LoteProduccion toEntity(LoteProduccionRequest input);
 
@@ -22,7 +22,7 @@ public interface LoteProduccionMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "productoId", target = "producto.id")
+            @Mapping(target = "producto", ignore = true)
     })
     void updateEntityFromInput(LoteProduccionRequest input, @MappingTarget LoteProduccion entity);
 }

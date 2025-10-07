@@ -12,10 +12,10 @@ public interface MovimientoInventarioMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "bodegaOrigenId", target = "bodegaOrigen.id"),
-            @Mapping(source = "bodegaDestinoId", target = "bodegaDestino.id"),
-            @Mapping(source = "tipoMovimientoId", target = "tipoMovimiento.id"),
-            @Mapping(source = "creadoPor", target = "creadoPor.id")
+            @Mapping(target = "bodegaOrigen", ignore = true),
+            @Mapping(target = "bodegaDestino", ignore = true),
+            @Mapping(target = "tipoMovimiento", ignore = true),
+            @Mapping(target = "creadoPor", ignore = true)
     })
     MovimientoInventario toEntity(MovimientoInventarioRequest input);
 
@@ -32,10 +32,10 @@ public interface MovimientoInventarioMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "bodegaOrigenId", target = "bodegaOrigen.id"),
-            @Mapping(source = "bodegaDestinoId", target = "bodegaDestino.id"),
-            @Mapping(source = "tipoMovimientoId", target = "tipoMovimiento.id"),
-            @Mapping(source = "creadoPor", target = "creadoPor.id")
+            @Mapping(target = "bodegaOrigen", ignore = true),
+            @Mapping(target = "bodegaDestino", ignore = true),
+            @Mapping(target = "tipoMovimiento", ignore = true),
+            @Mapping(target = "creadoPor", ignore = true)
     })
     void updateEntityFromInput(MovimientoInventarioRequest input, @MappingTarget MovimientoInventario entity);
 }

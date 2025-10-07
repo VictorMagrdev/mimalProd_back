@@ -12,7 +12,7 @@ public interface UnidadMedidaMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "unidadMedidaTipoId", target = "tipo.id")
+            @Mapping(target = "tipo", ignore = true)
     })
     UnidadMedida toEntity(UnidadMedidaRequest input);
 
@@ -26,7 +26,7 @@ public interface UnidadMedidaMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "unidadMedidaTipoId", target = "tipo.id")
+            @Mapping(target = "tipo", ignore = true)
     })
     void updateEntityFromInput(UnidadMedidaRequest input, @MappingTarget UnidadMedida entity);
 }

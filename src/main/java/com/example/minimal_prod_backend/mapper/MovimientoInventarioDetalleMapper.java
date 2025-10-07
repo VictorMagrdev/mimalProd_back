@@ -10,10 +10,10 @@ public interface MovimientoInventarioDetalleMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "movimientoId", target = "movimiento.id"),
-            @Mapping(source = "productoId", target = "producto.id"),
-            @Mapping(source = "loteId", target = "lote.id"),
-            @Mapping(source = "unidadId", target = "unidad.id")
+            @Mapping(target = "movimiento", ignore = true),
+            @Mapping(target = "producto", ignore = true),
+            @Mapping(target = "lote", ignore = true),
+            @Mapping(target = "unidad", ignore = true)
     })
     MovimientoInventarioDetalle toEntity(MovimientoInventarioDetalleRequest input);
 
@@ -28,10 +28,10 @@ public interface MovimientoInventarioDetalleMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(source = "movimientoId", target = "movimiento.id"),
-            @Mapping(source = "productoId", target = "producto.id"),
-            @Mapping(source = "loteId", target = "lote.id"),
-            @Mapping(source = "unidadId", target = "unidad.id")
+            @Mapping(target = "movimiento", ignore = true),
+            @Mapping(target = "producto", ignore = true),
+            @Mapping(target = "lote", ignore = true),
+            @Mapping(target = "unidad", ignore = true)
     })
     void updateEntityFromInput(MovimientoInventarioDetalleRequest input, @MappingTarget MovimientoInventarioDetalle entity);
 }

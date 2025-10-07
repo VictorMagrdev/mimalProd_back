@@ -788,6 +788,27 @@ input SecuenciaInput {
     nuevaSecuencia: Int!
 }
 
+type EstadoOrdenTrabajo {
+    id: ID!
+    nombre: String!
+    descripcion: String
+}
+
+type CentroCosto {
+    id: ID!
+    codigo: String!
+    nombre: String!
+}
+
+input EstadoOrdenTrabajoRequest {
+    nombre: String!
+    descripcion: String
+}
+
+input CentroCostoRequest {
+    codigo: String!
+    nombre: String!
+}
 
 type Query {
     tiposBodega: [TipoBodega]
@@ -849,6 +870,9 @@ type Query {
     recursosOperacion(operacionOrdenId: ID!): [RecursoOperacion!]!
     recursoOperacion(id: ID!): RecursoOperacion
     recursosPorUsuario(usuarioId: ID!): [RecursoOperacion!]!
+
+    centrosCosto: [CentroCosto]
+    estadosOrdenTrabajo: [EstadoOrdenTrabajo]
 }
 
 
@@ -868,7 +892,9 @@ type Mutation {
     createUnidadMedida(input: UnidadMedidaRequest!): UnidadMedida
     updateUnidadMedida(id: ID!, input: UnidadMedidaRequest!): UnidadMedida
     deleteUnidadMedida(id: ID!): Boolean
-
+    createUnidadConversion(input: UnidadConversionRequest!): UnidadConversion
+    updateUnidadConversion(id: ID!, input: UnidadConversionRequest!): UnidadConversion
+    deleteUnidadConversion(id: ID!): Boolean
     createProducto(input: ProductoRequest!): Producto
     updateProducto(id: ID!, input: ProductoRequest!): Producto
     deleteProducto(id: ID!): Boolean
@@ -975,4 +1001,40 @@ type Mutation {
     asignarRecursoOperacion(input: RecursoOperacionInput!): RecursoOperacion!
     actualizarRecursoOperacion(id: ID!, input: RecursoOperacionInput!): RecursoOperacion!
     eliminarRecursoOperacion(id: ID!): Boolean!
+
+    createTipoBodega(input: TipoBodegaRequest!): TipoBodega
+    updateTipoBodega(id: ID!, input: TipoBodegaRequest!): TipoBodega
+    deleteTipoBodega(id: ID!): Boolean
+
+    createTipoMovimiento(input: TipoMovimientoRequest!): TipoMovimiento
+    updateTipoMovimiento(id: ID!, input: TipoMovimientoRequest!): TipoMovimiento
+    deleteTipoMovimiento(id: ID!): Boolean
+
+    createEstadoOrdenEstacion(input: EstadoOrdenEstacionRequest!): EstadoOrdenEstacion
+    updateEstadoOrdenEstacion(id: ID!, input: EstadoOrdenEstacionRequest!): EstadoOrdenEstacion
+    deleteEstadoOrdenEstacion(id: ID!): Boolean
+
+    createEstadoAsignacion(input: EstadoAsignacionRequest!): EstadoAsignacion
+    updateEstadoAsignacion(id: ID!, input: EstadoAsignacionRequest!): EstadoAsignacion
+    deleteEstadoAsignacion(id: ID!): Boolean
+
+    createTipoActividad(input: TipoActividadRequest!): TipoActividad
+    updateTipoActividad(id: ID!, input: TipoActividadRequest!): TipoActividad
+    deleteTipoActividad(id: ID!): Boolean
+
+    createTipoOrdenTrabajo(input: TipoOrdenTrabajoRequest!): TipoOrdenTrabajo
+    updateTipoOrdenTrabajo(id: ID!, input: TipoOrdenTrabajoRequest!): TipoOrdenTrabajo
+    deleteTipoOrdenTrabajo(id: ID!): Boolean
+
+    createFuncionTarea(input: FuncionTareaRequest!): FuncionTarea
+    updateFuncionTarea(id: ID!, input: FuncionTareaRequest!): FuncionTarea
+    deleteFuncionTarea(id: ID!): Boolean
+
+    createEstadoOrdenTrabajo(input: EstadoOrdenTrabajoRequest!): EstadoOrdenTrabajo
+    updateEstadoOrdenTrabajo(id: ID!, input: EstadoOrdenTrabajoRequest!): EstadoOrdenTrabajo
+    deleteEstadoOrdenTrabajo(id: ID!): Boolean
+
+    createCentroCosto(input: CentroCostoRequest!): CentroCosto
+    updateCentroCosto(id: ID!, input: CentroCostoRequest!): CentroCosto
+    deleteCentroCosto(id: ID!): Boolean
 }

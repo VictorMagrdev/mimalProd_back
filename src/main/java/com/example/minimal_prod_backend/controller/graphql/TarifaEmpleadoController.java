@@ -19,31 +19,26 @@ public class TarifaEmpleadoController {
     private final TarifaEmpleadoService tarifaEmpleadoService;
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('TARIFAS_EMPLEADO_TAG', 'READ')")
     public List<TarifaEmpleadoResponse> tarifasEmpleado() {
         return tarifaEmpleadoService.getTarifasEmpleado();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('TARIFAS_EMPLEADO_TAG', 'READ')")
     public TarifaEmpleadoResponse tarifaEmpleado(@Argument Long id) {
         return tarifaEmpleadoService.getTarifaEmpleadoById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TARIFAS_EMPLEADO_TAG', 'WRITE')")
     public TarifaEmpleadoResponse createTarifaEmpleado(@Argument("input") TarifaEmpleadoRequest request) {
         return tarifaEmpleadoService.createTarifaEmpleado(request);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TARIFAS_EMPLEADO_TAG', 'WRITE')")
     public TarifaEmpleadoResponse updateTarifaEmpleado(@Argument Long id, @Argument("input") TarifaEmpleadoRequest request) {
         return tarifaEmpleadoService.updateTarifaEmpleado(id, request);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('TARIFAS_EMPLEADO_TAG', 'DELETE')")
     public boolean deleteTarifaEmpleado(@Argument Long id) {
         tarifaEmpleadoService.deleteTarifaEmpleado(id);
         return true;

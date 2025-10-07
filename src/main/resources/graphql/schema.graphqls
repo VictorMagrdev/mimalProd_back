@@ -139,7 +139,7 @@ input ProductoRequest {
 
 type LoteProduccion {
     id: ID!
-    numero_lote: String!
+    numeroLote: String!
     producto_id: ID
     fabricado_en: DateTime
     vence_en: DateTime
@@ -148,7 +148,7 @@ type LoteProduccion {
 }
 
 input LoteProduccionRequest {
-    numero_lote: String!
+    numeroLote: String!
     producto_id: ID
     fabricado_en: DateTime
     vence_en: DateTime
@@ -228,6 +228,7 @@ type CostoOrden {
     moneda: String
     registrado_en: DateTime
     tipo_costo: TipoCosto
+    orden: OrdenProduccion
 }
 
 input CostoOrdenRequest {
@@ -331,16 +332,20 @@ input MovimientoInventarioDetalleRequest {
 
 type InventarioLote {
     id: ID!
-    producto_id: ID
+    productoId: ID
     lote_id: ID
     bodega_id: ID
     cantidad: Numeric
     unidad_id: ID
     actualizado_en: DateTime
+    producto: Producto
+    lote: LoteProduccion
+    bodega: Bodega
+    unidad: UnidadMedida
 }
 
 input InventarioLoteRequest {
-    producto_id: ID
+    productoId: ID
     lote_id: ID
     bodega_id: ID
     cantidad: Numeric
@@ -441,6 +446,11 @@ type ConteoCiclico {
     cantidad_contada: Numeric
     unidad_id: ID
     fecha: DateTime
+
+    producto: Producto
+    bodega: Bodega
+    lote: LoteProduccion
+    unidad: UnidadMedida
 }
 
 input ConteoCiclicoRequest {
@@ -719,9 +729,6 @@ type RecursoOperacion {
     asignadoPorUsuario: Usuario
 }
 
-# Tipos de referencia basados en tus otras tablas
-
-
 type Usuario {
     id: ID!
     nombre: String!
@@ -734,11 +741,6 @@ type Usuario {
     actualizadoEn: String!
 }
 
-
-
-
-
-# Inputs
 input RutaProduccionInput {
     productoId: ID!
     version: String
@@ -811,6 +813,8 @@ input CentroCostoRequest {
 }
 
 type Query {
+    LineasOrden:[LineaOrden]
+    costosOrden: [CostoOrden]
     tiposBodega: [TipoBodega]
     bodegas: [Bodega]
     tiposMovimiento: [TipoMovimiento]
@@ -852,25 +856,16 @@ type Query {
     rutasProduccion(activo: Boolean): [RutaProduccion!]!
     rutaProduccion(id: ID!): RutaProduccion
     rutasPorProducto(productoId: ID!): [RutaProduccion!]!
-
-    # Operaciones de ruta
     operacionesRuta(rutaId: ID!): [OperacionRuta!]!
     operacionRuta(id: ID!): OperacionRuta
-
-    # Estados de operación de orden
     estadosOperacionOrden: [OperacionOrdenEstado!]!
     estadoOperacionOrden(id: ID!): OperacionOrdenEstado
-
-    # Operaciones de orden
     operacionesOrden(ordenId: ID!): [OperacionOrden!]!
     operacionOrden(id: ID!): OperacionOrden
     operacionesPorEstacion(estacionId: ID!, estadoId: ID): [OperacionOrden!]!
-
-    # Recursos de operación
     recursosOperacion(operacionOrdenId: ID!): [RecursoOperacion!]!
     recursoOperacion(id: ID!): RecursoOperacion
     recursosPorUsuario(usuarioId: ID!): [RecursoOperacion!]!
-
     centrosCosto: [CentroCosto]
     estadosOrdenTrabajo: [EstadoOrdenTrabajo]
 }

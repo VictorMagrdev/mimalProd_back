@@ -11,10 +11,10 @@ public interface InventarioLoteMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "actualizadoEn", ignore = true),
-            @Mapping(source = "productoId", target = "producto.id"),
-            @Mapping(source = "loteId", target = "lote.id"),
-            @Mapping(source = "bodegaId", target = "bodega.id"),
-            @Mapping(source = "unidadId", target = "unidad.id")
+            @Mapping(target = "producto", ignore = true),
+            @Mapping(target = "lote", ignore = true),
+            @Mapping(target = "bodega", ignore = true),
+            @Mapping(target = "unidad", ignore = true)
     })
     InventarioLote toEntity(InventarioLoteRequest input);
 
@@ -30,10 +30,10 @@ public interface InventarioLoteMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "actualizadoEn", ignore = true),
-            @Mapping(source = "productoId", target = "producto.id"),
-            @Mapping(source = "loteId", target = "lote.id"),
-            @Mapping(source = "bodegaId", target = "bodega.id"),
-            @Mapping(source = "unidadId", target = "unidad.id")
+            @Mapping(target = "producto", ignore = true),
+            @Mapping(target = "lote", ignore = true),
+            @Mapping(target = "bodega", ignore = true),
+            @Mapping(target = "unidad", ignore = true)
     })
     void updateEntityFromInput(InventarioLoteRequest input, @MappingTarget InventarioLote entity);
 }

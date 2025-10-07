@@ -14,11 +14,12 @@ public interface OrdenProduccionMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(source = "unidadId", target = "unidad.id"),
             @Mapping(source = "estadoId", target = "estado.id"),
-            @Mapping(source = "creadoPor", target = "creadoPor.id")
+            @Mapping(source = "creadoPor", target = "creadoPor.id"),
+            @Mapping(target = "creadoEn", ignore = true),
+            @Mapping(target = "actualizadoEn", ignore = true),
+            @Mapping(target = "lotes", ignore = true)
     })
     OrdenProduccion toEntity(OrdenProduccionRequest input);
-
-    List<OrdenProduccionResponse> toResponseList(List<OrdenProduccion> conteos);
 
     @Mappings({
             @Mapping(source = "unidad.id", target = "unidadId"),
@@ -27,13 +28,17 @@ public interface OrdenProduccionMapper {
     })
     OrdenProduccionResponse toResponse(OrdenProduccion entity);
 
+    List<OrdenProduccionResponse> toResponseList(List<OrdenProduccion> ordenes);
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "lotes", ignore = true),
             @Mapping(source = "unidadId", target = "unidad.id"),
             @Mapping(source = "estadoId", target = "estado.id"),
-            @Mapping(source = "creadoPor", target = "creadoPor.id")
+            @Mapping(source = "creadoPor", target = "creadoPor.id"),
+            @Mapping(target = "creadoEn", ignore = true),
+            @Mapping(target = "actualizadoEn", ignore = true)
     })
     void updateEntityFromInput(OrdenProduccionRequest input, @MappingTarget OrdenProduccion entity);
 }

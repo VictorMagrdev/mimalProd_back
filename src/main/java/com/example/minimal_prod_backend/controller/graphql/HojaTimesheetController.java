@@ -28,7 +28,7 @@ public class HojaTimesheetController {
     }
 
     @MutationMapping
-    public HojaTimesheetResponse crearHojaTimesheet(@Argument HojaTimesheetRequest input) {
+    public HojaTimesheetResponse createHojaTimesheet(@Argument HojaTimesheetRequest input) {
         return hojaTimesheetService.save(input);
     }
 

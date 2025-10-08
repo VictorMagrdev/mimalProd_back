@@ -27,10 +27,9 @@ public class FuncionTareaController {
         return funcionTareaService.findById(id);
     }
 
-    // === MUTATIONS ===
 
     @MutationMapping
-    public FuncionTareaResponse crearFuncionTarea(@Argument FuncionTareaRequest input) {
+    public FuncionTareaResponse createFuncionTarea(@Argument FuncionTareaRequest input) {
         return funcionTareaService.save(input);
     }
 

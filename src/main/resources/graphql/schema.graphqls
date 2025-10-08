@@ -9,7 +9,7 @@ type EstadoOrden {
     nombre: String!
     descripcion: String
     activo: Boolean
-    creado_en: DateTime
+    creadoEn: DateTime
 }
 
 input EstadoOrdenRequest {
@@ -25,7 +25,7 @@ type TipoCosto {
     nombre: String!
     descripcion: String
     activo: Boolean
-    creado_en: DateTime
+    creadoEn: DateTime
 }
 
 input TipoCostoRequest {
@@ -40,7 +40,7 @@ type UnidadMedidaTipo {
     codigo: String!
     nombre: String!
     descripcion: String
-    creado_en: DateTime
+    creadoEn: DateTime
     unidades: [UnidadMedida]
 }
 
@@ -55,10 +55,10 @@ type UnidadMedida {
     codigo: String!
     nombre: String!
     abreviatura: String
-    unidad_medida_tipo_id: ID
+    unidadMedidaTipoId: ID
     activa: Boolean
     base: Boolean
-    creado_en: DateTime
+    creadoEn: DateTime
     tipo: UnidadMedidaTipo
 }
 
@@ -66,23 +66,23 @@ input UnidadMedidaRequest {
     codigo: String!
     nombre: String!
     abreviatura: String
-    unidad_medida_tipo_id: ID
+    unidadMedidaTipoId: ID
     activa: Boolean
     base: Boolean
 }
 
 type UnidadConversion {
     id: ID!
-    origen_id: ID
-    destino_id: ID
+    origenId: ID
+    destinoId: ID
     factor: Numeric!
     origen: UnidadMedida
     destino: UnidadMedida
 }
 
 input UnidadConversionRequest {
-    origen_id: ID
-    destino_id: ID
+    origenId: ID
+    destinoId: ID
     factor: Numeric!
 }
 
@@ -118,57 +118,57 @@ type Producto {
     id: ID!
     codigo: String
     nombre: String!
-    metodo_valoracion_id: ID
-    tipo_id: ID
-    unidad_base_id: ID
-    costo_base: Numeric
-    creado_en: DateTime
+    metodoValoracionId: ID
+    tipoId: ID
+    unidadBaseId: ID
+    costoBase: Numeric
+    creadoEn: DateTime
     tipo: TipoProducto
-    metodo_valoracion: MetodoValoracion
-    unidad_base: UnidadMedida
+    metodoValoracion: MetodoValoracion
+    unidadBase: UnidadMedida
 }
 
 input ProductoRequest {
     codigo: String
     nombre: String!
-    metodo_valoracion_id: ID
-    tipo_id: ID
-    unidad_base_id: ID
-    costo_base: Numeric
+    metodoValoracionId: ID
+    tipoId: ID
+    unidadBaseId: ID
+    costoBase: Numeric
 }
 
 type LoteProduccion {
     id: ID!
     numeroLote: String!
-    producto_id: ID
-    fabricado_en: DateTime
-    vence_en: DateTime
-    creado_en: DateTime
+    productoId: ID
+    fabricadoEn: DateTime
+    venceEn: DateTime
+    creadoEn: DateTime
     producto: Producto
 }
 
 input LoteProduccionRequest {
     numeroLote: String!
-    producto_id: ID
-    fabricado_en: DateTime
-    vence_en: DateTime
+    productoId: ID
+    fabricadoEn: DateTime
+    venceEn: DateTime
 }
 
 type OrdenProduccion {
     id: ID!
-    numero_orden: String!
+    numeroOrden: String!
     cantidad: Numeric
-    unidad_id: ID
-    estado_id: ID
-    inicio_planificado: DateTime
-    fin_planificado: DateTime
-    inicio_real: DateTime
-    fin_real: DateTime
-    cantidad_desperdicio: Numeric
-    cantidad_producida: Numeric
-    creado_por: ID
+    unidadId: ID
+    estadoId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    cantidadDesperdicio: Numeric
+    cantidadProducida: Numeric
+    creadoPor: ID
     observaciones: String
-    creado_en: DateTime
+    creadoEn: DateTime
     actualizado_en: DateTime
     unidad: UnidadMedida
     estado: EstadoOrden
@@ -178,51 +178,51 @@ type OrdenProduccion {
 
 
 input OrdenProduccionRequest {
-    numero_orden: String!
+    numeroOrden: String!
     cantidad: Numeric
-    unidad_id: ID
-    estado_id: ID
-    inicio_planificado: DateTime
-    fin_planificado: DateTime
-    inicio_real: DateTime
-    fin_real: DateTime
-    cantidad_desperdicio: Numeric
-    cantidad_producida: Numeric
-    creado_por: ID
+    unidadId: ID
+    estadoId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    cantidadDesperdicio: Numeric
+    cantidadProducida: Numeric
+    creadoPor: ID
     observaciones: String
 }
 
 type LineaOrden {
     id: ID!
-    orden_id: ID
-    numero_linea: Int
-    producto_componente_id: ID
-    cantidad_requerida: Numeric
-    unidad_componente_id: ID
-    cantidad_usada: Numeric
-    costo_unitario: Numeric
+    ordenId: ID
+    numeroLinea: Int
+    productoComponenteId: ID
+    cantidadRequerida: Numeric
+    unidadComponenteId: ID
+    cantidadUsada: Numeric
+    costoUnitario: Numeric
     costo_total: Numeric
     observaciones: String
-    creado_en: DateTime
+    creadoEn: DateTime
     producto_componente: Producto
     unidad_componente: UnidadMedida
 }
 
 input LineaOrdenRequest {
-    orden_id: ID
-    numero_linea: Int
-    producto_componente_id: ID
-    cantidad_requerida: Numeric
-    unidad_componente_id: ID
-    cantidad_usada: Numeric
-    costo_unitario: Numeric
+    ordenId: ID
+    numeroLinea: Int
+    productoComponenteId: ID
+    cantidadRequerida: Numeric
+    unidadComponenteId: ID
+    cantidadUsada: Numeric
+    costoUnitario: Numeric
     observaciones: String
 }
 
 type CostoOrden {
     id: ID!
-    orden_id: ID
-    tipo_costo_id: ID
+    ordenId: ID
+    tipoCostoId: ID
     descripcion: String
     monto: Numeric
     moneda: String
@@ -232,8 +232,8 @@ type CostoOrden {
 }
 
 input CostoOrdenRequest {
-    orden_id: ID
-    tipo_costo_id: ID
+    ordenId: ID
+    tipoCostoId: ID
     descripcion: String
     monto: Numeric
     moneda: String
@@ -256,8 +256,8 @@ type Bodega {
     codigo: String!
     nombre: String!
     descripcion: String
-    tipo_bodega_id: ID
-    creado_en: DateTime
+    tipoBodegaId: ID
+    creadoEn: DateTime
     tipo: TipoBodega
 }
 
@@ -265,7 +265,7 @@ input BodegaRequest {
     codigo: String!
     nombre: String!
     descripcion: String
-    tipo_bodega_id: ID
+    tipoBodegaId: ID
 }
 
 type TipoMovimiento {
@@ -273,70 +273,70 @@ type TipoMovimiento {
     codigo: String!
     nombre: String!
     descripcion: String
-    afecta_wip: Boolean
-    creado_en: DateTime
+    afectaWip: Boolean
+    creadoEn: DateTime
 }
 
 input TipoMovimientoRequest {
     codigo: String!
     nombre: String!
     descripcion: String
-    afecta_wip: Boolean
+    afectaWip: Boolean
 }
 
 type MovimientoInventario {
     id: ID!
     fecha: DateTime
-    bodega_origen_id: ID
-    bodega_destino_id: ID
-    tipo_movimiento_id: ID
+    bodegaOrigenId: ID
+    bodegaDestinoId: ID
+    tipoMovimientoId: ID
     referencia: String
     observaciones: String
-    creado_por: ID
-    creado_en: DateTime
-    tipo_movimiento: TipoMovimiento
-    bodega_origen: Bodega
-    bodega_destino: Bodega
+    creadoPor: ID
+    creadoEn: DateTime
+    tipoMovimiento: TipoMovimiento
+    bodegaOrigen: Bodega
+    bodegaDestino: Bodega
     detalles: [MovimientoInventarioDetalle]
 }
 
 input MovimientoInventarioRequest {
     fecha: DateTime
-    bodega_origen_id: ID
-    bodega_destino_id: ID
-    tipo_movimiento_id: ID
+    bodegaOrigenId: ID
+    bodegaDestinoId: ID
+    tipoMovimientoId: ID
     referencia: String
     observaciones: String
-    creado_por: ID
+    creadoPor: ID
 }
 
 type MovimientoInventarioDetalle {
     id: ID!
-    movimiento_id: ID
-    producto_id: ID
-    lote_id: ID
+    movimientoId: ID
+    productoId: ID
+    loteId: ID
     cantidad: Numeric
-    unidad_id: ID
-    costo_unitario: Numeric
+    unidadId: ID
+    costoUnitario: Numeric
     costo_total: Numeric
 }
 
 input MovimientoInventarioDetalleRequest {
-    movimiento_id: ID
-    producto_id: ID
-    lote_id: ID
+    movimientoId: ID
+    productoId: ID
+    loteId: ID
     cantidad: Numeric
-    unidad_id: ID
-    costo_unitario: Numeric
+    unidadId: ID
+    costoUnitario: Numeric
 }
 
 type InventarioLote {
     id: ID!
     productoId: ID
-    lote_id: ID
-    bodega_id: ID
+    loteId: ID
+    bodegaId: ID
     cantidad: Numeric
-    unidad_id: ID
+    unidadId: ID
     actualizado_en: DateTime
     producto: Producto
     lote: LoteProduccion
@@ -346,28 +346,28 @@ type InventarioLote {
 
 input InventarioLoteRequest {
     productoId: ID
-    lote_id: ID
-    bodega_id: ID
+    loteId: ID
+    bodegaId: ID
     cantidad: Numeric
-    unidad_id: ID
+    unidadId: ID
 }
 
 type ReservaMaterialOrden {
     id: ID!
-    orden_id: ID
-    producto_id: ID
-    lote_id: ID
+    ordenId: ID
+    productoId: ID
+    loteId: ID
     cantidad_reservada: Numeric
-    unidad_id: ID
+    unidadId: ID
     fecha_reserva: DateTime
 }
 
 input ReservaMaterialOrdenRequest {
-    orden_id: ID
-    producto_id: ID
-    lote_id: ID
+    ordenId: ID
+    productoId: ID
+    loteId: ID
     cantidad_reservada: Numeric
-    unidad_id: ID
+    unidadId: ID
 }
 
 type EstacionProduccion {
@@ -376,7 +376,7 @@ type EstacionProduccion {
     nombre: String!
     descripcion: String
     orden: Int
-    creado_en: DateTime
+    creadoEn: DateTime
 }
 
 
@@ -400,39 +400,39 @@ input EstadoOrdenEstacionRequest {
 
 type OrdenEstacion {
     id: ID!
-    orden_id: ID
-    estacion_id: ID
-    inicio_planificado: DateTime
-    fin_planificado: DateTime
-    inicio_real: DateTime
-    fin_real: DateTime
-    estado_orden_estacion_id: ID
+    ordenId: ID
+    estacionId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    estadoOrdenEstacionId: ID
     observaciones: String
     estacion: EstacionProduccion
     estado: EstadoOrdenEstacion
 }
 
 input OrdenEstacionRequest {
-    orden_id: ID
-    estacion_id: ID
-    inicio_planificado: DateTime
-    fin_planificado: DateTime
-    inicio_real: DateTime
-    fin_real: DateTime
-    estado_orden_estacion_id: ID
+    ordenId: ID
+    estacionId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    estadoOrdenEstacionId: ID
     observaciones: String
 }
 
 type OrdenEvento {
     id: ID!
-    orden_id: ID
+    ordenId: ID
     evento: String!
     descripcion: String
     fecha: DateTime
 }
 
 input OrdenEventoRequest {
-    orden_id: ID
+    ordenId: ID
     evento: String!
     descripcion: String
     fecha: DateTime
@@ -440,11 +440,11 @@ input OrdenEventoRequest {
 
 type ConteoCiclico {
     id: ID!
-    producto_id: ID
-    bodega_id: ID
-    lote_id: ID
-    cantidad_contada: Numeric
-    unidad_id: ID
+    productoId: ID
+    bodegaId: ID
+    loteId: ID
+    cantidadContada: Numeric
+    unidadId: ID
     fecha: DateTime
 
     producto: Producto
@@ -454,41 +454,41 @@ type ConteoCiclico {
 }
 
 input ConteoCiclicoRequest {
-    producto_id: ID
-    bodega_id: ID
-    lote_id: ID
-    cantidad_contada: Numeric
-    unidad_id: ID
+    productoId: ID
+    bodegaId: ID
+    loteId: ID
+    cantidadContada: Numeric
+    unidadId: ID
     fecha: DateTime
 }
 
 type DiscrepanciaInventario {
     id: ID!
-    conteo_id: ID
-    cantidad_sistema: Numeric
+    conteoId: ID
+    cantidadSistema: Numeric
     resuelto: Boolean
     conteo: ConteoCiclico
 }
 
 input DiscrepanciaInventarioRequest {
-    conteo_id: ID
-    cantidad_sistema: Numeric
+    conteoId: ID
+    cantidadSistema: Numeric
     resuelto: Boolean
 }
 
 type PuntoReorden {
     id: ID!
-    producto_id: ID
+    productoId: ID
     stock_minimo: Numeric
     stock_seguridad: Numeric
-    unidad_id: ID
+    unidadId: ID
 }
 
 input PuntoReordenRequest {
-    producto_id: ID
+    productoId: ID
     stock_minimo: Numeric
     stock_seguridad: Numeric
-    unidad_id: ID
+    unidadId: ID
 }
 
 type EstadoAsignacion {
@@ -538,21 +538,21 @@ input TipoOrdenTrabajoRequest {
 type OrdenTrabajo {
     id: ID!
     referencia: String
-    tipo_id: ID
+    tipoId: ID
     descripcion: String
-    inicio_planificado: DateTime
-    fin_planificado: DateTime
-    estado_id: ID
-    creado_en: DateTime
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    estadoId: ID
+    creadoEn: DateTime
 }
 
 input OrdenTrabajoRequest {
     referencia: String
-    tipo_id: ID
+    tipoId: ID
     descripcion: String
-    inicio_planificado: DateTime
-    fin_planificado: DateTime
-    estado_id: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    estadoId: ID
 }
 
 type FuncionTarea {
@@ -568,100 +568,100 @@ input FuncionTareaRequest {
 
 type Asignacion {
     id: ID!
-    orden_trabajo_id: ID
-    usuario_id: ID
-    inicio_planificado: DateTime
-    fin_planificado: DateTime
-    horas_planificadas: Numeric
-    asignado_por: ID
-    estado_asignacion_id: ID
-    funcion_tarea: ID
-    creado_en: DateTime
+    ordenTrabajoId: ID
+    usuarioId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    horasPlanificadas: Numeric
+    asignadoPor: ID
+    estadoAsignacionId: ID
+    funcionTareaId: ID
+    creadoEn: DateTime
 }
 
 input AsignacionRequest {
-    orden_trabajo_id: ID
-    usuario_id: ID
-    inicio_planificado: DateTime
-    fin_planificado: DateTime
-    horas_planificadas: Numeric
-    asignado_por: ID
-    estado_asignacion_id: ID
-    funcion_tarea: ID
+    ordenTrabajoId: ID
+    usuarioId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    horasPlanificadas: Numeric
+    asignadoPor: ID
+    estadoAsignacionId: ID
+    funcionTareaId: ID
 }
 
 type HojaTimesheet {
     id: ID!
-    usuario_id: ID
-    inicio_periodo: DateTime
-    fin_periodo: DateTime
-    estado_aprobacion_id: ID
-    aprobado_por: ID
-    aprobado_en: DateTime
-    creado_en: DateTime
+    usuarioId: ID
+    inicioPeriodo: DateTime
+    finPeriodo: DateTime
+    estadoAprobacionId: ID
+    aprobadoPor: ID
+    aprobadoEn: DateTime
+    creadoEn: DateTime
 }
 
 input HojaTimesheetRequest {
-    usuario_id: ID
-    inicio_periodo: DateTime
-    fin_periodo: DateTime
-    estado_aprobacion_id: ID
-    aprobado_por: ID
-    aprobado_en: DateTime
+    usuarioId: ID
+    inicioPeriodo: DateTime
+    finPeriodo: DateTime
+    estadoAprobacionId: ID
+    aprobadoPor: ID
+    aprobadoEn: DateTime
 }
 
 type RegistroTiempo {
     id: ID!
-    asignacion_id: ID
-    inicio_tz: DateTime
-    fin_tz: DateTime
+    asignacionId: ID
+    inicioTz: DateTime
+    finTz: DateTime
     duracion: Interval
     duracion_horas: Numeric
-    tipo_actividad_id: ID
-    tipo_costo_id: ID
-    estado_aprobacion_id: ID
-    hoja_timesheet_id: ID
-    creado_en: DateTime
+    tipoActividadId: ID
+    tipoCostoId: ID
+    estadoAprobacionId: ID
+    hojaTimesheetId: ID
+    creadoEn: DateTime
     actualizado_en: DateTime
 }
 
 input RegistroTiempoRequest {
-    asignacion_id: ID
-    inicio_tz: DateTime
-    fin_tz: DateTime
-    tipo_actividad_id: ID
-    tipo_costo_id: ID
-    estado_aprobacion_id: ID
-    hoja_timesheet_id: ID
+    asignacionId: ID
+    inicioTz: DateTime
+    finTz: DateTime
+    tipoActividadId: ID
+    tipoCostoId: ID
+    estadoAprobacionId: ID
+    hojaTimesheetId: ID
 }
 
 type ExcepcionTiempo {
     id: ID!
-    usuario_id: ID
+    usuarioId: ID
     periodo: String
     detalles: String
-    creado_en: DateTime
+    creadoEn: DateTime
     resuelto: Boolean
 }
 
 input ExcepcionTiempoRequest {
-    usuario_id: ID!
+    usuarioId: ID!
     periodo: String
     detalles: String
 }
 
 type TarifaEmpleado {
     id: ID!
-    usuario_id: ID
+    usuarioId: ID
     tarifa: Numeric
     moneda: String
     vigente_desde: Date
     vigente_hasta: Date
-    creado_en: DateTime
+    creadoEn: DateTime
 }
 
 input TarifaEmpleadoRequest {
-    usuario_id: ID!
+    usuarioId: ID!
     tarifa: Numeric
     moneda: String
     vigente_desde: Date
@@ -741,14 +741,14 @@ type Usuario {
     actualizadoEn: String!
 }
 
-input RutaProduccionInput {
+input RutaProduccionRequest {
     productoId: ID!
     version: String
     nombre: String!
     activo: Boolean
 }
 
-input OperacionRutaInput {
+input OperacionRutaRequest {
     rutaId: ID!
     estacionId: ID!
     secuencia: Int!
@@ -758,12 +758,12 @@ input OperacionRutaInput {
     tiempoCola: String
 }
 
-input EstadoOperacionOrdenInput {
+input EstadoOperacionOrdenRequest {
     nombre: String!
     descripcion: String
 }
 
-input OperacionOrdenInput {
+input OperacionOrdenRequest {
     ordenId: ID!
     operacionRutaId: ID!
     estacionId: ID!
@@ -776,7 +776,7 @@ input OperacionOrdenInput {
     observaciones: String
 }
 
-input RecursoOperacionInput {
+input RecursoOperacionRequest {
     operacionOrdenId: ID!
     usuarioId: ID!
     funcionTareaId: ID!
@@ -785,7 +785,7 @@ input RecursoOperacionInput {
     asignadoPor: ID!
 }
 
-input SecuenciaInput {
+input SecuenciaRequest {
     operacionId: ID!
     nuevaSecuencia: Int!
 }
@@ -868,10 +868,27 @@ type Query {
     recursosPorUsuario(usuarioId: ID!): [RecursoOperacion!]!
     centrosCosto: [CentroCosto]
     estadosOrdenTrabajo: [EstadoOrdenTrabajo]
+    tiposOrdenTrabajo: [TipoOrdenTrabajo]
+    tipoOrdenTrabajo(id: ID!): TipoOrdenTrabajo
 }
 
 
 type Mutation {
+    createTipoProducto(input: TipoProductoRequest!): TipoProducto
+    updateTipoProducto(id: ID!, input: TipoProductoRequest!): TipoProducto
+    deleteTipoProducto(id: ID!): Boolean
+
+    createMetodoValoracion(input: MetodoValoracionRequest!): MetodoValoracion
+    updateMetodoValoracion(id: ID!, input: MetodoValoracionRequest!): MetodoValoracion
+    deleteMetodoValoracion(id: ID!): Boolean
+
+    createLineaOrden(input: LineaOrdenRequest!): LineaOrden
+    updateLineaOrden(id: ID!, input: LineaOrdenRequest!): LineaOrden
+    deleteLineaOrden(id: ID!): Boolean
+
+    createCostoOrden(input: CostoOrdenRequest!): CostoOrden
+    updateCostoOrden(id: ID!, input: CostoOrdenRequest!): CostoOrden
+    deleteCostoOrden(id: ID!): Boolean
     createEstadoOrden(input: EstadoOrdenRequest!): EstadoOrden
     updateEstadoOrden(id: ID!, input: EstadoOrdenRequest!): EstadoOrden
     deleteEstadoOrden(id: ID!): Boolean
@@ -976,25 +993,25 @@ type Mutation {
     updateEstadoAprobacion(id: ID!, input: EstadoAprobacionRequest!): EstadoAprobacion
     deleteEstadoAprobacion(id: ID!): Boolean
 
-    crearRutaProduccion(input: RutaProduccionInput!): RutaProduccion!
-    actualizarRutaProduccion(id: ID!, input: RutaProduccionInput!): RutaProduccion!
+    crearRutaProduccion(input: RutaProduccionRequest!): RutaProduccion!
+    actualizarRutaProduccion(id: ID!, input: RutaProduccionRequest!): RutaProduccion!
     desactivarRutaProduccion(id: ID!): RutaProduccion!
     activarRutaProduccion(id: ID!): RutaProduccion!
 
-    crearOperacionRuta(input: OperacionRutaInput!): OperacionRuta!
-    actualizarOperacionRuta(id: ID!, input: OperacionRutaInput!): OperacionRuta!
+    crearOperacionRuta(input: OperacionRutaRequest!): OperacionRuta!
+    actualizarOperacionRuta(id: ID!, input: OperacionRutaRequest!): OperacionRuta!
     eliminarOperacionRuta(id: ID!): Boolean!
 
-    crearEstadoOperacionOrden(input: EstadoOperacionOrdenInput!): OperacionOrdenEstado!
-    actualizarEstadoOperacionOrden(id: ID!, input: EstadoOperacionOrdenInput!): OperacionOrdenEstado!
+    crearEstadoOperacionOrden(input: EstadoOperacionOrdenRequest!): OperacionOrdenEstado!
+    actualizarEstadoOperacionOrden(id: ID!, input: EstadoOperacionOrdenRequest!): OperacionOrdenEstado!
     eliminarEstadoOperacionOrden(id: ID!): Boolean!
 
-    crearOperacionOrden(input: OperacionOrdenInput!): OperacionOrden!
-    actualizarOperacionOrden(id: ID!, input: OperacionOrdenInput!): OperacionOrden!
+    crearOperacionOrden(input: OperacionOrdenRequest!): OperacionOrden!
+    actualizarOperacionOrden(id: ID!, input: OperacionOrdenRequest!): OperacionOrden!
     eliminarOperacionOrden(id: ID!): Boolean!
 
-    asignarRecursoOperacion(input: RecursoOperacionInput!): RecursoOperacion!
-    actualizarRecursoOperacion(id: ID!, input: RecursoOperacionInput!): RecursoOperacion!
+    asignarRecursoOperacion(input: RecursoOperacionRequest!): RecursoOperacion!
+    actualizarRecursoOperacion(id: ID!, input: RecursoOperacionRequest!): RecursoOperacion!
     eliminarRecursoOperacion(id: ID!): Boolean!
 
     createTipoBodega(input: TipoBodegaRequest!): TipoBodega

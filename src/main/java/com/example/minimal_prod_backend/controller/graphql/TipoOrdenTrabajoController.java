@@ -29,7 +29,7 @@ public class TipoOrdenTrabajoController {
     }
 
     @MutationMapping
-    public TipoOrdenTrabajoResponse crearTipoOrdenTrabajo(@Argument TipoOrdenTrabajoRequest input) {
+    public TipoOrdenTrabajoResponse createTipoOrdenTrabajo(@Argument TipoOrdenTrabajoRequest input) {
         return tipoOrdenTrabajoService.createTipoOrdenTrabajo(input);
     }
 

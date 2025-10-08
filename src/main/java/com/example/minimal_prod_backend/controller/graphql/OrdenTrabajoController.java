@@ -8,11 +8,14 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Controller
 public class OrdenTrabajoController {
+    private static final Logger logger = LoggerFactory.getLogger(OrdenTrabajoController.class);
 
     @Autowired
     private OrdenTrabajoService ordenTrabajoService;
@@ -28,7 +31,8 @@ public class OrdenTrabajoController {
     }
 
     @MutationMapping
-    public OrdenTrabajoResponse crearOrdenTrabajo(@Argument OrdenTrabajoRequest input) {
+    public OrdenTrabajoResponse createOrdenTrabajo(@Argument OrdenTrabajoRequest input) {
+        logger.debug("1");
         return ordenTrabajoService.save(input);
     }
 

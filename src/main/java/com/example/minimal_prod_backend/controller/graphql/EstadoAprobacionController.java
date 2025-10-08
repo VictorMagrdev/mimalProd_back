@@ -19,31 +19,26 @@ public class EstadoAprobacionController {
     private final EstadoAprobacionService estadoAprobacionService;
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTADOS_APROBACION_TAG', 'READ')")
     public List<EstadoAprobacionResponse> estadosAprobacion() {
         return estadoAprobacionService.getEstadosAprobacion();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTADOS_APROBACION_TAG', 'READ')")
     public EstadoAprobacionResponse estadoAprobacion(@Argument Long id) {
         return estadoAprobacionService.getEstadoAprobacionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTADOS_APROBACION_TAG', 'WRITE')")
     public EstadoAprobacionResponse createEstadoAprobacion(@Argument("input") EstadoAprobacionRequest request) {
         return estadoAprobacionService.createEstadoAprobacion(request);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTADOS_APROBACION_TAG', 'WRITE')")
     public EstadoAprobacionResponse updateEstadoAprobacion(@Argument Long id, @Argument("input") EstadoAprobacionRequest request) {
         return estadoAprobacionService.updateEstadoAprobacion(id, request);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ESTADOS_APROBACION_TAG', 'DELETE')")
     public boolean deleteEstadoAprobacion(@Argument Long id) {
         estadoAprobacionService.deleteEstadoAprobacion(id);
         return true;

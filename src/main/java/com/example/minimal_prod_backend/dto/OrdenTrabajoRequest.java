@@ -4,10 +4,10 @@ import java.time.OffsetDateTime;
 
 public record OrdenTrabajoRequest(
         String referencia,
-        Integer tipoId,
+        Long tipoId,
         String descripcion,
         OffsetDateTime inicioPlanificado,
         OffsetDateTime finPlanificado,
-        Integer estadoId
+        Long estadoId
 ) {
 }

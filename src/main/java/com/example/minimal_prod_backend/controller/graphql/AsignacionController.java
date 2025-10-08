@@ -19,31 +19,26 @@ public class AsignacionController {
     private final AsignacionService asignacionService;
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ASIGNACIONES_TAG', 'READ')")
     public List<AsignacionResponse> asignaciones() {
         return asignacionService.getAsignaciones();
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('ASIGNACIONES_TAG', 'READ')")
     public AsignacionResponse asignacion(@Argument Long id) {
         return asignacionService.getAsignacionById(id);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ASIGNACIONES_TAG', 'WRITE')")
-    public AsignacionResponse createAsignacion(@Argument("input") AsignacionRequest request) {
+    public AsignacionResponse createAsignacion(@Argument AsignacionRequest request) {
         return asignacionService.createAsignacion(request);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ASIGNACIONES_TAG', 'WRITE')")
     public AsignacionResponse updateAsignacion(@Argument Long id, @Argument("input") AsignacionRequest request) {
         return asignacionService.updateAsignacion(id, request);
     }
 
     @MutationMapping
-    @PreAuthorize("@customSecurity.hasPermission('ASIGNACIONES_TAG', 'DELETE')")
     public boolean deleteAsignacion(@Argument Long id) {
         asignacionService.deleteAsignacion(id);
         return true;

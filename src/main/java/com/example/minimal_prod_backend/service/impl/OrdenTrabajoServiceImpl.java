@@ -1,11 +1,14 @@
 package com.example.minimal_prod_backend.service.impl;
 
+import com.example.minimal_prod_backend.controller.graphql.OrdenTrabajoController;
 import com.example.minimal_prod_backend.dto.OrdenTrabajoRequest;
 import com.example.minimal_prod_backend.dto.OrdenTrabajoResponse;
 import com.example.minimal_prod_backend.entity.OrdenTrabajo;
 import com.example.minimal_prod_backend.mapper.OrdenTrabajoMapper;
 import com.example.minimal_prod_backend.repository.OrdenTrabajoRepository;
 import com.example.minimal_prod_backend.service.OrdenTrabajoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrdenTrabajoServiceImpl implements OrdenTrabajoService {
-
+    private static final Logger logger = LoggerFactory.getLogger(OrdenTrabajoServiceImpl.class);
     @Autowired
     private OrdenTrabajoRepository ordenTrabajoRepository;
 
@@ -36,8 +39,12 @@ public class OrdenTrabajoServiceImpl implements OrdenTrabajoService {
 
     @Override
     public OrdenTrabajoResponse save(OrdenTrabajoRequest ordenTrabajoRequest) {
+        logger.debug("2");
         OrdenTrabajo ordenTrabajo = ordenTrabajoMapper.toEntity(ordenTrabajoRequest);
-        return ordenTrabajoMapper.toResponse(ordenTrabajoRepository.save(ordenTrabajo));
+        logger.debug("3");
+        OrdenTrabajo saved = ordenTrabajoRepository.save(ordenTrabajo);
+        logger.debug("4");
+        return ordenTrabajoMapper.toResponse(saved);
     }
 
     @Override

@@ -169,7 +169,7 @@ type OrdenProduccion {
     creadoPor: ID
     observaciones: String
     creadoEn: DateTime
-    actualizado_en: DateTime
+    actualizadoEn: DateTime
     unidad: UnidadMedida
     estado: EstadoOrden
     lineas: [LineaOrden]
@@ -201,11 +201,11 @@ type LineaOrden {
     unidadComponenteId: ID
     cantidadUsada: Numeric
     costoUnitario: Numeric
-    costo_total: Numeric
+    costoTotal: Numeric
     observaciones: String
     creadoEn: DateTime
-    producto_componente: Producto
-    unidad_componente: UnidadMedida
+    productoComponente: Producto
+    unidadComponente: UnidadMedida
 }
 
 input LineaOrdenRequest {
@@ -226,8 +226,8 @@ type CostoOrden {
     descripcion: String
     monto: Numeric
     moneda: String
-    registrado_en: DateTime
-    tipo_costo: TipoCosto
+    registradoEn: DateTime
+    tipoCosto: TipoCosto
     orden: OrdenProduccion
 }
 
@@ -318,7 +318,7 @@ type MovimientoInventarioDetalle {
     cantidad: Numeric
     unidadId: ID
     costoUnitario: Numeric
-    costo_total: Numeric
+    costoTotal: Numeric
 }
 
 input MovimientoInventarioDetalleRequest {
@@ -337,7 +337,7 @@ type InventarioLote {
     bodegaId: ID
     cantidad: Numeric
     unidadId: ID
-    actualizado_en: DateTime
+    actualizadoEn: DateTime
     producto: Producto
     lote: LoteProduccion
     bodega: Bodega
@@ -357,16 +357,16 @@ type ReservaMaterialOrden {
     ordenId: ID
     productoId: ID
     loteId: ID
-    cantidad_reservada: Numeric
+    cantidadReservada: Numeric
     unidadId: ID
-    fecha_reserva: DateTime
+    fechaReserva: DateTime
 }
 
 input ReservaMaterialOrdenRequest {
     ordenId: ID
     productoId: ID
     loteId: ID
-    cantidad_reservada: Numeric
+    cantidadReservada: Numeric
     unidadId: ID
 }
 
@@ -479,15 +479,15 @@ input DiscrepanciaInventarioRequest {
 type PuntoReorden {
     id: ID!
     productoId: ID
-    stock_minimo: Numeric
-    stock_seguridad: Numeric
+    stockMinimo: Numeric
+    stockSeguridad: Numeric
     unidadId: ID
 }
 
 input PuntoReordenRequest {
     productoId: ID
-    stock_minimo: Numeric
-    stock_seguridad: Numeric
+    stockMinimo: Numeric
+    stockSeguridad: Numeric
     unidadId: ID
 }
 
@@ -616,13 +616,13 @@ type RegistroTiempo {
     inicioTz: DateTime
     finTz: DateTime
     duracion: Interval
-    duracion_horas: Numeric
+    duracionHoras: Numeric
     tipoActividadId: ID
     tipoCostoId: ID
     estadoAprobacionId: ID
     hojaTimesheetId: ID
     creadoEn: DateTime
-    actualizado_en: DateTime
+    actualizadoEn: DateTime
 }
 
 input RegistroTiempoRequest {
@@ -655,8 +655,8 @@ type TarifaEmpleado {
     usuarioId: ID
     tarifa: Numeric
     moneda: String
-    vigente_desde: Date
-    vigente_hasta: Date
+    vigenteDesde: Date
+    vigenteHasta: Date
     creadoEn: DateTime
 }
 
@@ -664,8 +664,8 @@ input TarifaEmpleadoRequest {
     usuarioId: ID!
     tarifa: Numeric
     moneda: String
-    vigente_desde: Date
-    vigente_hasta: Date
+    vigenteDesde: Date
+    vigenteHasta: Date
 }
 
 type RutaProduccion {
@@ -674,7 +674,7 @@ type RutaProduccion {
     version: String
     nombre: String!
     activo: Boolean!
-    creadoEn: String!
+    creadoEn: DateTime!
     operaciones: [OperacionRuta!]!
 }
 
@@ -687,7 +687,7 @@ type OperacionRuta {
     tiempoSetup: String
     tiempoEjecucion: String
     tiempoCola: String
-    creadoEn: String!
+    creadoEn: DateTime!
     estacion: EstacionProduccion
 }
 
@@ -723,7 +723,7 @@ type RecursoOperacion {
     horasPlanificadas: String
     horasReales: String
     asignadoPor: ID!
-    creadoEn: String!
+    creadoEn: DateTime!
     usuario: Usuario
     funcionTarea: FuncionTarea
     asignadoPorUsuario: Usuario
@@ -737,7 +737,7 @@ type Usuario {
     rol: String!
     departamento: String
     activo: Boolean!
-    creadoEn: String!
+    creadoEn: DateTime!
     actualizadoEn: String!
 }
 
@@ -993,26 +993,24 @@ type Mutation {
     updateEstadoAprobacion(id: ID!, input: EstadoAprobacionRequest!): EstadoAprobacion
     deleteEstadoAprobacion(id: ID!): Boolean
 
-    crearRutaProduccion(input: RutaProduccionRequest!): RutaProduccion!
-    actualizarRutaProduccion(id: ID!, input: RutaProduccionRequest!): RutaProduccion!
-    desactivarRutaProduccion(id: ID!): RutaProduccion!
-    activarRutaProduccion(id: ID!): RutaProduccion!
+    createRutaProduccion(input: RutaProduccionRequest!): RutaProduccion!
+    updateRutaProduccion(id: ID!, input: RutaProduccionRequest!): RutaProduccion!
 
-    crearOperacionRuta(input: OperacionRutaRequest!): OperacionRuta!
-    actualizarOperacionRuta(id: ID!, input: OperacionRutaRequest!): OperacionRuta!
-    eliminarOperacionRuta(id: ID!): Boolean!
+    createOperacionRuta(input: OperacionRutaRequest!): OperacionRuta!
+    updateOperacionRuta(id: ID!, input: OperacionRutaRequest!): OperacionRuta!
+    deleteOperacionRuta(id: ID!): Boolean!
 
-    crearEstadoOperacionOrden(input: EstadoOperacionOrdenRequest!): OperacionOrdenEstado!
-    actualizarEstadoOperacionOrden(id: ID!, input: EstadoOperacionOrdenRequest!): OperacionOrdenEstado!
-    eliminarEstadoOperacionOrden(id: ID!): Boolean!
+    createEstadoOperacionOrden(input: EstadoOperacionOrdenRequest!): OperacionOrdenEstado!
+    updateEstadoOperacionOrden(id: ID!, input: EstadoOperacionOrdenRequest!): OperacionOrdenEstado!
+    deleteEstadoOperacionOrden(id: ID!): Boolean!
 
-    crearOperacionOrden(input: OperacionOrdenRequest!): OperacionOrden!
-    actualizarOperacionOrden(id: ID!, input: OperacionOrdenRequest!): OperacionOrden!
-    eliminarOperacionOrden(id: ID!): Boolean!
+    createOperacionOrden(input: OperacionOrdenRequest!): OperacionOrden!
+    updateOperacionOrden(id: ID!, input: OperacionOrdenRequest!): OperacionOrden!
+    deleteOperacionOrden(id: ID!): Boolean!
 
     asignarRecursoOperacion(input: RecursoOperacionRequest!): RecursoOperacion!
-    actualizarRecursoOperacion(id: ID!, input: RecursoOperacionRequest!): RecursoOperacion!
-    eliminarRecursoOperacion(id: ID!): Boolean!
+    updateRecursoOperacion(id: ID!, input: RecursoOperacionRequest!): RecursoOperacion!
+    deleteRecursoOperacion(id: ID!): Boolean!
 
     createTipoBodega(input: TipoBodegaRequest!): TipoBodega
     updateTipoBodega(id: ID!, input: TipoBodegaRequest!): TipoBodega

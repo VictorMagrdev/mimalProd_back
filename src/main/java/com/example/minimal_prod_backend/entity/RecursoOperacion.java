@@ -1,7 +1,9 @@
 package com.example.minimal_prod_backend.entity;
 
+import io.hypersistence.utils.hibernate.type.interval.PostgreSQLIntervalType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -28,9 +30,11 @@ public class RecursoOperacion {
     @Column(name = "funcion_tarea_id")
     private Long funcionTareaId;
 
+    @Type(PostgreSQLIntervalType.class)
     @Column(name = "horas_planificadas", columnDefinition = "INTERVAL")
     private Duration horasPlanificadas;
 
+    @Type(PostgreSQLIntervalType.class)
     @Column(name = "horas_reales", columnDefinition = "INTERVAL")
     private Duration horasReales;
 

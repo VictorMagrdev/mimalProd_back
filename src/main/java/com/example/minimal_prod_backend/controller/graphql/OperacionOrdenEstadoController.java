@@ -34,13 +34,13 @@ public class OperacionOrdenEstadoController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('OPERACIONES_ORDEN_ESTADOS_TAG', 'CREATE')")
-    public OperacionOrdenEstadoResponse createOperacionOrdenEstado(@Argument("input") OperacionOrdenEstadoRequest operacionOrdenEstadoInput) {
-        return operacionOrdenEstadoService.save(operacionOrdenEstadoInput);
+    public OperacionOrdenEstadoResponse createEstadoOperacionOrden(@Argument OperacionOrdenEstadoRequest input) {
+        return operacionOrdenEstadoService.save(input);
     }
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('OPERACIONES_ORDEN_ESTADOS_TAG', 'DELETE')")
-    public boolean deleteOperacionOrdenEstado(@Argument Long id) {
+    public boolean deleteEstadoOperacionOrden(@Argument Long id) {
         operacionOrdenEstadoService.deleteById(id);
         return true;
     }

@@ -21,7 +21,7 @@ public class OperacionOrdenController {
     }
 
     @QueryMapping
-    @PreAuthorize("@customSecurity.hasPermission('OPERACIONES_ORDEN_TAG', 'READ')")
+    //@PreAuthorize("@customSecurity.hasPermission('OPERACIONES_ORDEN_TAG', 'READ')")
     public List<OperacionOrdenResponse> operacionesOrden() {
         return operacionOrdenService.findAll();
     }

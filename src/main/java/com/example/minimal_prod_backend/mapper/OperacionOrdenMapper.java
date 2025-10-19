@@ -10,9 +10,14 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface OperacionOrdenMapper {
 
+    @Mapping(target = "operacionRutaId", source = "operacionRuta.id")
+    @Mapping(target = "estadoId", source = "estado.id")
     OperacionOrdenResponse toResponse(OperacionOrden operacionOrden);
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "operacionRuta", ignore = true)
     @Mapping(target = "estado", ignore = true)
     OperacionOrden toEntity(OperacionOrdenRequest operacionOrdenRequest);
 }
+
+

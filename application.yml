@@ -3,6 +3,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/minimalProd
     username: minimal_prod_user
     password: minimal_prod_pass
+
   jpa:
     hibernate:
       ddl-auto: validate
@@ -11,6 +12,16 @@ spring:
         format_sql: true
     show-sql: true
 
+  graphql:
+    execution:
+      thread-executor: bean
+    schema:
+      printer:
+        enabled: true
+
+  logging:
+    level:
+      org.springframework.graphql: DEBUG
 
 flyway:
   enabled: true

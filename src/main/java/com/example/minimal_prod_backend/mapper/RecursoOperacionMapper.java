@@ -10,8 +10,11 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface RecursoOperacionMapper {
 
+    @Mapping(target = "operacionOrdenId", source = "operacionOrden.id")
     RecursoOperacionResponse toResponse(RecursoOperacion recursoOperacion);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "creadoEn", ignore = true)
     @Mapping(target = "operacionOrden", ignore = true)
     RecursoOperacion toEntity(RecursoOperacionRequest recursoOperacionRequest);
 }

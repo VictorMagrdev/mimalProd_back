@@ -853,18 +853,18 @@ type Query {
     productos: [Producto]
     lotesProduccion: [LoteProduccion]
     ordenesProduccion: [OrdenProduccion]
-    rutasProduccion(activo: Boolean): [RutaProduccion!]!
+    rutasProduccion: [RutaProduccion!]!
     rutaProduccion(id: ID!): RutaProduccion
     rutasPorProducto(productoId: ID!): [RutaProduccion!]!
-    operacionesRuta(rutaId: ID!): [OperacionRuta!]!
+    operacionesRuta: [OperacionRuta!]!
     operacionRuta(id: ID!): OperacionRuta
     estadosOperacionOrden: [OperacionOrdenEstado!]!
     estadoOperacionOrden(id: ID!): OperacionOrdenEstado
-    operacionesOrden(ordenId: ID!): [OperacionOrden!]!
+    operacionesOrden: [OperacionOrden!]!
     operacionOrden(id: ID!): OperacionOrden
     operacionesPorEstacion(estacionId: ID!, estadoId: ID): [OperacionOrden!]!
-    recursosOperacion(operacionOrdenId: ID!): [RecursoOperacion!]!
     recursoOperacion(id: ID!): RecursoOperacion
+    recursosOperacion: [RecursoOperacion!]!
     recursosPorUsuario(usuarioId: ID!): [RecursoOperacion!]!
     centrosCosto: [CentroCosto]
     estadosOrdenTrabajo: [EstadoOrdenTrabajo]
@@ -1008,7 +1008,7 @@ type Mutation {
     updateOperacionOrden(id: ID!, input: OperacionOrdenRequest!): OperacionOrden!
     deleteOperacionOrden(id: ID!): Boolean!
 
-    asignarRecursoOperacion(input: RecursoOperacionRequest!): RecursoOperacion!
+    createRecursoOperacion(input: RecursoOperacionRequest!): RecursoOperacion!
     updateRecursoOperacion(id: ID!, input: RecursoOperacionRequest!): RecursoOperacion!
     deleteRecursoOperacion(id: ID!): Boolean!
 

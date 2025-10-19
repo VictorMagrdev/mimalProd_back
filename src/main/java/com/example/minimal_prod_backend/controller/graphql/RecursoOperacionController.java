@@ -34,8 +34,8 @@ public class RecursoOperacionController {
 
     @MutationMapping
     @PreAuthorize("@customSecurity.hasPermission('RECURSOS_OPERACION_TAG', 'CREATE')")
-    public RecursoOperacionResponse createRecursoOperacion(@Argument("input") RecursoOperacionRequest recursoOperacionInput) {
-        return recursoOperacionService.save(recursoOperacionInput);
+    public RecursoOperacionResponse createRecursoOperacion(@Argument RecursoOperacionRequest input) {
+        return recursoOperacionService.save(input);
     }
 
     @MutationMapping

@@ -811,6 +811,51 @@ input CentroCostoRequest {
     codigo: String!
     nombre: String!
 }
+type Maquina {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    numeroSerie: String
+    fechaCompra: Date!
+    costoCompra: Numeric!
+    valorRescate: Numeric
+    vidaUtilAnios: Int!
+    centroCostoId: ID
+    creadoEn: DateTime
+    actualizadoEn: DateTime
+    centroCosto: CentroCosto
+}
+
+input MaquinaRequest {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    numeroSerie: String
+    fechaCompra: Date!
+    costoCompra: Numeric!
+    valorRescate: Numeric
+    vidaUtilAnios: Int!
+    centroCostoId: ID
+}
+type Depreciacion {
+    id: ID!
+    maquinaId: ID!
+    fecha: Date!
+    valorDepreciacion: Numeric!
+    valorAcumulado: Numeric
+    valorEnLibros: Numeric
+    creadoEn: DateTime
+    maquina: Maquina
+}
+
+input DepreciacionRequest {
+    maquinaId: ID!
+    fecha: Date!
+    valorDepreciacion: Numeric!
+    valorAcumulado: Numeric
+    valorEnLibros: Numeric
+}
 
 type Query {
     LineasOrden:[LineaOrden]
@@ -870,6 +915,11 @@ type Query {
     estadosOrdenTrabajo: [EstadoOrdenTrabajo]
     tiposOrdenTrabajo: [TipoOrdenTrabajo]
     tipoOrdenTrabajo(id: ID!): TipoOrdenTrabajo
+    maquinas: [Maquina]
+    maquina(id: ID!): Maquina
+
+    depreciaciones: [Depreciacion]
+    depreciacion(id: ID!): Depreciacion
 }
 
 
@@ -1047,4 +1097,12 @@ type Mutation {
     createCentroCosto(input: CentroCostoRequest!): CentroCosto
     updateCentroCosto(id: ID!, input: CentroCostoRequest!): CentroCosto
     deleteCentroCosto(id: ID!): Boolean
+
+    createMaquina(input: MaquinaRequest!): Maquina
+    updateMaquina(id: ID!, input: MaquinaRequest!): Maquina
+    deleteMaquina(id: ID!): Boolean
+
+    createDepreciacion(input: DepreciacionRequest!): Depreciacion
+    updateDepreciacion(id: ID!, input: DepreciacionRequest!): Depreciacion
+    deleteDepreciacion(id: ID!): Boolean
 }

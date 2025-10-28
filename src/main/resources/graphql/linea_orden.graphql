@@ -1,0 +1,36 @@
+type LineaOrden {
+    id: ID!
+    ordenId: ID
+    numeroLinea: Int
+    productoComponenteId: ID
+    cantidadRequerida: Numeric
+    unidadComponenteId: ID
+    cantidadUsada: Numeric
+    costoUnitario: Numeric
+    costoTotal: Numeric
+    observaciones: String
+    creadoEn: DateTime
+    productoComponente: Producto
+    unidadComponente: UnidadMedida
+}
+
+input LineaOrdenRequest {
+    ordenId: ID
+    numeroLinea: Int
+    productoComponenteId: ID
+    cantidadRequerida: Numeric
+    unidadComponenteId: ID
+    cantidadUsada: Numeric
+    costoUnitario: Numeric
+    observaciones: String
+}
+
+extend type Query {
+    LineasOrden:[LineaOrden]
+}
+
+extend type Mutation {
+    createLineaOrden(input: LineaOrdenRequest!): LineaOrden
+    updateLineaOrden(id: ID!, input: LineaOrdenRequest!): LineaOrden
+    deleteLineaOrden(id: ID!): Boolean
+}

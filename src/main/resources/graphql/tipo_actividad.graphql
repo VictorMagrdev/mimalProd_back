@@ -1,0 +1,20 @@
+type TipoActividad {
+    id: ID!
+    nombre: String!
+    descripcion: String
+}
+
+input TipoActividadRequest {
+    nombre: String!
+    descripcion: String
+}
+
+extend type Query {
+    tiposActividad: [TipoActividad]
+}
+
+extend type Mutation {
+    createTipoActividad(input: TipoActividadRequest!): TipoActividad
+    updateTipoActividad(id: ID!, input: TipoActividadRequest!): TipoActividad
+    deleteTipoActividad(id: ID!): Boolean
+}

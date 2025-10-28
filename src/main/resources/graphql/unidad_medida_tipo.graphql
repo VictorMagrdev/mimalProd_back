@@ -1,0 +1,24 @@
+type UnidadMedidaTipo {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    creadoEn: DateTime
+    unidades: [UnidadMedida]
+}
+
+input UnidadMedidaTipoRequest {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+}
+
+extend type Query {
+    unidadesMedidaTipos: [UnidadMedidaTipo]
+}
+
+extend type Mutation {
+    createUnidadMedidaTipo(input: UnidadMedidaTipoRequest!): UnidadMedidaTipo
+    updateUnidadMedidaTipo(id: ID!, input: UnidadMedidaTipoRequest!): UnidadMedidaTipo
+    deleteUnidadMedidaTipo(id: ID!): Boolean
+}

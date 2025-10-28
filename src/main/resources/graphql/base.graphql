@@ -1,0 +1,18 @@
+scalar DateTime
+scalar Date
+scalar Numeric
+scalar Interval
+
+enum TipoArchivo {
+    FOTO
+    AUDIO
+}
+
+enum TipoPrioridad {
+    LEVE
+    MEDIA
+    ALTA
+}
+
+type Query
+type Mutation

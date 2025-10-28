@@ -1,0 +1,27 @@
+type IncidenciaArchivo {
+    id: ID!
+    incidenciaId: ID
+    tipo: TipoArchivo!
+    nombreOriginal: String!
+    url: String!
+    subidoPorId: ID
+    subidoEn: String!
+}
+
+input IncidenciaArchivoRequest {
+    incidenciaId: ID!
+    tipo: TipoArchivo!
+    nombreOriginal: String!
+    url: String!
+    subidoPorId: ID
+}
+
+extend type Query {
+    incidenciasArchivos(incidenciaId: ID!): [IncidenciaArchivo!]!
+    incidenciasArchivo: [IncidenciaArchivo!]!
+}
+
+extend type Mutation {
+    createIncidenciaArchivo(input: IncidenciaArchivoRequest!): IncidenciaArchivo!
+    deleteIncidenciaArchivo(id: ID!): Boolean!
+}

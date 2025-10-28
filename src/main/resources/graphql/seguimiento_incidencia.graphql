@@ -1,0 +1,26 @@
+type SeguimientoIncidencia {
+    id: ID!
+    incidenciaId: ID!
+    estadoAnteriorId: ID
+    estadoNuevoId: ID
+    comentario: String
+    realizadoPorId: ID
+    realizadoEn: String!
+}
+
+input SeguimientoIncidenciaRequest {
+    incidenciaId: ID!
+    estadoAnteriorId: ID
+    estadoNuevoId: ID
+    comentario: String
+    realizadoPorId: ID
+}
+
+extend type Query {
+    seguimientoIncidencias(incidenciaId: ID!): [SeguimientoIncidencia!]!
+}
+
+extend type Mutation {
+    createSeguimientoIncidencia(input: SeguimientoIncidenciaRequest!): SeguimientoIncidencia!
+    deleteSeguimientoIncidencia(id: ID!): Boolean!
+}

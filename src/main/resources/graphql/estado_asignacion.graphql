@@ -1,0 +1,20 @@
+type EstadoAsignacion {
+    id: ID!
+    nombre: String!
+    descripcion: String
+}
+
+input EstadoAsignacionRequest {
+    nombre: String!
+    descripcion: String
+}
+
+extend type Query {
+    estadosAsignacion: [EstadoAsignacion]
+}
+
+extend type Mutation {
+    createEstadoAsignacion(input: EstadoAsignacionRequest!): EstadoAsignacion
+    updateEstadoAsignacion(id: ID!, input: EstadoAsignacionRequest!): EstadoAsignacion
+    deleteEstadoAsignacion(id: ID!): Boolean
+}

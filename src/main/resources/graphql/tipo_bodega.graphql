@@ -1,0 +1,22 @@
+type TipoBodega {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+}
+
+input TipoBodegaRequest {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+}
+
+extend type Query {
+    tiposBodega: [TipoBodega]
+}
+
+extend type Mutation {
+    createTipoBodega(input: TipoBodegaRequest!): TipoBodega
+    updateTipoBodega(id: ID!, input: TipoBodegaRequest!): TipoBodega
+    deleteTipoBodega(id: ID!): Boolean
+}

@@ -1,0 +1,34 @@
+type Asignacion {
+    id: ID!
+    ordenTrabajoId: ID
+    usuarioId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    horasPlanificadas: Numeric
+    asignadoPor: ID
+    estadoAsignacionId: ID
+    funcionTareaId: ID
+    creadoEn: DateTime
+}
+
+input AsignacionRequest {
+    ordenTrabajoId: ID
+    usuarioId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    horasPlanificadas: Numeric
+    asignadoPor: ID
+    estadoAsignacionId: ID
+    funcionTareaId: ID
+}
+
+extend type Query {
+    asignaciones: [Asignacion]
+    asignacion(id: ID!): Asignacion
+}
+
+extend type Mutation {
+    createAsignacion(input: AsignacionRequest!): Asignacion
+    updateAsignacion(id: ID!, input: AsignacionRequest!): Asignacion
+    deleteAsignacion(id: ID!): Boolean
+}

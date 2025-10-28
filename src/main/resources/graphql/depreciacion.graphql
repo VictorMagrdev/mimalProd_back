@@ -1,0 +1,31 @@
+type Depreciacion {
+    id: ID!
+    maquinaId: ID!
+    tipoPeriodo: String!
+    periodo: Date!
+    depreciacionPeriodo: Numeric!
+    depreciacionAcumulada: Numeric!
+    valorNeto: Numeric!
+    calculadoEn: DateTime
+    maquina: Maquina
+}
+
+input DepreciacionRequest {
+    maquinaId: ID!
+    tipoPeriodo: String!
+    periodo: Date!
+    depreciacionPeriodo: Numeric!
+    depreciacionAcumulada: Numeric!
+    valorNeto: Numeric!
+}
+
+extend type Query {
+    depreciaciones: [Depreciacion]
+    depreciacion(id: ID!): Depreciacion
+}
+
+extend type Mutation {
+    createDepreciacion(input: DepreciacionRequest!): Depreciacion
+    updateDepreciacion(id: ID!, input: DepreciacionRequest!): Depreciacion
+    deleteDepreciacion(id: ID!): Boolean
+}

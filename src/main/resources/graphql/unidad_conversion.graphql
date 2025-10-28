@@ -1,0 +1,24 @@
+type UnidadConversion {
+    id: ID!
+    origenId: ID
+    destinoId: ID
+    factor: Numeric!
+    origen: UnidadMedida
+    destino: UnidadMedida
+}
+
+input UnidadConversionRequest {
+    origenId: ID
+    destinoId: ID
+    factor: Numeric!
+}
+
+extend type Query {
+    unidadesConversion: [UnidadConversion]
+}
+
+extend type Mutation {
+    createUnidadConversion(input: UnidadConversionRequest!): UnidadConversion
+    updateUnidadConversion(id: ID!, input: UnidadConversionRequest!): UnidadConversion
+    deleteUnidadConversion(id: ID!): Boolean
+}

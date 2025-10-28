@@ -1,0 +1,20 @@
+type FuncionTarea {
+    id: ID!
+    nombre: String!
+    descripcion: String
+}
+
+input FuncionTareaRequest {
+    nombre: String!
+    descripcion: String
+}
+
+extend type Query {
+    funcionesTarea: [FuncionTarea]
+}
+
+extend type Mutation {
+    createFuncionTarea(input: FuncionTareaRequest!): FuncionTarea
+    updateFuncionTarea(id: ID!, input: FuncionTareaRequest!): FuncionTarea
+    deleteFuncionTarea(id: ID!): Boolean
+}

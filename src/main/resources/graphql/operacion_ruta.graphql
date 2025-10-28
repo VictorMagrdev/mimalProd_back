@@ -1,0 +1,33 @@
+type OperacionRuta {
+    id: ID!
+    rutaId: ID!
+    estacionId: ID!
+    secuencia: Int!
+    nombre: String!
+    tiempoSetup: String
+    tiempoEjecucion: String
+    tiempoCola: String
+    creadoEn: DateTime!
+    estacion: EstacionProduccion
+}
+
+input OperacionRutaRequest {
+    rutaId: ID!
+    estacionId: ID!
+    secuencia: Int!
+    nombre: String!
+    tiempoSetup: String
+    tiempoEjecucion: String
+    tiempoCola: String
+}
+
+extend type Query {
+    operacionesRuta: [OperacionRuta!]!
+    operacionRuta(id: ID!): OperacionRuta
+}
+
+extend type Mutation {
+    createOperacionRuta(input: OperacionRutaRequest!): OperacionRuta!
+    updateOperacionRuta(id: ID!, input: OperacionRutaRequest!): OperacionRuta!
+    deleteOperacionRuta(id: ID!): Boolean!
+}

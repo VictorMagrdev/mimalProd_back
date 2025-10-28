@@ -824,7 +824,7 @@ type Maquina {
     centroCostoId: ID
     creadoEn: DateTime
     actualizadoEn: DateTime
-    centroCosto: CentroCosto
+    depreciaciones: [Depreciacion]
 }
 
 input MaquinaRequest {
@@ -841,23 +841,211 @@ input MaquinaRequest {
 type Depreciacion {
     id: ID!
     maquinaId: ID!
-    fecha: Date!
-    valorDepreciacion: Numeric!
-    valorAcumulado: Numeric
-    valorEnLibros: Numeric
-    creadoEn: DateTime
+    tipoPeriodo: String!
+    periodo: Date!
+    depreciacionPeriodo: Numeric!
+    depreciacionAcumulada: Numeric!
+    valorNeto: Numeric!
+    calculadoEn: DateTime
     maquina: Maquina
 }
 
 input DepreciacionRequest {
     maquinaId: ID!
-    fecha: Date!
-    valorDepreciacion: Numeric!
-    valorAcumulado: Numeric
-    valorEnLibros: Numeric
+    tipoPeriodo: String!
+    periodo: Date!
+    depreciacionPeriodo: Numeric!
+    depreciacionAcumulada: Numeric!
+    valorNeto: Numeric!
+}
+enum TipoPrioridad {
+    LEVE
+    MEDIA
+    ALTA
 }
 
+type TipoIncidencia {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    prioridadBase: TipoPrioridad
+}
+
+input TipoIncidenciaRequest {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    prioridadBase: TipoPrioridad
+}
+type EstadoIncidencia {
+    id: ID!
+    nombre: String!
+    descripcion: String
+    orden: Int
+    estadoFinal: Boolean
+}
+
+input EstadoIncidenciaRequest {
+    nombre: String!
+    descripcion: String
+    orden: Int
+    estadoFinal: Boolean
+}
+
+type Incidencia {
+    id: ID!
+    codigo: String!
+    titulo: String!
+    descripcion: String
+    tipoIncidenciaId: ID
+    estadoId: ID
+    maquinaId: ID
+    ordenId: ID
+    estacionId: ID
+    reportadoPorId: ID
+    asignadoAId: ID
+    fechaCierre: String
+    tiempoParada: String
+    creadoEn: String
+    tipoIncidencia: TipoIncidencia
+    estado: EstadoIncidencia
+    maquina: Maquina
+    orden: OrdenProduccion
+    estacion: EstacionProduccion
+    archivos: [IncidenciaArchivo!]
+}
+
+input IncidenciaRequest {
+    codigo: String!
+    titulo: String!
+    descripcion: String
+    tipoIncidenciaId: ID
+    estadoId: ID
+    maquinaId: ID
+    ordenId: ID
+    estacionId: ID
+    reportadoPorId: ID
+    asignadoAId: ID
+    fechaCierre: String
+    tiempoParada: String
+}
+
+enum TipoArchivo {
+    FOTO
+    AUDIO
+}
+
+type IncidenciaArchivo {
+    id: ID!
+    incidenciaId: ID
+    tipo: TipoArchivo!
+    nombreOriginal: String!
+    url: String!
+    subidoPorId: ID
+    subidoEn: String!
+}
+
+input IncidenciaArchivoRequest {
+    incidenciaId: ID!
+    tipo: TipoArchivo!
+    nombreOriginal: String!
+    url: String!
+    subidoPorId: ID
+}
+type SeguimientoIncidencia {
+    id: ID!
+    incidenciaId: ID!
+    estadoAnteriorId: ID
+    estadoNuevoId: ID
+    comentario: String
+    realizadoPorId: ID
+    realizadoEn: String!
+}
+
+input SeguimientoIncidenciaRequest {
+    incidenciaId: ID!
+    estadoAnteriorId: ID
+    estadoNuevoId: ID
+    comentario: String
+    realizadoPorId: ID
+}
+type EstructuraProducto {
+    id: ID!
+    productoPadreId: ID!
+    productoPadreCodigo: String!
+    productoPadreNombre: String!
+    productoHijoId: ID!
+    productoHijoCodigo: String!
+    productoHijoNombre: String!
+    cantidad: Float!
+    unidadId: ID
+    unidadNombre: String
+    version: String
+    activo: Boolean!
+    creadoEn: String!
+}
+
+input EstructuraProductoInput {
+    productoPadreId: ID!
+    productoHijoId: ID!
+    cantidad: Float!
+    unidadId: ID
+    version: String
+    activo: Boolean
+}
+
+# Tipos para ParametroPlanificacion
+type ParametroPlanificacion {
+    id: ID!
+    productoId: ID!
+    productoCodigo: String!
+    productoNombre: String!
+    leadTimeDias: Int!
+    loteMinimo: Float!
+    loteEconomico: Float!
+    politicaInventario: String!
+    actualizadoEn: String!
+}
+
+input ParametroPlanificacionInput {
+    productoId: ID!
+    leadTimeDias: Int
+    loteMinimo: Float
+    loteEconomico: Float
+    politicaInventario: String
+}
+
+# Tipos para RequerimientoMaterial
+type RequerimientoMaterial {
+    id: ID!
+    productoId: ID!
+    productoCodigo: String!
+    productoNombre: String!
+    ordenProduccionId: ID
+    ordenProduccionCodigo: String
+    cantidadRequerida: Float!
+    cantidadDisponible: Float!
+    cantidadAPedir: Float!
+    fechaNecesidad: String
+    creadoEn: String!
+}
+
+input RequerimientoMaterialInput {
+    productoId: ID!
+    ordenProduccionId: ID
+    cantidadRequerida: Float!
+    cantidadDisponible: Float
+    fechaNecesidad: String
+}
 type Query {
+    seguimientoIncidencias(incidenciaId: ID!): [SeguimientoIncidencia!]!
+    incidenciasArchivos(incidenciaId: ID!): [IncidenciaArchivo!]!
+    incidenciasArchivo: [IncidenciaArchivo!]!
+    incidencias: [Incidencia!]!
+    incidencia(id: ID!): Incidencia
+    estadosIncidencia: [EstadoIncidencia!]!
+    estadoIncidencia(id: ID!): EstadoIncidencia
     LineasOrden:[LineaOrden]
     costosOrden: [CostoOrden]
     tiposBodega: [TipoBodega]
@@ -917,13 +1105,47 @@ type Query {
     tipoOrdenTrabajo(id: ID!): TipoOrdenTrabajo
     maquinas: [Maquina]
     maquina(id: ID!): Maquina
-
     depreciaciones: [Depreciacion]
     depreciacion(id: ID!): Depreciacion
+    tiposIncidencia: [TipoIncidencia!]!
+    tipoIncidencia(id: ID!): TipoIncidencia
+    getAllEstructuras: [EstructuraProducto!]!
+    getEstructuraById(id: ID!): EstructuraProducto
+    getEstructurasByProductoPadreId(productoPadreId: ID!): [EstructuraProducto!]!
+
+    getAllParametros: [ParametroPlanificacion!]!
+    getParametroById(id: ID!): ParametroPlanificacion
+    getParametroByProductoId(productoId: ID!): ParametroPlanificacion
+
+    getAllRequerimientos: [RequerimientoMaterial!]!
+    getRequerimientoById(id: ID!): RequerimientoMaterial
+    getRequerimientosByProductoId(productoId: ID!): [RequerimientoMaterial!]!
+    getRequerimientosByOrdenProduccionId(ordenProduccionId: ID!): [RequerimientoMaterial!]!
 }
 
 
 type Mutation {
+    createEstructura(input: EstructuraProductoInput!): EstructuraProducto!
+    updateEstructura(id: ID!, input: EstructuraProductoInput!): EstructuraProducto!
+    deleteEstructura(id: ID!): Boolean!
+
+    # ParametrosPlanificacion
+    createParametro(input: ParametroPlanificacionInput!): ParametroPlanificacion!
+    updateParametro(id: ID!, input: ParametroPlanificacionInput!): ParametroPlanificacion!
+    deleteParametro(id: ID!): Boolean!
+
+    # RequerimientosMateriales
+    createRequerimiento(input: RequerimientoMaterialInput!): RequerimientoMaterial!
+    updateRequerimiento(id: ID!, input: RequerimientoMaterialInput!): RequerimientoMaterial!
+    deleteRequerimiento(id: ID!): Boolean!
+    createSeguimientoIncidencia(input: SeguimientoIncidenciaRequest!): SeguimientoIncidencia!
+    deleteSeguimientoIncidencia(id: ID!): Boolean!
+    createIncidenciaArchivo(input: IncidenciaArchivoRequest!): IncidenciaArchivo!
+    deleteIncidenciaArchivo(id: ID!): Boolean!
+    createIncidencia(input: IncidenciaRequest!): Incidencia!
+    deleteIncidencia(id: ID!): Boolean!
+    createEstadoIncidencia(input: EstadoIncidenciaRequest!): EstadoIncidencia!
+    deleteEstadoIncidencia(id: ID!): Boolean!
     createTipoProducto(input: TipoProductoRequest!): TipoProducto
     updateTipoProducto(id: ID!, input: TipoProductoRequest!): TipoProducto
     deleteTipoProducto(id: ID!): Boolean
@@ -1105,4 +1327,6 @@ type Mutation {
     createDepreciacion(input: DepreciacionRequest!): Depreciacion
     updateDepreciacion(id: ID!, input: DepreciacionRequest!): Depreciacion
     deleteDepreciacion(id: ID!): Boolean
+    crearTipoIncidencia(input: TipoIncidenciaRequest!): TipoIncidencia!
+    eliminarTipoIncidencia(id: ID!): Boolean!
 }

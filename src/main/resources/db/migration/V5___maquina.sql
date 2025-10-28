@@ -13,6 +13,7 @@ CREATE TABLE maquinas (
   creado_en TIMESTAMPTZ DEFAULT now()
 );
 CREATE TYPE tipoPeriodo AS ENUM ('MENSUAL', 'ANUAL');
+
 CREATE TABLE depreciaciones (
   id BIGSERIAL PRIMARY KEY,
   maquina_id BIGINT REFERENCES maquinas(id),

@@ -2,6 +2,9 @@ package com.example.minimal_prod_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -24,6 +27,7 @@ public class Depreciacion {
     private Maquina maquina;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "tipo_periodo", nullable = false, length = 20)
     private TipoPeriodo tipoPeriodo;
 

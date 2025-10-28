@@ -5,7 +5,6 @@ import com.example.minimal_prod_backend.dto.RecursoOperacionResponse;
 import com.example.minimal_prod_backend.entity.RecursoOperacion;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface RecursoOperacionMapper {

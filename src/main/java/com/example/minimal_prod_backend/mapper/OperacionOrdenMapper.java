@@ -5,7 +5,6 @@ import com.example.minimal_prod_backend.dto.OperacionOrdenResponse;
 import com.example.minimal_prod_backend.entity.OperacionOrden;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface OperacionOrdenMapper {

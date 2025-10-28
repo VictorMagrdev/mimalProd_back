@@ -15,4 +15,8 @@ public interface DepreciacionService {
     DepreciacionResponse updateDepreciacion(Long id, DepreciacionRequest request);
 
     void deleteDepreciacion(Long id);
+
+    void calcularDepreciacionMensual();
+
+    void calcularDepreciacionAnual();
 }

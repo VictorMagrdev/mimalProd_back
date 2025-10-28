@@ -23,6 +23,7 @@ public interface RequerimientoMaterialMapper {
             @Mapping(target = "productoCodigo", source = "producto.codigo"),
             @Mapping(target = "productoNombre", source = "producto.nombre"),
             @Mapping(target = "ordenProduccionId", source = "ordenProduccion.id"),
+            @Mapping(target = "ordenProduccionNumero", source = "ordenProduccion.numeroOrden")
     })
     RequerimientoMaterialResponse toResponse(RequerimientoMaterial requerimiento);
 

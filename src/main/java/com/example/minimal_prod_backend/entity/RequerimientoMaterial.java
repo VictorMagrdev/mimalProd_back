@@ -5,6 +5,8 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "requerimientos_materiales")
 @Getter
@@ -26,15 +28,15 @@ public class RequerimientoMaterial {
     @JoinColumn(name = "orden_produccion_id")
     private OrdenProduccion ordenProduccion;
 
-    @Column(name = "cantidad_requerida", precision = 18, scale = 6)
-    private Double cantidadRequerida;
+    @Column(name = "cantidad_requerida", precision = 18, scale = 2)
+    private BigDecimal cantidadRequerida;
 
-    @Column(name = "cantidad_disponible", precision = 18, scale = 6)
+    @Column(name = "cantidad_disponible", precision = 18, scale = 2)
     @Builder.Default
-    private Double cantidadDisponible = 0.0;
+    private BigDecimal cantidadDisponible = BigDecimal.ZERO;
 
-    @Column(name = "cantidad_a_pedir", precision = 18, scale = 6, insertable = false, updatable = false)
-    private Double cantidadAPedir;
+    @Column(name = "cantidad_a_pedir", precision = 18, scale = 2)
+    private BigDecimal cantidadAPedir;
 
     @Column(name = "fecha_necesidad")
     private LocalDate fechaNecesidad;

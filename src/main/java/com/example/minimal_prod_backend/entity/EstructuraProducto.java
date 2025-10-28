@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,8 +31,8 @@ public class EstructuraProducto {
     @JoinColumn(name = "producto_hijo_id", nullable = false)
     private Producto productoHijo;
 
-    @Column(name = "cantidad", nullable = false, precision = 18, scale = 6)
-    private Double cantidad;
+    @Column(name = "cantidad", nullable = false, precision = 10, scale = 2)
+    private BigDecimal cantidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unidad_id")

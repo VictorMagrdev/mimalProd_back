@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,17 +27,16 @@ public class ParametroPlanificacion {
     @Builder.Default
     private Integer leadTimeDias = 0;
 
-    @Column(name = "lote_minimo", precision = 18, scale = 6)
+    @Column(name = "lote_minimo", precision = 18, scale = 2)
     @Builder.Default
-    private Double loteMinimo = 0.0;
+    private BigDecimal loteMinimo = BigDecimal.ZERO;
 
-    @Column(name = "lote_economico", precision = 18, scale = 6)
+    @Column(name = "lote_economico", precision = 18, scale = 2)
     @Builder.Default
-    private Double loteEconomico = 0.0;
+    private BigDecimal loteEconomico = BigDecimal.ZERO;
 
     @Column(name = "politica_inventario", length = 50)
-    @Builder.Default
-    private String politicaInventario = "MRP";
+    private String politicaInventario;
 
     @Column(name = "actualizado_en")
     @Builder.Default

@@ -10,7 +10,7 @@ public record RequerimientoMaterialResponse(
         String productoCodigo,
         String productoNombre,
         Long ordenProduccionId,
-        String ordenProduccionCodigo,
+        String ordenProduccionNumero,
         BigDecimal cantidadRequerida,
         BigDecimal cantidadDisponible,
         BigDecimal cantidadAPedir,

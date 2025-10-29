@@ -14,5 +14,7 @@ public interface ParametroPlanificacionService {
 
     ParametroPlanificacionResponse updateParametro(Long id, ParametroPlanificacionRequest request);
 
+    ParametroPlanificacionResponse getParametroByProductoId(Long productoId);
+
     void deleteParametro(Long id);
 }

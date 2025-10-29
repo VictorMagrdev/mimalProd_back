@@ -25,7 +25,10 @@ public class ParametroPlanificacionController {
     public ParametroPlanificacionResponse parametroPlanificacion(@Argument Long id) {
         return parametroPlanificacionService.getParametroById(id);
     }
-
+    @QueryMapping
+    public ParametroPlanificacionResponse parametroByProductoId(@Argument Long productoId) {
+        return parametroPlanificacionService.getParametroByProductoId(productoId);
+    }
     @MutationMapping
     public ParametroPlanificacionResponse createParametroPlanificacion(@Argument ParametroPlanificacionRequest input) {
         return parametroPlanificacionService.createParametro(input);

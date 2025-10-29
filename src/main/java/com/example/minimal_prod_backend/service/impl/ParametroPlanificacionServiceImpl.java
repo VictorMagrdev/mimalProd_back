@@ -38,6 +38,13 @@ public class ParametroPlanificacionServiceImpl implements ParametroPlanificacion
     }
 
     @Override
+    public ParametroPlanificacionResponse getParametroByProductoId(Long productoId) {
+        ParametroPlanificacion parametro = parametroPlanificacionRepository.findByProductoId(productoId)
+                .orElseThrow(() -> new ResourceNotFoundException("ParametroPlanificacion not found for producto id: " + productoId));
+        return parametroPlanificacionMapper.toResponse(parametro);
+    }
+
+    @Override
     public ParametroPlanificacionResponse createParametro(ParametroPlanificacionRequest request) {
         Producto producto = productoRepository.findById(request.productoId())
                 .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + request.productoId()));

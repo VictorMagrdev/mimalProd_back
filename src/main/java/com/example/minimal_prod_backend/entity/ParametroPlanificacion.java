@@ -36,7 +36,8 @@ public class ParametroPlanificacion {
     private BigDecimal loteEconomico = BigDecimal.ZERO;
 
     @Column(name = "politica_inventario", length = 50)
-    private String politicaInventario;
+    @Builder.Default
+    private String politicaInventario = "MRP";
 
     @Column(name = "actualizado_en")
     @Builder.Default

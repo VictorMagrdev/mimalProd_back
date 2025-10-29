@@ -17,7 +17,7 @@ public class ParametroPlanificacionController {
     private final ParametroPlanificacionService parametroPlanificacionService;
 
     @QueryMapping
-    public List<ParametroPlanificacionResponse> estructurasProductos() {
+    public List<ParametroPlanificacionResponse> parametrosClasificacion() {
         return parametroPlanificacionService.getAllParametros();
     }
 

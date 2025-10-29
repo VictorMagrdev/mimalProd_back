@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface IncidenciaArchivoService {
     IncidenciaArchivoResponse create(IncidenciaArchivoRequest request);
+
     List<IncidenciaArchivoResponse> findByIncidencia(Long incidenciaId);
+
     void delete(Long id);
 
     List<IncidenciaArchivoResponse> findAll();

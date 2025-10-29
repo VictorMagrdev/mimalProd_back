@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface FuncionTareaService {
     List<FuncionTareaResponse> findAll();
+
     FuncionTareaResponse findById(Long id);
+
     FuncionTareaResponse save(FuncionTareaRequest funcionTareaRequest);
+
     void deleteById(Long id);
 }

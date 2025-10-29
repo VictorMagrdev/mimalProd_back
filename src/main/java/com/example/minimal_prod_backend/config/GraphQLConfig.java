@@ -85,6 +85,7 @@ public class GraphQLConfig {
                 })
                 .build();
     }
+
     @Bean
     public GraphQLScalarType dateScalar() {
         return GraphQLScalarType.newScalar()
@@ -122,6 +123,7 @@ public class GraphQLConfig {
                 })
                 .build();
     }
+
     @Bean
     public GraphQLScalarType numericScalar() {
         return GraphQLScalarType.newScalar()

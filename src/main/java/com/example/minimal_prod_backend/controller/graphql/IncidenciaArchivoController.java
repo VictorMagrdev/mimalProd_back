@@ -4,8 +4,11 @@ import com.example.minimal_prod_backend.dto.IncidenciaArchivoRequest;
 import com.example.minimal_prod_backend.dto.IncidenciaArchivoResponse;
 import com.example.minimal_prod_backend.service.IncidenciaArchivoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.graphql.data.method.annotation.*;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+
 import java.util.List;
 
 @Controller

@@ -15,4 +15,5 @@ public record DepreciacionResponse(
         BigDecimal depreciacionAcumulada,
         BigDecimal valorNeto,
         OffsetDateTime calculadoEn
-) {}
+) {
+}

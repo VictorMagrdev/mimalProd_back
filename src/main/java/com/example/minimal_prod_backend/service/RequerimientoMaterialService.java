@@ -8,8 +8,12 @@ import java.util.List;
 
 public interface RequerimientoMaterialService {
     List<RequerimientoMaterialResponse> getAllRequerimientos();
+
     RequerimientoMaterialResponse getRequerimientoById(Long id);
+
     RequerimientoMaterialResponse createRequerimiento(RequerimientoMaterialRequest request);
+
     RequerimientoMaterialResponse updateRequerimiento(Long id, RequerimientoMaterialRequest request);
+
     void deleteRequerimiento(Long id);
 }

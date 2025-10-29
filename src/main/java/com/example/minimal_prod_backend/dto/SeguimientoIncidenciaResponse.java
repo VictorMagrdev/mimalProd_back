@@ -9,4 +9,5 @@ public record SeguimientoIncidenciaResponse(
         String estadoNuevo,
         String comentario,
         OffsetDateTime realizadoEn
-) {}
+) {
+}

@@ -15,4 +15,5 @@ public record IncidenciaConArchivosRequest(
         OffsetDateTime fechaCierre,
         Duration tiempoParada,
         List<MultipartFile> archivos
-) {}
+) {
+}

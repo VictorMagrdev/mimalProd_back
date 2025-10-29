@@ -17,4 +17,5 @@ public record EstructuraProductoResponse(
         String version,
         Boolean activo,
         LocalDateTime creadoEn
-) {}
+) {
+}

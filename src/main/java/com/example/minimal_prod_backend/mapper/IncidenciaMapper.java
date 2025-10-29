@@ -1,8 +1,10 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.*;
+import com.example.minimal_prod_backend.dto.IncidenciaRequest;
+import com.example.minimal_prod_backend.dto.IncidenciaResponse;
 import com.example.minimal_prod_backend.entity.Incidencia;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface IncidenciaMapper {

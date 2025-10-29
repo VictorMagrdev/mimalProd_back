@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface TipoActividadService {
     List<TipoActividadResponse> findAll();
+
     TipoActividadResponse findById(Long id);
+
     TipoActividadResponse save(TipoActividadRequest tipoActividadRequest);
+
     void deleteById(Long id);
 }

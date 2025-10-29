@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface EstadoIncidenciaService {
     EstadoIncidenciaResponse create(EstadoIncidenciaRequest request);
+
     List<EstadoIncidenciaResponse> findAll();
+
     EstadoIncidenciaResponse findById(Long id);
+
     void delete(Long id);
 }

@@ -49,7 +49,7 @@ public class MovimientoInventarioDetalle {
     @Builder.Default
     private BigDecimal costoUnitario = BigDecimal.ZERO;
 
-    @Column(name = "costo_total", precision = 18,insertable = false, updatable = false)
+    @Column(name = "costo_total", precision = 18, insertable = false, updatable = false)
     private BigDecimal costoTotal;
 
     @Override

@@ -7,4 +7,5 @@ public record IncidenciaArchivoRequest(
         TipoArchivo tipo,
         String nombreOriginal,
         String url
-) {}
+) {
+}

@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface SeguimientoIncidenciaService {
     SeguimientoIncidenciaResponse create(SeguimientoIncidenciaRequest request);
+
     List<SeguimientoIncidenciaResponse> findByIncidencia(Long incidenciaId);
+
     void delete(Long id);
 }

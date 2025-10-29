@@ -17,4 +17,5 @@ public record MaquinaResponse(
         Long centroCostoId,
         Boolean activa,
         OffsetDateTime creadoEn
-) {}
+) {
+}

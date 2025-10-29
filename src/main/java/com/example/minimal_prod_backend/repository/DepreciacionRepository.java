@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface DepreciacionRepository extends JpaRepository<Depreciacion,Long> {
+public interface DepreciacionRepository extends JpaRepository<Depreciacion, Long> {
     boolean existsByTipoPeriodoAndPeriodo(TipoPeriodo tipoPeriodo, LocalDate periodo);
 
     Optional<Depreciacion> findTopByMaquinaIdOrderByPeriodoDesc(Long maquinaId);

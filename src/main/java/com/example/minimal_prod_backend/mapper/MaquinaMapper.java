@@ -8,14 +8,24 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface MaquinaMapper {
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "centroCosto.id", source = "centroCostoId")
+    @Mappings({
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "centroCosto.id", source = "centroCostoId"),
+            @Mapping(target = "creadoEn", ignore = true)
+    })
     Maquina toEntity(MaquinaRequest request);
 
-    @Mapping(target = "centroCostoId", source = "centroCosto.id")
+    @Mappings({
+            @Mapping(target = "centroCostoId", source = "centroCosto.id")
+    })
     MaquinaResponse toResponse(Maquina entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "centroCosto.id", source = "centroCostoId", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mappings({
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "creadoEn", ignore = true),
+            @Mapping(target = "centroCosto.id", source = "centroCostoId",
+                    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    })
     void updateEntityFromRequest(MaquinaRequest request, @MappingTarget Maquina entity);
 }

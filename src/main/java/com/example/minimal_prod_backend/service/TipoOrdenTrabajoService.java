@@ -1,6 +1,5 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.OrdenTrabajoRequest;
 import com.example.minimal_prod_backend.dto.TipoOrdenTrabajoRequest;
 import com.example.minimal_prod_backend.dto.TipoOrdenTrabajoResponse;
 

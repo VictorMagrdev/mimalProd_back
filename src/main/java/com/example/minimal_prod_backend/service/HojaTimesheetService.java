@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface HojaTimesheetService {
     List<HojaTimesheetResponse> findAll();
+
     HojaTimesheetResponse findById(Long id);
+
     HojaTimesheetResponse save(HojaTimesheetRequest hojaTimesheetRequest);
+
     void deleteById(Long id);
 }

@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface ParametroPlanificacionService {
     List<ParametroPlanificacionResponse> getAllParametros();
+
     ParametroPlanificacionResponse getParametroById(Long id);
+
     ParametroPlanificacionResponse createParametro(ParametroPlanificacionRequest request);
+
     ParametroPlanificacionResponse updateParametro(Long id, ParametroPlanificacionRequest request);
+
     void deleteParametro(Long id);
 }

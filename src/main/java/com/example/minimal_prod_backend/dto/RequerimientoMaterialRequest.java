@@ -19,4 +19,5 @@ public record RequerimientoMaterialRequest(
         BigDecimal cantidadDisponible,
 
         LocalDate fechaNecesidad
-) {}
+) {
+}

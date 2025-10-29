@@ -12,4 +12,5 @@ public record DepreciacionRequest(
         BigDecimal depreciacionPeriodo,
         BigDecimal depreciacionAcumulada,
         BigDecimal valorNeto
-) {}
+) {
+}

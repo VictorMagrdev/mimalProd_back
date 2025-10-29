@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface OperacionOrdenService {
     List<OperacionOrdenResponse> findAll();
+
     OperacionOrdenResponse findById(Long id);
+
     OperacionOrdenResponse save(OperacionOrdenRequest operacionOrdenRequest);
+
     void deleteById(Long id);
 }

@@ -5,4 +5,5 @@ public record EstadoIncidenciaRequest(
         String descripcion,
         Integer orden,
         Boolean estadoFinal
-) {}
+) {
+}

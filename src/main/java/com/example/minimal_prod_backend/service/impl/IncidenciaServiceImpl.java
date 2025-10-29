@@ -9,6 +9,7 @@ import com.example.minimal_prod_backend.service.IncidenciaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service

@@ -14,4 +14,5 @@ public record MaquinaRequest(
         Integer vidaUtilAnios,
         Long centroCostoId,
         Boolean activa
-) {}
+) {
+}

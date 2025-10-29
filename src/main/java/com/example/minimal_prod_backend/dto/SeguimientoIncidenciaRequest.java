@@ -6,4 +6,5 @@ public record SeguimientoIncidenciaRequest(
         Long estadoAnteriorId,
         Long estadoNuevoId,
         String comentario
-) {}
+) {
+}

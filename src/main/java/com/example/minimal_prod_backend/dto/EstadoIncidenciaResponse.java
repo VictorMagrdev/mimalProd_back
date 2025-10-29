@@ -6,4 +6,5 @@ public record EstadoIncidenciaResponse(
         String descripcion,
         Integer orden,
         Boolean estadoFinal
-) {}
+) {
+}

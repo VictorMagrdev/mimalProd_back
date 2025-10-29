@@ -15,4 +15,5 @@ public record ParametroPlanificacionRequest(
         BigDecimal loteEconomico,
 
         String politicaInventario
-) {}
+) {
+}

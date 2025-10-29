@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface RutaProduccionService {
     List<RutaProduccionResponse> findAll();
+
     RutaProduccionResponse findById(Long id);
+
     RutaProduccionResponse save(RutaProduccionRequest rutaProduccionRequest);
+
     void deleteById(Long id);
 }

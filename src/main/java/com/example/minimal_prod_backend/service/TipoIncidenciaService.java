@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface TipoIncidenciaService {
     TipoIncidenciaResponse create(TipoIncidenciaRequest request);
+
     List<TipoIncidenciaResponse> findAll();
+
     TipoIncidenciaResponse findById(Long id);
+
     void delete(Long id);
 }

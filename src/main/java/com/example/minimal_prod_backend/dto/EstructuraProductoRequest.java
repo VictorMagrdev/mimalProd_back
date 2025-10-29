@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+
 import java.math.BigDecimal;
 
 public record EstructuraProductoRequest(
@@ -21,4 +22,5 @@ public record EstructuraProductoRequest(
         String version,
 
         Boolean activo
-) {}
+) {
+}

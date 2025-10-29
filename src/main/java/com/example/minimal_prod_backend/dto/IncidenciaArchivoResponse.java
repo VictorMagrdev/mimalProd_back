@@ -11,4 +11,5 @@ public record IncidenciaArchivoResponse(
         String nombreOriginal,
         String url,
         OffsetDateTime subidoEn
-) {}
+) {
+}

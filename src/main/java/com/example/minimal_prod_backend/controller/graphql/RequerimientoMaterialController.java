@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class RequerimientoMaterialController {
-     private final RequerimientoMaterialService requerimientoMaterialService;
+    private final RequerimientoMaterialService requerimientoMaterialService;
 
     @QueryMapping
     public List<RequerimientoMaterialResponse> requerimientosMateriales() {

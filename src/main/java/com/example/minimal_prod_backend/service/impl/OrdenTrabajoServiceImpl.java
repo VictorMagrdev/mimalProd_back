@@ -1,6 +1,5 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.controller.graphql.OrdenTrabajoController;
 import com.example.minimal_prod_backend.dto.OrdenTrabajoRequest;
 import com.example.minimal_prod_backend.dto.OrdenTrabajoResponse;
 import com.example.minimal_prod_backend.entity.OrdenTrabajo;

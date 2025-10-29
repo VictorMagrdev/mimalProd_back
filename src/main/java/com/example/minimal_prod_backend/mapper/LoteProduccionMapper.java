@@ -11,7 +11,8 @@ public interface LoteProduccionMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "producto", ignore = true),
-            @Mapping(source = "numeroLote", target = "numeroLote")
+            @Mapping(source = "numeroLote", target = "numeroLote"),
+            @Mapping(target = "creadoEn", ignore = true)
     })
     LoteProduccion toEntity(LoteProduccionRequest input);
 

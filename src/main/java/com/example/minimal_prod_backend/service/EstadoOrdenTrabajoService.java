@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface EstadoOrdenTrabajoService {
     List<EstadoOrdenTrabajoResponse> findAll();
+
     EstadoOrdenTrabajoResponse findById(Long id);
+
     EstadoOrdenTrabajoResponse save(EstadoOrdenTrabajoRequest estadoOrdenTrabajoRequest);
+
     void deleteById(Long id);
 }

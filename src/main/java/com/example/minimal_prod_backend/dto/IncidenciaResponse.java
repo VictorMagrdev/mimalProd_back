@@ -13,4 +13,5 @@ public record IncidenciaResponse(
         OffsetDateTime fechaCierre,
         Duration tiempoParada,
         OffsetDateTime creadoEn
-) {}
+) {
+}

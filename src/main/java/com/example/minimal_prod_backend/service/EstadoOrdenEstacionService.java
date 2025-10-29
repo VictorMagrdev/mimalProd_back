@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface EstadoOrdenEstacionService {
     List<EstadoOrdenEstacionResponse> findAll();
+
     EstadoOrdenEstacionResponse findById(Long id);
+
     EstadoOrdenEstacionResponse save(EstadoOrdenEstacionRequest estadoOrdenEstacionRequest);
+
     void deleteById(Long id);
 }

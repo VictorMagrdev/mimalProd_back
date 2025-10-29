@@ -11,4 +11,5 @@ public record IncidenciaRequest(
         Long estadoId,
         OffsetDateTime fechaCierre,
         Duration tiempoParada
-) {}
+) {
+}

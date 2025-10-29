@@ -12,6 +12,7 @@ public class GraphQLSecurityConfig {
 
     @Bean
     public Executor graphqlExecutor() {
+
         return new DelegatingSecurityContextExecutor(Executors.newCachedThreadPool());
     }
 }

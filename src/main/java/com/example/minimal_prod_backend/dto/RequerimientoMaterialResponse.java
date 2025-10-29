@@ -16,4 +16,5 @@ public record RequerimientoMaterialResponse(
         BigDecimal cantidadAPedir,
         LocalDate fechaNecesidad,
         LocalDateTime creadoEn
-) {}
+) {
+}

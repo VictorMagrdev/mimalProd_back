@@ -44,6 +44,7 @@ public class Depreciacion {
     private BigDecimal valorNeto;
 
     @Column(name = "calculado_en", columnDefinition = "TIMESTAMPTZ DEFAULT now()")
+    @Builder.Default
     private OffsetDateTime calculadoEn = OffsetDateTime.now();
 }
 

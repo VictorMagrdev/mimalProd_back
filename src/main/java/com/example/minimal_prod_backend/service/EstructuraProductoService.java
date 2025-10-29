@@ -8,8 +8,12 @@ import java.util.List;
 
 public interface EstructuraProductoService {
     List<EstructuraProductoResponse> getAllEstructuras();
+
     EstructuraProductoResponse getEstructuraById(Long id);
+
     EstructuraProductoResponse createEstructura(EstructuraProductoRequest request);
+
     EstructuraProductoResponse updateEstructura(Long id, EstructuraProductoRequest request);
+
     void deleteEstructura(Long id);
 }

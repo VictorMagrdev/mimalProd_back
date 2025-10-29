@@ -2,6 +2,7 @@ package com.example.minimal_prod_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -37,6 +38,7 @@ public class Maquina {
     @Column(name = "costo_compra", nullable = false, precision = 18, scale = 2)
     private BigDecimal costoCompra;
 
+    @Builder.Default
     @Column(name = "valor_rescate", precision = 18, scale = 2)
     private BigDecimal valorRescate = BigDecimal.ZERO;
 
@@ -48,8 +50,10 @@ public class Maquina {
     private CentroCosto centroCosto;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean activa = true;
 
+    @Builder.Default
     @Column(name = "creado_en", columnDefinition = "TIMESTAMPTZ DEFAULT now()")
     private OffsetDateTime creadoEn = OffsetDateTime.now();
 }

@@ -4,6 +4,7 @@ import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenRequest;
 import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenResponse;
 import com.example.minimal_prod_backend.entity.ReservaMaterialOrden;
 import org.mapstruct.*;
+
 import java.util.List;
 
 @Mapper(componentModel = "spring")

@@ -13,4 +13,5 @@ public record ParametroPlanificacionResponse(
         BigDecimal loteEconomico,
         String politicaInventario,
         LocalDateTime actualizadoEn
-) {}
+) {
+}

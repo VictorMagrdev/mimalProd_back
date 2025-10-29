@@ -4,7 +4,9 @@ import com.example.minimal_prod_backend.dto.TipoIncidenciaRequest;
 import com.example.minimal_prod_backend.dto.TipoIncidenciaResponse;
 import com.example.minimal_prod_backend.service.TipoIncidenciaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.graphql.data.method.annotation.*;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;

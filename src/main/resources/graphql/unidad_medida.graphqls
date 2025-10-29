@@ -1,0 +1,30 @@
+type UnidadMedida {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    abreviatura: String
+    unidadMedidaTipoId: ID
+    activa: Boolean
+    base: Boolean
+    creadoEn: DateTime
+    tipo: UnidadMedidaTipo
+}
+
+input UnidadMedidaRequest {
+    codigo: String!
+    nombre: String!
+    abreviatura: String
+    unidadMedidaTipoId: ID
+    activa: Boolean
+    base: Boolean
+}
+
+extend type Query {
+    unidadesMedida: [UnidadMedida]
+}
+
+extend type Mutation {
+    createUnidadMedida(input: UnidadMedidaRequest!): UnidadMedida
+    updateUnidadMedida(id: ID!, input: UnidadMedidaRequest!): UnidadMedida
+    deleteUnidadMedida(id: ID!): Boolean
+}

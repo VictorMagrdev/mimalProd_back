@@ -1,0 +1,21 @@
+type EstadoAprobacion {
+    id: ID!
+    nombre: String!
+    descripcion: String
+}
+
+input EstadoAprobacionRequest {
+    nombre: String!
+    descripcion: String
+}
+
+extend type Query {
+    estadosAprobacion: [EstadoAprobacion]
+    estadoAprobacion(id: ID!): EstadoAprobacion
+}
+
+extend type Mutation {
+    createEstadoAprobacion(input: EstadoAprobacionRequest!): EstadoAprobacion
+    updateEstadoAprobacion(id: ID!, input: EstadoAprobacionRequest!): EstadoAprobacion
+    deleteEstadoAprobacion(id: ID!): Boolean
+}

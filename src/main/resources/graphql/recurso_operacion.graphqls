@@ -1,0 +1,32 @@
+type RecursoOperacion {
+    id: ID!
+    operacionOrdenId: ID!
+    usuarioId: ID!
+    funcionTareaId: ID!
+    horasPlanificadas: String
+    horasReales: String
+    asignadoPor: ID!
+    creadoEn: DateTime!
+    funcionTarea: FuncionTarea
+}
+
+input RecursoOperacionRequest {
+    operacionOrdenId: ID!
+    usuarioId: ID!
+    funcionTareaId: ID!
+    horasPlanificadas: String
+    horasReales: String
+    asignadoPor: ID!
+}
+
+extend type Query {
+    recursoOperacion(id: ID!): RecursoOperacion
+    recursosOperacion: [RecursoOperacion!]!
+    recursosPorUsuario(usuarioId: ID!): [RecursoOperacion!]!
+}
+
+extend type Mutation {
+    createRecursoOperacion(input: RecursoOperacionRequest!): RecursoOperacion!
+    updateRecursoOperacion(id: ID!, input: RecursoOperacionRequest!): RecursoOperacion!
+    deleteRecursoOperacion(id: ID!): Boolean!
+}

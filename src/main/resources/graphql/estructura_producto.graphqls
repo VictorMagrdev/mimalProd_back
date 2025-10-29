@@ -1,0 +1,36 @@
+type EstructuraProducto {
+    id: ID!
+    productoPadreId: ID!
+    productoPadreCodigo: String!
+    productoPadreNombre: String!
+    productoHijoId: ID!
+    productoHijoCodigo: String!
+    productoHijoNombre: String!
+    cantidad: Float!
+    unidadId: ID
+    unidadNombre: String
+    version: String
+    activo: Boolean!
+    creadoEn: String!
+}
+
+input EstructuraProductoInput {
+    productoPadreId: ID!
+    productoHijoId: ID!
+    cantidad: Float!
+    unidadId: ID
+    version: String
+    activo: Boolean
+}
+
+extend type Query {
+    estructurasProductos: [EstructuraProducto!]!
+    estructuraProducto(id: ID!): EstructuraProducto
+    estructurasByProductoPadreId(productoPadreId: ID!): [EstructuraProducto!]!
+}
+
+extend type Mutation {
+    createEstructura(input: EstructuraProductoInput!): EstructuraProducto!
+    updateEstructura(id: ID!, input: EstructuraProductoInput!): EstructuraProducto!
+    deleteEstructura(id: ID!): Boolean!
+}

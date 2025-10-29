@@ -1,0 +1,47 @@
+type OrdenProduccion {
+    id: ID!
+    numeroOrden: String!
+    cantidad: Numeric
+    unidadId: ID
+    estadoId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    cantidadDesperdicio: Numeric
+    cantidadProducida: Numeric
+    creadoPor: ID
+    observaciones: String
+    creadoEn: DateTime
+    actualizadoEn: DateTime
+    unidad: UnidadMedida
+    estado: EstadoOrden
+    lineas: [LineaOrden]
+    costos: [CostoOrden]
+}
+
+
+input OrdenProduccionRequest {
+    numeroOrden: String!
+    cantidad: Numeric
+    unidadId: ID
+    estadoId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    cantidadDesperdicio: Numeric
+    cantidadProducida: Numeric
+    creadoPor: ID
+    observaciones: String
+}
+
+extend type Query {
+    ordenesProduccion: [OrdenProduccion]
+}
+
+extend type Mutation {
+    createOrdenProduccion(input: OrdenProduccionRequest!): OrdenProduccion
+    updateOrdenProduccion(id: ID!, input: OrdenProduccionRequest!): OrdenProduccion
+    deleteOrdenProduccion(id: ID!): Boolean
+}

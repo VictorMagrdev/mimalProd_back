@@ -1,0 +1,34 @@
+type OrdenEstacion {
+    id: ID!
+    ordenId: ID
+    estacionId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    estadoOrdenEstacionId: ID
+    observaciones: String
+    estacion: EstacionProduccion
+    estado: EstadoOrdenEstacion
+}
+
+input OrdenEstacionRequest {
+    ordenId: ID
+    estacionId: ID
+    inicioPlanificado: DateTime
+    finPlanificado: DateTime
+    inicioReal: DateTime
+    finReal: DateTime
+    estadoOrdenEstacionId: ID
+    observaciones: String
+}
+
+extend type Query {
+    ordenesEstacion: [OrdenEstacion]
+}
+
+extend type Mutation {
+    createOrdenEstacion(input: OrdenEstacionRequest!): OrdenEstacion
+    updateOrdenEstacion(id: ID!, input: OrdenEstacionRequest!): OrdenEstacion
+    deleteOrdenEstacion(id: ID!): Boolean
+}

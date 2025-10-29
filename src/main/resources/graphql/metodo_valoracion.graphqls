@@ -1,0 +1,23 @@
+type MetodoValoracion {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    productos: [Producto]
+}
+
+input MetodoValoracionRequest {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+}
+
+extend type Query {
+    metodosValoracion: [MetodoValoracion]
+}
+
+extend type Mutation {
+    createMetodoValoracion(input: MetodoValoracionRequest!): MetodoValoracion
+    updateMetodoValoracion(id: ID!, input: MetodoValoracionRequest!): MetodoValoracion
+    deleteMetodoValoracion(id: ID!): Boolean
+}

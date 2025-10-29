@@ -1,0 +1,26 @@
+type LoteProduccion {
+    id: ID!
+    numeroLote: String!
+    productoId: ID
+    fabricadoEn: DateTime
+    venceEn: DateTime
+    creadoEn: DateTime
+    producto: Producto
+}
+
+input LoteProduccionRequest {
+    numeroLote: String!
+    productoId: ID
+    fabricadoEn: DateTime
+    venceEn: DateTime
+}
+
+extend type Query {
+    lotesProduccion: [LoteProduccion]
+}
+
+extend type Mutation {
+    createLoteProduccion(input: LoteProduccionRequest!): LoteProduccion
+    updateLoteProduccion(id: ID!, input: LoteProduccionRequest!): LoteProduccion
+    deleteLoteProduccion(id: ID!): Boolean
+}

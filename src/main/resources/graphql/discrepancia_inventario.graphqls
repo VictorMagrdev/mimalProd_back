@@ -1,0 +1,23 @@
+type DiscrepanciaInventario {
+    id: ID!
+    conteoId: ID
+    cantidadSistema: Numeric
+    resuelto: Boolean
+    conteo: ConteoCiclico
+}
+
+input DiscrepanciaInventarioRequest {
+    conteoId: ID
+    cantidadSistema: Numeric
+    resuelto: Boolean
+}
+
+extend type Query {
+    discrepanciasInventario: [DiscrepanciaInventario]
+}
+
+extend type Mutation {
+    createDiscrepanciaInventario(input: DiscrepanciaInventarioRequest!): DiscrepanciaInventario
+    updateDiscrepanciaInventario(id: ID!, input: DiscrepanciaInventarioRequest!): DiscrepanciaInventario
+    deleteDiscrepanciaInventario(id: ID!): Boolean
+}

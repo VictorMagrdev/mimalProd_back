@@ -1,0 +1,24 @@
+type PuntoReorden {
+    id: ID!
+    productoId: ID
+    stockMinimo: Numeric
+    stockSeguridad: Numeric
+    unidadId: ID
+}
+
+input PuntoReordenRequest {
+    productoId: ID
+    stockMinimo: Numeric
+    stockSeguridad: Numeric
+    unidadId: ID
+}
+
+extend type Query {
+    puntosReorden: [PuntoReorden]
+}
+
+extend type Mutation {
+    createPuntoReorden(input: PuntoReordenRequest!): PuntoReorden
+    updatePuntoReorden(id: ID!, input: PuntoReordenRequest!): PuntoReorden
+    deletePuntoReorden(id: ID!): Boolean
+}

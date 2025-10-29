@@ -1,0 +1,26 @@
+type MovimientoInventarioDetalle {
+    id: ID!
+    movimientoId: ID
+    productoId: ID
+    loteId: ID
+    cantidad: Numeric
+    unidadId: ID
+    costoUnitario: Numeric
+    costoTotal: Numeric
+}
+
+input MovimientoInventarioDetalleRequest {
+    movimientoId: ID
+    productoId: ID
+    loteId: ID
+    cantidad: Numeric
+    unidadId: ID
+    costoUnitario: Numeric
+}
+
+
+extend type Mutation {
+    createMovimientoInventarioDetalle(input: MovimientoInventarioDetalleRequest!): MovimientoInventarioDetalle
+    updateMovimientoInventarioDetalle(id: ID!, input: MovimientoInventarioDetalleRequest!): MovimientoInventarioDetalle
+    deleteMovimientoInventarioDetalle(id: ID!): Boolean
+}

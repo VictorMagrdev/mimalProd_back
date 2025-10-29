@@ -1,0 +1,26 @@
+type EstacionProduccion {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    orden: Int
+    creadoEn: DateTime
+}
+
+
+input EstacionProduccionRequest {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    orden: Int
+}
+
+extend type Query {
+    estacionesProduccion: [EstacionProduccion]
+}
+
+extend type Mutation {
+    createEstacionProduccion(input: EstacionProduccionRequest!): EstacionProduccion
+    updateEstacionProduccion(id: ID!, input: EstacionProduccionRequest!): EstacionProduccion
+    deleteEstacionProduccion(id: ID!): Boolean
+}

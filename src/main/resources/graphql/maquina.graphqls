@@ -1,0 +1,38 @@
+type Maquina {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    numeroSerie: String
+    fechaCompra: Date!
+    costoCompra: Numeric!
+    valorRescate: Numeric
+    vidaUtilAnios: Int!
+    centroCostoId: ID
+    creadoEn: DateTime
+    actualizadoEn: DateTime
+    depreciaciones: [Depreciacion]
+}
+
+input MaquinaRequest {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    numeroSerie: String
+    fechaCompra: Date!
+    costoCompra: Numeric!
+    valorRescate: Numeric
+    vidaUtilAnios: Int!
+    centroCostoId: ID
+}
+
+extend type Query {
+    maquinas: [Maquina]
+    maquina(id: ID!): Maquina
+}
+
+extend type Mutation {
+    createMaquina(input: MaquinaRequest!): Maquina
+    updateMaquina(id: ID!, input: MaquinaRequest!): Maquina
+    deleteMaquina(id: ID!): Boolean
+}

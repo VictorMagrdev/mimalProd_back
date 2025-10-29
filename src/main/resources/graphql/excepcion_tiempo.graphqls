@@ -1,0 +1,25 @@
+type ExcepcionTiempo {
+    id: ID!
+    usuarioId: ID
+    periodo: String
+    detalles: String
+    creadoEn: DateTime
+    resuelto: Boolean
+}
+
+input ExcepcionTiempoRequest {
+    usuarioId: ID!
+    periodo: String
+    detalles: String
+}
+
+extend type Query {
+    excepcionesTiempo: [ExcepcionTiempo]
+    excepcionTiempo(id: ID!): ExcepcionTiempo
+}
+
+extend type Mutation {
+    createExcepcionTiempo(input: ExcepcionTiempoRequest!): ExcepcionTiempo
+    updateExcepcionTiempo(id: ID!, input: ExcepcionTiempoRequest!): ExcepcionTiempo
+    deleteExcepcionTiempo(id: ID!): Boolean
+}

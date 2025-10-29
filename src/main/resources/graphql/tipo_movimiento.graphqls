@@ -1,0 +1,25 @@
+type TipoMovimiento {
+    id: ID!
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    afectaWip: Boolean
+    creadoEn: DateTime
+}
+
+input TipoMovimientoRequest {
+    codigo: String!
+    nombre: String!
+    descripcion: String
+    afectaWip: Boolean
+}
+
+extend type Query {
+    tiposMovimiento: [TipoMovimiento]
+}
+
+extend type Mutation {
+    createTipoMovimiento(input: TipoMovimientoRequest!): TipoMovimiento
+    updateTipoMovimiento(id: ID!, input: TipoMovimientoRequest!): TipoMovimiento
+    deleteTipoMovimiento(id: ID!): Boolean
+}

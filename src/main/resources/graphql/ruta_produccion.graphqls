@@ -1,0 +1,27 @@
+type RutaProduccion {
+    id: ID!
+    productoId: ID!
+    version: String
+    nombre: String!
+    activo: Boolean!
+    creadoEn: DateTime!
+    operaciones: [OperacionRuta!]!
+}
+
+input RutaProduccionRequest {
+    productoId: ID!
+    version: String
+    nombre: String!
+    activo: Boolean
+}
+
+extend type Query {
+    rutasProduccion: [RutaProduccion!]!
+    rutaProduccion(id: ID!): RutaProduccion
+    rutasPorProducto(productoId: ID!): [RutaProduccion!]!
+}
+
+extend type Mutation {
+    createRutaProduccion(input: RutaProduccionRequest!): RutaProduccion!
+    updateRutaProduccion(id: ID!, input: RutaProduccionRequest!): RutaProduccion!
+}

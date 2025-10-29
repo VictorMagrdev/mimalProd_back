@@ -1,0 +1,35 @@
+type MovimientoInventario {
+    id: ID!
+    fecha: DateTime
+    bodegaOrigenId: ID
+    bodegaDestinoId: ID
+    tipoMovimientoId: ID
+    referencia: String
+    observaciones: String
+    creadoPor: ID
+    creadoEn: DateTime
+    tipoMovimiento: TipoMovimiento
+    bodegaOrigen: Bodega
+    bodegaDestino: Bodega
+    detalles: [MovimientoInventarioDetalle]
+}
+
+input MovimientoInventarioRequest {
+    fecha: DateTime
+    bodegaOrigenId: ID
+    bodegaDestinoId: ID
+    tipoMovimientoId: ID
+    referencia: String
+    observaciones: String
+    creadoPor: ID
+}
+
+extend type Query {
+    movimientosInventario: [MovimientoInventario]
+}
+
+extend type Mutation {
+    createMovimientoInventario(input: MovimientoInventarioRequest!): MovimientoInventario
+    updateMovimientoInventario(id: ID!, input: MovimientoInventarioRequest!): MovimientoInventario
+    deleteMovimientoInventario(id: ID!): Boolean
+}

@@ -30,7 +30,7 @@ extend type Query {
 }
 
 extend type Mutation {
-    createEstructura(input: EstructuraProductoInput!): EstructuraProducto!
-    updateEstructura(id: ID!, input: EstructuraProductoInput!): EstructuraProducto!
-    deleteEstructura(id: ID!): Boolean!
+    createEstructuraProducto(input: EstructuraProductoInput!): EstructuraProducto!
+    updateEstructuraProducto(id: ID!, input: EstructuraProductoInput!): EstructuraProducto!
+    deleteEstructuraProducto(id: ID!): Boolean!
 }

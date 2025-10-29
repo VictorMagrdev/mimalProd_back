@@ -25,6 +25,10 @@ public class EstructuraProductoController {
     public EstructuraProductoResponse estructuraProducto(@Argument Long id) {
         return estructuraProductoService.getEstructuraById(id);
     }
+    @QueryMapping
+    public List<EstructuraProductoResponse> estructurasByProductoPadreId(@Argument Long productoPadreId) {
+        return estructuraProductoService.getEstructurasByProductoPadreId(productoPadreId);
+    }
 
     @MutationMapping
     public EstructuraProductoResponse createEstructuraProducto(@Argument EstructuraProductoRequest input) {

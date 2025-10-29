@@ -16,4 +16,6 @@ public interface EstructuraProductoService {
     EstructuraProductoResponse updateEstructura(Long id, EstructuraProductoRequest request);
 
     void deleteEstructura(Long id);
+
+    List<EstructuraProductoResponse> getEstructurasByProductoPadreId(Long productoPadreId);
 }

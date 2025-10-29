@@ -40,6 +40,13 @@ public class EstructuraProductoServiceImpl implements EstructuraProductoService 
         return estructuraProductoMapper.toResponse(estructura);
     }
 
+    @Override
+    public List<EstructuraProductoResponse> getEstructurasByProductoPadreId(Long productoPadreId) {
+        return estructuraProductoRepository.findByProductoPadreId(productoPadreId)
+                .stream()
+                .map(estructuraProductoMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public EstructuraProductoResponse createEstructura(EstructuraProductoRequest request) {

@@ -4,7 +4,7 @@ type RequerimientoMaterial {
     productoCodigo: String!
     productoNombre: String!
     ordenProduccionId: ID
-    ordenProduccionCodigo: String
+    ordenProduccionNumero: String
     cantidadRequerida: Float!
     cantidadDisponible: Float!
     cantidadAPedir: Float!
@@ -20,15 +20,15 @@ input RequerimientoMaterialInput {
     fechaNecesidad: String
 }
 extend type Query {
-    getAllRequerimientos: [RequerimientoMaterial!]!
-    getRequerimientoById(id: ID!): RequerimientoMaterial
-    getRequerimientosByProductoId(productoId: ID!): [RequerimientoMaterial!]!
-    getRequerimientosByOrdenProduccionId(ordenProduccionId: ID!): [RequerimientoMaterial!]!
+    requerimientosMateriales: [RequerimientoMaterial!]!
+    requerimientoMaterial(id: ID!): RequerimientoMaterial
+    requerimientosByProductoId(productoId: ID!): [RequerimientoMaterial!]!
+    requerimientosByOrdenProduccionId(ordenProduccionId: ID!): [RequerimientoMaterial!]!
 }
 
 
 extend type Mutation {
-    createRequerimiento(input: RequerimientoMaterialInput!): RequerimientoMaterial!
+    createRequerimientoMaterial(input: RequerimientoMaterialInput!): RequerimientoMaterial!
     updateRequerimiento(id: ID!, input: RequerimientoMaterialInput!): RequerimientoMaterial!
     deleteRequerimiento(id: ID!): Boolean!
 

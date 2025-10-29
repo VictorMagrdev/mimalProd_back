@@ -15,5 +15,9 @@ public interface RequerimientoMaterialService {
 
     RequerimientoMaterialResponse updateRequerimiento(Long id, RequerimientoMaterialRequest request);
 
+    List<RequerimientoMaterialResponse> getRequerimientosByProductoId(Long productoId);
+
+    List<RequerimientoMaterialResponse> getRequerimientosByOrdenProduccionId(Long ordenProduccionId);
+
     void deleteRequerimiento(Long id);
 }

@@ -12,9 +12,11 @@ import com.example.minimal_prod_backend.repository.OrdenProduccionRepository;
 import com.example.minimal_prod_backend.repository.ProductoRepository;
 import com.example.minimal_prod_backend.repository.RequerimientoMaterialRepository;
 import com.example.minimal_prod_backend.service.RequerimientoMaterialService;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,7 @@ public class RequerimientoMaterialServiceImpl implements RequerimientoMaterialSe
     private final ProductoRepository productoRepository;
     private final OrdenProduccionRepository ordenProduccionRepository;
     private final RequerimientoMaterialMapper requerimientoMaterialMapper;
+    private final EntityManager entityManager;
 
     @Override
     public List<RequerimientoMaterialResponse> getAllRequerimientos() {
@@ -41,6 +44,8 @@ public class RequerimientoMaterialServiceImpl implements RequerimientoMaterialSe
         return requerimientoMaterialMapper.toResponse(requerimiento);
     }
 
+
+
     @Override
     public RequerimientoMaterialResponse createRequerimiento(RequerimientoMaterialRequest request) {
         Producto producto = productoRepository.findById(request.productoId())
@@ -54,7 +59,18 @@ public class RequerimientoMaterialServiceImpl implements RequerimientoMaterialSe
         requerimiento.setProducto(producto);
         requerimiento.setOrdenProduccion(ordenProduccion);
 
-        return requerimientoMaterialMapper.toResponse(requerimientoMaterialRepository.save(requerimiento));
+        RequerimientoMaterial saved = requerimientoMaterialRepository.save(requerimiento);
+
+        requerimientoMaterialRepository.flush();
+
+        entityManager.detach(saved);
+
+        BigDecimal cantidadAPedir = requerimientoMaterialRepository.getCantidadAPedirCalculada(saved.getId());
+        saved.setCantidadAPedir(cantidadAPedir);
+
+        System.out.println("Cantidad a pedir calculada por PostgreSQL: " + cantidadAPedir);
+
+        return requerimientoMaterialMapper.toResponse(saved);
     }
 
     @Override
@@ -73,7 +89,32 @@ public class RequerimientoMaterialServiceImpl implements RequerimientoMaterialSe
         existingRequerimiento.setProducto(producto);
         existingRequerimiento.setOrdenProduccion(ordenProduccion);
 
-        return requerimientoMaterialMapper.toResponse(requerimientoMaterialRepository.save(existingRequerimiento));
+        RequerimientoMaterial saved = requerimientoMaterialRepository.save(existingRequerimiento);
+
+        requerimientoMaterialRepository.flush();
+
+        entityManager.detach(saved);
+
+        BigDecimal cantidadAPedir = requerimientoMaterialRepository.getCantidadAPedirCalculada(saved.getId());
+        saved.setCantidadAPedir(cantidadAPedir);
+
+        return requerimientoMaterialMapper.toResponse(saved);
+    }
+
+    @Override
+    public List<RequerimientoMaterialResponse> getRequerimientosByProductoId(Long productoId) {
+        return requerimientoMaterialRepository.findByProductoId(productoId)
+                .stream()
+                .map(requerimientoMaterialMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RequerimientoMaterialResponse> getRequerimientosByOrdenProduccionId(Long ordenProduccionId) {
+        return requerimientoMaterialRepository.findByOrdenProduccionId(ordenProduccionId)
+                .stream()
+                .map(requerimientoMaterialMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override

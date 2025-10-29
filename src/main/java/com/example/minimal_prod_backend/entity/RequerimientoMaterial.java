@@ -35,7 +35,8 @@ public class RequerimientoMaterial {
     @Builder.Default
     private BigDecimal cantidadDisponible = BigDecimal.ZERO;
 
-    @Column(name = "cantidad_a_pedir", precision = 18, scale = 2)
+    @Column(name = "cantidad_a_pedir", precision = 18, scale = 2,
+            insertable = false, updatable = false)
     private BigDecimal cantidadAPedir;
 
     @Column(name = "fecha_necesidad")

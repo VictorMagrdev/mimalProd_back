@@ -62,11 +62,7 @@ public class DepreciacionServiceImpl implements DepreciacionService {
         Depreciacion depreciacion = depreciacionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Depreciación no encontrada con ID: " + id));
 
-        depreciacion.setTipoPeriodo(request.tipoPeriodo());
-        depreciacion.setPeriodo(request.periodo());
-        depreciacion.setDepreciacionPeriodo(request.depreciacionPeriodo());
-        depreciacion.setDepreciacionAcumulada(request.depreciacionAcumulada());
-        depreciacion.setValorNeto(request.valorNeto());
+        depreciacionMapper.updateEntityFromInput(request, depreciacion);
 
         if (request.maquinaId() != null) {
             Maquina maquina = maquinaRepository.findById(request.maquinaId())

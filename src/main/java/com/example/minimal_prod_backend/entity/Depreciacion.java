@@ -27,7 +27,6 @@ public class Depreciacion {
     private Maquina maquina;
 
     @Enumerated(EnumType.STRING)
-    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "tipo_periodo", nullable = false, length = 20)
     private TipoPeriodo tipoPeriodo;
 

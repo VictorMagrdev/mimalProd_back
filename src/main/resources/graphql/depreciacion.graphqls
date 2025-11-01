@@ -1,7 +1,13 @@
+# Definir el enum
+enum TipoPeriodo {
+    MENSUAL
+    ANUAL
+}
+
 type Depreciacion {
     id: ID!
     maquinaId: ID!
-    tipoPeriodo: String!
+    tipoPeriodo: TipoPeriodo!
     periodo: Date!
     depreciacionPeriodo: Numeric!
     depreciacionAcumulada: Numeric!
@@ -12,7 +18,7 @@ type Depreciacion {
 
 input DepreciacionRequest {
     maquinaId: ID!
-    tipoPeriodo: String!
+    tipoPeriodo: TipoPeriodo!S
     periodo: Date!
     depreciacionPeriodo: Numeric!
     depreciacionAcumulada: Numeric!

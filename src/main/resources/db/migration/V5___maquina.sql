@@ -16,8 +16,8 @@ CREATE TYPE tipoPeriodo AS ENUM ('MENSUAL', 'ANUAL');
 
 CREATE TABLE depreciaciones (
   id BIGSERIAL PRIMARY KEY,
-  maquina_id BIGINT REFERENCES maquinas(id),
-  tipo_periodo tipoPeriodo NOT NULL,
+  maquina_id BIGINT NOT NULL REFERENCES maquinas(id),
+  tipo_periodo VARCHAR(20) NOT NULL,
   periodo DATE NOT NULL,
   depreciacion_periodo NUMERIC(18,2) NOT NULL,
   depreciacion_acumulada NUMERIC(18,2) NOT NULL,

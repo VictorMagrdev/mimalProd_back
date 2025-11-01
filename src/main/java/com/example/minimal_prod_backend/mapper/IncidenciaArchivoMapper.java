@@ -15,7 +15,6 @@ public interface IncidenciaArchivoMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "subidoEn", ignore = true)
     @Mapping(target = "incidencia", ignore = true)
-        // si viene solo incidenciaId en DTO
     IncidenciaArchivo toEntity(IncidenciaArchivoRequest dto);
 }
 

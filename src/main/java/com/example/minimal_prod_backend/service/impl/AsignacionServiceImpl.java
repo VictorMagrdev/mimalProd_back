@@ -40,6 +40,8 @@ public class AsignacionServiceImpl implements AsignacionService {
 
     @Override
     public AsignacionResponse createAsignacion(AsignacionRequest request) {
+        validateAsignacionDates(request);
+
         OrdenTrabajo ordenTrabajo = ordenTrabajoRepository.findById(request.ordenTrabajoId())
                 .orElseThrow(() -> new ResourceNotFoundException("OrdenTrabajo not found with id: " + request.ordenTrabajoId()));
         Usuario usuario = userRepository.findById(request.usuarioId())
@@ -63,6 +65,8 @@ public class AsignacionServiceImpl implements AsignacionService {
 
     @Override
     public AsignacionResponse updateAsignacion(Long id, AsignacionRequest request) {
+        validateAsignacionDates(request);
+
         Asignacion existingAsignacion = asignacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Asignacion not found with id: " + id));
 
@@ -77,11 +81,10 @@ public class AsignacionServiceImpl implements AsignacionService {
         FuncionTarea funcionTarea = funcionTareaRepository.findById(request.funcionTareaId())
                 .orElseThrow(() -> new ResourceNotFoundException("FuncionTarea not found with id: " + request.funcionTareaId()));
 
+        asignacionMapper.updateEntityFromInput(request, existingAsignacion);
+
         existingAsignacion.setOrdenTrabajo(ordenTrabajo);
         existingAsignacion.setUsuario(usuario);
-        existingAsignacion.setInicioPlanificado(request.inicioPlanificado());
-        existingAsignacion.setFinPlanificado(request.finPlanificado());
-        existingAsignacion.setHorasPlanificadas(request.horasPlanificadas());
         existingAsignacion.setAsignadoPor(asignadoPor);
         existingAsignacion.setEstadoAsignacion(estadoAsignacion);
         existingAsignacion.setFuncionTarea(funcionTarea);
@@ -89,6 +92,11 @@ public class AsignacionServiceImpl implements AsignacionService {
         return asignacionMapper.toResponse(asignacionRepository.save(existingAsignacion));
     }
 
+    private void validateAsignacionDates(AsignacionRequest request) {
+        if (request.finPlanificado().isBefore(request.inicioPlanificado())) {
+            throw new IllegalArgumentException("La fecha fin debe ser posterior a la fecha inicio");
+        }
+    }
     @Override
     public void deleteAsignacion(Long id) {
         if (!asignacionRepository.existsById(id)) {

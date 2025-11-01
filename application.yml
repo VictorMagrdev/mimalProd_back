@@ -10,6 +10,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        id:
+          identifier_generator: Tsid
     show-sql: true
 
   graphql:

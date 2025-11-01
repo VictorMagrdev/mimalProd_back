@@ -1,13 +1,13 @@
 package com.example.minimal_prod_backend.entity;
 
+import io.hypersistence.utils.hibernate.id.Tsid;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.proxy.HibernateProxy;
+import org.hibernate.annotations.Immutable;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Asignacion {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Tsid
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -52,27 +52,13 @@ public class Asignacion {
     private EstadoAsignacion estadoAsignacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "funcion_tarea", nullable = false)
+    @JoinColumn(name = "funcion_tarea_id", nullable = false)
     @ToString.Exclude
     private FuncionTarea funcionTarea;
 
     @CreationTimestamp
+    @Immutable
     @Column(name = "creado_en", updatable = false)
     private OffsetDateTime creadoEn;
 
-    @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
-        Asignacion that = (Asignacion) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public final int hashCode() {
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
-    }
 }

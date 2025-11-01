@@ -40,6 +40,7 @@ public class BodegaServiceImpl implements BodegaService {
 
     @Override
     public BodegaResponse createBodega(BodegaRequest bodegaInput) {
+
         Bodega bodega = bodegaMapper.toEntity(bodegaInput);
 
         if (bodegaInput.tipoBodegaId() != null) {
@@ -56,9 +57,7 @@ public class BodegaServiceImpl implements BodegaService {
         Bodega existingBodega = bodegaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + id));
 
-        existingBodega.setCodigo(bodegaInput.codigo());
-        existingBodega.setNombre(bodegaInput.nombre());
-        existingBodega.setDescripcion(bodegaInput.descripcion());
+        bodegaMapper.updateEntityFromInput(bodegaInput, existingBodega);
 
         if (bodegaInput.tipoBodegaId() != null) {
             TipoBodega tipo = tipoBodegaRepository.findById(bodegaInput.tipoBodegaId())
@@ -73,6 +72,6 @@ public class BodegaServiceImpl implements BodegaService {
     public void deleteBodega(Long id) {
         Bodega bodega = bodegaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + id));
-        bodegaRepository.save(bodega);
+        bodegaRepository.deleteById(id);
     }
 }

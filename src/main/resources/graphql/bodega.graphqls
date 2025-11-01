@@ -4,9 +4,10 @@ type Bodega {
     nombre: String!
     descripcion: String
     tipoBodegaId: ID
-    creadoEn: DateTime
     tipo: TipoBodega
+    creadoEn: DateTime
 }
+
 
 input BodegaRequest {
     codigo: String!

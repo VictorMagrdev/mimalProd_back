@@ -1,17 +1,16 @@
+input DiscrepanciaInventarioRequest {
+    conteoId: ID
+    cantidadSistema: Numeric!
+    resuelto: Boolean
+}
+
 type DiscrepanciaInventario {
     id: ID!
     conteoId: ID
-    cantidadSistema: Numeric
-    resuelto: Boolean
+    cantidadSistema: Numeric!
+    resuelto: Boolean!
     conteo: ConteoCiclico
 }
-
-input DiscrepanciaInventarioRequest {
-    conteoId: ID
-    cantidadSistema: Numeric
-    resuelto: Boolean
-}
-
 extend type Query {
     discrepanciasInventario: [DiscrepanciaInventario]
 }

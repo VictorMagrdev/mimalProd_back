@@ -36,7 +36,15 @@ public class DiscrepanciaInventarioServiceImpl implements DiscrepanciaInventario
 
     @Override
     public DiscrepanciaInventarioResponse createDiscrepanciaInventario(DiscrepanciaInventarioRequest dto) {
+        if (dto.cantidadSistema() == null) {
+            throw new IllegalArgumentException("cantidadSistema es requerida");
+        }
+
         DiscrepanciaInventario entity = discrepanciaInventarioMapper.toEntity(dto);
+
+        if (entity.getResuelto() == null) {
+            entity.setResuelto(false);
+        }
 
         if (dto.conteoId() != null) {
             ConteoCiclico conteo = conteoCiclicoRepository.findById(dto.conteoId())
@@ -65,6 +73,9 @@ public class DiscrepanciaInventarioServiceImpl implements DiscrepanciaInventario
 
     @Override
     public void deleteDiscrepanciaInventario(Long id) {
+        if (!discrepanciaInventarioRepository.existsById(id)) {
+            throw new ResourceNotFoundException("DiscrepanciaInventario not found with id: " + id);
+        }
         discrepanciaInventarioRepository.deleteById(id);
     }
 }

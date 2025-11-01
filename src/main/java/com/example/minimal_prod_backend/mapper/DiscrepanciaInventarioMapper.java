@@ -12,7 +12,8 @@ public interface DiscrepanciaInventarioMapper {
 
     @Mappings({
             @Mapping(target = "conteo.id", source = "conteoId"),
-            @Mapping(target = "id", ignore = true)
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "resuelto", source = "resuelto", defaultValue = "false")
     })
     DiscrepanciaInventario toEntity(DiscrepanciaInventarioRequest input);
 

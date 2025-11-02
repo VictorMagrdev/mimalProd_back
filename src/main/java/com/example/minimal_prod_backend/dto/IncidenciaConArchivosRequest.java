@@ -14,6 +14,11 @@ public record IncidenciaConArchivosRequest(
         String descripcion,
         @NotNull Long tipoIncidenciaId,
         @NotNull Long estadoId,
+        @NotNull Long maquinaId,
+        @NotNull Long ordenId,
+        @NotNull Long estacionId,
+        @NotNull Long reportadoPor,
+        @NotNull Long asignadoA,
         OffsetDateTime fechaCierre,
         Duration tiempoParada,
         List<MultipartFile> archivos
@@ -21,6 +26,7 @@ public record IncidenciaConArchivosRequest(
     public IncidenciaConArchivosRequest withArchivos(List<MultipartFile> newArchivos) {
         return new IncidenciaConArchivosRequest(
                 codigo, titulo, descripcion, tipoIncidenciaId, estadoId,
+                maquinaId, ordenId, estacionId, reportadoPor, asignadoA,
                 fechaCierre, tiempoParada, newArchivos
         );
     }

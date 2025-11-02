@@ -4,10 +4,7 @@ import com.example.minimal_prod_backend.dto.IncidenciaConArchivosRequest;
 import com.example.minimal_prod_backend.dto.IncidenciaResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.mapper.IncidenciaCompletaMapper;
-import com.example.minimal_prod_backend.repository.EstadoIncidenciaRepository;
-import com.example.minimal_prod_backend.repository.IncidenciaArchivoRepository;
-import com.example.minimal_prod_backend.repository.IncidenciaRepository;
-import com.example.minimal_prod_backend.repository.TipoIncidenciaRepository;
+import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.security.S3R2Properties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +22,10 @@ public class IncidenciaCompletaService {
     private final IncidenciaArchivoRepository archivoRepository;
     private final TipoIncidenciaRepository tipoIncidenciaRepository;
     private final EstadoIncidenciaRepository estadoRepository;
+    private final MaquinaRepository maquinaRepository;
+    private final OrdenProduccionRepository ordenRepository;
+    private final EstacionProduccionRepository estacionRepository;
+    private final UserRepository usuarioRepository;
     private final CloudflareR2Client r2;
     private final S3R2Properties props;
     private final IncidenciaCompletaMapper incidenciaMapper;
@@ -36,9 +37,29 @@ public class IncidenciaCompletaService {
         EstadoIncidencia estado = estadoRepository.findById(req.estadoId())
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
+        Maquina maquina = maquinaRepository.findById(req.maquinaId())
+                .orElseThrow(() -> new RuntimeException("Máquina no encontrada"));
+
+        OrdenProduccion orden = ordenRepository.findById(req.ordenId())
+                .orElseThrow(() -> new RuntimeException("Orden de producción no encontrada"));
+
+        EstacionProduccion estacion = estacionRepository.findById(req.estacionId())
+                .orElseThrow(() -> new RuntimeException("Estación de producción no encontrada"));
+
+        Usuario reportadoPor = usuarioRepository.findById(req.reportadoPor())
+                .orElseThrow(() -> new RuntimeException("Usuario (reportado por) no encontrado"));
+
+        Usuario asignadoA = usuarioRepository.findById(req.asignadoA())
+                .orElseThrow(() -> new RuntimeException("Usuario (asignado a) no encontrado"));
+
         Incidencia incidencia = incidenciaMapper.toEntity(req);
         incidencia.setTipoIncidencia(tipoIncidencia);
         incidencia.setEstado(estado);
+        incidencia.setMaquina(maquina);
+        incidencia.setOrden(orden);
+        incidencia.setEstacion(estacion);
+        incidencia.setReportadoPor(reportadoPor);
+        incidencia.setAsignadoA(asignadoA);
 
         Incidencia incidenciaGuardada = incidenciaRepository.save(incidencia);
 
@@ -54,6 +75,7 @@ public class IncidenciaCompletaService {
 
                     IncidenciaArchivo archivo = IncidenciaArchivo.builder()
                             .incidencia(incidenciaGuardada)
+                            .subidoPor(reportadoPor)
                             .nombreOriginal(file.getOriginalFilename())
                             .tipo(tipo)
                             .url(url)

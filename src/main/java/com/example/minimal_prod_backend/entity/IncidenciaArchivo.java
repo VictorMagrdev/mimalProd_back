@@ -32,8 +32,12 @@ public class IncidenciaArchivo {
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "incidencia_id")
+    @JoinColumn(name = "incidencia_id", nullable = false)
     private Incidencia incidencia;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subido_por", nullable = false)
+    private Usuario subidoPor;
 
     @Column(name = "subido_en")
     private OffsetDateTime subidoEn = OffsetDateTime.now();

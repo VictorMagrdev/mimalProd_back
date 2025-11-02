@@ -10,15 +10,20 @@ public interface IncidenciaCompletaMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(target = "tipoIncidencia", ignore = true), // Se setea manualmente
-            @Mapping(target = "estado", ignore = true), // Se setea manualmente
+            @Mapping(target = "tipoIncidencia", ignore = true),
+            @Mapping(target = "estado", ignore = true),
+            @Mapping(target = "maquina", ignore = true),
+            @Mapping(target = "orden", ignore = true),
+            @Mapping(target = "estacion", ignore = true),
+            @Mapping(target = "reportadoPor", ignore = true),
+            @Mapping(target = "asignadoA", ignore = true),
             @Mapping(target = "creadoEn", ignore = true)
     })
     Incidencia toEntity(IncidenciaConArchivosRequest request);
 
     @Mappings({
             @Mapping(target = "tipoIncidencia", source = "tipoIncidencia.codigo"),
-            @Mapping(target = "estado", source = "estado.nombre")
+            @Mapping(target = "estado", source = "estado.nombre"),
     })
     IncidenciaResponse toResponse(Incidencia incidencia);
 }

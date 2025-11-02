@@ -39,23 +39,23 @@ public class Incidencia {
     private EstadoIncidencia estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maquina_id")
+    @JoinColumn(name = "maquina_id", nullable = false)
     private Maquina maquina;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orden_id")
+    @JoinColumn(name = "orden_id", nullable = false)
     private OrdenProduccion orden;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "estacion_id")
+    @JoinColumn(name = "estacion_id", nullable = false)
     private EstacionProduccion estacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reportado_por")
+    @JoinColumn(name = "reportado_por", nullable = false)
     private Usuario reportadoPor;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "asignado_a")
+    @JoinColumn(name = "asignado_a", nullable = false)
     private Usuario asignadoA;
 
     @Column(name = "fecha_cierre")

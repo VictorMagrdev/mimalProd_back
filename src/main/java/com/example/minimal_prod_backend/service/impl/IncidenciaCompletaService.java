@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.service.impl;
 import com.example.minimal_prod_backend.dto.IncidenciaConArchivosRequest;
 import com.example.minimal_prod_backend.dto.IncidenciaResponse;
 import com.example.minimal_prod_backend.entity.*;
+import com.example.minimal_prod_backend.mapper.IncidenciaCompletaMapper;
 import com.example.minimal_prod_backend.repository.EstadoIncidenciaRepository;
 import com.example.minimal_prod_backend.repository.IncidenciaArchivoRepository;
 import com.example.minimal_prod_backend.repository.IncidenciaRepository;
@@ -26,6 +27,7 @@ public class IncidenciaCompletaService {
     private final EstadoIncidenciaRepository estadoRepository;
     private final CloudflareR2Client r2;
     private final S3R2Properties props;
+    private final IncidenciaCompletaMapper incidenciaMapper;
 
     public IncidenciaResponse crearConArchivos(IncidenciaConArchivosRequest req) throws Exception {
         TipoIncidencia tipoIncidencia = tipoIncidenciaRepository.findById(req.tipoIncidenciaId())
@@ -34,15 +36,9 @@ public class IncidenciaCompletaService {
         EstadoIncidencia estado = estadoRepository.findById(req.estadoId())
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
-        Incidencia incidencia = Incidencia.builder()
-                .codigo(req.codigo())
-                .titulo(req.titulo())
-                .descripcion(req.descripcion())
-                .tipoIncidencia(tipoIncidencia)
-                .estado(estado)
-                .fechaCierre(req.fechaCierre())
-                .tiempoParada(req.tiempoParada())
-                .build();
+        Incidencia incidencia = incidenciaMapper.toEntity(req);
+        incidencia.setTipoIncidencia(tipoIncidencia);
+        incidencia.setEstado(estado);
 
         Incidencia incidenciaGuardada = incidenciaRepository.save(incidencia);
 
@@ -70,18 +66,6 @@ public class IncidenciaCompletaService {
         Incidencia incidenciaCompleta = incidenciaRepository.findById(incidenciaGuardada.getId())
                 .orElse(incidenciaGuardada);
 
-        return new IncidenciaResponse(
-                incidenciaCompleta.getId(),
-                incidenciaCompleta.getCodigo(),
-                incidenciaCompleta.getTitulo(),
-                incidenciaCompleta.getDescripcion(),
-                incidenciaCompleta.getTipoIncidencia() != null ?
-                        incidenciaCompleta.getTipoIncidencia().getCodigo() : null,
-                incidenciaCompleta.getEstado() != null ?
-                        incidenciaCompleta.getEstado().getNombre() : null,
-                incidenciaCompleta.getFechaCierre(),
-                incidenciaCompleta.getTiempoParada(),
-                incidenciaCompleta.getCreadoEn()
-        );
+        return incidenciaMapper.toResponse(incidenciaCompleta);
     }
 }

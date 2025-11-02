@@ -23,13 +23,13 @@ CREATE TABLE incidencias (
   codigo VARCHAR(100) UNIQUE NOT NULL,
   titulo VARCHAR(200) NOT NULL,
   descripcion TEXT,
-  tipo_incidencia_id BIGINT REFERENCES tipos_incidencia(id),
-  estado_id BIGINT REFERENCES estados_incidencia(id),
-  maquina_id BIGINT REFERENCES maquinas(id),
-  orden_id BIGINT REFERENCES ordenes_produccion(id),
-  estacion_id BIGINT REFERENCES estaciones_produccion(id),
-  reportado_por BIGINT REFERENCES usuarios(id),
-  asignado_a BIGINT REFERENCES usuarios(id),
+  tipo_incidencia_id BIGINT NOT NULL REFERENCES tipos_incidencia(id),
+  estado_id BIGINT REFERENCES NOT NULL estados_incidencia(id),
+  maquina_id BIGINT REFERENCES NOT NULL maquinas(id),
+  orden_id BIGINT REFERENCES NOT NULL ordenes_produccion(id),
+  estacion_id BIGINT REFERENCES NOT NULL estaciones_produccion(id),
+  reportado_por BIGINT REFERENCES NOT NULL usuarios(id),
+  asignado_a BIGINT REFERENCES NOT NULL usuarios(id),
   fecha_cierre TIMESTAMPTZ,
   tiempo_parada INTERVAL,
   creado_en TIMESTAMPTZ DEFAULT now()
@@ -38,11 +38,11 @@ CREATE TABLE incidencias (
 
 CREATE TABLE incidencias_archivos (
   id BIGSERIAL PRIMARY KEY,
-  incidencia_id BIGINT REFERENCES incidencias(id) ON DELETE CASCADE,
+  incidencia_id BIGINT REFERENCES incidencias(id) NOT NULL ON DELETE CASCADE,
   tipo tipoArchivo NOT NULL,
   nombre_original VARCHAR(255) NOT NULL,
   url TEXT NOT NULL,
-  subido_por BIGINT REFERENCES usuarios(id),
+  subido_por BIGINT NOT NULL REFERENCES usuarios(id),
   subido_en TIMESTAMPTZ DEFAULT now()
 );
 

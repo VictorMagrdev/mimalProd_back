@@ -30,13 +30,33 @@ public class Incidencia {
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "tipo_incidencia_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo_incidencia_id", nullable = false)
     private TipoIncidencia tipoIncidencia;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "estado_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estado_id", nullable = false)
     private EstadoIncidencia estado;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "maquina_id")
+    private Maquina maquina;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orden_id")
+    private OrdenProduccion orden;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estacion_id")
+    private EstacionProduccion estacion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reportado_por")
+    private Usuario reportadoPor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asignado_a")
+    private Usuario asignadoA;
 
     @Column(name = "fecha_cierre")
     private OffsetDateTime fechaCierre;

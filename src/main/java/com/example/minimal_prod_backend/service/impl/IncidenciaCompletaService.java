@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,64 +32,82 @@ public class IncidenciaCompletaService {
     private final S3R2Properties props;
     private final IncidenciaCompletaMapper incidenciaMapper;
 
-    public IncidenciaResponse crearConArchivos(IncidenciaConArchivosRequest req) throws Exception {
-        TipoIncidencia tipoIncidencia = tipoIncidenciaRepository.findById(req.tipoIncidenciaId())
-                .orElseThrow(() -> new RuntimeException("Tipo de incidencia no encontrado"));
+    public IncidenciaResponse crearConArchivos(IncidenciaConArchivosRequest req) throws IOException {
+        Incidencia incidencia = buildIncidencia(req);
+        Incidencia incidenciaGuardada = incidenciaRepository.save(incidencia);
 
+        if (req.archivos() != null && !req.archivos().isEmpty()) {
+            List<IncidenciaArchivo> archivos = procesarArchivos(req.archivos(), incidenciaGuardada, req.reportadoPor());
+            archivoRepository.saveAll(archivos);
+        }
+
+        return incidenciaMapper.toResponse(
+                incidenciaRepository.findById(incidenciaGuardada.getId()).orElse(incidenciaGuardada)
+        );
+    }
+
+    private Incidencia buildIncidencia(IncidenciaConArchivosRequest req) {
+        TipoIncidencia tipo = tipoIncidenciaRepository.findById(req.tipoIncidenciaId())
+                .orElseThrow(() -> new IllegalArgumentException("Tipo de incidencia no encontrado"));
         EstadoIncidencia estado = estadoRepository.findById(req.estadoId())
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
-
+                .orElseThrow(() -> new IllegalArgumentException("Estado no encontrado"));
         Maquina maquina = maquinaRepository.findById(req.maquinaId())
-                .orElseThrow(() -> new RuntimeException("Máquina no encontrada"));
-
+                .orElseThrow(() -> new IllegalArgumentException("Máquina no encontrada"));
         OrdenProduccion orden = ordenRepository.findById(req.ordenId())
-                .orElseThrow(() -> new RuntimeException("Orden de producción no encontrada"));
-
+                .orElseThrow(() -> new IllegalArgumentException("Orden de producción no encontrada"));
         EstacionProduccion estacion = estacionRepository.findById(req.estacionId())
-                .orElseThrow(() -> new RuntimeException("Estación de producción no encontrada"));
-
+                .orElseThrow(() -> new IllegalArgumentException("Estación de producción no encontrada"));
         Usuario reportadoPor = usuarioRepository.findById(req.reportadoPor())
-                .orElseThrow(() -> new RuntimeException("Usuario (reportado por) no encontrado"));
-
+                .orElseThrow(() -> new IllegalArgumentException("Usuario (reportado por) no encontrado"));
         Usuario asignadoA = usuarioRepository.findById(req.asignadoA())
-                .orElseThrow(() -> new RuntimeException("Usuario (asignado a) no encontrado"));
+                .orElseThrow(() -> new IllegalArgumentException("Usuario (asignado a) no encontrado"));
 
         Incidencia incidencia = incidenciaMapper.toEntity(req);
-        incidencia.setTipoIncidencia(tipoIncidencia);
+        incidencia.setTipoIncidencia(tipo);
         incidencia.setEstado(estado);
         incidencia.setMaquina(maquina);
         incidencia.setOrden(orden);
         incidencia.setEstacion(estacion);
         incidencia.setReportadoPor(reportadoPor);
         incidencia.setAsignadoA(asignadoA);
+        return incidencia;
+    }
 
-        Incidencia incidenciaGuardada = incidenciaRepository.save(incidencia);
+    private List<IncidenciaArchivo> procesarArchivos(List<MultipartFile> archivos, Incidencia incidencia, Long reportadoPorId) throws IOException {
+        Usuario subidoPor = usuarioRepository.findById(reportadoPorId)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado para archivos"));
 
-        if (req.archivos() != null && !req.archivos().isEmpty()) {
-            for (MultipartFile file : req.archivos()) {
-                if (!file.isEmpty()) {
-                    String nombre = UUID.randomUUID() + "_" + file.getOriginalFilename();
-                    r2.upload(props.getBucket(), nombre, file.getBytes());
-                    String url = String.format("%s/%s/%s", props.getEndpoint(), props.getBucket(), nombre);
+        return archivos.stream()
+                .filter(file -> !file.isEmpty())
+                .map(file -> subirArchivo(file, incidencia, subidoPor))
+                .toList();
+    }
 
-                    TipoArchivo tipo = file.getContentType() != null && file.getContentType().startsWith("audio")
-                            ? TipoArchivo.AUDIO : TipoArchivo.FOTO;
+    private IncidenciaArchivo subirArchivo(MultipartFile file, Incidencia incidencia, Usuario subidoPor) {
+        try {
+            String nombre = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            r2.upload(props.getBucket(), nombre, file.getBytes());
+            String url = String.format("%s/%s/%s", props.getEndpoint(), props.getBucket(), nombre);
 
-                    IncidenciaArchivo archivo = IncidenciaArchivo.builder()
-                            .incidencia(incidenciaGuardada)
-                            .subidoPor(reportadoPor)
-                            .nombreOriginal(file.getOriginalFilename())
-                            .tipo(tipo)
-                            .url(url)
-                            .build();
-                    archivoRepository.save(archivo);
-                }
-            }
+            TipoArchivo tipo = getTipoArchivo(file);
+            return IncidenciaArchivo.builder()
+                    .incidencia(incidencia)
+                    .subidoPor(subidoPor)
+                    .nombreOriginal(file.getOriginalFilename())
+                    .tipo(tipo)
+                    .url(url)
+                    .build();
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error al subir archivo: " + file.getOriginalFilename(), e);
         }
+    }
 
-        Incidencia incidenciaCompleta = incidenciaRepository.findById(incidenciaGuardada.getId())
-                .orElse(incidenciaGuardada);
-
-        return incidenciaMapper.toResponse(incidenciaCompleta);
+    private TipoArchivo getTipoArchivo(MultipartFile file) {
+        String type = file.getContentType();
+        if (type == null) return TipoArchivo.FOTO;
+        if (type.startsWith("audio")) return TipoArchivo.AUDIO;
+        if (type.startsWith("image")) return TipoArchivo.FOTO;
+        throw new IllegalArgumentException("Tipo de archivo no permitido: " + type);
     }
 }

@@ -63,7 +63,7 @@ INSERT INTO centros_costo (codigo, nombre) VALUES
 ('ADMIN', 'Centro de Costo Administrativo');
 
 INSERT INTO usuarios (username, email, password, telefono, codigo_empleado, nombre, apellidos, centro_costo_id, activo) VALUES
-('admin', 'admin@example.com', '$2a$10$NdzsMp8e0Syek06aG80yvO/8RkSH7zwSrODsv7ICFklnbJLH8HNmG', '123456789', 'ADMIN001', 'Administrador', 'Del Sistema', (SELECT id FROM centros_costo WHERE codigo = 'ADMIN'), true);
+('admin', 'admin@example.com', '$2a$10$QWAlTWwCRz6VoVFwGa4j2e2UG0RI/YYKqnIUnclmEBK5tkC.FiJMO', '123456789', 'ADMIN001', 'Administrador', 'Del Sistema', (SELECT id FROM centros_costo WHERE codigo = 'ADMIN'), true);
 
 INSERT INTO usuario_roles (usuario_id, rol_id)
 VALUES (

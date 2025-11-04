@@ -52,7 +52,7 @@ public class Asignacion {
     private EstadoAsignacion estadoAsignacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "funcion_tarea_id", nullable = false)
+    @JoinColumn(name = "funcion_tarea", nullable = false)
     @ToString.Exclude
     private FuncionTarea funcionTarea;
 

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.LoteProduccionRequest;
-import com.example.minimal_prod_backend.dto.LoteProduccionResponse;
+import com.example.minimal_prod_backend.dto.Request.LoteProduccionRequest;
+import com.example.minimal_prod_backend.dto.Response.LoteProduccionResponse;
 import com.example.minimal_prod_backend.entity.LoteProduccion;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;

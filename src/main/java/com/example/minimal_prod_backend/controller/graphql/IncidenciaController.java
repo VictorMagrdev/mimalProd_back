@@ -1,9 +1,10 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.*;
+import com.example.minimal_prod_backend.dto.Request.IncidenciaRequest;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaArchivoResponse;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaResponse;
 import com.example.minimal_prod_backend.service.IncidenciaArchivoService;
 import com.example.minimal_prod_backend.service.IncidenciaService;
-import com.example.minimal_prod_backend.service.TipoBodegaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

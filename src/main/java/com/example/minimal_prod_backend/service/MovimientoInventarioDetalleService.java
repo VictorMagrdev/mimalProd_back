@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleRequest;
-import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleResponse;
+import com.example.minimal_prod_backend.dto.Request.MovimientoInventarioDetalleRequest;
+import com.example.minimal_prod_backend.dto.Response.MovimientoInventarioDetalleResponse;
 
 import java.util.List;
 

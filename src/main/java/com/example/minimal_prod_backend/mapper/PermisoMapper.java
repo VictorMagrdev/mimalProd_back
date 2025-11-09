@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.PermisoRequest;
-import com.example.minimal_prod_backend.dto.PermisoResponse;
+import com.example.minimal_prod_backend.dto.Request.PermisoRequest;
+import com.example.minimal_prod_backend.dto.Response.PermisoResponse;
 import com.example.minimal_prod_backend.entity.Permiso;
 import org.mapstruct.*;
 

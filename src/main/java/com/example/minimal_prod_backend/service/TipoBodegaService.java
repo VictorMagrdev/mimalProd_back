@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.TipoBodegaRequest;
-import com.example.minimal_prod_backend.dto.TipoBodegaResponse;
+import com.example.minimal_prod_backend.dto.Request.TipoBodegaRequest;
+import com.example.minimal_prod_backend.dto.Response.TipoBodegaResponse;
 
 import java.util.List;
 

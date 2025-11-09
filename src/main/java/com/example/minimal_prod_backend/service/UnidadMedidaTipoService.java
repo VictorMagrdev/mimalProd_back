@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.UnidadMedidaTipoRequest;
-import com.example.minimal_prod_backend.dto.UnidadMedidaTipoResponse;
+import com.example.minimal_prod_backend.dto.Request.UnidadMedidaTipoRequest;
+import com.example.minimal_prod_backend.dto.Response.UnidadMedidaTipoResponse;
 
 import java.util.List;
 

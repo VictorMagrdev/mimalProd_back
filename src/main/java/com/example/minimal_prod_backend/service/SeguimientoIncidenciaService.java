@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.SeguimientoIncidenciaRequest;
-import com.example.minimal_prod_backend.dto.SeguimientoIncidenciaResponse;
+import com.example.minimal_prod_backend.dto.Request.SeguimientoIncidenciaRequest;
+import com.example.minimal_prod_backend.dto.Response.SeguimientoIncidenciaResponse;
 
 import java.util.List;
 

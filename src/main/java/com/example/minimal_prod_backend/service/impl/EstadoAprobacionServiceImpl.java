@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.EstadoAprobacionRequest;
-import com.example.minimal_prod_backend.dto.EstadoAprobacionResponse;
+import com.example.minimal_prod_backend.dto.Request.EstadoAprobacionRequest;
+import com.example.minimal_prod_backend.dto.Response.EstadoAprobacionResponse;
 import com.example.minimal_prod_backend.entity.EstadoAprobacion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.EstadoAprobacionMapper;

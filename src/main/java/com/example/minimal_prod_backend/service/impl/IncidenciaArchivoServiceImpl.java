@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.IncidenciaArchivoRequest;
-import com.example.minimal_prod_backend.dto.IncidenciaArchivoResponse;
+import com.example.minimal_prod_backend.dto.Request.IncidenciaArchivoRequest;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaArchivoResponse;
 import com.example.minimal_prod_backend.entity.IncidenciaArchivo;
 import com.example.minimal_prod_backend.mapper.IncidenciaArchivoMapper;
 import com.example.minimal_prod_backend.repository.IncidenciaArchivoRepository;

@@ -1,9 +1,9 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.RolResponse;
-import com.example.minimal_prod_backend.dto.UserCreateRequest;
-import com.example.minimal_prod_backend.dto.UserResponse;
-import com.example.minimal_prod_backend.dto.UserUpdateRequest;
+import com.example.minimal_prod_backend.dto.Response.RolResponse;
+import com.example.minimal_prod_backend.dto.Request.UserCreateRequest;
+import com.example.minimal_prod_backend.dto.Response.UserResponse;
+import com.example.minimal_prod_backend.dto.Request.UserUpdateRequest;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;

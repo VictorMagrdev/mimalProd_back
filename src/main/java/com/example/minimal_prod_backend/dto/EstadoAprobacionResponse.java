@@ -1,4 +1,0 @@
-package com.example.minimal_prod_backend.dto;
-
-public record EstadoAprobacionResponse(Long id, String nombre, String descripcion) {
-}

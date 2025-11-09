@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.HojaTimesheetRequest;
-import com.example.minimal_prod_backend.dto.HojaTimesheetResponse;
+import com.example.minimal_prod_backend.dto.Request.HojaTimesheetRequest;
+import com.example.minimal_prod_backend.dto.Response.HojaTimesheetResponse;
 
 import java.util.List;
 

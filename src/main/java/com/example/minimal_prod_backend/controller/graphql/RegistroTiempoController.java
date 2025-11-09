@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.RegistroTiempoRequest;
-import com.example.minimal_prod_backend.dto.RegistroTiempoResponse;
+import com.example.minimal_prod_backend.dto.Request.RegistroTiempoRequest;
+import com.example.minimal_prod_backend.dto.Response.RegistroTiempoResponse;
 import com.example.minimal_prod_backend.service.RegistroTiempoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;

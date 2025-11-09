@@ -1,11 +1,12 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.IncidenciaConArchivosRequest;
-import com.example.minimal_prod_backend.dto.IncidenciaResponse;
+import com.example.minimal_prod_backend.dto.Request.IncidenciaConArchivosRequest;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.mapper.IncidenciaCompletaMapper;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.security.S3R2Properties;
+import com.example.minimal_prod_backend.service.client.CloudflareR2Client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

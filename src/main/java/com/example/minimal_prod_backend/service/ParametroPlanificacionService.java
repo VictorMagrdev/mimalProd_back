@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.ParametroPlanificacionRequest;
-import com.example.minimal_prod_backend.dto.ParametroPlanificacionResponse;
+import com.example.minimal_prod_backend.dto.Request.ParametroPlanificacionRequest;
+import com.example.minimal_prod_backend.dto.Response.ParametroPlanificacionResponse;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.EstadoOrdenRequest;
-import com.example.minimal_prod_backend.dto.EstadoOrdenResponse;
+import com.example.minimal_prod_backend.dto.Request.EstadoOrdenRequest;
+import com.example.minimal_prod_backend.dto.Response.EstadoOrdenResponse;
 import com.example.minimal_prod_backend.entity.EstadoOrden;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.EstadoOrdenMapper;

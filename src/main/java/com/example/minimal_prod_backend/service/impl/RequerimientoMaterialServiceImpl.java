@@ -1,8 +1,8 @@
 package com.example.minimal_prod_backend.service.impl;
 
 
-import com.example.minimal_prod_backend.dto.RequerimientoMaterialRequest;
-import com.example.minimal_prod_backend.dto.RequerimientoMaterialResponse;
+import com.example.minimal_prod_backend.dto.Request.RequerimientoMaterialRequest;
+import com.example.minimal_prod_backend.dto.Response.RequerimientoMaterialResponse;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.entity.RequerimientoMaterial;

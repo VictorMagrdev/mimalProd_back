@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.ExcepcionTiempoRequest;
-import com.example.minimal_prod_backend.dto.ExcepcionTiempoResponse;
+import com.example.minimal_prod_backend.dto.Request.ExcepcionTiempoRequest;
+import com.example.minimal_prod_backend.dto.Response.ExcepcionTiempoResponse;
 import com.example.minimal_prod_backend.entity.ExcepcionTiempo;
 import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;

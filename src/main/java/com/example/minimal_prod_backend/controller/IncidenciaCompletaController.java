@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller;
 
-import com.example.minimal_prod_backend.dto.IncidenciaConArchivosRequest;
-import com.example.minimal_prod_backend.dto.IncidenciaResponse;
+import com.example.minimal_prod_backend.dto.Request.IncidenciaConArchivosRequest;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaResponse;
 import com.example.minimal_prod_backend.service.impl.IncidenciaCompletaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

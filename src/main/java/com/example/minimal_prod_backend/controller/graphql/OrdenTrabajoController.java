@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.OrdenTrabajoRequest;
-import com.example.minimal_prod_backend.dto.OrdenTrabajoResponse;
+import com.example.minimal_prod_backend.dto.Request.OrdenTrabajoRequest;
+import com.example.minimal_prod_backend.dto.Response.OrdenTrabajoResponse;
 import com.example.minimal_prod_backend.service.OrdenTrabajoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

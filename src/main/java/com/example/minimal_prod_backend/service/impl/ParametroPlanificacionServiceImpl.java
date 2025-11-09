@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.ParametroPlanificacionRequest;
-import com.example.minimal_prod_backend.dto.ParametroPlanificacionResponse;
+import com.example.minimal_prod_backend.dto.Request.ParametroPlanificacionRequest;
+import com.example.minimal_prod_backend.dto.Response.ParametroPlanificacionResponse;
 import com.example.minimal_prod_backend.entity.ParametroPlanificacion;
 import com.example.minimal_prod_backend.entity.Producto;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;

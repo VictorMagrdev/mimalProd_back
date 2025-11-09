@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.TagRequest;
-import com.example.minimal_prod_backend.dto.TagResponse;
+import com.example.minimal_prod_backend.dto.Request.TagRequest;
+import com.example.minimal_prod_backend.dto.Response.TagResponse;
 import com.example.minimal_prod_backend.entity.Tag;
 import org.mapstruct.*;
 

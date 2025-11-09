@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.EstadoAsignacionRequest;
-import com.example.minimal_prod_backend.dto.EstadoAsignacionResponse;
+import com.example.minimal_prod_backend.dto.Request.EstadoAsignacionRequest;
+import com.example.minimal_prod_backend.dto.Response.EstadoAsignacionResponse;
 import com.example.minimal_prod_backend.entity.EstadoAsignacion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.EstadoAsignacionMapper;

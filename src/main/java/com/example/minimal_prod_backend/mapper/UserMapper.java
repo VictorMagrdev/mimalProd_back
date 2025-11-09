@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.RolResponse;
-import com.example.minimal_prod_backend.dto.UserResponse;
+import com.example.minimal_prod_backend.dto.Response.RolResponse;
+import com.example.minimal_prod_backend.dto.Response.UserResponse;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Usuario;
 import org.mapstruct.Mapper;

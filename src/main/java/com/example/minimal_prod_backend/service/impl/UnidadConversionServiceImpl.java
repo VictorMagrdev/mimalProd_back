@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.UnidadConversionRequest;
-import com.example.minimal_prod_backend.dto.UnidadConversionResponse;
+import com.example.minimal_prod_backend.dto.Request.UnidadConversionRequest;
+import com.example.minimal_prod_backend.dto.Response.UnidadConversionResponse;
 import com.example.minimal_prod_backend.entity.UnidadConversion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.UnidadConversionMapper;

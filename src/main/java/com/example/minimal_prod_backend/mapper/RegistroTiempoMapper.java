@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.RegistroTiempoRequest;
-import com.example.minimal_prod_backend.dto.RegistroTiempoResponse;
+import com.example.minimal_prod_backend.dto.Request.RegistroTiempoRequest;
+import com.example.minimal_prod_backend.dto.Response.RegistroTiempoResponse;
 import com.example.minimal_prod_backend.entity.RegistroTiempo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,8 +1,8 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.BodegaRequest;
-import com.example.minimal_prod_backend.dto.BodegaResponse;
-import com.example.minimal_prod_backend.dto.TipoBodegaResponse;
+import com.example.minimal_prod_backend.dto.Request.BodegaRequest;
+import com.example.minimal_prod_backend.dto.Response.BodegaResponse;
+import com.example.minimal_prod_backend.dto.Response.TipoBodegaResponse;
 import com.example.minimal_prod_backend.service.BodegaService;
 import com.example.minimal_prod_backend.service.TipoBodegaService;
 import org.springframework.graphql.data.method.annotation.Argument;

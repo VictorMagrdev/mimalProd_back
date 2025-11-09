@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioRequest;
-import com.example.minimal_prod_backend.dto.MovimientoInventarioResponse;
+import com.example.minimal_prod_backend.dto.Request.MovimientoInventarioRequest;
+import com.example.minimal_prod_backend.dto.Response.MovimientoInventarioResponse;
 import com.example.minimal_prod_backend.entity.MovimientoInventario;
 import org.mapstruct.*;
 

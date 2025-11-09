@@ -1,8 +1,8 @@
 package com.example.minimal_prod_backend.service;
 
 
-import com.example.minimal_prod_backend.dto.RequerimientoMaterialRequest;
-import com.example.minimal_prod_backend.dto.RequerimientoMaterialResponse;
+import com.example.minimal_prod_backend.dto.Request.RequerimientoMaterialRequest;
+import com.example.minimal_prod_backend.dto.Response.RequerimientoMaterialResponse;
 
 import java.util.List;
 

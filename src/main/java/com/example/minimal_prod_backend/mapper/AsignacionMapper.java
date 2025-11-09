@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.AsignacionRequest;
-import com.example.minimal_prod_backend.dto.AsignacionResponse;
+import com.example.minimal_prod_backend.dto.Request.AsignacionRequest;
+import com.example.minimal_prod_backend.dto.Response.AsignacionResponse;
 import com.example.minimal_prod_backend.entity.Asignacion;
 import org.mapstruct.*;
 

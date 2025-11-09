@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.*;
+import com.example.minimal_prod_backend.dto.Request.ConteoCiclicoRequest;
+import com.example.minimal_prod_backend.dto.Response.*;
 import com.example.minimal_prod_backend.service.*;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

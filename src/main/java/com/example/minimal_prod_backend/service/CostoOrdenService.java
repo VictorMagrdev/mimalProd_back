@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.CostoOrdenRequest;
-import com.example.minimal_prod_backend.dto.CostoOrdenResponse;
+import com.example.minimal_prod_backend.dto.Request.CostoOrdenRequest;
+import com.example.minimal_prod_backend.dto.Response.CostoOrdenResponse;
 
 import java.util.List;
 

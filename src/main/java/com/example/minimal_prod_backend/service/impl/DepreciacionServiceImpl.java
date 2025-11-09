@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.DepreciacionRequest;
-import com.example.minimal_prod_backend.dto.DepreciacionResponse;
+import com.example.minimal_prod_backend.dto.Request.DepreciacionRequest;
+import com.example.minimal_prod_backend.dto.Response.DepreciacionResponse;
 import com.example.minimal_prod_backend.entity.Depreciacion;
 import com.example.minimal_prod_backend.entity.Maquina;
 import com.example.minimal_prod_backend.entity.TipoPeriodo;

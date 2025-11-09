@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.EstadoAprobacionRequest;
-import com.example.minimal_prod_backend.dto.EstadoAprobacionResponse;
+import com.example.minimal_prod_backend.dto.Request.EstadoAprobacionRequest;
+import com.example.minimal_prod_backend.dto.Response.EstadoAprobacionResponse;
 import com.example.minimal_prod_backend.service.EstadoAprobacionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;

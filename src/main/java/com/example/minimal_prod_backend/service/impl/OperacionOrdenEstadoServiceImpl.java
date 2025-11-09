@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.OperacionOrdenEstadoRequest;
-import com.example.minimal_prod_backend.dto.OperacionOrdenEstadoResponse;
+import com.example.minimal_prod_backend.dto.Request.OperacionOrdenEstadoRequest;
+import com.example.minimal_prod_backend.dto.Response.OperacionOrdenEstadoResponse;
 import com.example.minimal_prod_backend.entity.OperacionOrdenEstado;
 import com.example.minimal_prod_backend.mapper.OperacionOrdenEstadoMapper;
 import com.example.minimal_prod_backend.repository.OperacionOrdenEstadoRepository;

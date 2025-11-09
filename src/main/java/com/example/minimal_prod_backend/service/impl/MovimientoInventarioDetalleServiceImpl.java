@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleRequest;
-import com.example.minimal_prod_backend.dto.MovimientoInventarioDetalleResponse;
+import com.example.minimal_prod_backend.dto.Request.MovimientoInventarioDetalleRequest;
+import com.example.minimal_prod_backend.dto.Response.MovimientoInventarioDetalleResponse;
 import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.MovimientoInventarioDetalleMapper;

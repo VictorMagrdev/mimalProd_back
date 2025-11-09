@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.MetodoValoracionRequest;
+import com.example.minimal_prod_backend.dto.Request.MetodoValoracionRequest;
 import com.example.minimal_prod_backend.entity.MetodoValoracion;
 import com.example.minimal_prod_backend.repository.MetodoValoracionRepository;
 import com.example.minimal_prod_backend.service.MetodoValoracionService;

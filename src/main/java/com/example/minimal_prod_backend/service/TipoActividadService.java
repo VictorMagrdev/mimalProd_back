@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.TipoActividadRequest;
-import com.example.minimal_prod_backend.dto.TipoActividadResponse;
+import com.example.minimal_prod_backend.dto.Request.TipoActividadRequest;
+import com.example.minimal_prod_backend.dto.Response.TipoActividadResponse;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.TarifaEmpleadoRequest;
-import com.example.minimal_prod_backend.dto.TarifaEmpleadoResponse;
+import com.example.minimal_prod_backend.dto.Request.TarifaEmpleadoRequest;
+import com.example.minimal_prod_backend.dto.Response.TarifaEmpleadoResponse;
 import com.example.minimal_prod_backend.service.TarifaEmpleadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;

@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller;
 
-import com.example.minimal_prod_backend.dto.PoliticaRequest;
+import com.example.minimal_prod_backend.dto.Request.PoliticaRequest;
 import com.example.minimal_prod_backend.entity.Politica;
 import com.example.minimal_prod_backend.service.PolicyService;
 import jakarta.validation.Valid;

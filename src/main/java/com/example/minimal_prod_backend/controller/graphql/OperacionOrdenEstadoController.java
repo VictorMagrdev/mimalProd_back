@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.OperacionOrdenEstadoRequest;
-import com.example.minimal_prod_backend.dto.OperacionOrdenEstadoResponse;
+import com.example.minimal_prod_backend.dto.Request.OperacionOrdenEstadoRequest;
+import com.example.minimal_prod_backend.dto.Response.OperacionOrdenEstadoResponse;
 import com.example.minimal_prod_backend.service.OperacionOrdenEstadoService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

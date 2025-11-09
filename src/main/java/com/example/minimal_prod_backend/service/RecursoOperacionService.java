@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.RecursoOperacionRequest;
-import com.example.minimal_prod_backend.dto.RecursoOperacionResponse;
+import com.example.minimal_prod_backend.dto.Request.RecursoOperacionRequest;
+import com.example.minimal_prod_backend.dto.Response.RecursoOperacionResponse;
 
 import java.util.List;
 

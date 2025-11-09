@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioRequest;
-import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioResponse;
+import com.example.minimal_prod_backend.dto.Request.DiscrepanciaInventarioRequest;
+import com.example.minimal_prod_backend.dto.Response.DiscrepanciaInventarioResponse;
 import com.example.minimal_prod_backend.service.DiscrepanciaInventarioService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

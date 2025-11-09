@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.PuntoReordenRequest;
-import com.example.minimal_prod_backend.dto.PuntoReordenResponse;
+import com.example.minimal_prod_backend.dto.Request.PuntoReordenRequest;
+import com.example.minimal_prod_backend.dto.Response.PuntoReordenResponse;
 import com.example.minimal_prod_backend.entity.PuntoReorden;
 import org.mapstruct.*;
 

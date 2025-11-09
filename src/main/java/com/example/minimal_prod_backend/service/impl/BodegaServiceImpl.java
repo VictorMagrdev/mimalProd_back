@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.BodegaRequest;
-import com.example.minimal_prod_backend.dto.BodegaResponse;
+import com.example.minimal_prod_backend.dto.Request.BodegaRequest;
+import com.example.minimal_prod_backend.dto.Response.BodegaResponse;
 import com.example.minimal_prod_backend.entity.Bodega;
 import com.example.minimal_prod_backend.entity.TipoBodega;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;

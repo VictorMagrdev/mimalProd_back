@@ -1,8 +1,8 @@
 package com.example.minimal_prod_backend.mapper;
 
 
-import com.example.minimal_prod_backend.dto.ParametroPlanificacionRequest;
-import com.example.minimal_prod_backend.dto.ParametroPlanificacionResponse;
+import com.example.minimal_prod_backend.dto.Request.ParametroPlanificacionRequest;
+import com.example.minimal_prod_backend.dto.Response.ParametroPlanificacionResponse;
 import com.example.minimal_prod_backend.entity.ParametroPlanificacion;
 import org.mapstruct.*;
 

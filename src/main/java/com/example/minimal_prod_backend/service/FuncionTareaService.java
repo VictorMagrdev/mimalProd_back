@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.FuncionTareaRequest;
-import com.example.minimal_prod_backend.dto.FuncionTareaResponse;
+import com.example.minimal_prod_backend.dto.Request.FuncionTareaRequest;
+import com.example.minimal_prod_backend.dto.Response.FuncionTareaResponse;
 
 import java.util.List;
 

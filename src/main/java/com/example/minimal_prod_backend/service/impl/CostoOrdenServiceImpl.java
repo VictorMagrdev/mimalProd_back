@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.CostoOrdenRequest;
-import com.example.minimal_prod_backend.dto.CostoOrdenResponse;
+import com.example.minimal_prod_backend.dto.Request.CostoOrdenRequest;
+import com.example.minimal_prod_backend.dto.Response.CostoOrdenResponse;
 import com.example.minimal_prod_backend.entity.CostoOrden;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.entity.TipoCosto;

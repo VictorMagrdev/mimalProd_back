@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.ConteoCiclicoRequest;
-import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
+import com.example.minimal_prod_backend.dto.Request.ConteoCiclicoRequest;
+import com.example.minimal_prod_backend.dto.Response.ConteoCiclicoResponse;
 
 import java.util.List;
 

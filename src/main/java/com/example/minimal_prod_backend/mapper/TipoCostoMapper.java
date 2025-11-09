@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.TipoCostoRequest;
-import com.example.minimal_prod_backend.dto.TipoCostoResponse;
+import com.example.minimal_prod_backend.dto.Request.TipoCostoRequest;
+import com.example.minimal_prod_backend.dto.Response.TipoCostoResponse;
 import com.example.minimal_prod_backend.entity.TipoCosto;
 import org.mapstruct.*;
 

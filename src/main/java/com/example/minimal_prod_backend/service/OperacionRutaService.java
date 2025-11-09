@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.OperacionRutaRequest;
-import com.example.minimal_prod_backend.dto.OperacionRutaResponse;
+import com.example.minimal_prod_backend.dto.Request.OperacionRutaRequest;
+import com.example.minimal_prod_backend.dto.Response.OperacionRutaResponse;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.RutaProduccionRequest;
-import com.example.minimal_prod_backend.dto.RutaProduccionResponse;
+import com.example.minimal_prod_backend.dto.Request.RutaProduccionRequest;
+import com.example.minimal_prod_backend.dto.Response.RutaProduccionResponse;
 import com.example.minimal_prod_backend.service.RutaProduccionService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

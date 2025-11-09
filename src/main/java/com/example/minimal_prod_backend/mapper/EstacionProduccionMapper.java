@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.EstacionProduccionRequest;
-import com.example.minimal_prod_backend.dto.EstacionProduccionResponse;
+import com.example.minimal_prod_backend.dto.Request.EstacionProduccionRequest;
+import com.example.minimal_prod_backend.dto.Response.EstacionProduccionResponse;
 import com.example.minimal_prod_backend.entity.EstacionProduccion;
 import org.mapstruct.*;
 

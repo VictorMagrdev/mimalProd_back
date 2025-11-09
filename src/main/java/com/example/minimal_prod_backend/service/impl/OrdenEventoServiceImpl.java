@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.OrdenEventoRequest;
-import com.example.minimal_prod_backend.dto.OrdenEventoResponse;
+import com.example.minimal_prod_backend.dto.Request.OrdenEventoRequest;
+import com.example.minimal_prod_backend.dto.Response.OrdenEventoResponse;
 import com.example.minimal_prod_backend.entity.OrdenEvento;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.HojaTimesheetRequest;
-import com.example.minimal_prod_backend.dto.HojaTimesheetResponse;
+import com.example.minimal_prod_backend.dto.Request.HojaTimesheetRequest;
+import com.example.minimal_prod_backend.dto.Response.HojaTimesheetResponse;
 import com.example.minimal_prod_backend.service.HojaTimesheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;

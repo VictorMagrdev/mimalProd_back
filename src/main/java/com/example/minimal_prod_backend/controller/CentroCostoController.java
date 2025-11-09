@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller;
 
-import com.example.minimal_prod_backend.dto.CentroCostoRequest;
-import com.example.minimal_prod_backend.dto.CentroCostoResponse;
+import com.example.minimal_prod_backend.dto.Request.CentroCostoRequest;
+import com.example.minimal_prod_backend.dto.Response.CentroCostoResponse;
 import com.example.minimal_prod_backend.service.CentroCostoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

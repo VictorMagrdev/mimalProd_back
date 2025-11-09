@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioRequest;
-import com.example.minimal_prod_backend.dto.DiscrepanciaInventarioResponse;
+import com.example.minimal_prod_backend.dto.Request.DiscrepanciaInventarioRequest;
+import com.example.minimal_prod_backend.dto.Response.DiscrepanciaInventarioResponse;
 import com.example.minimal_prod_backend.entity.DiscrepanciaInventario;
 import org.mapstruct.*;
 

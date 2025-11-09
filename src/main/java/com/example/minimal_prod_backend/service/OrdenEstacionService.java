@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
-import com.example.minimal_prod_backend.dto.OrdenEstacionRequest;
-import com.example.minimal_prod_backend.dto.OrdenEstacionResponse;
+import com.example.minimal_prod_backend.dto.Request.OrdenEstacionRequest;
+import com.example.minimal_prod_backend.dto.Response.OrdenEstacionResponse;
 
 import java.util.List;
 

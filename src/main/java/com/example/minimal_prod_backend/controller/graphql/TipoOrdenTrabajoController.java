@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.TipoOrdenTrabajoRequest;
-import com.example.minimal_prod_backend.dto.TipoOrdenTrabajoResponse;
+import com.example.minimal_prod_backend.dto.Request.TipoOrdenTrabajoRequest;
+import com.example.minimal_prod_backend.dto.Response.TipoOrdenTrabajoResponse;
 import com.example.minimal_prod_backend.service.TipoOrdenTrabajoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;

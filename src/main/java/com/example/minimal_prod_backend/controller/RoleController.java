@@ -1,6 +1,6 @@
 package com.example.minimal_prod_backend.controller;
 
-import com.example.minimal_prod_backend.dto.RolRequest;
+import com.example.minimal_prod_backend.dto.Request.RolRequest;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.service.RoleService;
 import jakarta.validation.Valid;

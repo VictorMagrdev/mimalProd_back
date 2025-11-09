@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.PoliticaRequest;
-import com.example.minimal_prod_backend.dto.PoliticaResponse;
+import com.example.minimal_prod_backend.dto.Request.PoliticaRequest;
+import com.example.minimal_prod_backend.dto.Response.PoliticaResponse;
 import com.example.minimal_prod_backend.entity.Politica;
 import org.mapstruct.*;
 

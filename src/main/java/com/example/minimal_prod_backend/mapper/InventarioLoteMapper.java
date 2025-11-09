@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.InventarioLoteRequest;
-import com.example.minimal_prod_backend.dto.InventarioLoteResponse;
+import com.example.minimal_prod_backend.dto.Request.InventarioLoteRequest;
+import com.example.minimal_prod_backend.dto.Response.InventarioLoteResponse;
 import com.example.minimal_prod_backend.entity.InventarioLote;
 import org.mapstruct.*;
 

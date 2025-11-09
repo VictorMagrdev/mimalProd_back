@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.UnidadConversionRequest;
-import com.example.minimal_prod_backend.dto.UnidadConversionResponse;
+import com.example.minimal_prod_backend.dto.Request.UnidadConversionRequest;
+import com.example.minimal_prod_backend.dto.Response.UnidadConversionResponse;
 import com.example.minimal_prod_backend.service.UnidadConversionService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.ConteoCiclicoRequest;
-import com.example.minimal_prod_backend.dto.ConteoCiclicoResponse;
+import com.example.minimal_prod_backend.dto.Request.ConteoCiclicoRequest;
+import com.example.minimal_prod_backend.dto.Response.ConteoCiclicoResponse;
 import com.example.minimal_prod_backend.entity.ConteoCiclico;
 import org.mapstruct.*;
 

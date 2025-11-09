@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.OrdenEventoRequest;
-import com.example.minimal_prod_backend.dto.OrdenEventoResponse;
+import com.example.minimal_prod_backend.dto.Request.OrdenEventoRequest;
+import com.example.minimal_prod_backend.dto.Response.OrdenEventoResponse;
 import com.example.minimal_prod_backend.entity.OrdenEvento;
 import org.mapstruct.*;
 

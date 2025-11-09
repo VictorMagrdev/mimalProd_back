@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenRequest;
-import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenResponse;
+import com.example.minimal_prod_backend.dto.Request.ReservaMaterialOrdenRequest;
+import com.example.minimal_prod_backend.dto.Response.ReservaMaterialOrdenResponse;
 import com.example.minimal_prod_backend.service.ReservaMaterialOrdenService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.HojaTimesheetRequest;
-import com.example.minimal_prod_backend.dto.HojaTimesheetResponse;
+import com.example.minimal_prod_backend.dto.Request.HojaTimesheetRequest;
+import com.example.minimal_prod_backend.dto.Response.HojaTimesheetResponse;
 import com.example.minimal_prod_backend.entity.HojaTimesheet;
 import org.mapstruct.*;
 

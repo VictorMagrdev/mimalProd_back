@@ -1,8 +1,8 @@
 package com.example.minimal_prod_backend.mapper;
 
 
-import com.example.minimal_prod_backend.dto.TipoIncidenciaRequest;
-import com.example.minimal_prod_backend.dto.TipoIncidenciaResponse;
+import com.example.minimal_prod_backend.dto.Request.TipoIncidenciaRequest;
+import com.example.minimal_prod_backend.dto.Response.TipoIncidenciaResponse;
 import com.example.minimal_prod_backend.entity.TipoIncidencia;
 import org.mapstruct.Mapper;
 

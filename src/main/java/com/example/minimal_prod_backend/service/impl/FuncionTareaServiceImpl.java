@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.FuncionTareaRequest;
-import com.example.minimal_prod_backend.dto.FuncionTareaResponse;
+import com.example.minimal_prod_backend.dto.Request.FuncionTareaRequest;
+import com.example.minimal_prod_backend.dto.Response.FuncionTareaResponse;
 import com.example.minimal_prod_backend.entity.FuncionTarea;
 import com.example.minimal_prod_backend.mapper.FuncionTareaMapper;
 import com.example.minimal_prod_backend.repository.FuncionTareaRepository;

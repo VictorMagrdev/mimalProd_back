@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.OperacionRutaRequest;
-import com.example.minimal_prod_backend.dto.OperacionRutaResponse;
+import com.example.minimal_prod_backend.dto.Request.OperacionRutaRequest;
+import com.example.minimal_prod_backend.dto.Response.OperacionRutaResponse;
 import com.example.minimal_prod_backend.entity.OperacionRuta;
 import com.example.minimal_prod_backend.mapper.OperacionRutaMapper;
 import com.example.minimal_prod_backend.repository.OperacionRutaRepository;

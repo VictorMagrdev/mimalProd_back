@@ -1,8 +1,8 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.LoginRequest;
-import com.example.minimal_prod_backend.dto.LoginResponse;
-import com.example.minimal_prod_backend.dto.PoliticaLoginResponse;
+import com.example.minimal_prod_backend.dto.Request.LoginRequest;
+import com.example.minimal_prod_backend.dto.Response.LoginResponse;
+import com.example.minimal_prod_backend.dto.Response.PoliticaLoginResponse;
 import com.example.minimal_prod_backend.entity.Politica;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Usuario;

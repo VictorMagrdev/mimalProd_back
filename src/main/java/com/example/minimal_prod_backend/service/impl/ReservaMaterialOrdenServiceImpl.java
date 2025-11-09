@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenRequest;
-import com.example.minimal_prod_backend.dto.ReservaMaterialOrdenResponse;
+import com.example.minimal_prod_backend.dto.Request.ReservaMaterialOrdenRequest;
+import com.example.minimal_prod_backend.dto.Response.ReservaMaterialOrdenResponse;
 import com.example.minimal_prod_backend.entity.ReservaMaterialOrden;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.ReservaMaterialOrdenMapper;

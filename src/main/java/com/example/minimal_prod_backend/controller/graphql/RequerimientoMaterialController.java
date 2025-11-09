@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
-import com.example.minimal_prod_backend.dto.RequerimientoMaterialRequest;
-import com.example.minimal_prod_backend.dto.RequerimientoMaterialResponse;
+import com.example.minimal_prod_backend.dto.Request.RequerimientoMaterialRequest;
+import com.example.minimal_prod_backend.dto.Response.RequerimientoMaterialResponse;
 import com.example.minimal_prod_backend.service.RequerimientoMaterialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;

@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.mapper;
 
-import com.example.minimal_prod_backend.dto.EstadoIncidenciaRequest;
-import com.example.minimal_prod_backend.dto.EstadoIncidenciaResponse;
+import com.example.minimal_prod_backend.dto.Request.EstadoIncidenciaRequest;
+import com.example.minimal_prod_backend.dto.Response.EstadoIncidenciaResponse;
 import com.example.minimal_prod_backend.entity.EstadoIncidencia;
 import org.mapstruct.Mapper;
 

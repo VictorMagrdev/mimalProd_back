@@ -1,7 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
-import com.example.minimal_prod_backend.dto.TipoMovimientoRequest;
-import com.example.minimal_prod_backend.dto.TipoMovimientoResponse;
+import com.example.minimal_prod_backend.dto.Request.TipoMovimientoRequest;
+import com.example.minimal_prod_backend.dto.Response.TipoMovimientoResponse;
 import com.example.minimal_prod_backend.entity.TipoMovimiento;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.TipoMovimientoMapper;

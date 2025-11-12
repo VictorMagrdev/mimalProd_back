@@ -2,6 +2,7 @@ package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.Request.DepreciacionRequest;
 import com.example.minimal_prod_backend.dto.Response.DepreciacionResponse;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaArchivoResponse;
 import com.example.minimal_prod_backend.entity.Depreciacion;
 import com.example.minimal_prod_backend.entity.Maquina;
 import com.example.minimal_prod_backend.entity.TipoPeriodo;
@@ -90,6 +91,11 @@ public class DepreciacionServiceImpl implements DepreciacionService {
     public void calcularDepreciacionAnual() {
         LocalDate periodo = LocalDate.now().withDayOfYear(1);
         calcularDepreciacion(TipoPeriodo.ANUAL, periodo);
+    }
+
+    @Override
+    public List<IncidenciaArchivoResponse> findByMaquina(Long id) {
+        return depreciacionRepository.findByMaquina(id);
     }
 
     private void calcularDepreciacion(TipoPeriodo tipoPeriodo, LocalDate periodo) {

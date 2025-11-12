@@ -2,6 +2,7 @@ package com.example.minimal_prod_backend.service;
 
 import com.example.minimal_prod_backend.dto.Request.DepreciacionRequest;
 import com.example.minimal_prod_backend.dto.Response.DepreciacionResponse;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaArchivoResponse;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface DepreciacionService {
     void calcularDepreciacionMensual();
 
     void calcularDepreciacionAnual();
+
+    List<IncidenciaArchivoResponse> findByMaquina(Long id);
 }

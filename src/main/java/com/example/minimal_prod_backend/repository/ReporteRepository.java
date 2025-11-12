@@ -63,7 +63,7 @@ public class ReporteRepository {
             JOIN ordenes_lotes ol ON ol.orden_id = o.id
             JOIN lotes_produccion l ON ol.lote_id = l.id
             JOIN productos p ON l.producto_id = p.id
-            JOIN tipo_costo tc ON c.tipo_costo_id = tc.id
+            JOIN tipos_costo tc ON c.tipo_costo_id = tc.id
             GROUP BY o.id, p.nombre
             """;
 

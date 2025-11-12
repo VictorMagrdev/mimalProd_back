@@ -1,9 +1,12 @@
 package com.example.minimal_prod_backend.repository;
 
+import com.example.minimal_prod_backend.dto.Response.DepreciacionResponse;
 import com.example.minimal_prod_backend.dto.Response.IncidenciaArchivoResponse;
 import com.example.minimal_prod_backend.entity.Depreciacion;
 import com.example.minimal_prod_backend.entity.TipoPeriodo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,5 +19,6 @@ public interface DepreciacionRepository extends JpaRepository<Depreciacion, Long
 
     List<Depreciacion> findByMaquinaIdOrderByPeriodoAsc(Long maquinaId);
 
-    List<IncidenciaArchivoResponse> findByMaquina(Long id);
+    List<DepreciacionResponse> findByMaquina_Id(Long id);
+
 }

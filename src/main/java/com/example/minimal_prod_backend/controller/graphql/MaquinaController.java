@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
 import com.example.minimal_prod_backend.dto.Request.MaquinaRequest;
+import com.example.minimal_prod_backend.dto.Response.DepreciacionResponse;
 import com.example.minimal_prod_backend.dto.Response.IncidenciaArchivoResponse;
 import com.example.minimal_prod_backend.dto.Response.IncidenciaResponse;
 import com.example.minimal_prod_backend.dto.Response.MaquinaResponse;
@@ -49,7 +50,7 @@ public class MaquinaController {
     }
 
     @SchemaMapping(typeName = "depreciaciones", field = "tipo")
-    public List<IncidenciaArchivoResponse> archivo(MaquinaResponse maquinaResponse) {
-        return depreciacionService.findByMaquina(maquinaResponse.id());
+    public List<DepreciacionResponse> archivo(MaquinaResponse maquinaResponse) {
+        return depreciacionService.findByMaquinaId(maquinaResponse.id());
     }
 }

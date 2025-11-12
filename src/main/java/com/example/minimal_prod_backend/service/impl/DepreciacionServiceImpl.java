@@ -94,8 +94,8 @@ public class DepreciacionServiceImpl implements DepreciacionService {
     }
 
     @Override
-    public List<IncidenciaArchivoResponse> findByMaquina(Long id) {
-        return depreciacionRepository.findByMaquina(id);
+    public List<DepreciacionResponse> findByMaquinaId(Long id) {
+        return depreciacionRepository.findByMaquina_Id(id);
     }
 
     private void calcularDepreciacion(TipoPeriodo tipoPeriodo, LocalDate periodo) {

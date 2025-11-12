@@ -21,5 +21,5 @@ public interface DepreciacionService {
 
     void calcularDepreciacionAnual();
 
-    List<IncidenciaArchivoResponse> findByMaquina(Long id);
+    List<DepreciacionResponse> findByMaquinaId(Long id);
 }

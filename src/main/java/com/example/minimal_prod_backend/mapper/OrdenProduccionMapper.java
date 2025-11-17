@@ -14,7 +14,6 @@ public interface OrdenProduccionMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(source = "unidadId", target = "unidad.id"),
             @Mapping(source = "estadoId", target = "estado.id"),
-            @Mapping(source = "creadoPor", target = "creadoPor.id"),
             @Mapping(target = "creadoEn", ignore = true),
             @Mapping(target = "actualizadoEn", ignore = true),
             @Mapping(target = "lotes", ignore = true)
@@ -36,7 +35,6 @@ public interface OrdenProduccionMapper {
             @Mapping(target = "lotes", ignore = true),
             @Mapping(source = "unidadId", target = "unidad.id"),
             @Mapping(source = "estadoId", target = "estado.id"),
-            @Mapping(source = "creadoPor", target = "creadoPor.id"),
             @Mapping(target = "creadoEn", ignore = true),
             @Mapping(target = "actualizadoEn", ignore = true)
     })

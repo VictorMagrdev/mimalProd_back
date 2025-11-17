@@ -14,7 +14,6 @@ public record OrdenProduccionRequest(
         OffsetDateTime finReal,
         BigDecimal cantidadDesperdicio,
         BigDecimal cantidadProducida,
-        Long creadoPor,
         String observaciones
 ) {
 }

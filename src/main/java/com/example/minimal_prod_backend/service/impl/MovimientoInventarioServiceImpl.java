@@ -5,11 +5,13 @@ import com.example.minimal_prod_backend.dto.Response.MovimientoInventarioRespons
 import com.example.minimal_prod_backend.entity.Bodega;
 import com.example.minimal_prod_backend.entity.MovimientoInventario;
 import com.example.minimal_prod_backend.entity.TipoMovimiento;
+import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.MovimientoInventarioMapper;
 import com.example.minimal_prod_backend.repository.BodegaRepository;
 import com.example.minimal_prod_backend.repository.MovimientoInventarioRepository;
 import com.example.minimal_prod_backend.repository.TipoMovimientoRepository;
+import com.example.minimal_prod_backend.security.CustomUserDetailsService;
 import com.example.minimal_prod_backend.service.MovimientoInventarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ public class MovimientoInventarioServiceImpl implements MovimientoInventarioServ
     private final BodegaRepository bodegaRepository;
     private final TipoMovimientoRepository tipoMovimientoRepository;
     private final MovimientoInventarioMapper mapper;
+    private final CustomUserDetailsService userDetail;
 
     @Override
     @Transactional(readOnly = true)
@@ -45,6 +48,8 @@ public class MovimientoInventarioServiceImpl implements MovimientoInventarioServ
     public MovimientoInventarioResponse createMovimientoInventario(MovimientoInventarioRequest input) {
         MovimientoInventario entity = mapper.toEntity(input);
         attachRelations(input, entity);
+        Usuario currentUser = userDetail.getCurrentUser();
+        entity.setCreadoPor(currentUser);
         MovimientoInventario saved = movimientoInventarioRepository.save(entity);
         return mapper.toResponse(saved);
     }

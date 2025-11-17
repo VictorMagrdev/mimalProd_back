@@ -3,9 +3,11 @@ package com.example.minimal_prod_backend.service.impl;
 import com.example.minimal_prod_backend.dto.Request.OrdenProduccionRequest;
 import com.example.minimal_prod_backend.dto.Response.OrdenProduccionResponse;
 import com.example.minimal_prod_backend.entity.OrdenProduccion;
+import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.mapper.OrdenProduccionMapper;
 import com.example.minimal_prod_backend.repository.OrdenProduccionRepository;
+import com.example.minimal_prod_backend.security.CustomUserDetailsService;
 import com.example.minimal_prod_backend.service.OrdenProduccionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
 
     private final OrdenProduccionRepository ordenProduccionRepository;
     private final OrdenProduccionMapper mapper;
+    private final CustomUserDetailsService userDetail;
 
     @Override
     @Transactional(readOnly = true)
@@ -38,6 +41,8 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     @Transactional
     public OrdenProduccionResponse createOrdenProduccion(OrdenProduccionRequest input) {
         OrdenProduccion entity = mapper.toEntity(input);
+        Usuario currentUser = userDetail.getCurrentUser();
+        entity.setCreadoPor(currentUser);
         OrdenProduccion saved = ordenProduccionRepository.save(entity);
         return mapper.toResponse(saved);
     }

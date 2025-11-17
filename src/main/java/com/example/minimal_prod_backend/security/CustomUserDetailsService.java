@@ -41,14 +41,13 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .disabled(!u.getActivo())
                 .build();
     }
-    public Long getCurrentUserId() {
+    public Usuario getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 
         String username = authentication.getName();
-        Usuario usuario = repo.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        return usuario.getId();
+        return repo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 }

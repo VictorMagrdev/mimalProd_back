@@ -3,6 +3,7 @@ package com.example.minimal_prod_backend.entity;
 import io.hypersistence.utils.hibernate.type.interval.PostgreSQLIntervalType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 import java.time.Duration;
@@ -65,6 +66,7 @@ public class Incidencia {
     @Column(name = "tiempo_parada")
     private Duration tiempoParada;
 
+    @CreationTimestamp
     @Column(name = "creado_en")
-    private OffsetDateTime creadoEn = OffsetDateTime.now();
+    private OffsetDateTime creadoEn;
 }

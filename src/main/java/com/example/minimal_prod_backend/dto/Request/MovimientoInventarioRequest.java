@@ -10,8 +10,6 @@ public record MovimientoInventarioRequest(
         Long tipoMovimientoId,
         String referencia,
         String observaciones,
-        Long creadoPor,
-        OffsetDateTime creadoEn,
         List<MovimientoInventarioDetalleRequest> detalles
 ) {
 }

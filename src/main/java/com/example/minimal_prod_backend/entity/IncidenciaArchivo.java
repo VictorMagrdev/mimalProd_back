@@ -2,6 +2,7 @@ package com.example.minimal_prod_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -39,6 +40,7 @@ public class IncidenciaArchivo {
     @JoinColumn(name = "subido_por", nullable = false)
     private Usuario subidoPor;
 
+    @CreationTimestamp
     @Column(name = "subido_en")
-    private OffsetDateTime subidoEn = OffsetDateTime.now();
+    private OffsetDateTime subidoEn;
 }

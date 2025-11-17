@@ -35,4 +35,9 @@ public class SeguimientoIncidencia {
 
     @Column(name = "realizado_en")
     private OffsetDateTime realizadoEn = OffsetDateTime.now();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "realizado_por")
+    private Usuario realizadoPor;
+
 }

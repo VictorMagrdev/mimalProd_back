@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,13 +27,12 @@ public class AsignacionServiceImpl implements AsignacionService {
     public List<AsignacionResponse> getAsignaciones() {
         return asignacionRepository.findAll().stream()
                 .map(asignacionMapper::toResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public AsignacionResponse getAsignacionById(Long id) {
-        Asignacion asignacion = asignacionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Asignacion not found with id: " + id));
+        Asignacion asignacion = findAsignacionOrThrow(id);
         return asignacionMapper.toResponse(asignacion);
     }
 
@@ -42,23 +40,8 @@ public class AsignacionServiceImpl implements AsignacionService {
     public AsignacionResponse createAsignacion(AsignacionRequest request) {
         validateAsignacionDates(request);
 
-        OrdenTrabajo ordenTrabajo = ordenTrabajoRepository.findById(request.ordenTrabajoId())
-                .orElseThrow(() -> new ResourceNotFoundException("OrdenTrabajo not found with id: " + request.ordenTrabajoId()));
-        Usuario usuario = userRepository.findById(request.usuarioId())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario not found with id: " + request.usuarioId()));
-        Usuario asignadoPor = userRepository.findById(request.asignadoPor())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario (asignadoPor) not found with id: " + request.asignadoPor()));
-        EstadoAsignacion estadoAsignacion = estadoAsignacionRepository.findById(request.estadoAsignacionId())
-                .orElseThrow(() -> new ResourceNotFoundException("EstadoAsignacion not found with id: " + request.estadoAsignacionId()));
-        FuncionTarea funcionTarea = funcionTareaRepository.findById(request.funcionTareaId())
-                .orElseThrow(() -> new ResourceNotFoundException("FuncionTarea not found with id: " + request.funcionTareaId()));
-
         Asignacion asignacion = asignacionMapper.toEntity(request);
-        asignacion.setOrdenTrabajo(ordenTrabajo);
-        asignacion.setUsuario(usuario);
-        asignacion.setAsignadoPor(asignadoPor);
-        asignacion.setEstadoAsignacion(estadoAsignacion);
-        asignacion.setFuncionTarea(funcionTarea);
+        setForeignEntities(asignacion, request);
 
         return asignacionMapper.toResponse(asignacionRepository.save(asignacion));
     }
@@ -67,29 +50,11 @@ public class AsignacionServiceImpl implements AsignacionService {
     public AsignacionResponse updateAsignacion(Long id, AsignacionRequest request) {
         validateAsignacionDates(request);
 
-        Asignacion existingAsignacion = asignacionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Asignacion not found with id: " + id));
+        Asignacion asignacion = findAsignacionOrThrow(id);
+        asignacionMapper.updateEntityFromInput(request, asignacion);
+        setForeignEntities(asignacion, request);
 
-        OrdenTrabajo ordenTrabajo = ordenTrabajoRepository.findById(request.ordenTrabajoId())
-                .orElseThrow(() -> new ResourceNotFoundException("OrdenTrabajo not found with id: " + request.ordenTrabajoId()));
-        Usuario usuario = userRepository.findById(request.usuarioId())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario not found with id: " + request.usuarioId()));
-        Usuario asignadoPor = userRepository.findById(request.asignadoPor())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario (asignadoPor) not found with id: " + request.asignadoPor()));
-        EstadoAsignacion estadoAsignacion = estadoAsignacionRepository.findById(request.estadoAsignacionId())
-                .orElseThrow(() -> new ResourceNotFoundException("EstadoAsignacion not found with id: " + request.estadoAsignacionId()));
-        FuncionTarea funcionTarea = funcionTareaRepository.findById(request.funcionTareaId())
-                .orElseThrow(() -> new ResourceNotFoundException("FuncionTarea not found with id: " + request.funcionTareaId()));
-
-        asignacionMapper.updateEntityFromInput(request, existingAsignacion);
-
-        existingAsignacion.setOrdenTrabajo(ordenTrabajo);
-        existingAsignacion.setUsuario(usuario);
-        existingAsignacion.setAsignadoPor(asignadoPor);
-        existingAsignacion.setEstadoAsignacion(estadoAsignacion);
-        existingAsignacion.setFuncionTarea(funcionTarea);
-
-        return asignacionMapper.toResponse(asignacionRepository.save(existingAsignacion));
+        return asignacionMapper.toResponse(asignacionRepository.save(asignacion));
     }
 
     private void validateAsignacionDates(AsignacionRequest request) {
@@ -97,6 +62,40 @@ public class AsignacionServiceImpl implements AsignacionService {
             throw new IllegalArgumentException("La fecha fin debe ser posterior a la fecha inicio");
         }
     }
+
+    private Asignacion findAsignacionOrThrow(Long id) {
+        return asignacionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Asignacion not found with id: " + id));
+    }
+
+    private void setForeignEntities(Asignacion asignacion, AsignacionRequest request) {
+
+        asignacion.setOrdenTrabajo(
+                ordenTrabajoRepository.findById(request.ordenTrabajoId())
+                        .orElseThrow(() -> new ResourceNotFoundException("OrdenTrabajo not found"))
+        );
+
+        asignacion.setUsuario(
+                userRepository.findById(request.usuarioId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Usuario not found"))
+        );
+
+        asignacion.setAsignadoPor(
+                userRepository.findById(request.asignadoPor())
+                        .orElseThrow(() -> new ResourceNotFoundException("Usuario asignadoPor not found"))
+        );
+
+        asignacion.setEstadoAsignacion(
+                estadoAsignacionRepository.findById(request.estadoAsignacionId())
+                        .orElseThrow(() -> new ResourceNotFoundException("EstadoAsignacion not found"))
+        );
+
+        asignacion.setFuncionTarea(
+                funcionTareaRepository.findById(request.funcionTareaId())
+                        .orElseThrow(() -> new ResourceNotFoundException("FuncionTarea not found"))
+        );
+    }
+
     @Override
     public void deleteAsignacion(Long id) {
         if (!asignacionRepository.existsById(id)) {

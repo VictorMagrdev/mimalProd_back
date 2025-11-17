@@ -1,6 +1,5 @@
-package com.example.minimal_prod_backend.security;
+package com.example.minimal_prod_backend.service.client;
 
-import com.example.minimal_prod_backend.service.client.CloudflareR2Client;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

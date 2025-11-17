@@ -22,35 +22,34 @@ public class CustomMethodSecurityService {
     }
 
     public boolean hasPermission(String tagName, String permission) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication == null) {
+            if (authentication == null || !authentication.isAuthenticated()) {
+                return false;
+            }
+
+            String username = authentication.getName();
+            Usuario usuario = userRepository.findByUsername(username).orElse(null);
+
+            if (usuario == null || !usuario.getActivo()) {
+                return false;
+            }
+
+            List<Long> roleIds = usuario.getRoles().stream()
+                    .map(Rol::getId)
+                    .collect(Collectors.toList());
+
+            if (roleIds.isEmpty()) {
+                return false;
+            }
+
+            return policyRepository.existsByRol_IdInAndTag_NombreIgnoreCaseAndPermiso_Accion(
+                    roleIds, tagName, permission);
+
+        } catch (Exception e) {
+            System.err.println("Error in permission check: " + e.getMessage());
             return false;
         }
-
-        if (!authentication.isAuthenticated()) {
-            return false;
-        }
-
-        String username = authentication.getName();
-
-        Usuario usuario = userRepository.findByUsername(username).orElse(null);
-        if (usuario == null) {
-            return false;
-        }
-        if (usuario.getActivo() == false) {
-            return false;
-        }
-
-        List<Long> roleIds = usuario.getRoles().stream()
-                .map(Rol::getId)
-                .collect(Collectors.toList());
-
-
-        if (roleIds.isEmpty()) {
-            return false;
-        }
-
-        return policyRepository.existsByRol_IdInAndTag_NombreIgnoreCaseAndPermiso_Accion(roleIds, tagName, permission);
     }
 }

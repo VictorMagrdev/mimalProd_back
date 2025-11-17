@@ -1,4 +1,4 @@
-package com.example.minimal_prod_backend.security;
+package com.example.minimal_prod_backend.service.client;
 
 import lombok.Getter;
 import lombok.Setter;

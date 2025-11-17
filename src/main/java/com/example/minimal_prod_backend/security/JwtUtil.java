@@ -1,5 +1,7 @@
 package com.example.minimal_prod_backend.security;
 
+import com.example.minimal_prod_backend.entity.Rol;
+import com.example.minimal_prod_backend.entity.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -10,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.time.Instant;
-import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
@@ -25,13 +27,17 @@ public class JwtUtil {
         this.expirationMs = expirationMs;
     }
 
-    public String generateToken(String username, Collection<String> roles) {
+    public String generateToken(Usuario usuario) {
         Instant now = Instant.now();
         Instant exp = now.plusMillis(expirationMs);
 
         return Jwts.builder()
-                .subject(username)
-                .claim("roles", roles)
+                .subject(usuario.getUsername())
+                .claim("userId", usuario.getId())
+                .claim("email", usuario.getEmail())
+                .claim("roles", usuario.getRoles().stream()
+                        .map(Rol::getNombre)
+                        .collect(Collectors.toList()))
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(exp))
                 .signWith(key, Jwts.SIG.HS256)

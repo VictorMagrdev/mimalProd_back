@@ -19,11 +19,15 @@ public class SecurityContextPropagationInterceptor implements WebGraphQlIntercep
             @NonNull WebGraphQlRequest request,
             @NonNull Chain chain) {
 
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated()) {
-            request.configureExecutionInput((executionInput, builder) ->
-                    builder.graphQLContext(ctx -> ctx.put("authentication", authentication)).build());
+        try {
+            var authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication != null && authentication.isAuthenticated()) {
+                request.configureExecutionInput((executionInput, builder) ->
+                        builder.graphQLContext(ctx -> ctx.put("authentication", authentication)).build());
+            }
+            return chain.next(request);
+        } catch (Exception e) {
+            return Mono.error(e);
         }
-        return chain.next(request);
     }
 }

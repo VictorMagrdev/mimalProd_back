@@ -1,7 +1,10 @@
 package com.example.minimal_prod_backend.security;
 
+import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.repository.UserRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,5 +40,15 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .credentialsExpired(false)
                 .disabled(!u.getActivo())
                 .build();
+    }
+    public Long getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+
+        String username = authentication.getName();
+        Usuario usuario = repo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return usuario.getId();
     }
 }

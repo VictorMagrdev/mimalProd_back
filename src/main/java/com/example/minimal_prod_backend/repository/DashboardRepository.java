@@ -4,6 +4,7 @@ import com.example.minimal_prod_backend.dto.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -134,4 +135,109 @@ public class DashboardRepository {
                 )
         );
     }
+
+    public List<SerieProduccion7DiasDTO> obtenerProduccion7Dias() {
+
+        String sql = """
+        SELECT fin_real::date AS fecha,
+               COALESCE(SUM(cantidad_producida),0) AS total
+        FROM ordenes_produccion
+        WHERE fin_real::date >= CURRENT_DATE - INTERVAL '6 days'
+        GROUP BY fin_real::date
+        ORDER BY fecha;
+        """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new SerieProduccion7DiasDTO(
+                        rs.getDate("fecha").toLocalDate(),
+                        rs.getBigDecimal("total")
+                )
+        );
+    }
+
+    public List<TopProductoDTO> obtenerTopProductos30Dias() {
+
+        String sql = """
+        SELECT p.id, p.nombre,
+               COALESCE(SUM(o.cantidad_producida),0) AS total_producido
+        FROM productos p
+        LEFT JOIN ordenes_produccion o
+            ON o.creado_en::date >= CURRENT_DATE - INTERVAL '30 days'
+           AND o.producto_id = p.id
+        GROUP BY p.id, p.nombre
+        ORDER BY total_producido DESC
+        LIMIT 5;
+        """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new TopProductoDTO(
+                        rs.getLong("id"),
+                        rs.getString("nombre"),
+                        rs.getBigDecimal("total_producido")
+                )
+        );
+    }
+
+    public List<EstadoCantidadDTO> obtenerOrdenesPorEstado() {
+
+        String sql = """
+        SELECT e.nombre AS estado, COUNT(*) AS cantidad
+        FROM ordenes_produccion o
+        LEFT JOIN estados_orden e ON o.estado_id = e.id
+        GROUP BY e.nombre
+        ORDER BY cantidad DESC;
+        """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new EstadoCantidadDTO(
+                        rs.getString("estado"),
+                        rs.getLong("cantidad")
+                )
+        );
+    }
+
+    public Long obtenerOrdenesAtrasadasHoy() {
+        String sql = """
+        SELECT COUNT(*)
+        FROM ordenes_produccion
+        WHERE fin_planificado < NOW()
+          AND fin_real IS NULL
+    """;
+
+        return jdbcTemplate.queryForObject(sql, Long.class);
+    }
+
+    public BigDecimal obtenerProduccionHoy() {
+        String sql = """
+        SELECT COALESCE(SUM(cantidad_producida),0)
+        FROM ordenes_produccion
+        WHERE fin_real::date = CURRENT_DATE
+    """;
+
+        return jdbcTemplate.queryForObject(sql, BigDecimal.class);
+    }
+
+    public BigDecimal obtenerCumplimientoHoy() {
+        String sql = """
+        WITH plan AS (
+            SELECT COALESCE(SUM(cantidad),0) AS total_plan
+            FROM ordenes_produccion
+            WHERE inicio_planificado::date <= CURRENT_DATE
+              AND fin_planificado::date >= CURRENT_DATE
+        ),
+        real AS (
+            SELECT COALESCE(SUM(cantidad_producida),0) AS total_real
+            FROM ordenes_produccion
+            WHERE fin_real::date = CURRENT_DATE
+        )
+        SELECT
+            CASE WHEN plan.total_plan = 0 THEN 0
+                 ELSE ROUND((real.total_real::numeric / plan.total_plan::numeric) * 100,2)
+            END
+        FROM plan, real
+    """;
+
+        return jdbcTemplate.queryForObject(sql, BigDecimal.class);
+    }
+
 }

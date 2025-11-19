@@ -41,6 +41,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .disabled(!u.getActivo())
                 .build();
     }
+
     public Usuario getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

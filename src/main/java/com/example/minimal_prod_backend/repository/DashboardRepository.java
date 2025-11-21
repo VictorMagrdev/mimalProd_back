@@ -158,15 +158,18 @@ public class DashboardRepository {
     public List<TopProductoDTO> obtenerTopProductos30Dias() {
 
         String sql = """
-        SELECT p.id, p.nombre,
-               COALESCE(SUM(o.cantidad_producida),0) AS total_producido
-        FROM productos p
-        LEFT JOIN ordenes_produccion o
-            ON o.creado_en::date >= CURRENT_DATE - INTERVAL '30 days'
-           AND o.producto_id = p.id
-        GROUP BY p.id, p.nombre
-        ORDER BY total_producido DESC
-        LIMIT 5;
+                SELECT p.id,
+                       p.nombre,
+                       COALESCE(SUM(o.cantidad_producida), 0) AS total_producido
+                FROM productos p
+                LEFT JOIN lotes_produccion l ON l.producto_id = p.id
+                LEFT JOIN ordenes_lotes ol ON ol.lote_id = l.id
+                LEFT JOIN ordenes_produccion o\s
+                       ON o.id = ol.orden_id
+                      AND o.creado_en::date >= CURRENT_DATE - INTERVAL '30 days'
+                GROUP BY p.id, p.nombre
+                ORDER BY total_producido DESC
+                LIMIT 5;
         """;
 
         return jdbcTemplate.query(sql, (rs, rowNum) ->

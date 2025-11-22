@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -50,5 +51,10 @@ public class EstacionProduccionServiceImpl implements EstacionProduccionService 
     @Override
     public void deleteEstacionProduccion(Long id) {
         estacionProduccionRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<EstacionProduccion> findById(Long id) {
+        return estacionProduccionRepository.findById(id);
     }
 }

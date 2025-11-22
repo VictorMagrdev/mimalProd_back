@@ -22,8 +22,8 @@ public interface IncidenciaCompletaMapper {
     Incidencia toEntity(IncidenciaConArchivosRequest request);
 
     @Mappings({
-            @Mapping(target = "tipoIncidencia", source = "tipoIncidencia.codigo"),
-            @Mapping(target = "estado", source = "estado.nombre"),
+            @Mapping(target = "tipoIncidenciaId", source = "tipoIncidencia.codigo"),
+            @Mapping(target = "estadoId", source = "estado.nombre"),
     })
     IncidenciaResponse toResponse(Incidencia incidencia);
 }

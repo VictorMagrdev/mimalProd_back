@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +62,11 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     @Override
     public void deleteOrdenProduccion(Long id) {
         ordenProduccionRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<OrdenProduccion> findById(Long id) {
+        return ordenProduccionRepository.findById(id);
     }
 
 }

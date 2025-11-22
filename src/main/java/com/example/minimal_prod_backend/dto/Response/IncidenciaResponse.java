@@ -8,10 +8,17 @@ public record IncidenciaResponse(
         String codigo,
         String titulo,
         String descripcion,
-        String tipoIncidencia,
-        String estado,
+
+        Long tipoIncidenciaId,
+        Long estadoId,
+        Long maquinaId,
+        Long ordenId,
+        Long estacionId,
+        Long reportadoPorId,
+        Long asignadoAId,
+
         OffsetDateTime fechaCierre,
         Duration tiempoParada,
         OffsetDateTime creadoEn
-) {
-}
+) {}
+

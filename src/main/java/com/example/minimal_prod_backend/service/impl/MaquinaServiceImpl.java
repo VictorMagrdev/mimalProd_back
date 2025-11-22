@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -78,5 +79,10 @@ public class MaquinaServiceImpl implements MaquinaService {
             throw new EntityNotFoundException("Máquina no encontrada con ID: " + id);
         }
         maquinaRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Maquina> findById(Long id) {
+        return maquinaRepository.findById(id);
     }
 }

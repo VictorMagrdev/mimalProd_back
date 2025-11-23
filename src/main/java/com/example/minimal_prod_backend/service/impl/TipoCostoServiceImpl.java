@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +49,10 @@ public class TipoCostoServiceImpl implements TipoCostoService {
     @Override
     public void deleteTipoCosto(Long id) {
         tipoCostoRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<TipoCostoResponse> findById(Long id) {
+        return tipoCostoRepository.findById(id).map(mapper::toResponse);
     }
 }

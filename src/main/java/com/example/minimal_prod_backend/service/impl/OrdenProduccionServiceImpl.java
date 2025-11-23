@@ -65,8 +65,8 @@ public class OrdenProduccionServiceImpl implements OrdenProduccionService {
     }
 
     @Override
-    public Optional<OrdenProduccion> findById(Long id) {
-        return ordenProduccionRepository.findById(id);
+    public Optional<OrdenProduccionResponse> findById(Long id) {
+        return ordenProduccionRepository.findById(id).map(mapper::toResponse);
     }
 
 }

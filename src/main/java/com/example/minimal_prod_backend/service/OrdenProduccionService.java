@@ -19,5 +19,5 @@ public interface OrdenProduccionService {
 
     void deleteOrdenProduccion(Long id);
 
-    Optional<OrdenProduccion> findById(Long id);
+    Optional<OrdenProduccionResponse> findById(Long id);
 }

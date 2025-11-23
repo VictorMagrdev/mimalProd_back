@@ -14,7 +14,7 @@ input UnidadMedidaTipoRequest {
 }
 
 extend type Query {
-    unidadesMedidaTipos: [UnidadMedidaTipo]
+    unidadesMedidaTipo: [UnidadMedidaTipo]
 }
 
 extend type Mutation {

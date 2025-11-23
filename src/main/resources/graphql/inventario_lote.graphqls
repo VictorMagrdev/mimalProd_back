@@ -21,7 +21,7 @@ input InventarioLoteRequest {
 }
 
 extend type Query {
-    inventariosLote: [InventarioLote]
+    inventarioLotes: [InventarioLote]
 }
 
 extend type Mutation {

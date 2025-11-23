@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +49,10 @@ public class EstadoOrdenServiceImpl implements EstadoOrdenService {
     @Override
     public void deleteEstadoOrden(Long id) {
         estadoOrdenRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<EstadoOrdenResponse> findById(Long id) {
+        return estadoOrdenRepository.findById(id).map(estadoOrdenMapper::toResponse);
     }
 }

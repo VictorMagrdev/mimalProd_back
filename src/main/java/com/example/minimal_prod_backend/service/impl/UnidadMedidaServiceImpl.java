@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,6 +59,11 @@ public class UnidadMedidaServiceImpl implements UnidadMedidaService {
     @Override
     public void deleteUnidadMedida(Long id) {
         unidadMedidaRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<UnidadMedidaResponse> findById(Long id) {
+        return unidadMedidaRepository.findById(id).map(mapper::toResponse);
     }
 
     private void attachTipo(UnidadMedidaRequest dto, UnidadMedida entity) {

@@ -15,4 +15,6 @@ public interface CostoOrdenService {
     CostoOrdenResponse updateCostoOrden(Long id, CostoOrdenRequest costoOrdenInput);
 
     void deleteCostoOrden(Long id);
+
+    List<CostoOrdenResponse> findByOrdenProduccion(Long id);
 }

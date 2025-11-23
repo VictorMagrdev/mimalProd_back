@@ -63,6 +63,11 @@ public class CostoOrdenServiceImpl implements CostoOrdenService {
         costoOrdenRepository.deleteById(id);
     }
 
+    @Override
+    public List<CostoOrdenResponse> findByOrdenProduccion(Long id) {
+        return costoOrdenRepository.findByOrden_Id(id);
+    }
+
     private void attachRelations(CostoOrdenRequest dto, CostoOrden entity) {
         if (dto.ordenId() != null) {
             OrdenProduccion orden = ordenProduccionRepository.findById(dto.ordenId())

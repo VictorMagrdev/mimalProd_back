@@ -4,6 +4,7 @@ import com.example.minimal_prod_backend.dto.Request.EstadoOrdenRequest;
 import com.example.minimal_prod_backend.dto.Response.EstadoOrdenResponse;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EstadoOrdenService {
     List<EstadoOrdenResponse> getEstadosOrden();
@@ -15,4 +16,6 @@ public interface EstadoOrdenService {
     EstadoOrdenResponse updateEstadoOrden(Long id, EstadoOrdenRequest estadoOrdenInput);
 
     void deleteEstadoOrden(Long id);
+
+    Optional<EstadoOrdenResponse> findById(Long id);
 }

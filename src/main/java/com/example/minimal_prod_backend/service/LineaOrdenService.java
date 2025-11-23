@@ -16,4 +16,6 @@ public interface LineaOrdenService {
     LineaOrdenResponse updateLineaOrden(Long id, LineaOrdenRequest lineaOrdenInput);
 
     void deleteLineaOrden(Long id);
+
+    List<LineaOrdenResponse> findByOrdenProduccion(Long id);
 }

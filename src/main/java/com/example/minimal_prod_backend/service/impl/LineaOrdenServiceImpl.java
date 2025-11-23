@@ -70,6 +70,11 @@ public class LineaOrdenServiceImpl implements LineaOrdenService {
         lineaOrdenRepository.deleteById(id);
     }
 
+    @Override
+    public List<LineaOrdenResponse> findByOrdenProduccion(Long id) {
+        return lineaOrdenRepository.findByOrden_Id(id);
+    }
+
     private void attachRelations(LineaOrdenRequest dto, LineaOrden entity) {
         if (dto.ordenId() != null) {
             OrdenProduccion orden = ordenProduccionRepository.findById(dto.ordenId())

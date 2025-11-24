@@ -32,7 +32,6 @@ input OrdenProduccionRequest {
     finReal: DateTime
     cantidadDesperdicio: Numeric
     cantidadProducida: Numeric
-    creadoPor: ID
     observaciones: String
 }
 

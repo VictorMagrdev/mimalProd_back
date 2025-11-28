@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.service;
 
 import com.example.minimal_prod_backend.dto.Request.MetodoValoracionRequest;
+import com.example.minimal_prod_backend.dto.Response.MetodoValoracionResponse;
 import com.example.minimal_prod_backend.entity.MetodoValoracion;
 
 import java.util.List;
@@ -9,6 +10,8 @@ public interface MetodoValoracionService {
     List<MetodoValoracion> findAll();
 
     MetodoValoracion findById(Long id);
+
+    MetodoValoracionResponse GetById(Long id);
 
     MetodoValoracion save(MetodoValoracionRequest input);
 

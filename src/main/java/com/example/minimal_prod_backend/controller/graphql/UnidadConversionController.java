@@ -1,11 +1,16 @@
 package com.example.minimal_prod_backend.controller.graphql;
 
 import com.example.minimal_prod_backend.dto.Request.UnidadConversionRequest;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaArchivoResponse;
+import com.example.minimal_prod_backend.dto.Response.IncidenciaResponse;
 import com.example.minimal_prod_backend.dto.Response.UnidadConversionResponse;
+import com.example.minimal_prod_backend.dto.Response.UnidadMedidaResponse;
 import com.example.minimal_prod_backend.service.UnidadConversionService;
+import com.example.minimal_prod_backend.service.UnidadMedidaService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
@@ -15,9 +20,10 @@ import java.util.List;
 public class UnidadConversionController {
 
     private final UnidadConversionService unidadConversionService;
-
-    public UnidadConversionController(UnidadConversionService unidadConversionService) {
+    private final UnidadMedidaService unidadMedidaService;
+    public UnidadConversionController(UnidadConversionService unidadConversionService, UnidadMedidaService unidadMedidaService) {
         this.unidadConversionService = unidadConversionService;
+        this.unidadMedidaService = unidadMedidaService;
     }
 
     @QueryMapping
@@ -49,5 +55,15 @@ public class UnidadConversionController {
     public boolean deleteUnidadConversion(@Argument Long id) {
         unidadConversionService.deleteUnidadConversion(id);
         return true;
+    }
+
+    @SchemaMapping(typeName = "UnidadConversion", field = "origen")
+    public UnidadMedidaResponse origen(UnidadConversionResponse unidadConversionRequest) {
+        return unidadMedidaService.getUnidadMedidaById(unidadConversionRequest.origenId());
+    }
+
+    @SchemaMapping(typeName = "UnidadConversion", field = "destino")
+    public UnidadMedidaResponse destino(UnidadConversionResponse unidadConversionRequest) {
+        return unidadMedidaService.getUnidadMedidaById(unidadConversionRequest.destinoId());
     }
 }

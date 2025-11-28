@@ -1,6 +1,7 @@
 package com.example.minimal_prod_backend.service.impl;
 
 import com.example.minimal_prod_backend.dto.Request.MetodoValoracionRequest;
+import com.example.minimal_prod_backend.dto.Response.MetodoValoracionResponse;
 import com.example.minimal_prod_backend.entity.MetodoValoracion;
 import com.example.minimal_prod_backend.repository.MetodoValoracionRepository;
 import com.example.minimal_prod_backend.service.MetodoValoracionService;
@@ -24,7 +25,17 @@ public class MetodoValoracionServiceImpl implements MetodoValoracionService {
     public MetodoValoracion findById(Long id) {
         return metodoValoracionRepository.findById(id).orElse(null);
     }
-
+    @Override
+    public MetodoValoracionResponse GetById(Long id) {
+        return metodoValoracionRepository.findById(id)
+                .map(m -> new MetodoValoracionResponse(
+                        m.getId(),
+                        m.getCodigo(),
+                        m.getNombre(),
+                        m.getDescripcion()
+                ))
+                .orElse(null);
+    }
     @Override
     public MetodoValoracion save(MetodoValoracionRequest input) {
         MetodoValoracion metodoValoracion = new MetodoValoracion();

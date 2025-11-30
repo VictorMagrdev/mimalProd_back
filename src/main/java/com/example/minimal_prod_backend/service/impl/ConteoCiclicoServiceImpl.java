@@ -8,7 +8,6 @@ import com.example.minimal_prod_backend.mapper.ConteoCiclicoMapper;
 import com.example.minimal_prod_backend.repository.*;
 import com.example.minimal_prod_backend.service.ConteoCiclicoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +21,6 @@ public class ConteoCiclicoServiceImpl implements ConteoCiclicoService {
     private final BodegaRepository bodegaRepository;
     private final LoteProduccionRepository loteProduccionRepository;
     private final UnidadMedidaRepository unidadMedidaRepository;
-    private final ApplicationEventPublisher eventPublisher;
     private final ConteoCiclicoMapper mapper;
 
     @Override
@@ -73,27 +71,28 @@ public class ConteoCiclicoServiceImpl implements ConteoCiclicoService {
 
     private void attachRelations(ConteoCiclicoRequest dto, ConteoCiclico entity) {
         if (dto.productoId() != null) {
-            Producto producto = productoRepository.findById(dto.productoId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Producto not found with id: " + dto.productoId()));
-            entity.setProducto(producto);
+            entity.setProducto(productoRepository.getReferenceById(dto.productoId()));
+        } else {
+            entity.setProducto(null);
         }
 
         if (dto.bodegaId() != null) {
-            Bodega bodega = bodegaRepository.findById(dto.bodegaId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Bodega not found with id: " + dto.bodegaId()));
-            entity.setBodega(bodega);
+            entity.setBodega(bodegaRepository.getReferenceById(dto.bodegaId()));
+        } else {
+            entity.setBodega(null);
         }
 
         if (dto.loteId() != null) {
-            LoteProduccion lote = loteProduccionRepository.findById(dto.loteId())
-                    .orElseThrow(() -> new ResourceNotFoundException("LoteProduccion not found with id: " + dto.loteId()));
-            entity.setLote(lote);
+            entity.setLote(loteProduccionRepository.getReferenceById(dto.loteId()));
+        } else {
+            entity.setLote(null);
         }
 
         if (dto.unidadId() != null) {
-            UnidadMedida unidad = unidadMedidaRepository.findById(dto.unidadId())
-                    .orElseThrow(() -> new ResourceNotFoundException("UnidadMedida not found with id: " + dto.unidadId()));
-            entity.setUnidad(unidad);
+            entity.setUnidad(unidadMedidaRepository.getReferenceById(dto.unidadId()));
+        } else {
+            entity.setUnidad(null);
         }
     }
+
 }

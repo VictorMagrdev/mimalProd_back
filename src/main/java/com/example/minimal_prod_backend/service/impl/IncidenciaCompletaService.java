@@ -6,6 +6,8 @@ import com.example.minimal_prod_backend.entity.*;
 import com.example.minimal_prod_backend.mapper.IncidenciaCompletaMapper;
 import com.example.minimal_prod_backend.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @Transactional
 public class IncidenciaCompletaService {
 
+
     private final IncidenciaRepository incidenciaRepository;
     private final IncidenciaArchivoRepository archivoRepository;
     private final IncidenciaBuilderService builder;
@@ -24,16 +27,12 @@ public class IncidenciaCompletaService {
     private final IncidenciaCompletaMapper mapper;
 
     public IncidenciaResponse crearConArchivos(IncidenciaConArchivosRequest req) throws IOException {
-
         Incidencia incidencia = builder.build(req);
         incidencia = incidenciaRepository.save(incidencia);
-
-        List<IncidenciaArchivo> archivos =
-                archivoService.procesar(req.archivos(), incidencia, req.reportadoPor());
-
+        List<IncidenciaArchivo> archivos = archivoService.procesar(req.archivos(), incidencia, req.reportadoPor());
         archivoRepository.saveAll(archivos);
+        IncidenciaResponse response = mapper.toResponse(incidencia);
 
-        return mapper.toResponse(incidencia);
+        return response;
     }
 }
-

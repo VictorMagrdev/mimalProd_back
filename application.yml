@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
   datasource:
     url: jdbc:postgresql://localhost:5432/minimalProd
     username: minimal_prod_user

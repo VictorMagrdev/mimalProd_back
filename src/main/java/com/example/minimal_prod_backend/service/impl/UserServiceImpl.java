@@ -4,11 +4,13 @@ import com.example.minimal_prod_backend.dto.Response.RolResponse;
 import com.example.minimal_prod_backend.dto.Request.UserCreateRequest;
 import com.example.minimal_prod_backend.dto.Response.UserResponse;
 import com.example.minimal_prod_backend.dto.Request.UserUpdateRequest;
+import com.example.minimal_prod_backend.entity.CentroCosto;
 import com.example.minimal_prod_backend.entity.Rol;
 import com.example.minimal_prod_backend.entity.Usuario;
 import com.example.minimal_prod_backend.exception.ResourceNotFoundException;
 import com.example.minimal_prod_backend.exception.UsernameAlreadyExistsException;
 import com.example.minimal_prod_backend.mapper.UserMapper;
+import com.example.minimal_prod_backend.repository.CentroCostoRepository;
 import com.example.minimal_prod_backend.repository.RoleRepository;
 import com.example.minimal_prod_backend.repository.UserRepository;
 import com.example.minimal_prod_backend.service.UserService;
@@ -17,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,21 +32,23 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
-
+    private final CentroCostoRepository centroCostoRepository;
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            RoleRepository roleRepository,
                            PasswordEncoder passwordEncoder,
-                           UserMapper userMapper) {
+                           UserMapper userMapper, CentroCostoRepository centroCostoRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
+        this.centroCostoRepository = centroCostoRepository;
     }
 
     @Override
     @Transactional
     public UserResponse createUser(UserCreateRequest request) {
+
         userRepository.findByUsername(request.username())
                 .ifPresent(u -> {
                     throw new UsernameAlreadyExistsException("Username already exists: " + request.username());
@@ -53,17 +58,34 @@ public class UserServiceImpl implements UserService {
         usuario.setUsername(request.username());
         usuario.setEmail(request.email());
         usuario.setPassword(passwordEncoder.encode(request.password()));
-        usuario.setActivo(true);
-        usuario.setRoles(new HashSet<>());
 
+        usuario.setTelefono(request.telefono());
+        usuario.setCodigoEmpleado(request.codigoEmpleado());
+        usuario.setNombre(request.nombre());
+        usuario.setApellidos(request.apellidos());
+
+        if (request.centroCostoId() != null) {
+            CentroCosto cc = centroCostoRepository.findById(request.centroCostoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("CentroCosto not found: " + request.centroCostoId()));
+            usuario.setCentroCosto(cc);
+        }
+
+        usuario.setCapacidadHorasDia(
+                request.capacidadHorasDia() != null ? request.capacidadHorasDia() : Duration.ofHours(8)
+        );
+
+        usuario.setActivo(request.activo() == null || request.activo());
+
+        usuario.setRoles(new HashSet<>());
         if (request.roleIds() != null && !request.roleIds().isEmpty()) {
             List<Rol> roles = roleRepository.findAllById(request.roleIds());
             usuario.getRoles().addAll(roles);
         }
 
-        Usuario savedUsuario = userRepository.save(usuario);
-        return userMapper.toUserResponse(savedUsuario);
+        Usuario saved = userRepository.save(usuario);
+        return userMapper.toUserResponse(saved);
     }
+
 
     @Override
     @Transactional(readOnly = true)

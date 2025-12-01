@@ -34,7 +34,7 @@ flyway:
   locations: classpath:db/migration
 cloudflare:
   r2:
-    endpoint: https://bucked.minimalprod.space/
+    endpoint: http://localhost:9000
     access-key: admin
     secret-key: password123
     bucket: demos

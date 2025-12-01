@@ -24,7 +24,8 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build JAR with Gradle
-        run: ./gradlew build -x test
+        run: ./gradlew clean bootJar -x test
+
       - name: Check JAR exists
         run: ls -lh build/libs/app.jar
 

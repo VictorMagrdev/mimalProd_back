@@ -36,6 +36,7 @@ flyway:
 cloudflare:
   r2:
     endpoint: https://bucked.minimalprod.space
-    access-key: admin
-    secret-key: password123
-    bucket: demos
+    access-key: ${CLOUDFLARE_R2_ACCESS_KEY:}
+    secret-key: ${CLOUDFLARE_R2_SECRET_KEY:}
+    bucket: ${CLOUDFLARE_R2_BUCKET:demos}
+

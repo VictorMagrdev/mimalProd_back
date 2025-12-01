@@ -32,7 +32,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "build/libs/*.jar"
+          source: "build/libs/app.jar"
+
           target: "/home/ubuntu/app/app.jar"
 
       - name: Restart service

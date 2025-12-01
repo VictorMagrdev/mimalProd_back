@@ -27,14 +27,21 @@ public class RequerimientoMaterialController {
     }
 
     @MutationMapping
-    public RequerimientoMaterialResponse createRequerimientoMaterial(@Argument RequerimientoMaterialRequest input) {
+    public RequerimientoMaterialResponse createRequerimientoMaterial(
+            @Argument("input") RequerimientoMaterialRequest input
+    ) {
         return requerimientoMaterialService.createRequerimiento(input);
     }
 
+
     @MutationMapping
-    public RequerimientoMaterialResponse updateRequerimientoMaterial(@Argument Long id, @Argument RequerimientoMaterialRequest input) {
+    public RequerimientoMaterialResponse updateRequerimientoMaterial(
+            @Argument Long id,
+            @Argument("input") RequerimientoMaterialRequest input
+    ) {
         return requerimientoMaterialService.updateRequerimiento(id, input);
     }
+
 
     @MutationMapping
     public boolean deleteRequerimientoMaterial(@Argument Long id) {

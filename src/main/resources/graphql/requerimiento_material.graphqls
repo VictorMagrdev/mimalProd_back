@@ -29,7 +29,6 @@ extend type Query {
 
 extend type Mutation {
     createRequerimientoMaterial(input: RequerimientoMaterialInput!): RequerimientoMaterial!
-    updateRequerimiento(id: ID!, input: RequerimientoMaterialInput!): RequerimientoMaterial!
-    deleteRequerimiento(id: ID!): Boolean!
-
+    updateRequerimientoMaterial(id: ID!, input: RequerimientoMaterialInput!): RequerimientoMaterial!
+    deleteRequerimientoMaterial(id: ID!): Boolean!
 }

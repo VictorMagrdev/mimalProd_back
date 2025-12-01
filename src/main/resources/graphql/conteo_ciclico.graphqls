@@ -23,7 +23,7 @@ input ConteoCiclicoRequest {
 }
 
 extend type Query {
-    conteosCiclico: [ConteoCiclico]
+    conteosCiclicos: [ConteoCiclico]
 }
 
 extend type Mutation {

@@ -9,8 +9,8 @@ spring:
     show-sql: true
 
 jwt:
-  secret: ${JWT_SECRET}
-  expiration-ms: ${JWT_EXPIRATION_MS}
+  secret: ac9c8a7b2dc5c9bdc3a7fed6888d3c3f
+  expiration-ms: 3600000
 
 cloudflare:
   r2:

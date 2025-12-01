@@ -13,10 +13,15 @@ public class R2Config {
 
     @Bean
     public CloudflareR2Client r2Client() {
+        if (props.getAccessKey() == null || props.getAccessKey().isBlank()) {
+            throw new IllegalStateException("Access key ID cannot be blank.");
+        }
         return new CloudflareR2Client(
                 props.getEndpoint(),
                 props.getAccessKey(),
-                props.getSecretKey()
+                props.getSecretKey(),
+                props.getBucket()
         );
     }
+
 }

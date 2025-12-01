@@ -23,7 +23,7 @@ public class CloudflareR2Client {
     private final S3Presigner presigner;
     private final String endpoint;
 
-    public CloudflareR2Client(String endpoint, String accessKey, String secretKey) {
+    public CloudflareR2Client(String endpoint, String accessKey, String secretKey, String bucket) {
         this.endpoint = endpoint;
 
         AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);

@@ -7,6 +7,11 @@ plugins {
 group = 'com.example'
 version = '0.1.2'
 description = 'Demo project for Spring Boot'
+tasks.withType(Jar).configureEach {
+    archiveBaseName.set("app")
+    archiveVersion.set("")
+    archiveClassifier.set("")
+}
 
 java {
 	toolchain {

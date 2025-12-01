@@ -10,6 +10,7 @@ spring:
     hikari:
       max-lifetime: 1800000
       idle-timeout: 600000
+      keepalive-time: 300000
       maximum-pool-size: 10
       connection-timeout: 30000
 
@@ -19,8 +20,9 @@ spring:
 
     properties:
       hibernate:
-        dialect: org.company.configuration.CustomPostgreSQLDialect
-        format_sql: true
+        #dialect: org.company.configuration.CustomPostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
         id:
           identifier_generator: Tsid
     show-sql: true

@@ -32,7 +32,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "build/libs/minimal-prod-backend-0.0.1-SNAPSHOT.jar"
+          source: "build/libs/app.jar"
 
           target: "/home/ubuntu/app/app.jar"
 

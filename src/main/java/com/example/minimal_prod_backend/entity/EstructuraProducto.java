@@ -31,7 +31,7 @@ public class EstructuraProducto {
     @JoinColumn(name = "producto_hijo_id", nullable = false)
     private Producto productoHijo;
 
-    @Column(name = "cantidad", nullable = false, precision = 10, scale = 2)
+    @Column(name = "cantidad", nullable = false, precision = 18, scale = 6)
     private BigDecimal cantidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,7 +45,6 @@ public class EstructuraProducto {
     @Builder.Default
     private Boolean activo = true;
 
-    @Column(name = "creado_en")
-    @Builder.Default
-    private LocalDateTime creadoEn = LocalDateTime.now();
+    @Column(name = "creado_en", insertable = false, updatable = false)
+    private LocalDateTime creadoEn;
 }

@@ -63,7 +63,7 @@ public class Incidencia {
     private OffsetDateTime fechaCierre;
 
     @Type(PostgreSQLIntervalType.class)
-    @Column(name = "tiempo_parada")
+    @Column(name = "tiempo_parada", columnDefinition = "interval")
     private Duration tiempoParada;
 
     @CreationTimestamp

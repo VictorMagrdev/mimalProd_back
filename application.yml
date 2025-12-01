@@ -11,12 +11,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+
     properties:
       hibernate:
+        dialect: org.company.configuration.CustomPostgreSQLDialect
         format_sql: true
         id:
           identifier_generator: Tsid
     show-sql: true
+
 
   graphql:
     execution:

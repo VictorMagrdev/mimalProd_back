@@ -13,9 +13,25 @@ public class R2Config {
 
     @Bean
     public CloudflareR2Client r2Client() {
-        if (props.getAccessKey() == null || props.getAccessKey().isBlank()) {
-            throw new IllegalStateException("Access key ID cannot be blank.");
-        }
+            String missing = "";
+            if (props.getEndpoint() == null || props.getEndpoint().isBlank()) {
+                missing += "endpoint ";
+            }
+            if (props.getAccessKey() == null || props.getAccessKey().isBlank()) {
+                missing += "accessKey ";
+            }
+            if (props.getSecretKey() == null || props.getSecretKey().isBlank()) {
+                missing += "secretKey ";
+            }
+            if (props.getBucket() == null || props.getBucket().isBlank()) {
+                missing += "bucket ";
+            }
+
+            if (!missing.isEmpty()) {
+                throw new IllegalStateException(
+                        "Cloudflare R2 configuration error: missing properties -> " + missing.trim()
+                );
+            }
         return new CloudflareR2Client(
                 props.getEndpoint(),
                 props.getAccessKey(),
